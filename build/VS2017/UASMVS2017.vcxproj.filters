@@ -190,6 +190,9 @@
     <ClCompile Include="..\..\simd.c">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\x86macros.c">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\H\assume.h">
@@ -424,6 +427,9 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\H\simd.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\H\x86macros.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -162,7 +162,7 @@
 #define BACKQUOTES   1 /* allow IDs enclosed in `                */
 #define FPIMMEDIATE  1 /* allow float immediates: mov eax,1.0    */
 #define INCBINSUPP   1 /* support INCBIN directive               */
-#define INTELMOVQ    1 /* 1=MOVQ moves to/from 64-bit registers  */
+#define INTELMOVQ    0 /* 1=MOVQ moves to/from 64-bit registers  */
 #ifndef OWFC_SUPPORT
 #define OWFC_SUPPORT 1 /* support OW fastcall flavor             */
 #endif

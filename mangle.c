@@ -121,7 +121,9 @@ static int ms32_decorate( const struct asym *sym, char *buffer )
 	}
 	else if (Options.fctype == FCT_MSC && sym->isproc) {
     return ( sprintf( buffer, "@%s@%u", sym->name, ((struct dsym *)sym)->e.procinfo->parasize ) );
-	}	else {
+	} 
+	else 
+	{
 		memcpy(buffer, sym->name, sym->name_size + 1);
 		return(sym->name_size);
 	}
@@ -185,10 +187,12 @@ static int ms64_decorate( const struct asym *sym, char *buffer )
 	const struct dsym *dir = (struct dsym *)sym;
 	if ((sym->langtype == LANG_VECTORCALL) && (Options.vectorcall_decoration == VECTORCALL_FULL) && sym->isproc) {
 		return(sprintf(buffer, "%s@@%d", sym->name, dir->e.procinfo->parasize));
-	}	else	{
-    memcpy( buffer, sym->name, sym->name_size + 1 );
-    return( sym->name_size );
-}
+	} 
+	else 
+	{
+		memcpy( buffer, sym->name, sym->name_size + 1 );
+		return( sym->name_size );
+	}
 }
 #endif
 

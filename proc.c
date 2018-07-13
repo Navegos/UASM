@@ -1063,7 +1063,7 @@ static ret_code ParseParams(struct dsym *proc, int i, struct asm_tok tokenarray[
 				*/
 				//proc->e.procinfo->parasize += ROUND_UP( ti.size, CurrWordSize );
 
-				if (paranode->sym.langtype == LANG_VECTORCALL)
+				if (proc->sym.langtype == LANG_VECTORCALL)
 				{
 					switch (CurrWordSize)
 					{

@@ -1162,9 +1162,16 @@ static int OnePass(void)
 		unsigned  alist = ModuleInfo.list;
 		ModuleInfo.list = 0;
 		if (platform->value == 0)
+		{
 			InitAutoMacros32();
+		}
 		else
+		{
 			InitAutoMacros64();
+			Addx86defs();
+			Initx86AutoMacros64();
+		}
+
 		ModuleInfo.list = alist;
 	}
 	if (Parse_Pass == PASS_1)

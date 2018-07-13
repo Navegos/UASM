@@ -538,7 +538,7 @@ static void OPTQUAL Set_zf( void )  { Options.fctype = OptValue; }
 #endif
 
 static void OPTQUAL Set_zt( void ) { Options.stdcall_decoration = OptValue; }
-static void OPTQUAL Set_zv(void){	Options.vectorcall_decoration = OptValue; }
+static void OPTQUAL Set_zv( void ) { Options.vectorcall_decoration = OptValue; }
 #ifndef __SW_BD
 static void OPTQUAL Set_h( void ) {  PrintUsage();  exit(1); }
 #endif

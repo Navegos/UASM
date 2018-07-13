@@ -332,6 +332,7 @@ OPTFUNC(SetCaseMap)
 		if (Options.nomlib == FALSE && ModuleInfo.defOfssize == USE64)
 		{
 			CreateMacroLibCases();
+			x86CreateMacroLibCases();
 		}
     } else {
 		return(EmitErr(SYNTAX_ERROR_EX, tokenarray[i].tokpos));
