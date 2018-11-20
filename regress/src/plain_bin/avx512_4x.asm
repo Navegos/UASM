@@ -1,12 +1,19 @@
 
-    .x64
-    .model flat
+	.686p
+	.mmx
+	.xmm
+    .model flat,stdcall
+	
     option evex:1
-    .code
-
-	vgatherdps zmm2 {k1}, [zmm1]   ;62 F2 7D 49 92 14 0D 00 00 00 00'  UASM assembles wrong B2 instead F2
-	;62 B2 7D 49 92 94 0D 00 00 00 00 
-
-	;vgatherdps            zmm2, k1, zmmword ptr [rbp+zmm9]
+    
+	.code
+	
+	;32bit AVX512
+	
+	VPGATHERDD zmm1{k1}, [edx+zmm0]
+	vmovdqu32 ZMMWORD PTR [edi+eax], zmm1
+	vgatherpf0dpd [edi+ymm1*8+0x7b] {k1}
+	
+	;reported by AW 01-11-2018
 
     end

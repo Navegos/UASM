@@ -139,6 +139,7 @@ static const int sysv_maxreg[] = {
 
 #endif
 
+
 struct fastcall_conv {
 	int(*paramcheck)(struct dsym *, struct dsym *, int *);
 	void(*handlereturn)(struct dsym *, char *buffer);
@@ -158,6 +159,7 @@ struct delphicall_conv {
 	int(*paramcheck)(struct dsym *, struct dsym *, int *);
 	void(*handlereturn)(struct dsym *, char *buffer);
 };
+
 
 static  int ms32_pcheck(struct dsym *, struct dsym *, int *);
 static void ms32_return(struct dsym *, char *);
@@ -755,6 +757,7 @@ ret_code LocalDir(int i, struct asm_tok tokenarray[])
 			else {
 				return(EmitErr(EXPECTING_COMMA, tokenarray[i].tokpos));
 			}
+
 	} while (i < Token_Count);
 
 	return(NOT_ERROR);
@@ -831,6 +834,7 @@ static ret_code ParseParams(struct dsym *proc, int i, struct asm_tok tokenarray[
 				name = "";
 		}
 		else {
+
 			/* PROC needs a parameter name, PROTO accepts <void> also */
 			DebugMsg(("ParseParams: name missing/invalid for parameter %u, i=%u\n", cntParam + 1, i));
 			return(EmitErr(SYNTAX_ERROR_EX, tokenarray[i].string_ptr));
@@ -929,8 +933,9 @@ static ret_code ParseParams(struct dsym *proc, int i, struct asm_tok tokenarray[
 					tn != to))) {
 
 				/* UASM 2.46.10 prevent symbols that are moved to stack whose size is turned from ptr to machine word size from breaking the proto vs proc defition of a ptr type */
+				/* UASM 2.47.1 added additional types */
 				if (ti.mem_type == MT_PTR && paracurr->sym.state == SYM_STACK && 
-					(paracurr->sym.mem_type == MT_QWORD && CurrWordSize == 8) || 
+					(paracurr->sym.mem_type == MT_QWORD && CurrWordSize == 8) ||
 					(paracurr->sym.mem_type == MT_OWORD && CurrWordSize == 8) ||
 					(paracurr->sym.mem_type == MT_YMMWORD && CurrWordSize == 8) ||
 					(paracurr->sym.mem_type == MT_ZMMWORD && CurrWordSize == 8) ||
@@ -939,6 +944,7 @@ static ret_code ParseParams(struct dsym *proc, int i, struct asm_tok tokenarray[
 					(paracurr->sym.mem_type == MT_YMMWORD && CurrWordSize == 4) ||
 					(paracurr->sym.mem_type == MT_ZMMWORD && CurrWordSize == 4))
 				{
+
 				}
 				else if (paracurr->sym.mem_type == MT_PTR && paracurr->sym.state == SYM_STACK &&
 					(ti.mem_type == MT_QWORD && CurrWordSize == 8) ||
@@ -950,6 +956,7 @@ static ret_code ParseParams(struct dsym *proc, int i, struct asm_tok tokenarray[
 					(ti.mem_type == MT_YMMWORD && CurrWordSize == 4) ||
 					(ti.mem_type == MT_ZMMWORD && CurrWordSize == 4))
 				{
+
 				}
 				else
 				{
@@ -1058,66 +1065,61 @@ static ret_code ParseParams(struct dsym *proc, int i, struct asm_tok tokenarray[
 
 			if (paranode->sym.is_vararg == FALSE)
 			{
-				/* v2.11: CurrWordSize does reflect the default parameter size only for PROCs.
-				* For PROTOs and TYPEs use member seg_ofssize.
-				*/
-				//proc->e.procinfo->parasize += ROUND_UP( ti.size, CurrWordSize );
-
 				if (proc->sym.langtype == LANG_VECTORCALL)
 				{
 					switch (CurrWordSize)
 					{
-						case 8:
-							switch (ti.mem_type)
-							{
-								case MT_OWORD:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 2 * CurrWordSize : 2 * (2 << proc->sym.seg_ofssize));
-									break;
-
-								case MT_YMMWORD:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 4 * CurrWordSize : 4 * (2 << proc->sym.seg_ofssize));
-									break;
-
-								case MT_ZMMWORD:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 8 * CurrWordSize : 8 * (2 << proc->sym.seg_ofssize));
-									break;
-
-								default:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? CurrWordSize : (2 << proc->sym.seg_ofssize));
-									break;
-							}
+					case 8:
+						switch (ti.mem_type)
+						{
+						case MT_OWORD:
+							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 2 * CurrWordSize : 2 * (2 << proc->sym.seg_ofssize));
 							break;
 
-						case 4:
-							switch (ti.mem_type)
-							{
-								case MT_OWORD:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 4 * CurrWordSize : 4 * (2 << proc->sym.seg_ofssize));
-									break;
+						case MT_YMMWORD:
+							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 4 * CurrWordSize : 4 * (2 << proc->sym.seg_ofssize));
+							break;
 
-								case MT_YMMWORD:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 8 * CurrWordSize : 8 * (2 << proc->sym.seg_ofssize));
-									break;
-
-								case MT_ZMMWORD:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 16 * CurrWordSize : 16 * (2 << proc->sym.seg_ofssize));
-									break;
-
-								default:
-									proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? CurrWordSize : (2 << proc->sym.seg_ofssize));
-									break;
-							}
+						case MT_ZMMWORD:
+							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 8 * CurrWordSize : 8 * (2 << proc->sym.seg_ofssize));
 							break;
 
 						default:
 							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? CurrWordSize : (2 << proc->sym.seg_ofssize));
 							break;
-					}
+						}
+						break;
 
-				} else {
+					case 4:
+						switch (ti.mem_type)
+						{
+						case MT_OWORD:
+							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 4 * CurrWordSize : 4 * (2 << proc->sym.seg_ofssize));
+							break;
+
+						case MT_YMMWORD:
+							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 8 * CurrWordSize : 8 * (2 << proc->sym.seg_ofssize));
+							break;
+
+						case MT_ZMMWORD:
+							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? 16 * CurrWordSize : 16 * (2 << proc->sym.seg_ofssize));
+							break;
+
+						default:
+							proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? CurrWordSize : (2 << proc->sym.seg_ofssize));
+							break;
+						}
+						break;
+
+					default:
+						proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? CurrWordSize : (2 << proc->sym.seg_ofssize));
+						break;
+					}
+				}
+				else
+				{
 					proc->e.procinfo->parasize += ROUND_UP(ti.size, IsPROC ? CurrWordSize : (2 << proc->sym.seg_ofssize));
 				}
-
 			}
 
 			/* v2.05: the PROC's vararg flag has been set already */
@@ -1397,6 +1399,7 @@ ret_code ParseProc(struct dsym *proc, int i, struct asm_tok tokenarray[], bool I
 	}
 	else
 		proc->sym.langtype = langtype;
+
 
 	/* Handle return type if present */
 	ret_type = 0xff;
@@ -1842,6 +1845,7 @@ void DeleteProc(struct dsym *proc)
 
 	DebugMsg(("DeleteProc(%s) enter\n", proc->sym.name));
 	if (proc->sym.state == SYM_INTERNAL) {
+
 		/* delete all local symbols ( params, locals, labels ) */
 		for (curr = proc->e.procinfo->labellist; curr; ) {
 			next = curr->e.nextll;
@@ -1904,6 +1908,7 @@ ret_code ProcDir(int i, struct asm_tok tokenarray[])
 	name = tokenarray[0].string_ptr;
 
 	if (CurrProc != NULL) {
+
 		/* Set the current PROC name */
 		procname = SymFind("@ProcName");
 		procname->string_ptr = CurrProc->sym.name;
@@ -1923,6 +1928,7 @@ ret_code ProcDir(int i, struct asm_tok tokenarray[])
 		push_proc(CurrProc);
 	}
 
+
 	if (ModuleInfo.procalign) {
 		AlignCurrOffset(ModuleInfo.procalign);
 	}
@@ -1932,6 +1938,7 @@ ret_code ProcDir(int i, struct asm_tok tokenarray[])
 	sym = SymSearch(name);
 
 	if (Parse_Pass == PASS_1) { //|| (Parse_Pass > PASS_1 && sym == NULL) ) {
+
 		oldpubstate = sym ? sym->ispublic : FALSE;
 		if (sym == NULL || sym->state == SYM_UNDEFINED) {
 			sym = CreateProc(sym, name, SYM_INTERNAL);
@@ -2012,6 +2019,7 @@ ret_code ProcDir(int i, struct asm_tok tokenarray[])
 		*/
 		((struct dsym *)sym)->next = (struct dsym *)CurrSeg->e.seginfo->label_list;
 		CurrSeg->e.seginfo->label_list = sym;
+
 	}
 	else {
 		/**/
@@ -2216,6 +2224,7 @@ ret_code EndpDir(int i, struct asm_tok tokenarray[])
 	/* v2.10: "+ 1" added to CurrProc->sym.name_size */
 	if (CurrProc &&
 		(SymCmpFunc(CurrProc->sym.name, tokenarray[0].string_ptr, CurrProc->sym.name_size + 1) == 0)) {
+
 		/* Reset the current source code line relating to the PROC */
 		procline = SymFind("@ProcLine");
 		procline->value = 0;
@@ -2986,7 +2995,6 @@ static void write_win64_default_prologue_RBP(struct proc_info *info)
 
 	DebugMsg1(("write_win64_default_prologue_RBP enter\n"));
 	check_proc_fpo(info);
-
 	
 	info->pushed_reg = 0;
 
@@ -3012,7 +3020,6 @@ static void write_win64_default_prologue_RBP(struct proc_info *info)
 			if (info->isframe && ModuleInfo.frame_auto)
 				AddLineQueueX("%r %r", T_DOT_PUSHREG, info->basereg);
 		}
-
 	
 		/* Save the non-volatile registers */
 		cntxmm = 0;
@@ -3667,6 +3674,7 @@ static void write_win64_default_epilogue_RBP(struct proc_info *info)
 
 			if (i)
 			{
+
 				i = (info->localsize - i * 16) & ~(16 - 1);
 				if (info->fpo)
 					restoreReg = stackreg[ModuleInfo.Ofssize];
@@ -3732,7 +3740,6 @@ static void write_win64_default_epilogue_RBP(struct proc_info *info)
 		}
 
 		pop_register(CurrProc->e.procinfo->regslist);
-
 	
 		if (!info->fpo)
 			AddLineQueueX("pop %r", info->basereg);
@@ -3760,6 +3767,7 @@ static void write_win64_default_epilogue_RSP(struct proc_info *info)
 		uint_16 *regs;
 		int cnt;
 		int i;
+
 
 		/* v2.12: space for xmm saves is now included in localsize
 		* so first thing to do is to count the xmm regs that were saved */
@@ -4621,6 +4629,7 @@ static void SetLocalOffsets_RBP_SYSV(struct proc_info *info)
 
 #endif
 
+
 /* write PROC prologue
 * this is to be done after the LOCAL directives
 * and *before* any real instruction
@@ -5016,6 +5025,7 @@ static void pop_register(uint_16 *regist)
 			AddLineQueueX("pop %r", *regist);
 		}
 	}
+
 }
 
 /* write default epilogue code
@@ -5081,7 +5091,6 @@ static void write_generic_epilogue(struct proc_info *info)
 {
 	int resstack = 0;
 	int stackadj = 0;
-
 	
 	check_proc_fpo(info);
 
@@ -5164,6 +5173,7 @@ static void write_generic_epilogue(struct proc_info *info)
 				AddLineQueueX("pop %r", info->basereg);
 			}
 		}
+
 	}
 }
 
@@ -5377,9 +5387,9 @@ ret_code RetInstr(int i, struct asm_tok tokenarray[], int count)
 			case LANG_FASTCALL:
 				fastcall_tab[ModuleInfo.fctype].handlereturn(CurrProc, buffer);
 				break;
-				case LANG_VECTORCALL:
-					vectorcall_tab[ModuleInfo.fctype].handlereturn(CurrProc, buffer);
-					break;
+			case LANG_VECTORCALL:
+				vectorcall_tab[ModuleInfo.fctype].handlereturn(CurrProc, buffer);
+				break;
 			case LANG_SYSVCALL:
 				sysvcall_tab[ModuleInfo.fctype].handlereturn(CurrProc, buffer);
 				break;
@@ -5423,14 +5433,8 @@ void ProcInit(void)
 	ModuleInfo.epiloguemode = PEM_DEFAULT;
 	/* v2.06: no forward references in INVOKE if -Zne is set */
 	ModuleInfo.invoke_exprparm = (Options.strict_masm_compat ? EXPF_NOUNDEF : 0);
-#if STACKBASESUPP
 	ModuleInfo.basereg[USE16] = T_BP;
 	ModuleInfo.basereg[USE32] = T_EBP;
-#if AMD64_SUPPORT
 	ModuleInfo.basereg[USE64] = T_RBP;
-#endif
-#endif
-#if AMD64_SUPPORT
 	unw_segs_defined = 0;
-#endif
 }

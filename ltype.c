@@ -1,3 +1,4 @@
+
 #include "globals.h"
 
 unsigned char _ltype[257] = {

@@ -134,6 +134,7 @@
     <ClInclude Include="..\..\H\macho64spec.h" />
     <ClInclude Include="..\..\H\macro.h" />
     <ClInclude Include="..\..\H\macrolib.h" />
+    <ClInclude Include="..\..\H\malloc.h" />
     <ClInclude Include="..\..\H\mangle.h" />
     <ClInclude Include="..\..\H\memalloc.h" />
     <ClInclude Include="..\..\H\msgdef.h" />

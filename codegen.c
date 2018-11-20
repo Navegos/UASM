@@ -322,6 +322,7 @@ static void output_opc(struct code_info *CodeInfo)
 #endif
   }
 
+
 #if AVXSUPP  
       if ((CodeInfo->token >= T_VSHUFF32X4) && (CodeInfo->token <= T_VSHUFI64X2) &&
       ((CodeInfo->opnd[OPND1].type & OP_XMM) || (CodeInfo->opnd[OPND2].type & OP_XMM)))
@@ -367,23 +368,37 @@ static void output_opc(struct code_info *CodeInfo)
         case   T_VXORPD: 
         case   T_VORPS: 
         case   T_VXORPS:
-		case   T_VPSLLDQ:
-		case   T_VPSRLDQ:
-		case   T_VPSLLW:
-		case   T_VPSLLD:
-		case   T_VPSLLQ:
-		case   T_VPSRAW:
-		case   T_VPSRAD:
-		case   T_VPSRAQ:
-		case   T_VPSRLW:
-		case   T_VPSRLD:
-		case   T_VPSRLQ:
+        /*case   T_VPSLLDQ:
+          case   T_VPSRLDQ:
+          case   T_VPSLLW:
+          case   T_VPSLLD:
+          case   T_VPSLLQ:
+          case   T_VPSRAW:
+          case   T_VPSRAD:
+          case   T_VPSRAQ:
+          case   T_VPSRLW:
+          case   T_VPSRLD:
+          case   T_VPSRLQ:*/
         if (CodeInfo->r2type == OP_XMM || CodeInfo->r2type == OP_YMM || CodeInfo->r2type == OP_ZMM)
           break;
           EmitError(INVALID_INSTRUCTION_OPERANDS);
         }
       //}
-
+      /* AVX512 instructions only, the first parameter must be Kn register:
+        VPCMPB,VPCMPUB,VPCMPD,VPCMPUD,VPCMPQ,VPCMPUQ,VPCMPW,VPCMPUW */
+      switch (CodeInfo->token){
+        case   T_VPCMPD:
+        case   T_VPCMPUD:
+        case   T_VPCMPQ:
+        case   T_VPCMPUQ:
+        case   T_VPCMPW:
+        case   T_VPCMPUW:
+        case   T_VPCMPB:
+        case   T_VPCMPUB:
+          if (CodeInfo->r1type == OP_K)
+          break;
+          EmitError(INVALID_INSTRUCTION_OPERANDS);
+      }
    /*	if (CodeInfo->token >= T_VPORD && CodeInfo->token <= T_PSRLDQ){
 		if (decoflags == 0 && CodeInfo->r1type != OP_K)
         CodeInfo->evex_flag = 0;
@@ -400,7 +415,6 @@ static void output_opc(struct code_info *CodeInfo)
       /* these are only EVEX instructions, v2.46 */
   if ((CodeInfo->pinstr->prefix & 0xF00) == IZSZ)
 	  CodeInfo->evex_flag = TRUE;
-
   if (!evex){
 	  CodeInfo->evex_flag = FALSE;
     if (ResWordTable[CodeInfo->token].flags & RWF_VEX) {
@@ -453,12 +467,12 @@ static void output_opc(struct code_info *CodeInfo)
   
   if (CodeInfo->prefix.adrsiz == TRUE && (CodeInfo->token < T_VPGATHERDD || CodeInfo->token > T_VSCATTERQPD)&&
       CodeInfo->token != T_VCVTPH2PS && CodeInfo->token != T_VCVTPS2PD) {
+
 	  if (CodeInfo->basereg == 0x10) /* RIP used for relative addressing v2.36 */
 		  ;/* don't output 0x67 */
 	  else
 		  OutputCodeByte(ADRSIZ);
     
-
 #ifdef DEBUG_OUT
     if (fpfix)
       DebugMsg(("output_opc: ERROR: FP emulation byte sequence destroyed by 32-bit address prefix!\n"));
@@ -504,9 +518,8 @@ static void output_opc(struct code_info *CodeInfo)
     CodeInfo->prefix.rex = (tmp & 0xFA) | ((tmp & REX_R) >> 2) | ((tmp & REX_B) << 2);
 #endif
   }
-    //if (CodeInfo->token == T_VMOVSD)
+    //if (CodeInfo->token == T_VGATHERPF0DPD)
     //  __debugbreak();
-
 
 #if AVXSUPP
        if (CodeInfo->indextype == OP_XMM || CodeInfo->indextype == OP_YMM || CodeInfo->indextype == OP_ZMM) {
@@ -571,6 +584,7 @@ static void output_opc(struct code_info *CodeInfo)
       lbyte |= EVEX_P1VVVV;
       CodeInfo->evex_p2 |= EVEX_P2VMASK;
     }
+
 
   /* If there is no decoflags then it is AVX2 instruction with 3 parameters, Uasm 2.15 */
   if (CodeInfo->token >= T_VBROADCASTSS && CodeInfo->token <= T_VPBROADCASTMW2D)
@@ -736,7 +750,6 @@ static void output_opc(struct code_info *CodeInfo)
             else{
               /* These instructions if, not 0x62, can be only 0xC5, Uasm 2.16 */
                 if (CodeInfo->token == T_VPMOVMSKB){
-
                   if(ins->byte1_info == F_0F && (CodeInfo->prefix.rex & REX_B == 0)&& 
                      (CodeInfo->prefix.rex & REX_X == 0) && (CodeInfo->prefix.rex & REX_W == 8))
                         goto outC5;    // go handle 0xC5 instruction
@@ -750,7 +763,6 @@ static void output_opc(struct code_info *CodeInfo)
                      EmitError(INVALID_INSTRUCTION_OPERANDS);
                   if ((CodeInfo->reg2 <= 7)&&(CodeInfo->reg3 <= 7) && ((CodeInfo->opnd[OPND2].type & OP_M_ANY ) == 0))
                   goto outC5;    // go handle 0xC5 instruction
-
 
 					/* John: Validate 3 operand vex form */
 				  if (CodeInfo->opnd[OPND3].type == OP_NONE && CodeInfo->vexregop == 0 &&
@@ -1295,6 +1307,7 @@ static void output_opc(struct code_info *CodeInfo)
                 if (CodeInfo->evex_flag == 0) lbyte &= ~EVEX_P1WMASK;
                 else lbyte |= EVEX_P1WMASK;
                 }
+
 
           /* this is a temporary fix v2.46 */
           if (CodeInfo->token == T_VMOVQ) {
@@ -2040,7 +2053,6 @@ static void output_opc(struct code_info *CodeInfo)
                       CodeInfo->tuple = TRUE;  
                   }
                   
-
                   else{
                     if (CodeInfo->token < T_VPSLLD && CodeInfo->token > T_VPRORVQ)
                     EmitError(INVALID_OPERAND_SIZE);
@@ -2602,9 +2614,13 @@ static void output_opc(struct code_info *CodeInfo)
               case T_VPSCATTERQQ:
 				  if (CodeInfo->evex_flag && CodeInfo->tuple == 0 )/* && decoflags != 0 */
 				  {
-					  tmp &= NOT_BIT_67;
-					  tmp |= MOD_10;
-					  CodeInfo->rm_byte = tmp;
+            if (((CodeInfo->opnd[OPND1].type & OP_M_ANY) && (CodeInfo->opnd[OPND1].data32l)) ||
+                ((CodeInfo->opnd[OPND2].type & OP_M_ANY) && (CodeInfo->opnd[OPND2].data32l)))
+             {
+              tmp &= NOT_BIT_67;
+              tmp |= MOD_10;                    /* use dword displacement */
+              CodeInfo->rm_byte = tmp;
+             }
 				  }
 				  break;
 			  case T_VMOVUPD:
@@ -2617,7 +2633,7 @@ static void output_opc(struct code_info *CodeInfo)
 					if (CodeInfo->evex_flag && CodeInfo->tuple == 0) /* && decoflags != 0 */
 					{
 						tmp &= NOT_BIT_67;
-						tmp |= MOD_10;
+            tmp |= MOD_10;               /* use long word displacement */
 						CodeInfo->rm_byte = tmp;
 					}
 				}
@@ -2625,8 +2641,10 @@ static void output_opc(struct code_info *CodeInfo)
             }
 		    OutputCodeByte( tmp );
 
-        if( ( CodeInfo->Ofssize == USE16 && CodeInfo->prefix.adrsiz == 0 ) ||
-           ( CodeInfo->Ofssize == USE32 && CodeInfo->prefix.adrsiz == 1 ) )
+        //if( ( CodeInfo->Ofssize == USE16 && CodeInfo->prefix.adrsiz == 0 ) ||
+        //   ( CodeInfo->Ofssize == USE32 && CodeInfo->prefix.adrsiz == 1 ) )
+        //    return; /* no SIB for 16bit */
+        if ( CodeInfo->Ofssize == USE16 && CodeInfo->prefix.adrsiz == 0 ) 
             return; /* no SIB for 16bit */
 
         switch ( tmp & NOT_BIT_345 ) {
@@ -2765,7 +2783,7 @@ static void output_data(const struct code_info *CodeInfo, enum operand_type dete
             break;
         case MOD_10:  /* 16- or 32-bit displacement */
             if( ( CodeInfo->Ofssize == USE16 && CodeInfo->prefix.adrsiz == 0 ) ||
-               ( CodeInfo->Ofssize == USE32 && CodeInfo->prefix.adrsiz == 1 ) ) {
+               ( CodeInfo->Ofssize == USE32 && CodeInfo->prefix.adrsiz == 1 ) && (CodeInfo->evex_flag == 0)) {
                 size = 2;
             } else {
                 size = 4;
@@ -3017,7 +3035,6 @@ static ret_code match_phase_3( struct code_info *CodeInfo, enum operand_type opn
     
 #if AVXSUPP 
                                
-
     if ( CodeInfo->token >= VEX_START && ( vex_flags[ CodeInfo->token - VEX_START ] & VX_L ) ) {
         if ( CodeInfo->opnd[OPND1].type & (OP_K | OP_YMM | OP_ZMM | OP_M256) ) {
             if ( opnd2 & OP_ZMM || opnd2 & OP_YMM || opnd2 & OP_K)
@@ -3224,6 +3241,7 @@ static ret_code check_operand_2( struct code_info *CodeInfo, enum operand_type o
 		CodeInfo->opnd[OPND2].type = OP_A;
 	}
 
+
     if( CodeInfo->opnd[OPND2].type == OP_NONE ) {
       if (opnd_clstab[CodeInfo->pinstr->opclsidx].opnd_type[OPND2] != OP_NONE){
         if (CodeInfo->token == T_VGETEXPPD || CodeInfo->token == T_VGETEXPPS)
@@ -3311,8 +3329,10 @@ ret_code codegen( struct code_info *CodeInfo, uint_32 oldofs )
 				}
 				if (opnd1 & OP_XMM || opnd1 & OP_YMM || opnd1 & OP_K || opnd1 & OP_ZMM)
 					opnd1 |= OP_XMM;
-				else
+        else{
 					opnd1 |= OP_M128;
+          opnd1 |= OP_M;
+          }
 			}
 		}
 		/* Here is probably possible to find better solution     */
@@ -3337,6 +3357,20 @@ ret_code codegen( struct code_info *CodeInfo, uint_32 oldofs )
                CodeInfo->rm_byte, CodeInfo->sib,
                CodeInfo->prefix.rex, CodeInfo->prefix.opsiz ));
 #endif
+	
+	/* UASM 2.47 force non-sized jmp to match current word size */
+	if (CodeInfo->token == T_JMP && CodeInfo->mem_type == MT_EMPTY)
+	{
+		if (CodeInfo->opnd[0].type == OP_IGE8)
+		{
+			if (CurrWordSize == 2)
+				CodeInfo->mem_type = MT_WORD;
+			else if (CurrWordSize == 4)
+				CodeInfo->mem_type = MT_DWORD;
+			else if (CurrWordSize == 8)
+				CodeInfo->mem_type = MT_QWORD;
+		}
+	}
 
 	/* UASM 2.37: force immediate indirect addressing conversion */
 	if (( (CodeInfo->token == T_MOV && CodeInfo->opnd[OPND1].type == OP_R64) || CodeInfo->opnd[OPND1].type == OP_R32 || CodeInfo->opnd[OPND1].type == OP_R16 || CodeInfo->opnd[OPND1].type == OP_R8) && CodeInfo->isptr && CodeInfo->opnd[OPND1].data32h > 0)
@@ -3400,3 +3434,4 @@ ret_code codegen( struct code_info *CodeInfo, uint_32 oldofs )
     EmitError( INVALID_INSTRUCTION_OPERANDS );
     return( ERROR );
 }
+

@@ -63,7 +63,6 @@ LINK = jwlink.exe
 !endif
 
 #cflags stuff
-
 #########
 extra_c_flags =
 !if $(DEBUG)
@@ -179,4 +178,3 @@ clean: .SYMBOLIC
 	@if exist $(OUTD)\$(name).map erase $(OUTD)\$(name).map
 	@if exist $(OUTD)\$(name)d.map erase $(OUTD)\$(name)d.map
 	@if exist $(OUTD)\*.obj erase $(OUTD)\*.obj
-

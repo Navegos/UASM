@@ -23,6 +23,7 @@ for %%f in (..\src\coffdbg\*.asm) do call :cmpcoffdbg %%f
 for %%f in (..\src\oo\*.asm) do call :cmpoo %%f
 for %%f in (..\src\ooerr\*.asm) do call :cmpooerr %%f
 for %%f in (..\src\literals\*.asm) do call :cmpliterals %%f
+for %%f in (..\src\literalerr\*.asm) do call :cmpliteralerr %%f
 for %%f in (..\src\linux64\*.asm) do call :cmplinux64 %%f
 for %%f in (..\src\macho64\*.asm) do call :cmpmacho64 %%f
 for %%f in (..\src\cinvoke\*.asm) do call :cmpcinvoke %%f
@@ -31,6 +32,7 @@ for %%f in (..\src\flat16\*.asm) do call :flat16 %%f
 for %%f in (..\src\avxerr\*.asm) do call :avxerr %%f
 for %%f in (..\src\invoke64err\*.asm) do call :invoke64err %%f
 for %%f in (..\src\avx512\*.asm) do call :cmpavx512 %%f
+for %%f in (..\src\vcall\*.asm) do call :vectorcall %%f
 
 cd ..
 echo .
@@ -151,6 +153,19 @@ if errorlevel 1 goto end
 del %~n1.obj
 goto end
 
+:cmpliteralerr
+echo ****************************************************************
+ECHO %1
+echo ****************************************************************
+echo .
+echo .
+%ASMX% -q -win64 -Zp8 -Zi -Zd -Zf %1
+%FCMP% %~n1.err ..\exp\literalerr\%~n1.err
+if errorlevel 1 goto end
+del %~n1.obj
+del %~n1.err
+goto end
+
 :cmplinux64
 echo ****************************************************************
 ECHO %1
@@ -245,6 +260,18 @@ echo .
 %FCMP% %~n1.bin ..\exp\avx512\%~n1.bin
 if errorlevel 1 goto end
 del %~n1.bin
+goto end
+
+:vectorcall
+echo ****************************************************************
+ECHO %1
+echo ****************************************************************
+echo .
+echo .
+%ASMX% -c -win64 -Zp8 %1
+%FCMP% /O32 %~n1.obj ..\exp\vcall\%~n1.obj
+if errorlevel 1 goto end
+del %~n1.obj
 goto end
 
 :end

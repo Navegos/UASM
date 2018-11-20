@@ -432,6 +432,9 @@
     <ClInclude Include="..\..\H\x86macros.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\H\malloc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\msmod.inc">

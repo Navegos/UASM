@@ -1,5 +1,6 @@
-/*
-Create the predefined SIMD data types
+
+/* 
+Create the predefined SIMD data types 
 __m128
 __m256
 __m512
@@ -114,7 +115,7 @@ void AddSimdTypes()
 	AddLineQueue("b30 BYTE ?");
 	AddLineQueue("b31 BYTE ?");
 	AddLineQueue("__m256b ends");
-
+	
 	AddLineQueue("__m256w struct");
 	AddLineQueue("w0 WORD ?");
 	AddLineQueue("w1 WORD ?");
@@ -178,7 +179,7 @@ void AddSimdTypes()
 	AddLineQueue("d64 __m256d <>");
 	AddLineQueue("q64 __m256q <>");
 	AddLineQueue("__m256 ends");
-
+	
 	AddLineQueue("__m512b struct");
 	AddLineQueue("b0 BYTE ?");
 	AddLineQueue("b1 BYTE ?");
@@ -349,6 +350,7 @@ void AddSimdTypes()
 	AddLineQueue("d64 __m512d <>");
 	AddLineQueue("q64 __m512q <>");
 	AddLineQueue("__m512 ends");
-
+	
 	RunLineQueue();
+
 }
