@@ -1,0 +1,31 @@
+Package: uasm
+Format: 3.0 (quilt)
+Binary: uasm
+Architecture: any
+Version: 2.50.0-1ubuntu2
+Maintainer: Navegos QA <navegos@outlook.com>
+Standards-Version: 4.4.0
+Build-Depends: debhelper (>= 12), dpkg-dev (>= 1.16.1~)
+Homepage: http://www.terraspace.co.uk/uasm.html
+Vcs-Browser: https://github.com/Terraspace/UASM
+Vcs-Git: https://github.com/Terraspace/UASM.git
+Directory: pool/focal/main/source
+Package-List:
+ uasm deb devel optional arch=any
+Files:
+ f6bed45f731be08e7ec07075bd7e8cba 948 uasm_2.50.0-1ubuntu2.dsc
+ 1f21227df5f1f1653401a20520018142 2177735 uasm_2.50.0.orig.tar.gz
+ 398921ef8b71ff677fb99af3db40b47c 2280 uasm_2.50.0-1ubuntu2.debian.tar.xz
+Checksums-Sha1:
+ 76f711aaa34cee13401b8483de79d07868005a96 948 uasm_2.50.0-1ubuntu2.dsc
+ 45eb047db884202b83561982f09bc234620b2700 2177735 uasm_2.50.0.orig.tar.gz
+ 6d3e65bece548e7f5324e8ddd912bab4b3515286 2280 uasm_2.50.0-1ubuntu2.debian.tar.xz
+Checksums-Sha256:
+ 2aac3ea85813dcc41230c7f81140ecdf4f3a5a78970437b6980f349437194f1a 948 uasm_2.50.0-1ubuntu2.dsc
+ 76a6f223b57e40d3883f52c99ca108ddc8e1c9bb82a23c1fb880a57be7f89a8a 2177735 uasm_2.50.0.orig.tar.gz
+ ab02df7d0b88571fc576f9f5b29c6083c099bb537fc58e9076d57dd63c3afb8e 2280 uasm_2.50.0-1ubuntu2.debian.tar.xz
+Checksums-Sha512:
+ 1aea1f63a3e50a6f403efcf01a4b5c81fe62ed15786cf335c5981af52baf0114196b8ea723c3b00629ccadc8c618ca651af9ef8466e75b7ed78f1489fb0097fd 948 uasm_2.50.0-1ubuntu2.dsc
+ 3500e54d8c1042266d4c31c89dfae57c200d14f5cae7efac55c60db42d7adc3a9d08eb72626e35a7a543840da1d690d2f45eb2d43f0ba008a4813b50806cbf1d 2177735 uasm_2.50.0.orig.tar.gz
+ 157b824c13f4cb14b5e54117412587ab6c45ff234a6903231b32fdfc4975682e0f49e359aebfcb18a7947800ed0ea8e5ebe710a020fb0bd9c4707f63a9fafeae 2280 uasm_2.50.0-1ubuntu2.debian.tar.xz
+

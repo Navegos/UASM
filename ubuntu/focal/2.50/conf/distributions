@@ -1,0 +1,9 @@
+Origin: uasm
+Label: uasm
+Codename: focal
+Architectures: amd64 source
+Components: main
+DDebComponents: main
+Limit: 3
+Description: uasm Repository
+SignWith: 0xc3aa60f8ba7f9354

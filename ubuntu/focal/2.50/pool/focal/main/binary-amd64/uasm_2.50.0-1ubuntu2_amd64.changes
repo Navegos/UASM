@@ -1,0 +1,45 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Format: 1.8
+Date: Sat, 10 Oct 2020 06:59:36 +0000
+Source: uasm
+Binary: uasm
+Architecture: amd64
+Version: 2.50.0-1ubuntu2
+Distribution: focal
+Urgency: medium
+Maintainer: Navegos QA <navegos@outlook.com>
+Changed-By: Navegos QA <navegos@outlook.com>
+Description:
+ uasm       - UASM is a free MASM-compatible assembler
+Changes:
+ uasm (2.50.0-1ubuntu2) focal; urgency=medium
+ .
+   * New upstream release
+Checksums-Sha1:
+ ccaad6b41f62970621f29a47d5449f50bad36fc8 6889 uasm_2.50.0-1ubuntu2_amd64.buildinfo
+ 9032736e142d5911bf56b27e0a65762702610fa4 275788 uasm_2.50.0-1ubuntu2_amd64.deb
+Checksums-Sha256:
+ c8df4657577444aea612353e29ead72929e24099d4ab7df34bf094c740cfbfa3 6889 uasm_2.50.0-1ubuntu2_amd64.buildinfo
+ 1a7ee4feed81b172c0334227666d8384bd714a22a1ff59e5c6ae8aa3f64ca1d2 275788 uasm_2.50.0-1ubuntu2_amd64.deb
+Files:
+ 2a1154ad70e2893d7f831c4bf7df56eb 6889 devel optional uasm_2.50.0-1ubuntu2_amd64.buildinfo
+ 11ca42fdbf20961d78f082e5a04d7046 275788 devel optional uasm_2.50.0-1ubuntu2_amd64.deb
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE0ruQlwrPOIAqXiSkw6pg+Lp/k1QFAl+CELsACgkQw6pg+Lp/
+k1TVhBAAvoxAN0WP5PMbYOSS8j1FCelqwTFBjoTQ+2j+7+DlEaQAnAGB+N1qCO2r
++mquA2rJC/Xu9EfuapWj74nSFYT08iiybG/7pxDJI/5Pw2SGWFDki7kw/2UjBVqO
+7OWfMP6MZB7ihDLdXUtBw8JkCzi/O+x/YP2Bb2aFaTEn/vQoo1WoBTKBauKFvTFb
+EXcShRyyN8+MhbtYjpCzB4O6iUIRDEG2+Oh1h63i+m0xzDy/jigy5Bsi2rgE/91O
+U/NsD8oV8CARQuL/bQNK+VWGpVRgrCaT6QQ+RiNvAk5qV8NfwzLGLF5FKpJ5Uukq
+jMrzo9sm0W/20rA9c3tqa4Smh6xEJsk/3HejMtf7XPc6hoDJmUd6q1NFcmACpsje
++OuMdVdJKyuaPflfklN+OaCwUyJPPmpNGHetSU+SVuxLgRQxZSJqDF84mpOQBZ2k
+zQBC/hCXgENBWjblocsuCaYZ77ckLOPGzmi1sBXNTg6FGOa9h0ryO7CsHRM9U29N
+uey3EWcwmdHtJJW+c7VzM9EMNDOEtQNy/Ga1ic4vRRzSUZYefP7BEQz8gKlfHV15
+paBnl7y0RVu26jtnaJoPyLir7hzO95pT6TL2LXU1ikVgTb5OtrkvPAQmDUOCSE6T
+UXS4opN1OQh3djOrv31LexUCiz4c87ew0dcluf0pvtIua8tKZuk=
+=82eL
+-----END PGP SIGNATURE-----

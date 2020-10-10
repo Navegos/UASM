@@ -1,0 +1,23 @@
+Package: uasm
+Architecture: amd64
+Version: 2.50.0-1ubuntu2
+Priority: optional
+Section: devel
+Maintainer: Navegos QA <navegos@outlook.com>
+Installed-Size: 1441
+Depends: dpkg (>= 1.15.4) | install-info, libc6 (>= 2.14), libc6-dev
+Filename: pool/focal/main/binary-amd64/uasm_2.50.0-1ubuntu2_amd64.deb
+Size: 275788
+MD5sum: 11ca42fdbf20961d78f082e5a04d7046
+SHA1: 9032736e142d5911bf56b27e0a65762702610fa4
+SHA256: 1a7ee4feed81b172c0334227666d8384bd714a22a1ff59e5c6ae8aa3f64ca1d2
+SHA512: f5143d322bc4eb605fe00f3a12892336b17c4aa9fc097eb81af4c9f19658fa52c1e064f4f6da10ee69985f669ccdbcb13c71a56fe016090584e9aca4720d3536
+Homepage: http://www.terraspace.co.uk/uasm.html
+Description: UASM is a free MASM-compatible assembler
+ based on JWasm with more and enhanced features.
+ .
+ Please visit http://www.terraspace.co.uk/uasm.html for more info.
+ .
+ UASM is released under the Sybase Open Watcom Public License version 1.0
+ and under the Apache License, Version 2.0.
+
