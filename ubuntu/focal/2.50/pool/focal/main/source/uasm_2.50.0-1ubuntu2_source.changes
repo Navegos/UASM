@@ -15,34 +15,34 @@ Changes:
  .
    * New upstream release
 Checksums-Sha1:
- 1d8b81e2fdb803300cb41a7c9c2718d90a055f88 1831 uasm_2.50.0-1ubuntu2.dsc
- 45eb047db884202b83561982f09bc234620b2700 2177735 uasm_2.50.0.orig.tar.gz
+ 75f0a88bf6e73e95e5821abc1834234494c5179d 1831 uasm_2.50.0-1ubuntu2.dsc
+ 1ba9ff33faa6928abbe56c083fc21b5f2dcbc163 2177739 uasm_2.50.0.orig.tar.gz
  6d3e65bece548e7f5324e8ddd912bab4b3515286 2280 uasm_2.50.0-1ubuntu2.debian.tar.xz
- 5d35a468d75a6d126dccac5e0184e3106bec5bf9 6864 uasm_2.50.0-1ubuntu2_source.buildinfo
+ 06e2d0f7a2d12460b9e0f39e08cc85ee925bd698 6864 uasm_2.50.0-1ubuntu2_source.buildinfo
 Checksums-Sha256:
- e48fc8fb5bde3389378c16aaaf05d3c87bf7d530676b02908cc9c2d5241cb4d7 1831 uasm_2.50.0-1ubuntu2.dsc
- 76a6f223b57e40d3883f52c99ca108ddc8e1c9bb82a23c1fb880a57be7f89a8a 2177735 uasm_2.50.0.orig.tar.gz
+ c0f0dc8127e744305d960054988cf4dcb3793dec1b5dd83eb818ee861d88f44b 1831 uasm_2.50.0-1ubuntu2.dsc
+ 567f1243552e7c6af269452bbc03e5e0a75cb2b2bc4f8256895365ded260206e 2177739 uasm_2.50.0.orig.tar.gz
  ab02df7d0b88571fc576f9f5b29c6083c099bb537fc58e9076d57dd63c3afb8e 2280 uasm_2.50.0-1ubuntu2.debian.tar.xz
- 098f8499c4e3adb3f55a73b26a3b8348971dcfa2df553d4e8f03bf7bf18f66ec 6864 uasm_2.50.0-1ubuntu2_source.buildinfo
+ ae56cc3c65d24522d991d7dd23b13332a2aef46e2b96e1c5594bc3ae4b368513 6864 uasm_2.50.0-1ubuntu2_source.buildinfo
 Files:
- c76f563ed4cdf2a53c7b1f542d44eaa2 1831 devel optional uasm_2.50.0-1ubuntu2.dsc
- 1f21227df5f1f1653401a20520018142 2177735 devel optional uasm_2.50.0.orig.tar.gz
+ 8be84567b5fe6c25f1d1be1053f2453e 1831 devel optional uasm_2.50.0-1ubuntu2.dsc
+ fa3d722005a66482ef1e9d52696bcca1 2177739 devel optional uasm_2.50.0.orig.tar.gz
  398921ef8b71ff677fb99af3db40b47c 2280 devel optional uasm_2.50.0-1ubuntu2.debian.tar.xz
- f2db18979392f1d8a3fcd0eb5a918bbb 6864 devel optional uasm_2.50.0-1ubuntu2_source.buildinfo
+ 9da8356116c5b0a7970b3237fe9a0162 6864 devel optional uasm_2.50.0-1ubuntu2_source.buildinfo
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEE0ruQlwrPOIAqXiSkw6pg+Lp/k1QFAl+CEGkACgkQw6pg+Lp/
-k1Sdeg//TP3tP7+adzhiP8dRsyeQOaXl1fnVjzgasDFDPSNLcXjni7RK5F2fAQLK
-SaP0V9ScvhvUkoS7fjfQIbM999VICvSb/rbHMBRywU7S0VbTNfrBoZ657jLU6r+c
-Hlc9JxyCu/JLrtNGjOeIrm9hjQvETkdgfWpRC4OVx6l/dZL9ts2HfrpTOI9LhFI7
-hfIDzd2IJkEtVC2f/hiWOJ0LmH7w72EpfSNLIyRgvr4nEsWCowPUtLf9mc1RzMi/
-avRWWgBBlW8gqZwF8svBUjJMtGpcagscgTnTd9kkVarjdKSCFs7X3QwFnRw4l3Xw
-MED7uPpZJprqMbPzUHS4J+wXXWVX9vyRLvO0uLG1PSBvxUBP6N63CooMNz5Sezc4
-wiC+pcUyN5wKHRZpfQkLVpGf8NBM9SHtrUB9BHSFmWH47AaWmWe1xoUjElf/05p6
-dBSMkPmTxc19S2SGYdtYpsPOLKYDBV7aKHbmHJ5/uwVvKl0YXLIbqizRKO3dnlsu
-fPpi4ZoWi5q+y1t5QZuHFv4gRvj9/SLbH7z1WP0hrD4IcsN7wNaL4smGEY3iSvom
-dvW/as6Z7tPoKI0EHtoQ+KK6YdSoF0s1wnZa76f6MzvKMIkuFfODumwZ8wQpC1hd
-7ohkHtPQa2vg+zU1u85DdRF+mxHP/F0SAqAcI/eYL4VzWQ49sJ8=
-=ZowN
+iQIzBAEBCAAdFiEE0ruQlwrPOIAqXiSkw6pg+Lp/k1QFAl+CJTIACgkQw6pg+Lp/
+k1T4Vg/+ORXWdBXQnpqwOs+/xK0w0S/9HvDYsfZ6pubNPpHLgvAABt/uN0WBJrtQ
+b6x92MNQoAQNoSplVVmDC7eYQaRIhz6K1NCFKP7pVg5V0LU0K010EFlJFo6p14m8
+sgLhk41f5Hy6/lq0OCWdNgL5mqRChg0KSIC3BL1jePcfbgLTcmnMXcwtzz31N0PE
+7ydUKP0G55m+wJ0o8bo3JDGZ3blfLZMUJxfbEPLqlgKDx+b7UjCgeKGRKIp0YfgY
++AaLZEMIrl7jq1rjKld3J4tPlKCoQfkwOyGckUEn1QZ0IynNXkKAD8o7XURD6LVI
+MhtWzrMrzihXIYJqA+uZW+5zmtd9b/Y9yyoagZ6rkGLLzaLJSkWCSR5tqUJ3zeWf
+Vu5bqXElYTFZb+iryve/t8Pbi559d4eFH1wJr6ZjsVDk7BWVsybhWJW4ZvnWNLAX
+ULk8cotbcqkeUkbQaRNNpGRYsFztsa7KvqypjawvqWEfm7qiCLSd/6/wiUHGDOQ6
+mZAmyX1yAS1phSzyUNRg3c95pf/OyTu7I2e9ioY3CFb4m3cWwBHgtcebT02IloAP
+dPWobM9viEJvQrzN7syIJNZSI5JqZYahEFzuqzJ61HYDxf8Mm3JQy4ZQ00I6Nxin
+LjEUYULl7Xf6TVfS7RA0Rlaynl2coP1c+7wriFIBrUR39YgszCA=
+=s9P0
 -----END PGP SIGNATURE-----

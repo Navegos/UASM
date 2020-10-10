@@ -4,14 +4,14 @@ Version: 2.50.0-1ubuntu2
 Priority: optional
 Section: devel
 Maintainer: Navegos QA <navegos@outlook.com>
-Installed-Size: 1441
+Installed-Size: 1437
 Depends: dpkg (>= 1.15.4) | install-info, libc6 (>= 2.14), libc6-dev
 Filename: pool/focal/main/binary-amd64/uasm_2.50.0-1ubuntu2_amd64.deb
-Size: 275788
-MD5sum: 11ca42fdbf20961d78f082e5a04d7046
-SHA1: 9032736e142d5911bf56b27e0a65762702610fa4
-SHA256: 1a7ee4feed81b172c0334227666d8384bd714a22a1ff59e5c6ae8aa3f64ca1d2
-SHA512: f5143d322bc4eb605fe00f3a12892336b17c4aa9fc097eb81af4c9f19658fa52c1e064f4f6da10ee69985f669ccdbcb13c71a56fe016090584e9aca4720d3536
+Size: 294056
+MD5sum: 6af891254dcd6e8ac27f742142db1fc5
+SHA1: 2128bc426167d266f127b752185a57deba34db59
+SHA256: 742277f9381bbd5edb5b8145f0c0c6623c19ee1c6142e392b143b67882cda3eb
+SHA512: 7c45d0f7063d2cd905b7560dc3ce77e2e2e68a067834c7220c4fdcf2d04d617b8f470def3d2f8850a5a6e7a8c8c3c1771db4835f87c5a80428a147a698c9c2d1
 Homepage: http://www.terraspace.co.uk/uasm.html
 Description: UASM is a free MASM-compatible assembler
  based on JWasm with more and enhanced features.

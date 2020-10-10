@@ -7,14 +7,14 @@ Binary: uasm
 Architecture: source
 Version: 2.50.0-1ubuntu2
 Checksums-Md5:
- c76f563ed4cdf2a53c7b1f542d44eaa2 1831 uasm_2.50.0-1ubuntu2.dsc
+ 8be84567b5fe6c25f1d1be1053f2453e 1831 uasm_2.50.0-1ubuntu2.dsc
 Checksums-Sha1:
- 1d8b81e2fdb803300cb41a7c9c2718d90a055f88 1831 uasm_2.50.0-1ubuntu2.dsc
+ 75f0a88bf6e73e95e5821abc1834234494c5179d 1831 uasm_2.50.0-1ubuntu2.dsc
 Checksums-Sha256:
- e48fc8fb5bde3389378c16aaaf05d3c87bf7d530676b02908cc9c2d5241cb4d7 1831 uasm_2.50.0-1ubuntu2.dsc
+ c0f0dc8127e744305d960054988cf4dcb3793dec1b5dd83eb818ee861d88f44b 1831 uasm_2.50.0-1ubuntu2.dsc
 Build-Origin: Ubuntu
 Build-Architecture: amd64
-Build-Date: Sat, 10 Oct 2020 20:49:57 +0100
+Build-Date: Sat, 10 Oct 2020 22:18:34 +0100
 Build-Tainted-By:
  merged-usr-via-symlinks
  usr-local-has-libraries
@@ -189,17 +189,17 @@ Environment:
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEE0ruQlwrPOIAqXiSkw6pg+Lp/k1QFAl+CEGgACgkQw6pg+Lp/
-k1T7zQ/+N9iZYy50PD8u9Fnit3VRktkAaaQrN//YUAwaLAu/TwS1Hxs54fok4A5s
-pHDclo884+3xKBWPQDGxnzD8H7y2WrxBO0iIqBHPmp/x4jiLl9D5DSPVJFDNYY3x
-F7YXn1v+boEH833SYfTB/MlPIaNblhrfbmtgJNK1F2VXAND0KR0Xwnd/7lRpzXqw
-v11AJkJc4W1Hh20tG5cjw5LwZpN/zEHD86UlQOVQ1b5ESHC29yIIZQ82sDecJkRe
-gclvywdGkSMgE7nZUrtSdynIBJ7vkCD6nfrXa4/mR9kgpEePikXBStqi3WNfJc82
-cjIUK53njvKWlnC9t6v3Ef+1vZ7+Sdk6qwQDary1aepKSsQM7V4t6dsT4XM1NHQh
-HymxU8B8i8V1am+5l1yRAfq9R0sXy3B/cAAGUIDThPlwUigXUPmeeP2z9OnDINI2
-gQWjk7Nvw/lsVOqtViumvuPl9es3wB7oIEHapTsOyB+D798oBRw4eDgr1DcgLIhE
-73XaOLYaqZ4mGYjriC2VwXt8DqIpxzFuLjoQKSL+sWuXHDK6VZ8j8BDpJWWsPbvI
-8QV7IhSki3+CQAh3E4/CUrYQpbb/iF1i2rL5IXZTL0EymcM+c+Ia3IdjkGXeNbOU
-1Hmm5wIF+Z9lVjadHYxUJa8QB9adEFPquI+wnhzKsD8BjMALzlY=
-=xfg7
+iQIzBAEBCAAdFiEE0ruQlwrPOIAqXiSkw6pg+Lp/k1QFAl+CJTEACgkQw6pg+Lp/
+k1QQoxAAjHsEl+9ZoiQL7JIjPhTTcoWzG2GiwjveI/xn9a+6dnin1/3xqUafr3nS
+Rf1t1vRXLTgJmLBiYBIL6ZFxE4RHuziaCa3UXYx9GWLhymSsO9sJjt9+FncGiRHu
+tEt/Nc7llh1GkDwD3dGkHuGa4eLQjX5P19wBnIYhcOIC0+e7mm2Xuf/iGQDoKP6E
+/YTOfUeJjyZILGoVNExu9vPuAMQuu3YNTqN3PbdrQpWkFmFsMCygQr0His0Kfb6E
+d0uf9960S/1LEzgv48DgcLSjaZviWxkASTn5UQcTKQK5RnhsfIp2bnhL3ChK3yQG
+MjN28G4X7wmvDiSRrpiI1QEcLnHtwhPIjmXeVVjEmN4pLwb8xuKg6BlY5+4aQUo/
+oR7ewxf5wVVr9+y+cWidayEN3anza/8BIKJA2iVtphyoBk0Q867yNqNWVyGM8n3a
+zSsyxtxkiROr4rkqsu7FZ0YxeI9vRSGZ20F+/2CbzKj5LMbJpVeBzh6BbIj4mhNN
+6zSIVhAEUP9nnB5x5QwcQTWnBHPtuT3kbj5LXFko0emwonMn39PNhSxehZ931QeP
+MoE7OHIbq/huzwWBBtuZqw1LrFLJs/bLiPyRRrU/9UMQ4lPwVoPKCF4semgjYr2P
+UIyKfPB3MWbbaAjQ/m08vOE8JbcZyZqDqvL2Ah+jKRk5Vs5npHI=
+=xn2m
 -----END PGP SIGNATURE-----

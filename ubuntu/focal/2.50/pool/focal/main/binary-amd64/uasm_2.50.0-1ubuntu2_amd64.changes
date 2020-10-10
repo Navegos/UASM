@@ -18,28 +18,28 @@ Changes:
  .
    * New upstream release
 Checksums-Sha1:
- ccaad6b41f62970621f29a47d5449f50bad36fc8 6889 uasm_2.50.0-1ubuntu2_amd64.buildinfo
- 9032736e142d5911bf56b27e0a65762702610fa4 275788 uasm_2.50.0-1ubuntu2_amd64.deb
+ ca63e9d1f84159af08b6786b9ac6ca1fa9a2473e 6889 uasm_2.50.0-1ubuntu2_amd64.buildinfo
+ 2128bc426167d266f127b752185a57deba34db59 294056 uasm_2.50.0-1ubuntu2_amd64.deb
 Checksums-Sha256:
- c8df4657577444aea612353e29ead72929e24099d4ab7df34bf094c740cfbfa3 6889 uasm_2.50.0-1ubuntu2_amd64.buildinfo
- 1a7ee4feed81b172c0334227666d8384bd714a22a1ff59e5c6ae8aa3f64ca1d2 275788 uasm_2.50.0-1ubuntu2_amd64.deb
+ f0c40b1f012cca63fdce40d487130fd73889c4f688a5f1ac260a192b426d05ef 6889 uasm_2.50.0-1ubuntu2_amd64.buildinfo
+ 742277f9381bbd5edb5b8145f0c0c6623c19ee1c6142e392b143b67882cda3eb 294056 uasm_2.50.0-1ubuntu2_amd64.deb
 Files:
- 2a1154ad70e2893d7f831c4bf7df56eb 6889 devel optional uasm_2.50.0-1ubuntu2_amd64.buildinfo
- 11ca42fdbf20961d78f082e5a04d7046 275788 devel optional uasm_2.50.0-1ubuntu2_amd64.deb
+ 4a27460a3a9e7119fc89f8d68ac1c89f 6889 devel optional uasm_2.50.0-1ubuntu2_amd64.buildinfo
+ 6af891254dcd6e8ac27f742142db1fc5 294056 devel optional uasm_2.50.0-1ubuntu2_amd64.deb
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEE0ruQlwrPOIAqXiSkw6pg+Lp/k1QFAl+CELsACgkQw6pg+Lp/
-k1TVhBAAvoxAN0WP5PMbYOSS8j1FCelqwTFBjoTQ+2j+7+DlEaQAnAGB+N1qCO2r
-+mquA2rJC/Xu9EfuapWj74nSFYT08iiybG/7pxDJI/5Pw2SGWFDki7kw/2UjBVqO
-7OWfMP6MZB7ihDLdXUtBw8JkCzi/O+x/YP2Bb2aFaTEn/vQoo1WoBTKBauKFvTFb
-EXcShRyyN8+MhbtYjpCzB4O6iUIRDEG2+Oh1h63i+m0xzDy/jigy5Bsi2rgE/91O
-U/NsD8oV8CARQuL/bQNK+VWGpVRgrCaT6QQ+RiNvAk5qV8NfwzLGLF5FKpJ5Uukq
-jMrzo9sm0W/20rA9c3tqa4Smh6xEJsk/3HejMtf7XPc6hoDJmUd6q1NFcmACpsje
-+OuMdVdJKyuaPflfklN+OaCwUyJPPmpNGHetSU+SVuxLgRQxZSJqDF84mpOQBZ2k
-zQBC/hCXgENBWjblocsuCaYZ77ckLOPGzmi1sBXNTg6FGOa9h0ryO7CsHRM9U29N
-uey3EWcwmdHtJJW+c7VzM9EMNDOEtQNy/Ga1ic4vRRzSUZYefP7BEQz8gKlfHV15
-paBnl7y0RVu26jtnaJoPyLir7hzO95pT6TL2LXU1ikVgTb5OtrkvPAQmDUOCSE6T
-UXS4opN1OQh3djOrv31LexUCiz4c87ew0dcluf0pvtIua8tKZuk=
-=82eL
+iQIzBAEBCAAdFiEE0ruQlwrPOIAqXiSkw6pg+Lp/k1QFAl+CJYMACgkQw6pg+Lp/
+k1RI9g/9FBV/gqG4qs22k9AsLQQzNvhEhCRt8tNS6qWxlYljviWsaTVTbIH6JW15
+ACi9RuoplAZmQ3Y9xKz5a+FkUqlr//rKCAM+qrWtvERZ75OeyOOuQm1wiQE2xeMZ
+QEMbg5bdS5scuS5L6iEjfyjQ3E+ZD6k0rjfwyqHOskAKGiECMohYiw06n4+Uw3vl
+l6AQFakSU3tw2dRh+kRbGduRbGtuJw0p3L22EGxgspq9BCkq+xZLpqTYIX+6ZyS2
+F4vJVMvX3s/jJIxJDpwRfCJcR6bq/heHvJ40gRKP1PR/CMUGszdVLTuZO9OTZdYF
+lpGByktgf4QpShgmfjq7ud8isIrDCGqb1kG2euQ07ptQwvC6zW/WohRmsqv+afQQ
+8KryXdAaduQfvy/ybL1fybbKTvRvs8k6qYgQmRO8lzrL0Md+Qxa+NGxdeJ4PZ3+n
+j54zXaRN2jmQ+PkWv0NzTsmG7o0ks9odR258nzyujh1pSrScMWnWioBtQZpVJ4pq
+PKYtOxANg3OwOn/8aFwq5J56PYZOEPvdb4g2G2m32KfMjm1pQGHEamwjj52jting
+BG2vj99M545Pu8QCOJaCR42044ey63PXn1wwK+QSqdoXJhG2ZlOLBywKVXShRrHT
+Z6fweE1Vgn+X5Y2RRKiXPnWvu4siq+p35sHfqEnl00qhZjwn4N8=
+=BIjF
 -----END PGP SIGNATURE-----
