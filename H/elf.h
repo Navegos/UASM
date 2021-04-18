@@ -9,7 +9,7 @@
 
 uasm_PACK_PUSH_STACK
 
-void     elf_init(struct module_info*);
+void uasm_ABI     elf_init(struct module_info*);
 
 uasm_PACK_POP
 

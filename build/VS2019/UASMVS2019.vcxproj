@@ -53,6 +53,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\uasm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -91,14 +92,18 @@
       <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsC</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <CompileAsManaged>false</CompileAsManaged>
       <CompileAsWinRT>false</CompileAsWinRT>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -112,6 +117,18 @@ copy $(OutDir)$(TargetName).pdb $(UASM_PATH)\v142\x86
 xcopy  ..\..\include $(UASM_PATH)\include /hisery
 xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Command>
     </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -119,7 +136,7 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsC</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -127,8 +144,12 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <CompileAsManaged>false</CompileAsManaged>
       <CompileAsWinRT>false</CompileAsWinRT>
       <OmitFramePointers>false</OmitFramePointers>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -142,6 +163,19 @@ copy $(OutDir)$(TargetName).pdb $(UASM_PATH)\v142\x64
 xcopy  ..\..\include $(UASM_PATH)\include /hisery
 xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Command>
     </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -149,7 +183,7 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsC</CompileAs>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <StringPooling>true</StringPooling>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -159,10 +193,16 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <CompileAsManaged>false</CompileAsManaged>
       <CompileAsWinRT>false</CompileAsWinRT>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -176,12 +216,24 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
 xcopy  ..\..\include $(UASM_PATH)\include /hisery
 xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Command>
     </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <CompileAs>CompileAsC</CompileAs>
       <StringPooling>true</StringPooling>
       <WarningLevel>Level3</WarningLevel>
@@ -193,10 +245,16 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <CompileAsManaged>false</CompileAsManaged>
       <CompileAsWinRT>false</CompileAsWinRT>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>
@@ -219,6 +277,19 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <Message>
       </Message>
     </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\apiemu.c" />
@@ -285,11 +356,20 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
     <ClCompile Include="..\..\symbols.c" />
     <ClCompile Include="..\..\tbyte.c" />
     <ClCompile Include="..\..\tokenize.c" />
-    <ClCompile Include="..\..\trmem.c" />
+    <ClCompile Include="..\..\trmem.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\types.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\.gitignore" />
+    <None Include="..\..\README.md" />
+    <UASM Include="..\..\asm\cpua.asm">
+      <FileType>Document</FileType>
+    </UASM>
     <None Include="..\..\BuildCustomizations\uasm.props" />
     <None Include="..\..\BuildCustomizations\uasm.targets" />
     <None Include="..\..\BuildCustomizations\uasm.xml" />
@@ -316,6 +396,19 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
     <None Include="..\..\include_WIP\uasm\windows\vcruntime.inc" />
     <None Include="..\..\include_WIP\uasm\windows\vc\vadefs.inc" />
     <None Include="..\..\include_WIP\uasm\windows\vc\vcruntime.inc" />
+    <UASM Include="..\..\asm\memmove.asm">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </UASM>
+    <UASM Include="..\..\asm\memset.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </UASM>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\H\assume.h" />
@@ -342,6 +435,7 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
     <ClInclude Include="..\..\H\elfspec.h" />
     <ClInclude Include="..\..\H\equate.h" />
     <ClInclude Include="..\..\H\errmsg.h" />
+    <ClInclude Include="..\..\H\exports.h" />
     <ClInclude Include="..\..\H\expreval.h" />
     <ClInclude Include="..\..\H\extern.h" />
     <ClInclude Include="..\..\H\fastpass.h" />
@@ -383,6 +477,7 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
     <ClInclude Include="..\..\H\picohash.h" />
     <ClInclude Include="..\..\H\posndir.h" />
     <ClInclude Include="..\..\H\preproc.h" />
+    <ClInclude Include="..\..\H\preprocessor.h" />
     <ClInclude Include="..\..\H\proc.h" />
     <ClInclude Include="..\..\H\pseudoFilter.h" />
     <ClInclude Include="..\..\H\queue.h" />
@@ -410,5 +505,6 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\uasm.targets" />
   </ImportGroup>
 </Project>

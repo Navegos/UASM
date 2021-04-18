@@ -49,7 +49,7 @@ bool UseSavedState;
  * and the precompiled lines are used for assembly then.
  */
 
-static void SaveState(void)
+static void uasm_ABI SaveState(void)
 /***************************/
 {
     DebugMsg1(("SaveState enter\n"));
@@ -67,7 +67,7 @@ static void SaveState(void)
     DebugMsg(("SaveState exit\n"));
 }
 
-void StoreLine(const char* srcline, int flags, uint_32 lst_position)
+void uasm_ABI StoreLine(const char* srcline, int flags, uint_32 lst_position)
 /********************************************************************/
 {
     int i, j;
@@ -126,7 +126,7 @@ void StoreLine(const char* srcline, int flags, uint_32 lst_position)
  reported in pass 2, so ensure that a full source scan is done then
  */
 
-void SkipSavedState(void)
+void uasm_ABI SkipSavedState(void)
 /*************************/
 {
     DebugMsg(("SkipSavedState enter\n"));
@@ -144,7 +144,7 @@ void SkipSavedState(void)
  - it was defined when StoreState() is called
  */
 
-void SaveVariableState(struct asym* sym)
+void uasm_ABI SaveVariableState(struct asym* sym)
 /****************************************/
 {
     struct equ_item* p;
@@ -170,7 +170,7 @@ void SaveVariableState(struct asym* sym)
     //    printf("state of symbol >%s< saved, value=%u, defined=%u\n", sym->name, sym->value, sym->defined);
 }
 
-struct line_item* RestoreState(void)
+struct line_item* uasm_ABI RestoreState(void)
     /************************************/
 {
     DebugMsg1(("RestoreState enter\n"));
@@ -220,7 +220,7 @@ struct line_item* RestoreState(void)
  * are both either TRUE or FALSE.
  * It's active if both DEBUG and TRMEM is set in Makefile.
  */
-void FreeLineStore(void)
+void uasm_ABI FreeLineStore(void)
 /************************/
 {
     struct line_item* next;
@@ -233,7 +233,7 @@ void FreeLineStore(void)
 }
 #endif
 
-void FastpassInit(void)
+void uasm_ABI FastpassInit(void)
 /***********************/
 {
     StoreState = FALSE;

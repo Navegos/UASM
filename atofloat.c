@@ -19,11 +19,11 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void myatoi128(const char*, uint_64[], int, int);
+extern void uasm_ABI myatoi128(const char*, uint_64[], int, int);
 
 /* it's ensured that 'out' points to a buffer with a size of at least 16 */
 
-void atofloat(void* out, const char* inp, unsigned size, bool negative, uint_8 ftype)
+void uasm_ABI atofloat(void* out, const char* inp, unsigned size, bool negative, uint_8 ftype)
 /*************************************************************************************/
 {
     //const char *inp;

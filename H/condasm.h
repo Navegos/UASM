@@ -55,11 +55,11 @@ enum cond_class {
 
 extern enum if_state CurrIfState;
 
-extern void conditional_assembly_prepare(int);
-extern int  GetIfNestLevel(void);
-extern void SetIfNestLevel(int);
-extern void CondCheckOpen(void);
-extern void CondInit(void);
+extern void uasm_ABI conditional_assembly_prepare(int);
+extern int uasm_ABI  GetIfNestLevel(void);
+extern void uasm_ABI SetIfNestLevel(int);
+extern void uasm_ABI CondCheckOpen(void);
+extern void uasm_ABI CondInit(void);
 
 uasm_PACK_POP
 

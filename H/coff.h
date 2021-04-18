@@ -43,7 +43,7 @@ struct coffmod {
     } LongNames;
 };
 
-extern void coff_init(struct module_info*);
+extern void uasm_ABI coff_init(struct module_info*);
 
 uasm_PACK_POP
 

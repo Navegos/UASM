@@ -7,7 +7,7 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void AddFloatingPointEmulationFixup(struct code_info*);
+extern void uasm_ABI AddFloatingPointEmulationFixup(struct code_info*);
 
 uasm_PACK_POP
 

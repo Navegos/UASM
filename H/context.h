@@ -14,9 +14,9 @@ uasm_PACK_PUSH_STACK
 
 /*---------------------------------------------------------------------------*/
 
-extern void      ContextInit(int);
+extern void uasm_ABI      ContextInit(int);
 #if FASTMEM==0
-extern void      ContextFini(void);
+extern void uasm_ABI      ContextFini(void);
 #endif
 
 uasm_PACK_POP

@@ -23,7 +23,7 @@
 
 uasm_PACK_PUSH_STACK
 
-ret_code LoopDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI LoopDirective(int i, struct asm_tok tokenarray[])
 /**********************************************************/
 {
     int                 directive = tokenarray[i].tokval;

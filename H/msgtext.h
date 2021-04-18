@@ -13,7 +13,7 @@
 uasm_PACK_PUSH_STACK
 
 //extern const char *MsgGet( int, char * );
-extern const char* MsgGetEx(int); /* doesn't need a buffer */
+extern char const* const uasm_ABI MsgGetEx(int); /* doesn't need a buffer */
 
 uasm_PACK_POP
 

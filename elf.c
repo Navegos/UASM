@@ -153,7 +153,7 @@ static const struct conv_section cst[] = {
 /* translate section names:
  * see cst[] above for details.
  */
-static char* ElfConvertSectionName(const struct asym* sym, char* buffer)
+static char* uasm_ABI ElfConvertSectionName(const struct asym* sym, char* buffer)
 /************************************************************************/
 {
     int i;
@@ -177,7 +177,7 @@ static char* ElfConvertSectionName(const struct asym* sym, char* buffer)
 
 /* get number of sections that have relocations */
 
-static int get_num_reloc_sections(void)
+static int uasm_ABI get_num_reloc_sections(void)
 /***************************************/
 {
     struct dsym* curr;
@@ -193,7 +193,7 @@ static int get_num_reloc_sections(void)
 
 /* fill entries in ELF32 symbol table */
 
-static uint_32 set_symtab32(struct elfmod* em, uint_32 entries, struct localname* localshead)
+static uint_32 uasm_ABI set_symtab32(struct elfmod* em, uint_32 entries, struct localname* localshead)
 /*********************************************************************************************/
 {
     uint_32             strsize = 1;
@@ -384,7 +384,7 @@ static uint_32 set_symtab32(struct elfmod* em, uint_32 entries, struct localname
 } Elf64_Sym;
  */
 
-static uint_32 set_symtab64(struct elfmod* em, uint_32 entries, struct localname* localshead)
+static uint_32 uasm_ABI set_symtab64(struct elfmod* em, uint_32 entries, struct localname* localshead)
 /*********************************************************************************************/
 {
     uint_32             strsize = 1;
@@ -567,7 +567,7 @@ static uint_32 set_symtab64(struct elfmod* em, uint_32 entries, struct localname
 /* calculate size of .symtab + .strtab section.
  * set content of these sections.
  */
-static void set_symtab_values(struct elfmod* em)
+static void uasm_ABI set_symtab_values(struct elfmod* em)
 /************************************************/
 {
     uint_32         strsize;
@@ -731,7 +731,7 @@ static void set_symtab_values(struct elfmod* em)
  * - relocation sections
  * alloc .shstrtab
  */
-static void set_shstrtab_values(struct elfmod* em)
+static void uasm_ABI set_shstrtab_values(struct elfmod* em)
 /**************************************************/
 {
     int             i;
@@ -800,7 +800,7 @@ static void set_shstrtab_values(struct elfmod* em)
     return;
 }
 
-static unsigned int get_relocation_count(struct dsym* curr)
+static unsigned int uasm_ABI get_relocation_count(struct dsym* curr)
 /***********************************************************/
 {
     unsigned relocs;
@@ -811,7 +811,7 @@ static unsigned int get_relocation_count(struct dsym* curr)
     return(relocs);
 }
 
-static unsigned int Get_Alignment(struct dsym* curr)
+static unsigned int uasm_ABI Get_Alignment(struct dsym* curr)
 /****************************************************/
 {
     if (curr->e.seginfo->alignment == MAX_SEGALIGNMENT)
@@ -827,7 +827,7 @@ static unsigned int Get_Alignment(struct dsym* curr)
  * - the 'relocation' sections
  */
 
-static int elf_write_section_table32(struct module_info* modinfo, struct elfmod* em, uint_32 fileoffset)
+static int uasm_ABI elf_write_section_table32(struct module_info* modinfo, struct elfmod* em, uint_32 fileoffset)
 /********************************************************************************************************/
 {
     int             i;
@@ -998,7 +998,7 @@ static int elf_write_section_table32(struct module_info* modinfo, struct elfmod*
 
 /* write ELF64 section table. */
 
-static int elf_write_section_table64(struct module_info* modinfo, struct elfmod* em, uint_32 fileoffset)
+static int uasm_ABI elf_write_section_table64(struct module_info* modinfo, struct elfmod* em, uint_32 fileoffset)
 /********************************************************************************************************/
 {
     int             i;
@@ -1163,7 +1163,7 @@ static int elf_write_section_table64(struct module_info* modinfo, struct elfmod*
 
 /* write 1 section's relocations (32-bit) */
 
-static void write_relocs32(struct elfmod* em, struct dsym* curr)
+static void uasm_ABI write_relocs32(struct elfmod* em, struct dsym* curr)
 /****************************************************************/
 {
     uint_8          elftype;
@@ -1217,7 +1217,7 @@ static void write_relocs32(struct elfmod* em, struct dsym* curr)
 
 /* write 1 section's relocations (64-bit) */
 
-static void write_relocs64(struct dsym* curr)
+static void uasm_ABI write_relocs64(struct dsym* curr)
 /*********************************************/
 {
     uint_8          elftype;
@@ -1310,7 +1310,7 @@ static void write_relocs64(struct dsym* curr)
 
 /* write section contents and fixups */
 
-static ret_code elf_write_data(struct module_info* modinfo, struct elfmod* em)
+static ret_code uasm_ABI elf_write_data(struct module_info* modinfo, struct elfmod* em)
 /******************************************************************************/
 {
     struct dsym*    curr;
@@ -1375,7 +1375,7 @@ static ret_code elf_write_data(struct module_info* modinfo, struct elfmod* em)
 
 /* write ELF module */
 
-static ret_code elf_write_module(struct module_info* modinfo)
+static ret_code uasm_ABI elf_write_module(struct module_info* modinfo)
 /*************************************************************/
 {
     struct elfmod em;
@@ -1475,7 +1475,7 @@ static ret_code elf_write_module(struct module_info* modinfo)
  * called once per module.
  */
 
-void elf_init(struct module_info* modinfo)
+void uasm_ABI elf_init(struct module_info* modinfo)
 /******************************************/
 {
     modinfo->elf_osabi = ELFOSABI_LINUX;

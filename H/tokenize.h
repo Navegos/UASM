@@ -59,8 +59,8 @@ enum tok_flags3 {
     TF3_EXPANSION = 0x02,  /* expansion operator % at pos 0 */
 };
 
-extern ret_code GetToken(struct asm_tok[], struct line_status*);
-extern int      Tokenize(char*, unsigned int, struct asm_tok[], unsigned int);
+extern ret_code uasm_ABI GetToken(struct asm_tok[], struct line_status*);
+extern int uasm_ABI      Tokenize(char*, unsigned int, struct asm_tok[], unsigned int);
 
 uasm_PACK_POP
 

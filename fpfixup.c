@@ -66,7 +66,7 @@ static const char patchchr2[] = {
     'W', 'D', 'E', 'C', 'S', 'A', 'F', 'G'
 };
 
-void AddFloatingPointEmulationFixup(struct code_info* CodeInfo)
+void uasm_ABI AddFloatingPointEmulationFixup(struct code_info* CodeInfo)
 /***************************************************************/
 {
     int i;

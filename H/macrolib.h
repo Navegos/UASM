@@ -7,8 +7,8 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void Adddefs(void);
-extern void CreateMacroLibCases(void);
+extern void uasm_ABI Adddefs(void);
+extern void uasm_ABI CreateMacroLibCases(void);
 
 uasm_PACK_POP
 

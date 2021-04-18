@@ -45,7 +45,7 @@ void QInit(struct qdesc* q)
 }
 #endif
 
-void QEnqueue(struct qdesc* q, void* item)
+void uasm_ABI QEnqueue(struct qdesc* q, void* item)
 /******************************************/
 {
     if (q->head == NULL)
@@ -63,7 +63,7 @@ void QEnqueue(struct qdesc* q, void* item)
 
 /* add a new node to a queue */
 
-void QAddItem(struct qdesc* q, const void* data)
+void uasm_ABI QAddItem(struct qdesc* q, const void* data)
 /************************************************/
 {
     struct qnode* node;
@@ -74,7 +74,7 @@ void QAddItem(struct qdesc* q, const void* data)
 }
 
 #if 0
-void QJoinQueue(struct qdesc* dest, struct qdesc* src)
+void uasm_ABI QJoinQueue(struct qdesc* dest, struct qdesc* src)
 /******************************************************/
 {
     if (dest->head == NULL)
@@ -97,7 +97,7 @@ void QJoinQueue(struct qdesc* dest, struct qdesc* src)
 
 #if 0 /* v2.04: not needed anymore */
 
-void* QDequeue(struct qdesc* q)
+void* uasm_ABI QDequeue(struct qdesc* q)
 /*******************************/
 {
     void* item;

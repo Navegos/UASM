@@ -35,19 +35,19 @@
 
 uasm_PACK_PUSH_STACK
 
-#define  res(token, function) extern ret_code function( int, struct asm_tok[] );
+#define  res(token, function) extern ret_code uasm_ABI function( int, struct asm_tok[] );
 #include "dirtype.h"
 #undef res
 
 /* table of function addresses for directives */
 #define  res(token, function) function ,
-ret_code(* const directive_tab[])(int, struct asm_tok[]) = {
+ret_code(uasm_ABI *const directive_tab[])(int, struct asm_tok[]) = {
 #include "dirtype.h"
 };
 #undef res
 
 /* should never be called */
-ret_code StubDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI StubDir(int i, struct asm_tok tokenarray[])
 {
     return(ERROR);
 }
@@ -55,7 +55,7 @@ ret_code StubDir(int i, struct asm_tok tokenarray[])
 /* handle ECHO directive.
  * displays text on the console
  */
-ret_code EchoDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI EchoDirective(int i, struct asm_tok tokenarray[])
 /**********************************************************/
 {
     if (Parse_Pass == PASS_1) /* display in pass 1 only */
@@ -71,7 +71,7 @@ ret_code EchoDirective(int i, struct asm_tok tokenarray[])
  * is located becomes the "source" directory, that is, it is searched
  * FIRST if further INCLUDE directives are found inside the included file.
  */
-ret_code IncludeDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI IncludeDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     char* name;
@@ -115,7 +115,7 @@ ret_code IncludeDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-static char* IncludeLibrary(const char* name)
+static char* uasm_ABI IncludeLibrary(const char* name)
 /*********************************************/
 {
     struct qitem* q;
@@ -144,7 +144,7 @@ static char* IncludeLibrary(const char* name)
 
 /* release the lib queue ( created by INCLUDELIB directive ) */
 
-void FreeLibQueue(void)
+void uasm_ABI FreeLibQueue(void)
 /***********************/
 {
     struct qitem* curr;
@@ -159,7 +159,7 @@ void FreeLibQueue(void)
 
 /* directive INCLUDELIB */
 
-ret_code IncludeLibDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI IncludeLibDirective(int i, struct asm_tok tokenarray[])
 /****************************************************************/
 {
     char* name;
@@ -206,7 +206,7 @@ ret_code IncludeLibDirective(int i, struct asm_tok tokenarray[])
 
 /* INCBIN directive */
 
-ret_code IncBinDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI IncBinDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     FILE* file;
@@ -340,7 +340,7 @@ ret_code IncBinDirective(int i, struct asm_tok tokenarray[])
  * external or public!
  */
 
-ret_code AliasDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI AliasDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     //char *tmp;
@@ -445,7 +445,7 @@ ret_code AliasDirective(int i, struct asm_tok tokenarray[])
 
 /* the NAME directive is ignored in Masm v6 */
 
-ret_code NameDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI NameDirective(int i, struct asm_tok tokenarray[])
 /**********************************************************/
 {
     if (Parse_Pass != PASS_1)
@@ -489,7 +489,7 @@ ret_code NameDirective(int i, struct asm_tok tokenarray[])
 
 /* .RADIX directive, value must be between 2 .. 16 */
 
-ret_code RadixDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI RadixDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     uint_8          oldradix;
@@ -528,7 +528,7 @@ ret_code RadixDirective(int i, struct asm_tok tokenarray[])
 
 /* DOSSEG, .DOSSEG, .ALPHA, .SEQ directives */
 
-ret_code SegOrderDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI SegOrderDirective(int i, struct asm_tok tokenarray[])
 /**************************************************************/
 {
     if (tokenarray[i + 1].token != T_FINAL)

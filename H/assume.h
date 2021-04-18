@@ -71,20 +71,20 @@ extern struct assume_info StdAssumeTable[];
 
 #define NUM_SEGREGS 6
 
-extern void AssumeInit(int);     /* init assume tables */
+extern void uasm_ABI AssumeInit(int);     /* init assume tables */
 
-extern enum assume_segreg search_assume(const struct asym* sym, enum assume_segreg def, bool search_grps);
-extern enum assume_segreg GetAssume(const struct asym*, const struct asym*, enum assume_segreg, struct asym**);
+extern enum assume_segreg uasm_ABI search_assume(const struct asym* sym, enum assume_segreg def, bool search_grps);
+extern enum assume_segreg uasm_ABI GetAssume(const struct asym*, const struct asym*, enum assume_segreg def, struct asym**);
 
-extern struct asym* GetOverrideAssume(enum assume_segreg);
-extern struct asym* GetStdAssume(int);
-extern struct asym* GetStdAssumeEx(int);
+extern struct asym* uasm_ABI GetOverrideAssume(enum assume_segreg segoverride);
+extern struct asym* uasm_ABI GetStdAssume(int);
+extern struct asym* uasm_ABI GetStdAssumeEx(int);
 
-extern void             ModelAssumeInit(void);
-extern void             SetSegAssumeTable(void*);
-extern void             GetSegAssumeTable(void*);
-extern void             SetStdAssumeTable(void*, struct stdassume_typeinfo*);
-extern void             GetStdAssumeTable(void*, struct stdassume_typeinfo*);
+extern void uasm_ABI             ModelAssumeInit(void);
+extern void uasm_ABI             SetSegAssumeTable(void*);
+extern void uasm_ABI             GetSegAssumeTable(void*);
+extern void uasm_ABI             SetStdAssumeTable(void*, struct stdassume_typeinfo*);
+extern void uasm_ABI             GetStdAssumeTable(void*, struct stdassume_typeinfo*);
 
 uasm_PACK_POP
 

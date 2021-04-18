@@ -10,7 +10,7 @@ uasm_PACK_PUSH_STACK
 
 struct orgFixup* pOrgTable = NULL;
 
-void AddOrgFixup(int curPos, int orgValue)
+void uasm_ABI AddOrgFixup(int curPos, int orgValue)
 {
     struct orgFixup* curPtr = pOrgTable;
     struct orgFixup* pFixup = (struct orgFixup*)malloc(sizeof(struct orgFixup));
@@ -31,7 +31,7 @@ void AddOrgFixup(int curPos, int orgValue)
     return;
 }
 
-void ResetOrgFixup()
+void uasm_ABI ResetOrgFixup()
 {
     struct orgFixup* curPtr = pOrgTable;
     struct orgFixup* nextPtr;
@@ -50,7 +50,7 @@ void ResetOrgFixup()
     pOrgTable = NULL;
 }
 
-bool InOrgRange(int position)
+bool uasm_ABI InOrgRange(int position)
 {
     struct orgFixup* curPtr = pOrgTable;
     bool retval = FALSE;

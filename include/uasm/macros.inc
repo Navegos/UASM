@@ -466,13 +466,13 @@
     PROCSTART MACRO functionName:REQ, callconvType:REQ, retType:REQ, inpFrame:REQ, usesStr:REQ, args:VARARG
         _currfunctionName_ TEXTEQU <functionName>
         _currargs_ TEXTEQU <args>
-        ;;fnexproto TEXTEQU <>
-        ;;fnexproto CATSTR fnexproto, <&functionName&>
-        ;;fnexproto CATSTR fnexproto, < PROTO >, <&callconvType&>, < >, <(&retType&)>, < >, <&args&>
+        fnexproto TEXTEQU <>
+        fnexproto CATSTR fnexproto, <&functionName&>
+        fnexproto CATSTR fnexproto, < PROTO >, <&callconvType&>, < >, <(&retType&)>, < >, <&args&>
         fnexproc TEXTEQU <>
         fnexproc CATSTR fnexproc, <&functionName&>
         fnexproc CATSTR fnexproc, < PROC >, <&callconvType&>, < >, <(&retType&)>, < >, <&inpFrame&>, < >, <&usesStr&>, < >, <&args&>
-        ;;fnexproto
+        fnexproto
         fnexproc
     ENDM
     ENDIF
@@ -515,7 +515,7 @@
         mm64fnex TEXTEQU <>
         mm64fnex CATSTR mm64fnex, <&functionName&>
         PUBLIC mm64fnex
-        mm64fnex CATSTR mm64fnex, < vectorType>,  < { V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1 } >
+        mm64fnex CATSTR mm64fnex, < vectorType>, < { V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1 } >
         mm64fnex
     ENDM
     ENDIF
@@ -535,7 +535,7 @@
         mm32fnex TEXTEQU <>
         mm32fnex CATSTR mm32fnex, <&functionName&>
         PUBLIC mm32fnex
-        mm32fnex CATSTR mm32fnex, < vectorType>,  < { V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1 } >
+        mm32fnex CATSTR mm32fnex, < vectorType>, < { V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1 } >
         mm32fnex
     ENDM
     ENDIF
@@ -555,7 +555,7 @@
         mm16fnex TEXTEQU <>
         mm16fnex CATSTR mm16fnex, <&functionName&>
         PUBLIC mm16fnex
-        mm16fnex CATSTR mm16fnex, < vectorType>,  < { V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1 } >
+        mm16fnex CATSTR mm16fnex, < vectorType>, < { V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1 } >
         mm16fnex
     ENDM
     ENDIF
@@ -575,7 +575,7 @@
         mm8fnex TEXTEQU <>
         mm8fnex CATSTR mm8fnex, <&functionName&>
         PUBLIC mm8fnex
-        mm8fnex CATSTR mm8fnex, < vectorType>,  < { V1, V1, V1, V1, V1, V1, V1, V1 } >
+        mm8fnex CATSTR mm8fnex, < vectorType>, < { V1, V1, V1, V1, V1, V1, V1, V1 } >
         mm8fnex
     ENDM
     ENDIF
@@ -595,7 +595,7 @@
         mm4fnex TEXTEQU <>
         mm4fnex CATSTR mm4fnex, <&functionName&>
         PUBLIC mm4fnex
-        mm4fnex CATSTR mm4fnex, < vectorType>,  < { V1, V1, V1, V1 } >
+        mm4fnex CATSTR mm4fnex, < vectorType>, < { V1, V1, V1, V1 } >
         mm4fnex
     ENDM
     ENDIF
@@ -615,7 +615,7 @@
         mm2fnex TEXTEQU <>
         mm2fnex CATSTR mm2fnex, <&functionName&>
         PUBLIC mm2fnex
-        mm2fnex CATSTR mm2fnex, < vectorType>,  < { V1, V1 } >
+        mm2fnex CATSTR mm2fnex, < vectorType>, < { V1, V1 } >
         mm2fnex
     ENDM
     ENDIF
@@ -635,7 +635,7 @@
         vmm64fnex TEXTEQU <>
         vmm64fnex CATSTR vmm64fnex, <&functionName&>
         PUBLIC vmm64fnex
-        vmm64fnex CATSTR vmm64fnex, < vectorType>,  < { <V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1> } >
+        vmm64fnex CATSTR vmm64fnex, < vectorType>, < { <V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1> } >
         vmm64fnex
     ENDM
     ENDIF
@@ -655,7 +655,7 @@
         vmm32fnex TEXTEQU <>
         vmm32fnex CATSTR vmm32fnex, <&functionName&>
         PUBLIC vmm32fnex
-        vmm32fnex CATSTR vmm32fnex, < vectorType>,  < { <V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1> } >
+        vmm32fnex CATSTR vmm32fnex, < vectorType>, < { <V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1> } >
         vmm32fnex
     ENDM
     ENDIF
@@ -675,7 +675,7 @@
         vmm16fnex TEXTEQU <>
         vmm16fnex CATSTR vmm16fnex, <&functionName&>
         PUBLIC vmm16fnex
-        vmm16fnex CATSTR vmm16fnex, < vectorType>,  < { <V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1> } >
+        vmm16fnex CATSTR vmm16fnex, < vectorType>, < { <V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1, V1> } >
         vmm16fnex
     ENDM
     ENDIF
@@ -695,7 +695,7 @@
         vmm8fnex TEXTEQU <>
         vmm8fnex CATSTR vmm8fnex, <&functionName&>
         PUBLIC vmm8fnex
-        vmm8fnex CATSTR vmm8fnex, < vectorType>,  < { <V1, V1, V1, V1, V1, V1, V1, V1> } >
+        vmm8fnex CATSTR vmm8fnex, < vectorType>, < { <V1, V1, V1, V1, V1, V1, V1, V1> } >
         vmm8fnex
     ENDM
     ENDIF
@@ -715,7 +715,7 @@
         vmm4fnex TEXTEQU <>
         vmm4fnex CATSTR vmm4fnex, <&functionName&>
         PUBLIC vmm4fnex
-        vmm4fnex CATSTR vmm4fnex, < vectorType>,  < { <V1, V1, V1, V1> } >
+        vmm4fnex CATSTR vmm4fnex, < vectorType>, < { <V1, V1, V1, V1> } >
         vmm4fnex
     ENDM
     ENDIF
@@ -735,7 +735,7 @@
         vmm2fnex TEXTEQU <>
         vmm2fnex CATSTR vmm2fnex, <&functionName&>
         PUBLIC vmm2fnex
-        vmm2fnex CATSTR vmm2fnex, < vectorType>,  < { <V1, V1> } >
+        vmm2fnex CATSTR vmm2fnex, < vectorType>, < { <V1, V1> } >
         vmm2fnex
     ENDM
     ENDIF
@@ -755,47 +755,351 @@
         mm1fnex TEXTEQU <>
         mm1fnex CATSTR mm1fnex, <&functionName&>
         PUBLIC mm1fnex
-        mm1fnex CATSTR mm1fnex, < vectorType>,  < V1 >
+        mm1fnex CATSTR mm1fnex, < vectorType>, < V1 >
         mm1fnex
     ENDM
     ENDIF
 
     IFNDEF NOTMASK128
-    NOTMASK128 MACRO reg:REQ, field:REQ
-        IFNDEF GMASK
+    NOTMASK128 MACRO GMASKSymbolName:REQ, Reg:REQ, Field:REQ
+            LOCAL GMASKSymbolName
             .DATA
-            GMASK OWORD 0
-        ENDIF
+            GMASKSymbolName OWORD 0
         IFNDEF NOTMASK
             .DATA
-            NOTMASK OWORD (-1)
+            NOTMASK128Name OWORD (-1)
         ENDIF
         .CODE
         IF @Arch EQ ARCH_AVX
-            VMOVUPS reg, MASK field
-            VPXOR reg, reg, NOTMASK
+            VMOVUPS Reg, GMASKSymbolName Field
+            VPXOR Reg, Reg, NOTMASK128Name
         ELSE
-            MOVUPS reg, MASK field
-            PXOR reg, NOTMASK
+            MOVUPS Reg, GMASKSymbolName Field
+            PXOR Reg, NOTMASK128Name
         ENDIF
     ENDM
     ENDIF ;NOTMASK128
-    
+
     IFNDEF GETMASK128
-    GETMASK128 MACRO reg:REQ, field:REQ
-        IFNDEF GMASK
+    GETMASK128 MACRO GMASKSymbolName:REQ, Reg:REQ, Field:REQ
+            LOCAL GMASKSymbolName
             .DATA
-            GMASK OWORD 0
-        ENDIF
+            GMASKSymbolName OWORD 0
         .CODE
         IF @Arch EQ ARCH_AVX
-            VMOVUPS reg, MASK field
+            VMOVUPS Reg, GMASKSymbolName Field
         ELSE
-            MOVUPS reg, MASK field
+            MOVUPS Reg, GMASKSymbolName Field
         ENDIF
     ENDM
     ENDIF ;GETMASK128
-    
+
+    IFNDEF PUSHREG
+    PUSHREG MACRO REGSymbolName:REQ, REGType:REQ
+        LOCAL REGSymbolName, rval, WRD, DWD, QWD, MMW, FP, XMMW, YMMW, ZMMW, UNKNOWN
+        rval = 0
+        FOR arg,<AL,BL,CL,DL,SIL,DIL,BPL,SPL,R8B,R9B,R10B,R11B,R12B,R13B,R14B,R15B>
+          IFIDNI <arg>,<REGType>
+            rval = 1
+          ENDIF
+        ENDM
+        IF rval NE 1
+            GOTO WRD
+        ELSE
+            .DATA
+            REGSymbolName DB 0
+            .CODE
+            MOV REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+    :WRD
+        FOR arg,<AX,BX,CX,DX,SI,DI,BP,SP,R8W,R9W,R10W,R11W,R12W,R13W,R14W,R15W>
+          IFIDNI <arg>,<REGType>
+            rval = 2
+          ENDIF
+        ENDM
+        IF rval NE 2
+              GOTO DWD
+        ELSE
+            .DATA
+            REGSymbolName DW 0
+            .CODE
+            MOV REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+    :DWD
+        FOR arg,<EAX,EBX,EBX,EDX,ESI,EDI,EBP,ESP,R8D,R9D,R10D,R11D,R12D,R13D,R14D,R15D>
+          IFIDNI <arg>,<REGType>
+            rval = 4
+          ENDIF
+        ENDM
+        IF rval NE 4
+            GOTO QWD
+        ELSE
+            .DATA
+            REGSymbolName DD 0
+            .CODE
+            MOV REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+    :QWD
+        FOR arg,<RAX,RBX,RCX,RDX,RSI,RDI,RBP,RSP,R8,R9,R10,R11,R12,R13,R14,R15>
+          IFIDNI <arg>,<REGType>
+            rval = 8
+          ENDIF
+        ENDM
+        IF rval NE 8
+            GOTO MMW
+        ELSE
+            .DATA
+            REGSymbolName DQ 0
+            .CODE
+            MOV REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+    :MMW
+        FOR arg,<MM0,MM1,MM2,MM3,MM4,MM5,MM6,MM7>
+          IFIDNI <arg>,<REGType>
+            rval = 8
+          ENDIF
+        ENDM
+        IF rval NE 8
+            GOTO FP
+        ELSE
+            .DATA
+            REGSymbolName DQ 0
+            .CODE
+            MOVQ REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+    :FP
+        FOR arg,<ST(0),ST(1),ST(2),ST(3),ST(4),ST(5),ST(6),ST(7)>
+          IFIDNI <arg>,<REGType>
+            rval = 10
+          ENDIF
+        ENDM
+        IF rval NE 10
+            GOTO XMMW
+        ELSE
+            .DATA
+            REGSymbolName REAL10 0.0
+            .CODE
+            ;;FSTP REGSymbolName, REGType
+            .ERR <"In PUSHREG macro, ST register memory mov unimplemented. Uses the stack.">
+            GOTO ENDPUSHREG
+        ENDIF
+    :XMMW
+        FOR arg,<XMM0,XMM1,XMM2,XMM3,XMM4,XMM5,XMM6,XMM7,XMM8,XMM9,XMM10,XMM11,XMM12,XMM13,XMM14,XMM15,XMM16,XMM17,XMM18,XMM19,XMM20,XMM21,XMM22,XMM23,XMM24,XMM25,XMM26,XMM27,XMM28,XMM29,XMM30,XMM31>
+          IFIDNI <arg>,<REGType>
+            rval = 16
+          ENDIF
+        ENDM
+        IF rval NE 16
+            GOTO YMMW
+        ELSE
+            .DATA
+            ALIGN 16
+            REGSymbolName XMMWORD 0
+            .CODE
+            MOVAPS REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+    :YMMW
+        FOR arg,<YMM0,YMM1,YMM2,YMM3,YMM4,YMM5,YMM6,YMM7,YMM8,YMM9,YMM10,YMM11,YMM12,YMM13,YMM14,YMM15,YMM16,YMM17,YMM18,YMM19,YMM20,YMM21,YMM22,YMM23,YMM24,YMM25,YMM26,YMM27,YMM28,YMM29,YMM30,YMM31>
+          IFIDNI <arg>,<REGType>
+            rval = 32
+          ENDIF
+        ENDM
+        IF rval NE 32
+            GOTO ZMMW
+        ELSE
+            .DATA
+            ALIGN 32
+            REGSymbolName YMMWORD 0
+            .CODE
+            VMOVAPS REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+    :ZMMW
+        FOR arg,<ZMM0,ZMM1,ZMM2,ZMM3,ZMM4,ZMM5,ZMM6,ZMM7,ZMM8,ZMM9,ZMM10,ZMM11,ZMM12,ZMM13,ZMM14,ZMM15,ZMM16,ZMM17,ZMM18,ZMM19,ZMM20,ZMM21,ZMM22,ZMM23,ZMM24,ZMM25,ZMM26,ZMM27,ZMM28,ZMM29,ZMM30,ZMM31>
+          IFIDNI <arg>,<REGType>
+            rval = 64
+          ENDIF
+        ENDM
+        IF rval NE 64
+            GOTO UNKNOWN
+        ELSE
+            .DATA
+            ALIGN 64
+            REGSymbolName ZMMWORD 0
+            .CODE
+            VMOVAPS REGSymbolName, REGType
+            GOTO ENDPUSHREG
+        ENDIF
+
+    :UNKNOWN
+        rval = -1
+        .ERR <"In PUSHREG macro, Unknown register used or unimplemented.">
+
+      :ENDPUSHREG
+    ENDM
+    ENDIF ;PUSHREG
+
+    IFNDEF POPREG
+    POPREG MACRO REGSymbolName:REQ, REGType:REQ
+        LOCAL REGSymbolName, rval, WRD, DWD, QWD, MMW, FP, XMMW, YMMW, ZMMW, UNKNOWN
+        rval = 0
+        FOR arg,<AL,BL,CL,DL,SIL,DIL,BPL,SPL,R8B,R9B,R10B,R11B,R12B,R13B,R14B,R15B>
+          IFIDNI <arg>,<REGType>
+            rval = 1
+          ENDIF
+        ENDM
+        IF rval NE 1
+            GOTO WRD
+        ELSE
+            MOV REGType, REGSymbolName
+            MOV REGSymbolName, 0
+            GOTO ENDPOPREG
+        ENDIF
+    :WRD
+        FOR arg,<AX,BX,CX,DX,SI,DI,BP,SP,R8W,R9W,R10W,R11W,R12W,R13W,R14W,R15W>
+          IFIDNI <arg>,<REGType>
+            rval = 2
+          ENDIF
+        ENDM
+        IF rval NE 2
+              GOTO DWD
+        ELSE
+            MOV REGType, REGSymbolName
+            MOV REGSymbolName, 0
+            GOTO ENDPOPREG
+        ENDIF
+    :DWD
+        FOR arg,<EAX,EBX,EBX,EDX,ESI,EDI,EBP,ESP,R8D,R9D,R10D,R11D,R12D,R13D,R14D,R15D>
+          IFIDNI <arg>,<REGType>
+            rval = 4
+          ENDIF
+        ENDM
+        IF rval NE 4
+            GOTO QWD
+        ELSE
+            MOV REGType, REGSymbolName
+            MOV REGSymbolName, 0
+            GOTO ENDPOPREG
+        ENDIF
+    :QWD
+        FOR arg,<RAX,RBX,RCX,RDX,RSI,RDI,RBP,RSP,R8,R9,R10,R11,R12,R13,R14,R15>
+          IFIDNI <arg>,<REGType>
+            rval = 8
+          ENDIF
+        ENDM
+        IF rval NE 8
+            GOTO MMW
+        ELSE
+            MOV REGType, REGSymbolName
+            MOV DWORD PTR [REGSymbolName+4], 0
+            MOV DWORD PTR [REGSymbolName], 0
+            GOTO ENDPOPREG
+        ENDIF
+    :MMW
+        FOR arg,<MM0,MM1,MM2,MM3,MM4,MM5,MM6,MM7>
+          IFIDNI <arg>,<REGType>
+            rval = 8
+          ENDIF
+        ENDM
+        IF rval NE 8
+            GOTO FP
+        ELSE
+            MOVQ REGType, REGSymbolName
+            MOV DWORD PTR [REGSymbolName+4], 0
+            MOV DWORD PTR [REGSymbolName], 0
+            GOTO ENDPOPREG
+        ENDIF
+    :FP
+        FOR arg,<ST(0),ST(1),ST(2),ST(3),ST(4),ST(5),ST(6),ST(7)>
+          IFIDNI <arg>,<REGType>
+            rval = 10
+          ENDIF
+        ENDM
+        IF rval NE 10
+            GOTO XMMW
+        ELSE
+            .ERR <"In POPREG macro, ST register memory mov unimplemented. Uses the stack.">
+            GOTO ENDPOPREG
+        ENDIF
+    :XMMW
+        FOR arg,<XMM0,XMM1,XMM2,XMM3,XMM4,XMM5,XMM6,XMM7,XMM8,XMM9,XMM10,XMM11,XMM12,XMM13,XMM14,XMM15,XMM16,XMM17,XMM18,XMM19,XMM20,XMM21,XMM22,XMM23,XMM24,XMM25,XMM26,XMM27,XMM28,XMM29,XMM30,XMM31>
+          IFIDNI <arg>,<REGType>
+            rval = 16
+          ENDIF
+        ENDM
+        IF rval NE 16
+            GOTO YMMW
+        ELSE
+            MOVAPS REGType, REGSymbolName
+            MOV DWORD PTR [REGSymbolName+12], 0
+            MOV DWORD PTR [REGSymbolName+8], 0
+            MOV DWORD PTR [REGSymbolName+4], 0
+            MOV DWORD PTR [REGSymbolName], 0
+            GOTO ENDPOPREG
+        ENDIF
+    :YMMW
+        FOR arg,<YMM0,YMM1,YMM2,YMM3,YMM4,YMM5,YMM6,YMM7,YMM8,YMM9,YMM10,YMM11,YMM12,YMM13,YMM14,YMM15,YMM16,YMM17,YMM18,YMM19,YMM20,YMM21,YMM22,YMM23,YMM24,YMM25,YMM26,YMM27,YMM28,YMM29,YMM30,YMM31>
+          IFIDNI <arg>,<REGType>
+            rval = 32
+          ENDIF
+        ENDM
+        IF rval NE 32
+            GOTO ZMMW
+        ELSE
+            VMOVAPS REGType, REGSymbolName
+            MOV DWORD PTR [REGSymbolName+28], 0
+            MOV DWORD PTR [REGSymbolName+24], 0
+            MOV DWORD PTR [REGSymbolName+20], 0
+            MOV DWORD PTR [REGSymbolName+16], 0
+            MOV DWORD PTR [REGSymbolName+12], 0
+            MOV DWORD PTR [REGSymbolName+8], 0
+            MOV DWORD PTR [REGSymbolName+4], 0
+            MOV DWORD PTR [REGSymbolName], 0
+            GOTO ENDPOPREG
+        ENDIF
+    :ZMMW
+        FOR arg,<ZMM0,ZMM1,ZMM2,ZMM3,ZMM4,ZMM5,ZMM6,ZMM7,ZMM8,ZMM9,ZMM10,ZMM11,ZMM12,ZMM13,ZMM14,ZMM15,ZMM16,ZMM17,ZMM18,ZMM19,ZMM20,ZMM21,ZMM22,ZMM23,ZMM24,ZMM25,ZMM26,ZMM27,ZMM28,ZMM29,ZMM30,ZMM31>
+          IFIDNI <arg>,<REGType>
+            rval = 64
+          ENDIF
+        ENDM
+        IF rval NE 64
+            GOTO UNKNOWN
+        ELSE
+            VMOVAPS REGType, REGSymbolName
+            MOV DWORD PTR [REGSymbolName+60], 0
+            MOV DWORD PTR [REGSymbolName+56], 0
+            MOV DWORD PTR [REGSymbolName+52], 0
+            MOV DWORD PTR [REGSymbolName+48], 0
+            MOV DWORD PTR [REGSymbolName+44], 0
+            MOV DWORD PTR [REGSymbolName+40], 0
+            MOV DWORD PTR [REGSymbolName+36], 0
+            MOV DWORD PTR [REGSymbolName+32], 0
+            MOV DWORD PTR [REGSymbolName+28], 0
+            MOV DWORD PTR [REGSymbolName+24], 0
+            MOV DWORD PTR [REGSymbolName+20], 0
+            MOV DWORD PTR [REGSymbolName+16], 0
+            MOV DWORD PTR [REGSymbolName+12], 0
+            MOV DWORD PTR [REGSymbolName+8], 0
+            MOV DWORD PTR [REGSymbolName+4], 0
+            MOV DWORD PTR [REGSymbolName], 0
+            GOTO ENDPOPREG
+        ENDIF
+
+    :UNKNOWN
+        rval = -1
+        .ERR <"In POPREG macro, Unknown register used or unimplemented.">
+
+      :ENDPOPREG
+    ENDM
+    ENDIF ;POPREG
+
     IFDEF __X64__
     IFNDEF REGS15STORAGE
     REGS15STORAGE MACRO
@@ -1269,7 +1573,7 @@
     ENDIF ;FP10
     
     IFNDEF LOADSS
-    LOADSS MACRO reg, val
+    LOADSS MACRO Reg, val
         LOCAL savedeax
         .DATA?
         savedeax ISIZE_T ?
@@ -1277,17 +1581,17 @@
         MOV savedeax, RRET()
     IF @Arch EQ ARCH_AVX
         MOV EAX, val
-        VMOVD reg, EAX
+        VMOVD Reg, EAX
     ELSE
         MOV EAX, val
-        MOVD reg, EAX
+        MOVD Reg, EAX
     ENDIF
         MOV RRET(), savedeax
     ENDM
     ENDIF ;LOADSS
     
     IFNDEF LOAD1PS
-    LOAD1PS MACRO reg, val
+    LOAD1PS MACRO Reg, val
         LOCAL savedeax
         .DATA?
         savedeax ISIZE_T ?
@@ -1295,59 +1599,59 @@
         MOV savedeax, RRET()
     IF @Arch EQ ARCH_AVX
         MOV EAX, val
-        VMOVD reg, EAX
-        VPSHUFD reg, reg, 0
+        VMOVD Reg, EAX
+        VPSHUFD Reg, Reg, 0
     ELSE
         MOV EAX, val
-        MOVD reg, EAX
-        PSHUFD reg, reg, 0
+        MOVD Reg, EAX
+        PSHUFD Reg, Reg, 0
     ENDIF
         MOV RRET(), savedeax
     ENDM
     ENDIF ;LOAD1PS
     
     IFNDEF LOADPS
-    LOADPS MACRO reg, val3, val2, val1, val0
+    LOADPS MACRO Reg, val3, val2, val1, val0
         LOCAL savedeax
-        IFDIFI <reg>, <XMM3>
+        IFDIFI <Reg>, <XMM3>
         LOCAL savedxmm3
         ENDIF
-        IFDIFI <reg>, <XMM2>
+        IFDIFI <Reg>, <XMM2>
         LOCAL savedxmm2
         ENDIF
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         LOCAL savedxmm1
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         LOCAL savedxmm0
         ENDIF
         .DATA?
         savedeax ISIZE_T ?
-        IFDIFI <reg>, <XMM3>
+        IFDIFI <Reg>, <XMM3>
         savedxmm3 OWORD ?
         ENDIF
-        IFDIFI <reg>, <XMM2>
+        IFDIFI <Reg>, <XMM2>
         savedxmm2 OWORD ?
         ENDIF
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         savedxmm1 OWORD ?
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         savedxmm0 OWORD ?
         ENDIF
         .CODE
         MOV savedeax, RRET()
     IF @Arch EQ ARCH_AVX
-        IFDIFI <reg>, <XMM3>
+        IFDIFI <Reg>, <XMM3>
         VMOVDQU savedxmm3, XMM3
         ENDIF
-        IFDIFI <reg>, <XMM2>
+        IFDIFI <Reg>, <XMM2>
         VMOVDQU savedxmm2, XMM2
         ENDIF
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         VMOVDQU savedxmm1, XMM1
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         VMOVDQU savedxmm0, XMM0
         ENDIF
         MOV               EAX,           val3
@@ -1361,30 +1665,30 @@
         VPUNPCKLDQ       XMM2,      XMM2,           XMM3        ;;shuffle4(3,2,3,2)
         VPUNPCKLDQ       XMM0,      XMM0,           XMM1        ;;shuffle4(1,0,1,0)
         VPUNPCKLQDQ      XMM0,      XMM0,           XMM2        ;;shuffle2(1,0) (1:3,2|0:1,0)
-        IFDIFI <reg>, <XMM3>
+        IFDIFI <Reg>, <XMM3>
         VMOVDQU XMM3, savedxmm3
         ENDIF
-        IFDIFI <reg>, <XMM2>
+        IFDIFI <Reg>, <XMM2>
         VMOVDQU XMM2, savedxmm2
         ENDIF
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         VMOVDQU XMM1, savedxmm1
         ENDIF
-        IFDIFI <reg>, <XMM0>
-        VMOVDQU            reg,           XMM0
+        IFDIFI <Reg>, <XMM0>
+        VMOVDQU            Reg,           XMM0
         VMOVDQU XMM0, savedxmm0
         ENDIF
     ELSE ;;ARCH_AVX
-        IFDIFI <reg>, <XMM3>
+        IFDIFI <Reg>, <XMM3>
         MOVDQU savedxmm3, XMM3
         ENDIF
-        IFDIFI <reg>, <XMM2>
+        IFDIFI <Reg>, <XMM2>
         MOVDQU savedxmm2, XMM2
         ENDIF
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         MOVDQU savedxmm1, XMM1
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         MOVDQU savedxmm0, XMM0
         ENDIF
         MOV              EAX,           val3
@@ -1398,17 +1702,17 @@
         PUNPCKLDQ       XMM2,           XMM3        ;;shuffle4(3,2,3,2)
         PUNPCKLDQ       XMM0,           XMM1        ;;shuffle4(1,0,1,0)
         PUNPCKLQDQ      XMM0,           XMM2        ;;shuffle2(1,0) (1:3,2|0:1,0)
-        IFDIFI <reg>, <XMM3>
+        IFDIFI <Reg>, <XMM3>
         MOVDQU XMM3, savedxmm3
         ENDIF
-        IFDIFI <reg>, <XMM2>
+        IFDIFI <Reg>, <XMM2>
         MOVDQU XMM2, savedxmm2
         ENDIF
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         MOVDQU XMM1, savedxmm1
         ENDIF
-        IFDIFI <reg>, <XMM0>
-        MOVDQU           reg,           XMM0
+        IFDIFI <Reg>, <XMM0>
+        MOVDQU           Reg,           XMM0
         MOVDQU XMM0, savedxmm0
         ENDIF
     ENDIF ;;ARCH_SSE
@@ -1418,7 +1722,7 @@
     
     IFDEF __X64__
     IFNDEF LOADSD
-    LOADSD MACRO reg, val
+    LOADSD MACRO Reg, val
         LOCAL savedeax
         .DATA?
         savedeax ISIZE_T ?
@@ -1426,17 +1730,17 @@
         MOV savedeax, RRET()
     IF @Arch EQ ARCH_AVX
         MOV RAX, REAL8 PTR val
-        VMOVQ reg, RAX
+        VMOVQ Reg, RAX
     ELSE
         MOV RAX, REAL8 PTR val
-        MOVQ reg, RAX
+        MOVQ Reg, RAX
     ENDIF
         MOV RRET(), savedeax
     ENDM
     ENDIF ;LOADSD
     
     IFNDEF LOAD1PD
-    LOAD1PD MACRO reg, val
+    LOAD1PD MACRO Reg, val
         LOCAL savedeax
         .DATA?
         savedeax ISIZE_T ?
@@ -1444,41 +1748,41 @@
         MOV savedeax, RRET()
     IF @Arch EQ ARCH_AVX
         MOV RAX, val
-        VMOVQ reg, RAX
-        VPUNPCKLQDQ      reg,      reg,           reg        ;;shuffle2(0,0)
+        VMOVQ Reg, RAX
+        VPUNPCKLQDQ      Reg,      Reg,           Reg        ;;shuffle2(0,0)
     ELSE
         MOV RAX, val
-        MOVQ reg, RAX
-        PUNPCKLQDQ      reg,           reg        ;;shuffle2(0,0)
+        MOVQ Reg, RAX
+        PUNPCKLQDQ      Reg,           Reg        ;;shuffle2(0,0)
     ENDIF
         MOV RRET(), savedeax
     ENDM
     ENDIF ;LOAD1PD
    
     IFNDEF LOADPD
-    LOADPD MACRO reg, val1, val0
+    LOADPD MACRO Reg, val1, val0
         LOCAL savedeax
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         LOCAL savedxmm1
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         LOCAL savedxmm0
         ENDIF
         .DATA?
         savedeax ISIZE_T ?
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         savedxmm1 OWORD ?
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         savedxmm0 OWORD ?
         ENDIF
         .CODE
         MOV savedeax, RRET()
     IF @Arch EQ ARCH_AVX
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         VMOVDQU savedxmm1, XMM1
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         VMOVDQU savedxmm0, XMM0
         ENDIF
         MOV               RAX,           val1
@@ -1486,18 +1790,18 @@
         MOV               RAX,           val0
         VMOVQ            XMM0,           RAX
         VPUNPCKLQDQ      XMM0,      XMM0,           XMM1        ;;shuffle2(1,0)
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         VMOVDQU XMM1, savedxmm1
         ENDIF
-        IFDIFI <reg>, <XMM0>
-        VMOVDQU            reg,           XMM0
+        IFDIFI <Reg>, <XMM0>
+        VMOVDQU            Reg,           XMM0
         VMOVDQU XMM0, savedxmm0
         ENDIF
     ELSE ;;ARCH_AVX
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         MOVDQU savedxmm1, XMM1
         ENDIF
-        IFDIFI <reg>, <XMM0>
+        IFDIFI <Reg>, <XMM0>
         MOVDQU savedxmm0, XMM0
         ENDIF
         MOV              RAX,           val1
@@ -1505,11 +1809,11 @@
         MOV              RAX,           val0
         MOVQ            XMM0,           RAX
         PUNPCKLQDQ      XMM0,           XMM1            ;;shuffle2(1,0)
-        IFDIFI <reg>, <XMM1>
+        IFDIFI <Reg>, <XMM1>
         MOVDQU XMM1, savedxmm1
         ENDIF
-        IFDIFI <reg>, <XMM0>
-        MOVDQU           reg,           XMM0
+        IFDIFI <Reg>, <XMM0>
+        MOVDQU           Reg,           XMM0
         MOVDQU XMM0, savedxmm0
         ENDIF
     ENDIF ;;ARCH_SSE
@@ -1517,48 +1821,48 @@
     ENDM
     ENDIF ;LOADPD
     ENDIF ;__X64__
-    
+
     IFNDEF ALIGNADDR
-    ALIGNADDR MACRO reg, number
-        ADD reg, number-1
-        AND reg, -number,
+    ALIGNADDR MACRO Reg, number
+        ADD Reg, number-1
+        AND Reg, -number,
     ENDM
     ENDIF ;ALIGNADDR
     
     IFNDEF CSTR
-    CSTR MACRO Text:VARARG
-        LOCAL szText
+    CSTR MACRO SymbolName:REQ, Text:VARARG
+        LOCAL SymbolName
         .DATA
-        szText DB Text,0
+        SymbolName DB Text,0
         ALIGN SIZE_T_SIZE
         .CODE
-          EXITM <ADDR szText>
+          EXITM <OFFSET SymbolName>
     ENDM
     ENDIF ;CSTR
     
     IFNDEF WSTR
-    WSTR MACRO Text:VARARG
-        LOCAL szText
+    WSTR MACRO SymbolName:REQ, Text:VARARG
+        LOCAL SymbolName
         .DATA
-        szText DW Text,0
+        SymbolName DW Text,0
         ALIGN SIZE_T_SIZE
         .CODE
-          EXITM <ADDR szText>
+          EXITM <OFFSET SymbolName>
     ENDM
     ENDIF ;WSTR
     
     IFNDEF CHR$
-    CHR$ MACRO Text:VARARG
-        LOCAL szText
+    CHR$ MACRO SymbolName:REQ, Text:VARARG
+        LOCAL SymbolName
         .DATA
         IFDEF UNICODE
-          szText DW Text,0
+          SymbolName DW Text,0
         ELSE
-          szText DB Text,0
+          SymbolName DB Text,0
         ENDIF
         ALIGN SIZE_T_SIZE
         .CODE
-          EXITM <ADDR szText>
+          EXITM <OFFSET SymbolName>
     ENDM
     ENDIF ;CHR$
     
@@ -1566,40 +1870,68 @@
     TCHR TEXTEQU <CHR$>
     ENDIF ;TCHR
     
+    IFNDEF __T
+    __T MACRO Text:VARARG
+        tfnex TEXTEQU <>
+        IFDEF UNICODE
+            tfnex CATSTR tfnex, <L>, <Text>
+        ELSE
+            tfnex CATSTR tfnex, <Text>
+        ENDIF
+        EXITM <tfnex>
+    ENDM
+    ENDIF ;__T
+    
+    IFNDEF _T
+    _T TEXTEQU <__T>
+    ENDIF ;__T
+    
+    IFNDEF __TEXT
+    __TEXT TEXTEQU <__T>
+    ENDIF ;__TEXT
+    
+    IFNDEF _TEXT
+    _TEXT TEXTEQU <__T>
+    ENDIF ;_TEXT
+    
+    IFNDEF TEXT
+    TEXT TEXTEQU <__T>
+    ENDIF ;TEXT
+    
     IFNDEF REPARG
-    REPARG MACRO arg
-        LOCAL nustr,quot
+    REPARG MACRO SymbolName:REQ, arg
+        LOCAL SymbolName,quot
         quot SUBSTR <arg>, 1, 1
         IFIDN quot, <\">
           .DATA
           IFDEF UNICODE
-            nustr DW arg, 0
+            SymbolName DW arg, 0
           ELSE
-            nustr DB arg, 0
+            SymbolName DB arg, 0
           ENDIF
           ALIGN SIZE_T_SIZE
           .CODE
-            EXITM <ADDR nustr>
+            EXITM <OFFSET SymbolName>
         ELSE
-          EXITM <ADDR arg>
+          EXITM <OFFSET arg>
         ENDIF
     ENDM
     ENDIF ;REPARG
     
     IFNDEF REPARGV
-    REPARGV MACRO arg
-        LOCAL nustr,quot
+    REPARGV MACRO SymbolName:REQ, arg
+        LOCAL SymbolName,quot
         quot SUBSTR <arg>, 1, 1
         IFIDN quot, <\">
           .DATA
           IFDEF UNICODE
-            nustr DW arg, 0
+            SymbolName DW arg, 0
           ELSE
-            nustr DB arg, 0
+            SymbolName DB arg, 0
           ENDIF
           ALIGN SIZE_T_SIZE
           .CODE
-            MOV RRET(), ADDR nustr
+            MOV RRET(), OFFSET SymbolName
           EXITM <RRET()>
         ELSE
           MOV RRET(), arg
@@ -1609,23 +1941,23 @@
     ENDIF ;REPARGV
 
     IFNDEF EXPAND_PREFIX
-    EXPAND_PREFIX MACRO txtitm
-        LOCAL prefix1,wrd,nu,varname
+    EXPAND_PREFIX MACRO SymbolName:REQ, txtitm
+        LOCAL prefix1,wrd,nu,SymbolName
         prefix1 SUBSTR <txtitm>, 1, 1
         IFIDN prefix1, <&>
           nu SUBSTR <txtitm>, 2
-          wrd CATSTR <ADDR >, nu
+          wrd CATSTR <OFFSET >, nu
           EXITM <wrd>
         ENDIF
         IFIDN prefix1, <*>
           nu SUBSTR <txtitm>, 2
           .DATA?
-          varname ISIZE_T ?
+          SymbolName ISIZE_T ?
           .CODE
           MOV RRET(), nu
           MOV RRET(), [RRET()]
-          MOV varname, RRET()
-          EXITM <varname>
+          MOV SymbolName, RRET()
+          EXITM <SymbolName>
         ENDIF
         EXITM <txtitm>
     ENDM
@@ -1730,31 +2062,31 @@
     ENDIF ;MEMFREE
     
     IFNDEF LOADMSS
-    LOADMSS MACRO reg, value
+    LOADMSS MACRO Reg, value
         LOCAL vname
         .DATA
         ALIGN 4
         vname DD value
         .CODE
         IF @Arch EQ ARCH_AVX
-        VMOVSS reg, vname
+        VMOVSS Reg, vname
         ELSE
-        MOVSS reg, vname
+        MOVSS Reg, vname
         ENDIF
     ENDM
     ENDIF ;LOADMSS
     
     IFNDEF LOADMSD
-    LOADMSD MACRO reg, value
+    LOADMSD MACRO Reg, value
         LOCAL bname
         .DATA
         ALIGN 8
         bname DQ value
         .CODE
         IF @Arch EQ ARCH_AVX
-        VMOVSD reg, bname
+        VMOVSD Reg, bname
         ELSE
-        MOVSD reg, bname
+        MOVSD Reg, bname
         ENDIF
     ENDM
     ENDIF ;LOADMSD
@@ -1908,26 +2240,26 @@
     ENDIF ;UINVOKE
     
     IFNDEF ASFLOAT
-    ASFLOAT MACRO  reg:REQ
-         EXITM <REAL4 PTR reg>
+    ASFLOAT MACRO  Reg:REQ
+         EXITM <REAL4 PTR Reg>
     ENDM
     ENDIF ;ASFLOAT
 
     IFNDEF ASDOUBLE
-    ASDOUBLE MACRO reg:REQ
-         EXITM <REAL8 PTR reg>
+    ASDOUBLE MACRO Reg:REQ
+         EXITM <REAL8 PTR Reg>
     ENDM
     ENDIF ;ASDOUBLE
 
     IFNDEF R4P
-    R4P MACRO reg:REQ
-         EXITM <REAL4 PTR reg>
+    R4P MACRO Reg:REQ
+         EXITM <REAL4 PTR Reg>
     ENDM
     ENDIF ;R4P
 
     IFNDEF R8P
-    R8P MACRO reg:REQ
-         EXITM <REAL8 PTR reg>
+    R8P MACRO Reg:REQ
+         EXITM <REAL8 PTR Reg>
     ENDM
     ENDIF ;R8P
     
@@ -2813,8 +3145,8 @@
     ENDIF ;_DECLARE
 
     IFNDEF _STATICREF
-    _STATICREF MACRO reg:REQ, classType:REQ
-        % LEA reg, _stat&classType&
+    _STATICREF MACRO Reg:REQ, classType:REQ
+        % LEA Reg, _stat&classType&
     ENDM
     ENDIF ;_STATICREF
     
@@ -3305,7 +3637,7 @@
 
     IFNDEF ADDRESSOF
     ADDRESSOF MACRO argaddress
-        EXITM <ADDR argaddress>
+        EXITM <OFFSET argaddress>
     ENDM
     ENDIF ;ADDRESSOF
 
@@ -3619,6 +3951,21 @@
     ENDIF
     IFDEF TCHR
     tchr TEXTEQU <TCHR>
+    ENDIF
+    IFDEF __T
+    __t TEXTEQU <__T>
+    ENDIF
+    IFDEF _T
+    _t TEXTEQU <_T>
+    ENDIF
+    IFDEF __TEXT
+    __text TEXTEQU <__TEXT>
+    ENDIF
+    IFDEF _TEXT
+    _text TEXTEQU <_TEXT>
+    ENDIF
+    IFDEF TEXT
+    text TEXTEQU <TEXT>
     ENDIF
     IFDEF REPARG
     reparg TEXTEQU <REPARG>

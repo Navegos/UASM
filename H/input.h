@@ -66,37 +66,37 @@ struct input_status {
 #endif
 };
 
-extern uint_32  GetLineNumber(void);
+extern uint_32 uasm_ABI  GetLineNumber(void);
 //#define LineNumber GetLineNumber()
 
-extern const char* GetFNamePart(const char* fname);
-extern char* GetExtPart(const char* fname);
+extern char const* const uasm_ABI GetFNamePart(const char* fname);
+extern char const* const uasm_ABI GetExtPart(const char* fname);
 
-extern struct src_item* PushSrcItem(char type, void* pv);
+extern struct src_item* uasm_ABI PushSrcItem(char type, void* pv);
 
-extern FILE* SearchFile(char* path, bool);
-extern char* GetTextLine(char* buffer);
-extern void     PushMacro(struct macro_instance*);
-extern void     SetLineNumber(unsigned);
+extern FILE* uasm_ABI   SearchFile(char* path, bool);
+extern char* uasm_ABI   GetTextLine(char* buffer);
+extern void uasm_ABI    PushMacro(struct macro_instance*);
+extern void uasm_ABI    SetLineNumber(unsigned);
 #if FASTMEM==0
-extern bool     MacroInUse(struct dsym*);
+extern bool uasm_ABI    MacroInUse(struct dsym*);
 #endif
-extern void     AddStringToIncludePath(const char* string);
-extern void     InputInit(void);
-extern void     InputPassInit(void);
-extern void     InputFini(void);
-extern struct asm_tok* PushInputStatus(struct input_status*);
-extern void     PopInputStatus(struct input_status*);
-extern int      GetCurrSrcPos(char*);
-extern void     ClearSrcStack(void);
-extern unsigned get_curr_srcfile(void);
+extern void uasm_ABI    AddStringToIncludePath(const char* string);
+extern void uasm_ABI    InputInit(void);
+extern void uasm_ABI    InputPassInit(void);
+extern void uasm_ABI    InputFini(void);
+extern struct asm_tok* uasm_ABI PushInputStatus(struct input_status*);
+extern void  uasm_ABI   PopInputStatus(struct input_status*);
+extern int uasm_ABI     GetCurrSrcPos(char*);
+extern void  uasm_ABI   ClearSrcStack(void);
+extern unsigned uasm_ABI get_curr_srcfile(void);
 #if FASTPASS
-extern void     set_curr_srcfile(unsigned, uint_32);
+extern void uasm_ABI    set_curr_srcfile(unsigned, uint_32);
 #endif
-extern const struct fname_item* GetFName(unsigned);
+extern struct fname_item const* const uasm_ABI GetFName(unsigned);
 #ifdef DEBUG_OUT
-extern char* GetTopLine(char*);
-extern char* GetTopSrcName(void);
+extern char* uasm_ABI   GetTopLine(char*);
+extern char* uasm_ABI   GetTopSrcName(void);
 #endif
 
 #define GetAlignedPointer( x, size ) ( x + ( ( size + 1 + sizeof(void *) - 1 ) & ~( sizeof(void *) - 1 ) ) )

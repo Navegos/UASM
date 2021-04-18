@@ -53,7 +53,7 @@ static const char __based (__segname("_CODE"))* const msgtexts[] = {
 #define FPTR( x ) x
 #undef pick
 #define pick( code, string )  string,
-static const char* const msgtexts[] = {
+static char const* const msgtexts[] = {
 #include "msgdef.h"
 };
 #endif
@@ -68,7 +68,7 @@ const char szCVCompiler[] = { "Microsoft (R) Macro Assembler Version 6.15.8803" 
 const char szCVCompiler[] = { "Uasm v" _UASM_VERSION_STR_ };
 #endif
 
-static const char* MsgGet(int msgid, char* buffer)
+static char const* const uasm_ABI MsgGet(int msgid, char* buffer)
 /**************************************************/
 {
 #if USERESOURCES
@@ -113,7 +113,7 @@ static const char* MsgGet(int msgid, char* buffer)
     return(buffer);
 }
 
-const char* MsgGetEx(int msgid)
+char const* const uasm_ABI MsgGetEx(int msgid)
 /*******************************/
 {
     return(MsgGet(msgid, NULL));

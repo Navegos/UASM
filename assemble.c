@@ -94,11 +94,11 @@ jmp_buf jmpenv;
 uasm_PACK_PUSH_STACK
 
 extern int_32           LastCodeBufSize;
-extern char* DefaultDir[NUM_FILE_TYPES];
-extern const char* ModelToken[];
-extern void AddSimdTypes();
+extern char*            DefaultDir[NUM_FILE_TYPES];
+extern const char*      ModelToken[];
+extern void uasm_ABI    AddSimdTypes();
 #if FASTMEM==0
-extern void             FreeLibQueue();
+extern void uasm_ABI    FreeLibQueue();
 #endif
 
 /* parameters for output formats. order must match enum oformat */
@@ -187,7 +187,7 @@ static void CheckBOM(FILE *f)
         rewind(f);
 }*/
 
-extern void RewindToWin64()
+extern void uasm_ABI RewindToWin64()
 {
     if (!(ModuleInfo.output_format == OFORMAT_BIN && ModuleInfo.sub_format == SFORMAT_NONE))
     {
@@ -208,7 +208,7 @@ extern void RewindToWin64()
     }
 }
 
-extern void RewindToSYSV64()
+extern void uasm_ABI RewindToSYSV64()
 {
     if (!(ModuleInfo.output_format == OFORMAT_BIN && ModuleInfo.sub_format == SFORMAT_NONE))
     {
@@ -242,7 +242,7 @@ extern void RewindToSYSV64()
  * _BSS  -> .bss
  */
 
-char* ConvertSectionName(const struct asym* sym, enum seg_type* pst, char* buffer)
+char* uasm_ABI ConvertSectionName(const struct asym* sym, enum seg_type* pst, char* buffer)
 /**********************************************************************************/
 {
     int i;
@@ -284,7 +284,7 @@ char* ConvertSectionName(const struct asym* sym, enum seg_type* pst, char* buffe
 /* Write a byte to the segment buffer.
  * in OMF, the segment buffer is flushed when the max. record size is reached.
  */
-void OutputByte(unsigned char byte)
+void uasm_ABI OutputByte(unsigned char byte)
 /***********************************/
 {
     if (write_to_file == TRUE)
@@ -323,7 +323,7 @@ void OutputByte(unsigned char byte)
 }
 
 /* Added 2.14: to accelerate bulk writing of incbin data */
-void OutputBinBytes(unsigned char* pBytes, uint_32 len)
+void uasm_ABI OutputBinBytes(unsigned char* pBytes, uint_32 len)
 {
     int i;
 
@@ -366,7 +366,7 @@ void OutputBinBytes(unsigned char* pBytes, uint_32 len)
 }
 
 #if 0 /* v2.03: OutputCodeByte is obsolete */
-void OutputCodeByte(unsigned char byte)
+void uasm_ABI OutputCodeByte(unsigned char byte)
 /***************************************/
 {
     // if ( ModuleInfo.CommentDataInCode )
@@ -375,7 +375,7 @@ void OutputCodeByte(unsigned char byte)
 }
 #endif
 
-void FillDataBytes(unsigned char byte, int len)
+void uasm_ABI FillDataBytes(unsigned char byte, int len)
 /***********************************************/
 {
     if (ModuleInfo.CommentDataInCode)
@@ -384,7 +384,7 @@ void FillDataBytes(unsigned char byte, int len)
         OutputByte(byte);
 }
 
-void OutputSegmentBytes(struct dsym* segg, const unsigned char* pbytes, int len, struct fixup* fixup)
+void uasm_ABI OutputSegmentBytes(struct dsym* segg, const unsigned char* pbytes, int len, struct fixup* fixup)
 /***************************************************************************/
 {
     if (write_to_file == TRUE)
@@ -426,7 +426,7 @@ void OutputSegmentBytes(struct dsym* segg, const unsigned char* pbytes, int len,
  * this function is to output (small, <= 8) amounts of bytes which must
  * not be separated ( for omf, because of fixups )
  */
-void OutputBytes(const unsigned char* pbytes, int len, struct fixup* fixup)
+void uasm_ABI OutputBytes(const unsigned char* pbytes, int len, struct fixup* fixup)
 /***************************************************************************/
 {
     if (write_to_file == TRUE)
@@ -465,7 +465,7 @@ void OutputBytes(const unsigned char* pbytes, int len, struct fixup* fixup)
 }
 
 /* Used to output a string to current segment in wide-char format with interleaved zeros */
-void OutputInterleavedBytes(const unsigned char* pbytes, int len, struct fixup* fixup)
+void uasm_ABI OutputInterleavedBytes(const unsigned char* pbytes, int len, struct fixup* fixup)
 {
     int i = 0;
     char* pOut = NULL;
@@ -512,7 +512,7 @@ void OutputInterleavedBytes(const unsigned char* pbytes, int len, struct fixup* 
 }
 
 /* set current offset in a segment (usually CurrSeg) without to write anything */
-ret_code SetCurrOffset(struct dsym* seg, uint_32 value, bool relative, bool select_data)
+ret_code uasm_ABI SetCurrOffset(struct dsym* seg, uint_32 value, bool relative, bool select_data)
 /****************************************************************************************/
 {
     if (relative)
@@ -567,7 +567,7 @@ ret_code SetCurrOffset(struct dsym* seg, uint_32 value, bool relative, bool sele
 }
 
 /* write object module */
-static ret_code WriteModule(struct module_info* modinfo)
+static ret_code uasm_ABI WriteModule(struct module_info* modinfo)
 /********************************************************/
 {
     struct dsym* curr;
@@ -624,7 +624,7 @@ static ret_code WriteModule(struct module_info* modinfo)
 
 /* check name of text macros defined via -D option */
 
-static int is_valid_identifier(char* id)
+static int uasm_ABI is_valid_identifier(char* id)
 /****************************************/
 {
     /* special handling of first char of an id: it can't be a digit,
@@ -647,7 +647,7 @@ static int is_valid_identifier(char* id)
 
 /* add text macros defined with the -D cmdline switch */
 
-static void add_cmdline_tmacros(void)
+static void uasm_ABI add_cmdline_tmacros(void)
 /****************************************/
 {
     struct qitem* p;
@@ -707,7 +707,7 @@ static void add_cmdline_tmacros(void)
 
 /* add the include paths set by -I option */
 
-static void add_incpaths(void)
+static void uasm_ABI add_incpaths(void)
 /******************************/
 {
     struct qitem* p;
@@ -721,7 +721,7 @@ static void add_incpaths(void)
 /* this is called for every pass.
  * symbol table and ModuleInfo are initialized.
  */
-static void CmdlParamsInit(int pass)
+static void uasm_ABI CmdlParamsInit(int pass)
 /************************************/
 {
     DebugMsg(("CmdlParamsInit(%u) enter\n", pass));
@@ -801,7 +801,7 @@ static void CmdlParamsInit(int pass)
     return;
 }
 
-void WritePreprocessedLine(const char* string)
+void uasm_ABI WritePreprocessedLine(const char* string)
 /**********************************************/
 /* print out preprocessed source lines
  */
@@ -838,7 +838,7 @@ void WritePreprocessedLine(const char* string)
 
 /* set Masm v5.1 compatibility options */
 
-void SetMasm510(bool value)
+void uasm_ABI SetMasm510(bool value)
 /***************************/
 {
     ModuleInfo.m510 = value;
@@ -865,7 +865,7 @@ void SetMasm510(bool value)
 
 /* called for each pass */
 
-static void ModulePassInit(void)
+static void uasm_ABI ModulePassInit(void)
 /********************************/
 {
     enum cpu_info cpu = Options.cpu;
@@ -980,7 +980,7 @@ static void ModulePassInit(void)
  * They will become public when - and if - the PROC directive
  * for the symbol is met.
  */
-static void scan_globals(void)
+static void uasm_ABI scan_globals(void)
 /******************************/
 {
     struct qnode* curr;
@@ -1019,7 +1019,7 @@ static void scan_globals(void)
 
 /* checks after pass one has been finished without errors */
 
-static void PassOneChecks(void)
+static void uasm_ABI PassOneChecks(void)
 /*******************************/
 {
     struct dsym* curr;
@@ -1245,7 +1245,7 @@ static void PassOneChecks(void)
  *    - restore the state
  *    - read preprocessed lines and feed ParseLine() with it
  */
-static int OnePass(void)
+static int uasm_ABI OnePass(void)
 /************************/
 {
     struct asym* platform;
@@ -1387,7 +1387,7 @@ static int OnePass(void)
  *             if set, add string to include path.
  */
 
-static void get_os_include(void)
+static void uasm_ABI get_os_include(void)
 /********************************/
 {
     char* env;
@@ -1408,7 +1408,7 @@ static void get_os_include(void)
 
 #endif
 
-static void get_module_name(void)
+static void uasm_ABI get_module_name(void)
 /*********************************/
 {
     char* p;
@@ -1422,7 +1422,7 @@ static void get_module_name(void)
     else
     {
         /* v2.12: _splitpath()/_makepath() removed */
-        const char* fn = GetFNamePart(CurrFName[ASM]);
+        char const* const fn = GetFNamePart(CurrFName[ASM]);
         char* ext = GetExtPart(fn);
         memcpy(ModuleInfo.name, fn, ext - fn);
         ModuleInfo.name[ext - fn] = NULLC;
@@ -1452,7 +1452,7 @@ static void get_module_name(void)
 /* called by AssembleInit(), once per source module.
  * symbol table has been initialized here.
  */
-static void ModuleInit(void)
+static void uasm_ABI ModuleInit(void)
 /****************************/
 {
     ModuleInfo.sub_format = Options.sub_format;
@@ -1475,7 +1475,7 @@ static void ModuleInit(void)
     return;
 }
 
-static void ReswTableInit(void)
+static void uasm_ABI ReswTableInit(void)
 /*******************************/
 {
     ResWordsInit();
@@ -1494,7 +1494,7 @@ static void ReswTableInit(void)
     return;
 }
 
-static void open_files(void)
+static void uasm_ABI open_files(void)
 /****************************/
 {
     /* open ASM file */
@@ -1530,7 +1530,7 @@ static void open_files(void)
     return;
 }
 
-void close_files(void)
+void uasm_ABI close_files(void)
 /**********************/
 {
     /* v2.11: no fatal errors anymore if fclose() fails.
@@ -1580,7 +1580,7 @@ void close_files(void)
 
 /* get default file extension for error, object and listing files */
 
-static char* GetExt(int type)
+static char const* const uasm_ABI GetExt(int type)
 /*****************************/
 {
     switch (type)
@@ -1623,7 +1623,7 @@ static char* GetExt(int type)
  * v2.12: _splitpath()/_makepath() removed.
  */
 
-static void SetFilenames(const char* name)
+static void uasm_ABI SetFilenames(const char* name)
 /******************************************/
 {
     int i;
@@ -1674,7 +1674,7 @@ static void SetFilenames(const char* name)
 }
 
 /* init assembler. called once per module */
-static void AssembleInit(const char* source)
+static void uasm_ABI AssembleInit(const char* source)
 /********************************************/
 {
     MemInit();
@@ -1701,12 +1701,12 @@ static void AssembleInit(const char* source)
 }
 
 #ifdef DEBUG_OUT
-void DumpInstrStats(void);
+void uasm_ABI DumpInstrStats(void);
 #endif
 
 /* called once per module. AssembleModule() cleanup */
 
-static void AssembleFini(void)
+static void uasm_ABI AssembleFini(void)
 /******************************/
 {
     int i;
@@ -1744,7 +1744,7 @@ static void AssembleFini(void)
 
 /* AssembleModule() assembles one source file */
 
-int EXPQUAL AssembleModule(const char* source)
+int uasm_ABI AssembleModule(const char* source)
 /**********************************************/
 {
     uint_32       prev_written = -1;
@@ -2019,42 +2019,42 @@ done:
 }
 
 /* ARCH SSE/AVX specific instructions */
-char const* const MOVE_ALIGNED_FLOAT(void)
+char const* const uasm_ABI MOVE_ALIGNED_FLOAT(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? "vmovaps" : "movaps");
 }
 
-char const* const MOVE_ALIGNED_INT(void)
+char const* const uasm_ABI MOVE_ALIGNED_INT(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? (extraflags.evexflag == TRUE ? "vmovdqa32" : "vmovdqa") : "movdqa");
 }
 
-char const* const MOVE_UNALIGNED_FLOAT(void)
+char const* const uasm_ABI MOVE_UNALIGNED_FLOAT(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? "vmovups" : "movups");
 }
 
-char const* const MOVE_UNALIGNED_INT(void)
+char const* const uasm_ABI MOVE_UNALIGNED_INT(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? (extraflags.evexflag == TRUE ? "vmovdqu32" : "vmovdqu") : "movdqu");
 }
 
-char const* const MOVE_SINGLE(void)
+char const* const uasm_ABI MOVE_SINGLE(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? "vmovss" : "movss");
 }
 
-char const* const MOVE_DOUBLE(void)
+char const* const uasm_ABI MOVE_DOUBLE(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? "vmovsd" : "movsd");
 }
 
-char const* const MOVE_SIMD_DWORD(void)
+char const* const uasm_ABI MOVE_SIMD_DWORD(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? "vmovd" : "movd");
 }
 
-char const* const MOVE_SIMD_QWORD(void)
+char const* const uasm_ABI MOVE_SIMD_QWORD(void)
 {
     return (extraflags.MODULEARCH == ARCH_AVX ? "vmovq" : "movq");
 }

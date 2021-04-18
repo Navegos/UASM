@@ -36,8 +36,8 @@
 
 uasm_PACK_PUSH_STACK
 
-extern int  Mangle(struct asym*, char*);
-extern void SetMangler(struct asym*, enum lang_type, enum oformat, enum sformat, enum fastcall_type, const char*);
+extern int uasm_ABI  Mangle(struct asym*, char*);
+extern void uasm_ABI SetMangler(struct asym*, enum lang_type langtype, enum oformat output_format, enum sformat sub_format, enum fastcall_type fctype, const char*);
 
 uasm_PACK_POP
 

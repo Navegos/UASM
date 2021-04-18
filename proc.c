@@ -231,70 +231,70 @@ static const int regcallunix32_maxreg[] = {
 
 struct fastcall_conv
 {
-    int(*paramcheck)(struct dsym*, struct dsym*, int*, int*);
-    void(*handlereturn)(struct dsym*, char* buffer);
+    int(uasm_ABI *paramcheck)(struct dsym*, struct dsym*, int*, int*);
+    void(uasm_ABI *handlereturn)(struct dsym*, char* buffer);
 };
 
 struct thiscall_conv
 {
-    int(*paramcheck)(struct dsym*, struct dsym*, int*, int*);
-    void(*handlereturn)(struct dsym*, char* buffer);
+    int(uasm_ABI *paramcheck)(struct dsym*, struct dsym*, int*, int*);
+    void(uasm_ABI *handlereturn)(struct dsym*, char* buffer);
 };
 
 struct vectorcall_conv
 {
-    int(*paramcheck)(struct dsym*, struct dsym*, int*, int*);
-    void(*handlereturn)(struct dsym*, char* buffer);
+    int(uasm_ABI *paramcheck)(struct dsym*, struct dsym*, int*, int*);
+    void(uasm_ABI *handlereturn)(struct dsym*, char* buffer);
 };
 
 struct sysvcall_conv
 {
-    int(*paramcheck)(struct dsym*, struct dsym*, int*, int*);
-    void(*handlereturn)(struct dsym*, char* buffer);
+    int(uasm_ABI *paramcheck)(struct dsym*, struct dsym*, int*, int*);
+    void(uasm_ABI *handlereturn)(struct dsym*, char* buffer);
 };
 
 struct regcallms_conv
 {
-    int(*paramcheck)(struct dsym*, struct dsym*, int*, int*);
-    void(*handlereturn)(struct dsym*, char* buffer);
+    int(uasm_ABI *paramcheck)(struct dsym*, struct dsym*, int*, int*);
+    void(uasm_ABI *handlereturn)(struct dsym*, char* buffer);
 };
 
 struct regcallunix_conv
 {
-    int(*paramcheck)(struct dsym*, struct dsym*, int*, int*);
-    void(*handlereturn)(struct dsym*, char* buffer);
+    int(uasm_ABI *paramcheck)(struct dsym*, struct dsym*, int*, int*);
+    void(uasm_ABI *handlereturn)(struct dsym*, char* buffer);
 };
 
 struct delphicall_conv
 {
-    int(*paramcheck)(struct dsym*, struct dsym*, int*, int*);
-    void(*handlereturn)(struct dsym*, char* buffer);
+    int(uasm_ABI *paramcheck)(struct dsym*, struct dsym*, int*, int*);
+    void(uasm_ABI *handlereturn)(struct dsym*, char* buffer);
 };
 
-static  int ms32_pcheck(struct dsym*, struct dsym*, int*, int*);
-static void ms32_return(struct dsym*, char*);
+static  int uasm_ABI ms32_pcheck(struct dsym*, struct dsym*, int*, int*);
+static void uasm_ABI ms32_return(struct dsym*, char*);
 
 #if OWFC_SUPPORT
-static  int watc_pcheck(struct dsym*, struct dsym*, int*, int*);
-static void watc_return(struct dsym*, char*);
+static  int uasm_ABI watc_pcheck(struct dsym*, struct dsym*, int*, int*);
+static void uasm_ABI watc_return(struct dsym*, char*);
 #endif
 
 #if AMD64_SUPPORT
-static  int ms64_pcheck(struct dsym*, struct dsym*, int*, int*);
-static void ms64_return(struct dsym*, char*);
+static  int uasm_ABI ms64_pcheck(struct dsym*, struct dsym*, int*, int*);
+static void uasm_ABI ms64_return(struct dsym*, char*);
 #endif
 
 #if SYSV_SUPPORT
-static  int sysv_pcheck(struct dsym*, struct dsym*, int*, int*);
-static void sysv_return(struct dsym*, char*);
+static  int uasm_ABI sysv_pcheck(struct dsym*, struct dsym*, int*, int*);
+static void uasm_ABI sysv_return(struct dsym*, char*);
 #endif
 
 #if DELPHI_SUPPORT
-static  int delphi_pcheck(struct dsym*, struct dsym*, int*, int*);
-static void delphi_return(struct dsym*, char*);
+static  int uasm_ABI delphi_pcheck(struct dsym*, struct dsym*, int*, int*);
+static void uasm_ABI delphi_return(struct dsym*, char*);
 #endif
 
-static void check_proc_fpo(struct proc_info*);
+static void uasm_ABI check_proc_fpo(struct proc_info*);
 
 /* table of fastcall types.
 * must match order of enum fastcall_type!
@@ -390,14 +390,14 @@ int_32 StackAdjHigh;
 #endif
 
 #if AMD64_SUPPORT
-static const char* const fmtstk0[] = {
+static char const* const fmtstk0[] = {
     "sub %r, %d",
     "%r %d",
 #if STACKPROBE
     "mov %r, %d",
 #endif
 };
-static const char* const fmtstk1[] = {
+static char const* const fmtstk1[] = {
     "sub %r, %d + %s",
     "%r %d + %s",
 #if STACKPROBE
@@ -405,10 +405,10 @@ static const char* const fmtstk1[] = {
 #endif
 };
 
-static const char* const fmtstk2[] = {
+static char const* const fmtstk2[] = {
     "lea %r, [%r + %d]",
 };
-static const char* const fmtstk3[] = {
+static char const* const fmtstk3[] = {
     "lea %r, [%r + %d + %s]",
 };
 #endif
@@ -416,10 +416,10 @@ static const char* const fmtstk3[] = {
 #define ROUND_UP( i, r ) (((i)+((r)-1)) & ~((r)-1))
 
 /* Declare proc functions */
-static void SetLocalOffsets_RSP(struct proc_info* info);
-static void SetLocalOffsets_RBP(struct proc_info* info);
-static void pop_register(uint_16* regist);
-static void WriteSEHData(struct dsym* proc);
+static void uasm_ABI SetLocalOffsets_RSP(struct proc_info* info);
+static void uasm_ABI SetLocalOffsets_RBP(struct proc_info* info);
+static void uasm_ABI pop_register(uint_16* regist);
+static void uasm_ABI WriteSEHData(struct dsym* proc);
 
 #if OWFC_SUPPORT
 /* register usage for OW fastcall (register calling convention).
@@ -432,7 +432,7 @@ static void WriteSEHData(struct dsym* proc);
 * will do the cleanup, else the called proc does it.
 * in VARARG procs, all parameters are pushed onto the stack!
 */
-static int watc_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
+static int uasm_ABI watc_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
 /***************************************************************************/
 {
     static char regname[64];
@@ -529,7 +529,7 @@ static int watc_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int*
     return(STRING_EXPANDED);
 }
 
-static void watc_return(struct dsym* proc, char* buffer)
+static void uasm_ABI watc_return(struct dsym* proc, char* buffer)
 /********************************************************/
 {
     int value;
@@ -546,7 +546,7 @@ static void watc_return(struct dsym* proc, char* buffer)
 * The 16-bit ABI uses registers AX, DX and BX - additional registers
 * are pushed in PASCAL order (i.o.w.: left to right).
 */
-static int ms32_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
+static int uasm_ABI ms32_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
 /***************************************************************************/
 {
     char regname[32];
@@ -984,7 +984,7 @@ static int ms32_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int*
     return(STRING_EXPANDED);
 }
 
-static void ms32_return(struct dsym* proc, char* buffer)
+static void uasm_ABI ms32_return(struct dsym* proc, char* buffer)
 /********************************************************/
 {
     /* v2.07: changed */
@@ -1021,7 +1021,7 @@ static void ms32_return(struct dsym* proc, char* buffer)
 }
 
 /* v2.29: delphi uses 3 register params (EAX,EDX,ECX) */
-static int delphi_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
+static int uasm_ABI delphi_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
 /***************************************************************************/
 {
     char regname[32];
@@ -1072,7 +1072,7 @@ static int delphi_pcheck(struct dsym* proc, struct dsym* paranode, int* used, in
     return(STRING_EXPANDED);
 }
 
-static void delphi_return(struct dsym* proc, char* buffer)
+static void uasm_ABI delphi_return(struct dsym* proc, char* buffer)
 /********************************************************/
 {
     if (proc->e.procinfo->parasize > (delphi_maxreg[ModuleInfo.Ofssize] * CurrWordSize))
@@ -1092,7 +1092,7 @@ static void delphi_return(struct dsym* proc, char* buffer)
 * [esp+16] for param 2,... The parameter names refer to those stack
 * locations, not to the register names.
 */
-static int ms64_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
+static int uasm_ABI ms64_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
 /***************************************************************************/
 {
     /* since the parameter names refer the stack-backup locations,
@@ -1103,7 +1103,7 @@ static int ms64_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int*
     return(0);
 }
 
-static void ms64_return(struct dsym* proc, char* buffer)
+static void uasm_ABI ms64_return(struct dsym* proc, char* buffer)
 /********************************************************/
 {
     /* nothing to do, the caller cleans the stack */
@@ -1112,7 +1112,7 @@ static void ms64_return(struct dsym* proc, char* buffer)
 
 #endif
 
-static void pushitem(void* stk, void* elmt)
+static void uasm_ABI pushitem(void* stk, void* elmt)
 /*******************************************/
 {
     void** stack = stk;
@@ -1124,7 +1124,7 @@ static void pushitem(void* stk, void* elmt)
     *stack = node;
 }
 
-static void* popitem(void* stk)
+static void* uasm_ABI popitem(void* stk)
 /*******************************/
 {
     void** stack = stk;
@@ -1138,7 +1138,7 @@ static void* popitem(void* stk)
     return(elmt);
 }
 
-static void push_proc(struct dsym* proc)
+static void uasm_ABI push_proc(struct dsym* proc)
 /****************************************/
 {
     if (Parse_Pass == PASS_1) /* get the locals stored so far */
@@ -1147,7 +1147,7 @@ static void push_proc(struct dsym* proc)
     return;
 }
 
-static struct dsym* pop_proc(void)
+static struct dsym* uasm_ABI pop_proc(void)
 /**********************************/
 {
     if (ProcStack == NULL)
@@ -1162,7 +1162,7 @@ static struct dsym* pop_proc(void)
 * count: number of array elements, default is 1
 * type:  qualified type [simple type, structured type, ptr to simple/structured type]
 */
-ret_code LocalDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI LocalDir(int i, struct asm_tok tokenarray[])
 /*****************************************************/
 {
     char*               name;
@@ -1349,7 +1349,7 @@ ret_code LocalDir(int i, struct asm_tok tokenarray[])
 #if STACKBASESUPP
 
 /* read/write value of @StackBase variable */
-void UpdateStackBase(struct asym* sym, struct expr* opnd)
+void uasm_ABI UpdateStackBase(struct asym* sym, struct expr* opnd)
 /*********************************************************/
 {
     if (opnd)
@@ -1362,7 +1362,7 @@ void UpdateStackBase(struct asym* sym, struct expr* opnd)
 }
 
 /* read value of @ProcStatus variable */
-void UpdateProcStatus(struct asym* sym, struct expr* opnd)
+void uasm_ABI UpdateProcStatus(struct asym* sym, struct expr* opnd)
 /**********************************************************/
 {
     sym->value = (CurrProc ? ProcStatus : 0);
@@ -1374,7 +1374,7 @@ void UpdateProcStatus(struct asym* sym, struct expr* opnd)
 * Called in pass one only.
 * i=start parameters
 */
-static ret_code ParseParams(struct dsym* proc, int i, struct asm_tok tokenarray[], bool IsPROC)
+static ret_code uasm_ABI ParseParams(struct dsym* proc, int i, struct asm_tok tokenarray[], bool IsPROC)
 /***********************************************************************************************/
 {
     char*           name;
@@ -1992,7 +1992,7 @@ static ret_code ParseParams(struct dsym* proc, int i, struct asm_tok tokenarray[
 * 2. use the current segment's attribute
 * 3. if no segment is set, use cpu setting
 */
-ret_code ParseProc(struct dsym* proc, int i, struct asm_tok tokenarray[], bool IsPROC, enum lang_type langtype)
+ret_code uasm_ABI ParseProc(struct dsym* proc, int i, struct asm_tok tokenarray[], bool IsPROC, enum lang_type langtype)
 /***************************************************************************************************************/
 {
     char*           token;
@@ -2550,7 +2550,7 @@ ret_code ParseProc(struct dsym* proc, int i, struct asm_tok tokenarray[], bool I
 * - ExternDirective ( state == SYM_EXTERNAL )
 * - TypedefDirective ( state == SYM_TYPE, sym==NULL )
 */
-struct asym* CreateProc(struct asym* sym, const char* name, enum sym_state state)
+struct asym* uasm_ABI CreateProc(struct asym* sym, const char* name, enum sym_state state)
     /*********************************************************************************/
 {
     if (sym == NULL)
@@ -2607,7 +2607,7 @@ struct asym* CreateProc(struct asym* sym, const char* name, enum sym_state state
 }
 
 /* delete a PROC item */
-void DeleteProc(struct dsym* proc)
+void uasm_ABI DeleteProc(struct dsym* proc)
 /**********************************/
 {
     struct dsym* curr;
@@ -2652,7 +2652,7 @@ void DeleteProc(struct dsym* proc)
 }
 
 /* PROC directive. */
-ret_code ProcDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI ProcDir(int i, struct asm_tok tokenarray[])
 /****************************************************/
 {
     struct asym*        sym;
@@ -2871,7 +2871,7 @@ ret_code ProcDir(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-ret_code CopyPrototype(struct dsym* proc, struct dsym* src)
+ret_code uasm_ABI CopyPrototype(struct dsym* proc, struct dsym* src)
 /***********************************************************/
 {
     struct dsym* curr;
@@ -2915,7 +2915,7 @@ ret_code CopyPrototype(struct dsym* proc, struct dsym* src)
 }
 
 /* close a PROC */
-static void ProcFini(struct dsym* proc)
+static void uasm_ABI ProcFini(struct dsym* proc)
 /***************************************/
 {
     struct asym* procline = NULL;
@@ -2958,6 +2958,8 @@ static void ProcFini(struct dsym* proc)
 #if STACKBASESUPP
         if (proc->e.procinfo->fpo)
         {
+            if (proc->e.procinfo->ReservedStack > 0)
+            {
             for (curr = proc->e.procinfo->locallist; curr; curr = curr->nextlocal)
             {
                 DebugMsg1(("ProcFini(%s): FPO, offset for %s %8d -> %8d\n", proc->sym.name, curr->sym.name, curr->sym.offset, curr->sym.offset + proc->e.procinfo->ReservedStack));
@@ -2967,6 +2969,7 @@ static void ProcFini(struct dsym* proc)
             {
                 DebugMsg1(("ProcFini(%s): FPO, offset for %s %8d -> %8d\n", proc->sym.name, curr->sym.name, curr->sym.offset, curr->sym.offset + proc->e.procinfo->ReservedStack));
                 curr->sym.offset += proc->e.procinfo->ReservedStack;
+            }
             }
         }
 #endif
@@ -3014,7 +3017,7 @@ static void ProcFini(struct dsym* proc)
 }
 
 /* ENDP directive */
-ret_code EndpDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI EndpDir(int i, struct asm_tok tokenarray[])
 /****************************************************/
 {
     struct asym* procline;
@@ -3044,7 +3047,7 @@ ret_code EndpDir(int i, struct asm_tok tokenarray[])
 #if AMD64_SUPPORT
 
 /* for FRAME procs, write .pdata and .xdata SEH unwind information */
-static void WriteSEHData(struct dsym* proc)
+static void uasm_ABI WriteSEHData(struct dsym* proc)
 /*******************************************/
 {
     struct dsym*        xdata;
@@ -3158,7 +3161,7 @@ static void WriteSEHData(struct dsym* proc)
 * .savexmm128
 * .setframe
 */
-ret_code ExcFrameDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI ExcFrameDirective(int i, struct asm_tok tokenarray[])
 /**************************************************************/
 {
     struct expr         opndx;
@@ -3467,7 +3470,7 @@ ret_code ExcFrameDirective(int i, struct asm_tok tokenarray[])
 /* see if there are open procedures.
 * called when the END directive has been found.
 */
-void ProcCheckOpen(void)
+void uasm_ABI ProcCheckOpen(void)
 /************************/
 {
     while (CurrProc != NULL)
@@ -3478,7 +3481,7 @@ void ProcCheckOpen(void)
     }
 }
 
-static ret_code write_userdef_prologue(struct asm_tok tokenarray[])
+static ret_code uasm_ABI write_userdef_prologue(struct asm_tok tokenarray[])
 /*******************************************************************/
 {
     int                 len;
@@ -3582,14 +3585,13 @@ static ret_code write_userdef_prologue(struct asm_tok tokenarray[])
 /* ========================================================================================================= */
 /* OPTION WIN64:1 - save up to 4 register parameters for WIN64 fastcall, 11 for WIN64 regcall                */
 /* ========================================================================================================= */
-static void win64_SaveRegParams_RSP(struct proc_info* info)
+static void uasm_ABI win64_SaveRegParams_RSP(struct proc_info* info)
 /*******************************************************/
 {
     int i;
     struct dsym* param;
     if (ModuleInfo.win64_flags & W64F_SMART)
     {
-        //int			   cnt;
         uint_16* regist;
         info->home_taken = 0;
         memset(info->home_used, 0, 6);
@@ -3604,7 +3606,7 @@ static void win64_SaveRegParams_RSP(struct proc_info* info)
                 if (param->sym.is_vararg == FALSE)
                 {
                     if ((param->sym.mem_type & MT_FLOAT) && param->sym.used)
-                    {  // added  && param->sym.used
+                    {
                         if (param->sym.mem_type == MT_REAL8)
                             AddLineQueueX("%s qword ptr[%r+%u], %r", MOVE_DOUBLE(), T_RSP, 8 + i * 8, T_XMM0 + i);
                         else if (param->sym.mem_type == MT_REAL4)
@@ -3614,8 +3616,6 @@ static void win64_SaveRegParams_RSP(struct proc_info* info)
                     }
                     else if ((param->sym.mem_type == MT_TYPE) && param->sym.used)
                     {
-                        //						if(info->vecregs[i] == 0)
-                        //						AddLineQueueX("mov [%r+%u], %r", T_RSP, 8 + i * 8, ms64_regs64[i]);
                         info->home_used[i] = 1;
                         ++info->home_taken;
                         info->vecused = TRUE;
@@ -3624,7 +3624,7 @@ static void win64_SaveRegParams_RSP(struct proc_info* info)
                     {
                         if (((param->sym.mem_type != MT_TYPE) && param->sym.used) &&
                             (param->sym.mem_type <= MT_QWORD) && param->sym.used)
-                        {   //here as well
+                        {
                             if (i < 4)
                             {
                                 AddLineQueueX("mov [%r+%u], %r", T_RSP, 8 + i * 8, ms64_regs64[i]);
@@ -3697,8 +3697,20 @@ static void win64_SaveRegParams_RSP(struct proc_info* info)
                 /* v2.05: save XMMx if type is float/double */
                 if (param->sym.is_vararg == FALSE)
                 {
-                    if ((param->sym.mem_type & MT_FLOAT) && param->sym.used)
-                    {  // added  && param->sym.used
+                    if (param->sym.mem_type & MT_FLOAT && param->sym.total_size == 10)
+                    {
+                        /* UASM 2.52 emit a warning for trying to pass an REAL10 by value - don't want to be caught out expecting a value instead of ref */
+                        if (Parse_Pass == PASS_1)
+                            EmitWarn(2, REAL10_BY_VALUE);
+                    }
+                    if (param->sym.mem_type & MT_FLOAT && param->sym.total_size == 4 && param->sym.used)
+                    {
+                        AddLineQueueX("%s [%r+%u], %r", MOVE_SIMD_DWORD(), T_RSP, 8 + i * 8, T_XMM0 + i);
+                        info->home_used[i] = 1;
+                        ++info->home_taken;
+                    }
+                    else if (param->sym.mem_type & MT_FLOAT && param->sym.total_size == 8 && param->sym.used)
+                    {
                         AddLineQueueX("%s [%r+%u], %r", MOVE_SIMD_QWORD(), T_RSP, 8 + i * 8, T_XMM0 + i);
                         info->home_used[i] = 1;
                         ++info->home_taken;
@@ -3767,7 +3779,7 @@ static void win64_SaveRegParams_RSP(struct proc_info* info)
 /* ========================================================================================================= */
 /* WIN64 Store USED registers into free shadow spaces                                                        */
 /* ========================================================================================================= */
-static void win64_StoreRegHome(struct proc_info* info)
+static void uasm_ABI win64_StoreRegHome(struct proc_info* info)
 /*******************************************************/
 {
     int             i = 0;
@@ -4579,7 +4591,7 @@ static void win64_StoreRegHome(struct proc_info* info)
 /* ========================================================================================================= */
 /* WIN64 Return a correctly sized sub register from a 64bit fastcall parameter register                      */
 /* ========================================================================================================= */
-static enum special_token GetWin64SubReg(enum special_token srcReg, int type)
+static enum special_token uasm_ABI GetWin64SubReg(enum special_token srcReg, int type)
 {
     if (CurrProc->sym.langtype == LANG_REGCALL)
     {
@@ -4701,7 +4713,7 @@ static enum special_token GetWin64SubReg(enum special_token srcReg, int type)
 /* ========================================================================================================= */
 /* OPTION WIN64:1 - save up to 4 register parameters for WIN64 fastcall, 11 for WIN64 regcall                */
 /* ========================================================================================================= */
-static void win64_SaveRegParams_RBP(struct proc_info* info)
+static void uasm_ABI win64_SaveRegParams_RBP(struct proc_info* info)
 /*******************************************************/
 {
     int i;
@@ -4772,7 +4784,7 @@ static void win64_SaveRegParams_RBP(struct proc_info* info)
 /* ========================================================================================================= */
 /* win64 default prologue when PROC FRAME and OPTION FRAME:AUTO is set                                       */
 /* ========================================================================================================= */
-static void write_win64_default_prologue_RBP(struct proc_info* info)
+static void uasm_ABI write_win64_default_prologue_RBP(struct proc_info* info)
 /****************************************************************/
 {
     uint_16*            regist;
@@ -5043,7 +5055,7 @@ static void write_win64_default_prologue_RBP(struct proc_info* info)
 /* ========================================================================================================= */
 /* win64 default prologue when PROC FRAME and  OPTION FRAME:AUTO is set                                      */
 /* ========================================================================================================= */
-static void write_win64_default_prologue_RSP(struct proc_info* info)
+static void uasm_ABI write_win64_default_prologue_RSP(struct proc_info* info)
 /****************************************************************/
 {
     uint_16*            regist;
@@ -5610,7 +5622,7 @@ static void write_win64_default_prologue_RSP(struct proc_info* info)
 /* ========================================================================================================= */
 /* Check to see if a proc can have FPO enabled                                                               */
 /* ========================================================================================================= */
-static void check_proc_fpo(struct proc_info* info)
+static void uasm_ABI check_proc_fpo(struct proc_info* info)
 {
     struct dsym*    paracurr;
     int             usedParams = 0;
@@ -5671,7 +5683,7 @@ static void check_proc_fpo(struct proc_info* info)
 /* Win64 default epilogue if PROC FRAME and OPTION FRAME:AUTO is set for RBP stackbase                       */
 /* UASM WIN64:N version																						 */
 /* ========================================================================================================= */
-static void write_win64_default_epilogue_RBP(struct proc_info* info)
+static void uasm_ABI write_win64_default_epilogue_RBP(struct proc_info* info)
 /****************************************************************/
 {
     int             resstack = ((ModuleInfo.win64_flags & W64F_AUTOSTACKSP) ? sym_ReservedStack->value : 0);
@@ -5824,7 +5836,7 @@ static void write_win64_default_epilogue_RBP(struct proc_info* info)
 /* ========================================================================================================= */
 /* Win64 default epilogue if PROC FRAME and OPTION FRAME:AUTO is set for stackbase RSP						 */
 /* ========================================================================================================= */
-static void write_win64_default_epilogue_RSP(struct proc_info* info)
+static void uasm_ABI write_win64_default_epilogue_RSP(struct proc_info* info)
 /****************************************************************/
 {
     int  anysize;
@@ -6018,7 +6030,7 @@ shadow space    |
 ----------------|
 */
 /* ========================================================================================================= */
-static void SetLocalOffsets_RBP(struct proc_info* info)
+static void uasm_ABI SetLocalOffsets_RBP(struct proc_info* info)
 {
     struct dsym* curr = NULL;
     int         cntxmm = 0;
@@ -6181,7 +6193,7 @@ static void SetLocalOffsets_RBP(struct proc_info* info)
 /* ========================================================================================================= */
 /* Win64 Calculate offsets of local variables and parameters from RSP    									 */
 /* ========================================================================================================= */
-static void SetLocalOffsets_RSP(struct proc_info* info)
+static void uasm_ABI SetLocalOffsets_RSP(struct proc_info* info)
 {
     struct dsym*        curr;
     int                 cntxmm = 0;
@@ -6303,7 +6315,7 @@ static void SetLocalOffsets_RSP(struct proc_info* info)
 /* ========================================================================================================= */
 /* the SYSTEMV 64 ABI is strict: the six parameters are passed in registers. */
 /* ========================================================================================================= */
-static int sysv_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
+static int uasm_ABI sysv_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int* vecused)
 /***************************************************************************/
 {
     char regname[32];
@@ -6568,7 +6580,7 @@ static int sysv_pcheck(struct dsym* proc, struct dsym* paranode, int* used, int*
     return(STRING_EXPANDED);
 }
 
-static void sysv_return(struct dsym* proc, char* buffer)
+static void uasm_ABI sysv_return(struct dsym* proc, char* buffer)
 /********************************************************/
 {
     return;
@@ -6577,7 +6589,7 @@ static void sysv_return(struct dsym* proc, char* buffer)
 /* ========================================================================================================= */
 /* sysv default prologue when PROC FRAME and OPTION FRAME:AUTO is set */
 /* ========================================================================================================= */
-static void write_sysv_default_prologue_RBP(struct proc_info* info)
+static void uasm_ABI write_sysv_default_prologue_RBP(struct proc_info* info)
 /****************************************************************/
 {
     uint_16*            regist;
@@ -6712,7 +6724,7 @@ static void write_sysv_default_prologue_RBP(struct proc_info* info)
 /* ========================================================================================================= */
 /* SYSTEM V default epilogue if PROC FRAME and OPTION FRAME:AUTO is set for RBP stackbase */
 /* ========================================================================================================= */
-static void write_sysv_default_epilogue_RBP(struct proc_info* info)
+static void uasm_ABI write_sysv_default_epilogue_RBP(struct proc_info* info)
 /****************************************************************/
 {
     int  resstack = ((ModuleInfo.win64_flags & W64F_AUTOSTACKSP) ? sym_ReservedStack->value : 0);
@@ -6804,7 +6816,7 @@ static void write_sysv_default_epilogue_RBP(struct proc_info* info)
 /* ========================================================================================================= */
 /* SYSTEM V default stack frame offsets for RBP based frame */
 /* ========================================================================================================= */
-static void SetLocalOffsets_RBP_SYSV(struct proc_info* info)
+static void uasm_ABI SetLocalOffsets_RBP_SYSV(struct proc_info* info)
 {
     struct dsym* curr;
     int         cntxmm = 0;
@@ -6965,7 +6977,7 @@ write prolog code
 */
 
 /* Write out generic prologue for 386, esp, watc, borland */
-static ret_code write_generic_prologue(struct proc_info* info)
+static ret_code uasm_ABI write_generic_prologue(struct proc_info* info)
 /********************************************/
 {
     uint_16*            regist;
@@ -7104,7 +7116,7 @@ static ret_code write_generic_prologue(struct proc_info* info)
 }
 
 /* Write out UASM internal prologue */
-static ret_code write_default_prologue(void)
+static ret_code uasm_ABI write_default_prologue(void)
 /********************************************/
 {
     struct proc_info*   info;
@@ -7175,7 +7187,7 @@ runqueue:
 }
 
 /* Set Local offsets for 32bit procedures */
-static void SetLocalOffsets(struct proc_info* info)
+static void uasm_ABI SetLocalOffsets(struct proc_info* info)
 /***************************************************/
 {
     struct dsym*    curr;
@@ -7293,7 +7305,7 @@ static void SetLocalOffsets(struct proc_info* info)
     }
 }
 
-void write_prologue(struct asm_tok tokenarray[])
+void uasm_ABI write_prologue(struct asm_tok tokenarray[])
 /************************************************/
 {
     /* reset @ProcStatus flag */
@@ -7396,7 +7408,7 @@ void write_prologue(struct asm_tok tokenarray[])
 
 /**************************************** */
 /* Pop the register when a procedure ends */
-static void pop_register(uint_16* regist)
+static void uasm_ABI pop_register(uint_16* regist)
 {
     int cnt;
     if (regist == NULL)
@@ -7487,7 +7499,7 @@ static void pop_register(uint_16* regist)
 */
 
 /* Write generic epilogue for 286/386, stdcall, borland, watc etc. */
-static void write_generic_epilogue(struct proc_info* info)
+static void uasm_ABI write_generic_epilogue(struct proc_info* info)
 {
     int resstack = 0;
     int stackadj = 0;
@@ -7597,7 +7609,7 @@ static void write_generic_epilogue(struct proc_info* info)
     }
 }
 
-static void write_default_epilogue(void)
+static void uasm_ABI write_default_epilogue(void)
 /****************************************/
 {
     struct proc_info* info;
@@ -7632,7 +7644,7 @@ static void write_default_epilogue(void)
 /* write userdefined epilogue code
 * if a RET/IRET instruction has been found inside a PROC.
 */
-static ret_code write_userdef_epilogue(bool flag_iret, struct asm_tok tokenarray[])
+static ret_code uasm_ABI write_userdef_epilogue(bool flag_iret, struct asm_tok tokenarray[])
 /***********************************************************************************/
 {
     uint_16*            regs;
@@ -7714,7 +7726,7 @@ static ret_code write_userdef_epilogue(bool flag_iret, struct asm_tok tokenarray
 * count = number of tokens in buffer (=Token_Count)
 * it's ensured already that ModuleInfo.proc_epilogue isn't NULL.
 */
-ret_code RetInstr(int i, struct asm_tok tokenarray[], int count)
+ret_code uasm_ABI RetInstr(int i, struct asm_tok tokenarray[], int count)
 /****************************************************************/
 {
     struct proc_info*   info;
@@ -7882,7 +7894,7 @@ ret_code RetInstr(int i, struct asm_tok tokenarray[], int count)
 
 /* init this module. called for every pass. */
 
-void ProcInit(void)
+void uasm_ABI ProcInit(void)
 /*******************/
 {
     ProcStack = NULL;

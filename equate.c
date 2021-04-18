@@ -25,7 +25,7 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void myatoi128(const char*, uint_64[], int, int);
+extern void uasm_ABI myatoi128(const char*, uint_64[], int, int);
 
 #if defined(LLONG_MAX) || defined(__GNUC__) || defined(__TINYC__)
 /* gcc needs suffixes if the constants won't fit in long type */
@@ -55,7 +55,7 @@ const int_64 minintvalues[] = { 0xffffffff00000000i64, 0xffffffff00000000i64,
 
 /* set the value of a constant (EQU) or an assembly time variable (=) */
 
-static void SetValue(struct asym* sym, struct expr* opndx)
+static void uasm_ABI SetValue(struct asym* sym, struct expr* opndx)
 /**********************************************************/
 {
     sym->isequate = TRUE;
@@ -134,7 +134,7 @@ static void SetValue(struct asym* sym, struct expr* opndx)
  * this can only be a number (constant or relocatable).
  */
 
-static struct asym* CreateAssemblyTimeVariable(struct asm_tok tokenarray[])
+static struct asym* uasm_ABI CreateAssemblyTimeVariable(struct asm_tok tokenarray[])
 /***************************************************************************/
 {
     struct asym* sym;
@@ -298,7 +298,7 @@ static struct asym* CreateAssemblyTimeVariable(struct asm_tok tokenarray[])
 
 /* '=' directive.*/
 
-ret_code EqualSgnDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI EqualSgnDirective(int i, struct asm_tok tokenarray[])
 /**************************************************************/
 {
     struct asym* sym;
@@ -323,7 +323,7 @@ ret_code EqualSgnDirective(int i, struct asm_tok tokenarray[])
  * this is used for some internally generated variables (SIZESTR, INSTR, @Cpu)
  * NO listing is written! The value is ensured to be max 16-bit wide.
  */
-struct asym* CreateVariable(const char* name, int value)
+struct asym* uasm_ABI CreateVariable(const char* name, int value)
     /********************************************************/
 {
     struct asym* sym;
@@ -389,7 +389,7 @@ struct asym* CreateVariable(const char* name, int value)
  * - anything. This will also become a text literal.
  */
 
-struct asym* CreateConstant(struct asm_tok tokenarray[])
+struct asym* uasm_ABI CreateConstant(struct asm_tok tokenarray[])
     /********************************************************/
 {
     struct asym*        sym;
@@ -608,7 +608,7 @@ struct asym* CreateConstant(struct asm_tok tokenarray[])
  * pass 2 and later, and then this function may be called.
  */
 
-ret_code EquDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI EquDirective(int i, struct asm_tok tokenarray[])
 /*********************************************************/
 {
     struct asym* sym;

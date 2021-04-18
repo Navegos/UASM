@@ -67,8 +67,8 @@ typedef int64_t __int64;
 
 uasm_PACK_PUSH_STACK
 
-int Tokenize(char*, unsigned int, struct asm_tok[], unsigned int);
-void myatoi128(const char* src, uint_64 dst[], int base, int size);
+int uasm_ABI Tokenize(char*, unsigned int, struct asm_tok[], unsigned int);
+void uasm_ABI myatoi128(const char* src, uint_64 dst[], int base, int size);
 #define LABELSIZE 8
 #define LABELSGLOBAL 0 /* make the generated labels global */
 #define JMPPREFIX      /* define spaces before "jmp" or "loop" */
@@ -163,7 +163,8 @@ struct hll_opnd
     char* lastjmp;
     uint_32 lasttruelabel; /* v2.08: new member */
 };
-static ret_code GetExpression(struct hll_item* hll, int* i, struct asm_tok[], int ilabel, bool is_true, char* buffer, struct hll_opnd*);
+
+static ret_code uasm_ABI GetExpression(struct hll_item* hll, int* i, struct asm_tok[], int ilabel, bool is_true, char* buffer, struct hll_opnd*);
 
 /* c binary ops.
 * Order of items COP_EQ - COP_LE  and COP_ZERO - COP_OVERFLOW
@@ -207,11 +208,11 @@ static const char neg_cjmptype[] = { 0, 1, 0, 0, 1, 1 };
 * currently no limit.
 */
 #ifdef __WATCOMC__
-static _inline char HexDigit(char x)
+static _inline char uasm_ABI HexDigit(char x)
 #elif defined(_MSC_VER)
-static _inline char HexDigit(char x)
+static _inline char uasm_ABI HexDigit(char x)
 #else
-static char HexDigit(char x)
+static char uasm_ABI HexDigit(char x)
 #endif
 {
     x &= 0xF;
@@ -226,7 +227,7 @@ static unsigned cntCond;   /* # of allocated 'condlines'-buffer in .WHILE-blocks
 static unsigned cntCondBytes; /* total size of allocated 'condlines'-buffers */
 #endif
 
-uint_32 GetHllLabel(void)
+uint_32 uasm_ABI GetHllLabel(void)
 /********************************/
 {
     return (++ModuleInfo.hll_label);
@@ -247,7 +248,7 @@ uint_32 GetHllLabel(void)
 #define CHARS_AND '&' + ( '&' << 8 )
 #define CHARS_OR  '|' + ( '|' << 8 )
 
-static enum c_bop GetCOp(struct asm_tok* item)
+static enum c_bop uasm_ABI GetCOp(struct asm_tok* item)
 /**********************************************/
 {
     int size;
@@ -315,7 +316,7 @@ static enum c_bop GetCOp(struct asm_tok* item)
     return(rc);
 }
 /* handle 32 bit hex here for compatibility with x86 */
-uint_32  hex2dec(const char* src)
+uint_32 uasm_ABI hex2dec(const char* src)
 /*******************************************************/
 {
     uint_32 a;
@@ -337,7 +338,7 @@ uint_32  hex2dec(const char* src)
     return (b);
 }
 
-static void bubblesort(struct hll_item* hll, uint_16* lbl, int* src, int n)
+static void uasm_ABI bubblesort(struct hll_item* hll, uint_16* lbl, int* src, int n)
 {
     /*******************************************************************************************************************************/
     int i;
@@ -366,7 +367,7 @@ static void bubblesort(struct hll_item* hll, uint_16* lbl, int* src, int n)
     hll->delta = hll->maxcase - hll->mincase;
 }
 #if AMD64_SUPPORT
-static void bubblesort64(struct hll_item* hll, uint_16* lbl, int_64* src, int n)
+static void uasm_ABI bubblesort64(struct hll_item* hll, uint_16* lbl, int_64* src, int n)
 {
     /*******************************************************************************************************************************/
     int i;
@@ -395,7 +396,7 @@ static void bubblesort64(struct hll_item* hll, uint_16* lbl, int_64* src, int n)
 }
 #endif
 /* render an instruction */
-static char* RenderInstr(char* dst, const char* instr, int start1, int end1, int start2, int end2, struct asm_tok tokenarray[])
+static char* uasm_ABI RenderInstr(char* dst, const char* instr, int start1, int end1, int start2, int end2, struct asm_tok tokenarray[])
 /*******************************************************************************************************************************/
 {
 #if AMD64_SUPPORT
@@ -435,7 +436,7 @@ static char* RenderInstr(char* dst, const char* instr, int start1, int end1, int
 }
 
 /* render a Simd instruction */
-static char* RenderSimdInstr(char* dst, const char* instr, int start1, int end1, int start2, int end2, struct asm_tok tokenarray[], enum c_bop op)
+static char* uasm_ABI RenderSimdInstr(char* dst, const char* instr, int start1, int end1, int start2, int end2, struct asm_tok tokenarray[], enum c_bop op)
 /*******************************************************************************************************************************/
 {
 #if AMD64_SUPPORT
@@ -523,7 +524,7 @@ static char* RenderSimdInstrTM(char* dst, const char* instr, int start1, int end
     return(dst);
 }*/
 
-static char* GetLabelStr(int_32 label, char* buff)
+static char* uasm_ABI GetLabelStr(int_32 label, char* buff)
 /**************************************************/
 {
     sprintf(buff, LABELFMT, label);
@@ -532,7 +533,7 @@ static char* GetLabelStr(int_32 label, char* buff)
 
 /* render a Jcc instruction */
 
-static char* RenderJcc(char* dst, char cc, int neg, uint_32 label)
+static char* uasm_ABI RenderJcc(char* dst, char cc, int neg, uint_32 label)
 /******************************************************************/
 {
 #ifdef DEBUG_OUT
@@ -557,7 +558,7 @@ static char* RenderJcc(char* dst, char cc, int neg, uint_32 label)
 
 /* a "token" in a C expression actually is an assembly expression */
 
-static ret_code GetToken(struct hll_item* hll, int* i, struct asm_tok tokenarray[], struct expr* opnd)
+static ret_code uasm_ABI GetToken(struct hll_item* hll, int* i, struct asm_tok tokenarray[], struct expr* opnd)
 /******************************************************************************************************/
 {
     int end_tok;
@@ -590,7 +591,7 @@ static ret_code GetToken(struct hll_item* hll, int* i, struct asm_tok tokenarray
     return(NOT_ERROR);
 }
 
-static uint_32 GetLabel(struct hll_item* hll, int index)
+static uint_32 uasm_ABI GetLabel(struct hll_item* hll, int index)
 /********************************************************/
 {
     /**/myassert(hll->labels[index]);
@@ -603,7 +604,7 @@ static uint_32 GetLabel(struct hll_item* hll, int index)
 * 3. unary operator "!" + one token
 * 4. one token (short form for "<token> != 0")
 */
-static ret_code GetSimpleExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer, struct hll_opnd* hllop)
+static ret_code uasm_ABI GetSimpleExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer, struct hll_opnd* hllop)
 /**************************************************************************************************************************************************************/
 {
     enum c_bop  op;
@@ -895,7 +896,7 @@ static ret_code GetSimpleExpression(struct hll_item* hll, int* i, struct asm_tok
 * - jmp -> 0
 * - 0   -> jmp
 */
-static void InvertJump(char* p)
+static void uasm_ABI InvertJump(char* p)
 /*******************************/
 {
     if (*p == NULLC)
@@ -956,7 +957,7 @@ static void InvertJump(char* p)
 * then the simple memcpy() below won't work!
 */
 
-static void ReplaceLabel(char* p, uint_32 olabel, uint_32 nlabel)
+static void uasm_ABI ReplaceLabel(char* p, uint_32 olabel, uint_32 nlabel)
 /*****************************************************************/
 {
     char oldlbl[16];
@@ -978,7 +979,7 @@ static void ReplaceLabel(char* p, uint_32 olabel, uint_32 nlabel)
 
 /* operator &&, which has the second lowest precedence, is handled here */
 
-static ret_code GetAndExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer, struct hll_opnd* hllop)
+static ret_code uasm_ABI GetAndExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer, struct hll_opnd* hllop)
 /***********************************************************************************************************************************************************/
 {
     char* ptr = buffer;
@@ -1044,7 +1045,7 @@ static ret_code GetAndExpression(struct hll_item* hll, int* i, struct asm_tok to
 
 /* operator ||, which has the lowest precedence, is handled here */
 
-static ret_code GetExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer, struct hll_opnd* hllop)
+static ret_code uasm_ABI GetExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer, struct hll_opnd* hllop)
 /********************************************************************************************************************************************************/
 {
     char* ptr = buffer;
@@ -1151,7 +1152,7 @@ static ret_code GetExpression(struct hll_item* hll, int* i, struct asm_tok token
 * v2.11: local line buffer removed; src pointer has become a parameter.
 */
 
-static ret_code QueueTestLines(char* src)
+static ret_code uasm_ABI QueueTestLines(char* src)
 /*****************************************/
 {
     char* start;
@@ -1188,7 +1189,7 @@ static ret_code QueueTestLines(char* src)
 *   .CONT .IF: TRUE
 */
 
-static ret_code EvaluateHllExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer)
+static ret_code uasm_ABI EvaluateHllExpression(struct hll_item* hll, int* i, struct asm_tok tokenarray[], int ilabel, bool is_true, char* buffer)
 /****************************************************************************************************************************************/
 {
     struct hll_opnd hllop = { NULL, 0 };
@@ -1214,7 +1215,7 @@ static ret_code EvaluateHllExpression(struct hll_item* hll, int* i, struct asm_t
 * Constants (0 or != 0) are also accepted.
 */
 
-static ret_code CheckCXZLines(char* p)
+static ret_code uasm_ABI CheckCXZLines(char* p)
 /**************************************/
 {
     int lines = 0;
@@ -1278,11 +1279,11 @@ static ret_code CheckCXZLines(char* p)
     return(NOT_ERROR);
 }
 
-static const char* reax[] = { "ax", "eax", "rax" };
-static const char* redx[] = { "dx", "edx", "rdx" };
-static const char* recx[] = { "cx", "ecx", "rcx" };
+static char const* const reax[] = { "ax", "eax", "rax" };
+static char const* const redx[] = { "dx", "edx", "rdx" };
+static char const* const recx[] = { "cx", "ecx", "rcx" };
 
-static void WriteAsmLine(const char* cmd, const char* s1, const char* s2)
+static void uasm_ABI WriteAsmLine(const char* cmd, const char* s1, const char* s2)
 {
     char codebuff[512];
     strcpy(codebuff, cmd);
@@ -1292,7 +1293,8 @@ static void WriteAsmLine(const char* cmd, const char* s1, const char* s2)
     AddLineQueue(codebuff);				// MOV RAX,param
     return;
 }
-static ret_code ForInitAndNext(struct asm_tok tokenarray[], int cnt, char* buff)
+
+static ret_code uasm_ABI ForInitAndNext(struct asm_tok tokenarray[], int cnt, char* buff)
 {
     int a;
     int j;
@@ -1579,7 +1581,7 @@ static ret_code ForInitAndNext(struct asm_tok tokenarray[], int cnt, char* buff)
 
 /* .IF, .WHILE, .REPEAT or .FOR directive */
 
-ret_code HllStartDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI HllStartDir(int i, struct asm_tok tokenarray[])
 /********************************************************/
 {
     struct hll_item*    hll;
@@ -1978,7 +1980,7 @@ ret_code HllStartDir(int i, struct asm_tok tokenarray[])
 * .ENDIF, .ENDW, .ENDFOR .UNTIL and .UNTILCXZ .ENDSWITCH, .ENDSW, .ENDF directives.
 * These directives end a .IF, .WHILE or .REPEAT .SWITCH block.
 */
-ret_code HllEndDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI HllEndDir(int i, struct asm_tok tokenarray[])
 /******************************************************/
 {
     struct hll_item*    hll;
@@ -3150,7 +3152,7 @@ ret_code HllEndDir(int i, struct asm_tok tokenarray[])
 *    - jump to test / exit label of innermost .WHILE/.REPEAT block
 *
 */
-ret_code HllExitDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI HllExitDir(int i, struct asm_tok tokenarray[])
 /*******************************************************/
 {
     struct expr         opndx;
@@ -3479,7 +3481,7 @@ ret_code HllExitDir(int i, struct asm_tok tokenarray[])
 
 /* check if an hll block has been left open. called after pass 1 */
 
-void HllCheckOpen(void)
+void uasm_ABI HllCheckOpen(void)
 /***********************/
 {
     if (HllStack)
@@ -3491,7 +3493,7 @@ void HllCheckOpen(void)
 }
 
 #if FASTMEM==0
-void HllFini(void)
+void uasm_ABI HllFini(void)
 /******************/
 {
     struct hll_item* curr;
@@ -3509,7 +3511,7 @@ void HllFini(void)
 
 /* HllInit() is called for each pass */
 
-void HllInit(int pass)
+void uasm_ABI HllInit(int pass)
 /**********************/
 {
     //if ( pass == PASS_1 )

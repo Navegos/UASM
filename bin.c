@@ -55,7 +55,7 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void SortSegments(int);
+extern void uasm_ABI SortSegments(int);
 
 #if MZ_SUPPORT
 /* default values for OPTION MZ */
@@ -190,7 +190,7 @@ static const struct IMAGE_PE_HEADER64 pe64def = {
 
 #ifdef __I86__
 /* "huge" fwrite() for Uasmr.exe */
-uint_32 hfwrite(uint_8 huge* pBuffer, int size, uint_32 count, FILE* file)
+uint_32 uasm_ABI hfwrite(uint_8 huge* pBuffer, int size, uint_32 count, FILE* file)
 /**************************************************************************/
 {
     uint_32 written;
@@ -212,7 +212,7 @@ uint_32 hfwrite(uint_8 huge* pBuffer, int size, uint_32 count, FILE* file)
 
 /* calculate starting offset of segments and groups */
 
-static void CalcOffset(struct dsym* curr, struct calc_param* cp)
+static void uasm_ABI CalcOffset(struct dsym* curr, struct calc_param* cp)
 /****************************************************************/
 {
     uint_32 align;
@@ -332,7 +332,7 @@ static void CalcOffset(struct dsym* curr, struct calc_param* cp)
  * if pDst!=NULL: write segment related fixups
  */
 
-static int GetSegRelocs(uint_16* pDst)
+static int uasm_ABI GetSegRelocs(uint_16* pDst)
 /**************************************/
 {
     struct dsym* curr;
@@ -402,7 +402,7 @@ static int GetSegRelocs(uint_16* pDst)
  * memimage=TRUE: get full size
  */
 
-static uint_32 GetImageSize(bool memimage)
+static uint_32 uasm_ABI GetImageSize(bool memimage)
 /******************************************/
 {
     struct dsym* curr;
@@ -457,7 +457,7 @@ union genptr
 
 /* handle the fixups contained in a segment */
 
-static ret_code DoFixup(struct dsym* curr, struct calc_param* cp)
+static ret_code uasm_ABI DoFixup(struct dsym* curr, struct calc_param* cp)
 /*****************************************************************/
 {
     union genptr codeptr;
@@ -756,7 +756,7 @@ static ret_code DoFixup(struct dsym* curr, struct calc_param* cp)
 
 #if PE_SUPPORT
 
-static void pe_create_MZ_header(struct module_info* modinfo)
+static void uasm_ABI pe_create_MZ_header(struct module_info* modinfo)
 /************************************************************/
 {
     char* p;
@@ -781,7 +781,7 @@ static void pe_create_MZ_header(struct module_info* modinfo)
 
 /* get/set value of @pe_file_flags variable */
 
-static void set_file_flags(struct asym* sym, struct expr* opnd)
+static void uasm_ABI set_file_flags(struct asym* sym, struct expr* opnd)
 /***************************************************************/
 {
     struct dsym* pehdr;
@@ -799,7 +799,7 @@ static void set_file_flags(struct asym* sym, struct expr* opnd)
     DebugMsg(("set_file_flags(%s, %X): value=%X\n", sym->name, opnd, sym->value));
 }
 
-void pe_create_PE_header(void)
+void uasm_ABI pe_create_PE_header(void)
 /******************************/
 {
     struct asym* sym;
@@ -866,7 +866,7 @@ void pe_create_PE_header(void)
 
 #define CHAR_READONLY ( IMAGE_SCN_MEM_READ >> 24 )
 
-static void pe_create_section_table(void)
+static void uasm_ABI pe_create_section_table(void)
 /*****************************************/
 {
     int i;
@@ -972,7 +972,7 @@ static int compare_exp(const void* p1, const void* p2)
     return(strcmp(((struct expitem*)p1)->name, ((struct expitem*)p2)->name));
 }
 
-static void pe_emit_export_data(void)
+static void uasm_ABI pe_emit_export_data(void)
 /*************************************/
 {
     struct dsym* curr;
@@ -1072,7 +1072,7 @@ static void pe_emit_export_data(void)
  * .idata$6: strings
  */
 
-static void pe_emit_import_data(void)
+static void uasm_ABI pe_emit_import_data(void)
 /*************************************/
 {
     struct dll_desc* p;
@@ -1173,7 +1173,7 @@ static void pe_emit_import_data(void)
     }
 }
 
-static int get_bit(int value)
+static int uasm_ABI get_bit(int value)
 /*****************************/
 {
     int rc = -1;
@@ -1185,7 +1185,7 @@ static int get_bit(int value)
     return(rc);
 }
 
-static uint_32 pe_get_characteristics(struct dsym* seg)
+static uint_32 uasm_ABI pe_get_characteristics(struct dsym* seg)
 /*******************************************************/
 {
     uint_32 result = 0;
@@ -1230,7 +1230,7 @@ static uint_32 pe_get_characteristics(struct dsym* seg)
 
 /* set base relocations */
 
-static void pe_set_base_relocs(struct dsym* reloc)
+static void uasm_ABI pe_set_base_relocs(struct dsym* reloc)
 /**************************************************/
 {
     int cnt1 = 0;
@@ -1347,7 +1347,7 @@ static void pe_set_base_relocs(struct dsym* reloc)
  * .tls   - IMAGE_DIRECTORY_ENTRY_TLS
  */
 
-static void pe_set_values(struct calc_param* cp)
+static void uasm_ABI pe_set_values(struct calc_param* cp)
 /************************************************/
 {
     int i;
@@ -1641,7 +1641,7 @@ static void pe_set_values(struct calc_param* cp)
  * Previously the code was run inside EndDirective() directly.
  */
 
-static ret_code pe_enddirhook(struct module_info* modinfo)
+static ret_code uasm_ABI pe_enddirhook(struct module_info* modinfo)
 /**********************************************************/
 {
     pe_create_MZ_header(modinfo);
@@ -1659,7 +1659,7 @@ static ret_code pe_enddirhook(struct module_info* modinfo)
  * this is done after the last step only!
  */
 
-static ret_code bin_write_module(struct module_info* modinfo)
+static ret_code uasm_ABI bin_write_module(struct module_info* modinfo)
 /*************************************************************/
 {
     struct dsym* curr;
@@ -2020,7 +2020,7 @@ static ret_code bin_write_module(struct module_info* modinfo)
 }
 #endif
 
-static ret_code bin_check_external(struct module_info* modinfo)
+static ret_code uasm_ABI bin_check_external(struct module_info* modinfo)
 /***************************************************************/
 {
     struct dsym* curr;
@@ -2033,7 +2033,7 @@ static ret_code bin_check_external(struct module_info* modinfo)
     return(NOT_ERROR);
 }
 
-void bin_init(struct module_info* modinfo)
+void uasm_ABI bin_init(struct module_info* modinfo)
 /******************************************/
 {
     modinfo->g.WriteModule = bin_write_module;

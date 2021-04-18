@@ -18,8 +18,8 @@
 
 uasm_PACK_PUSH_STACK
 
-extern char* EXPQUAL ParseCmdline(char** cmdline, int*);
-extern void EXPQUAL CmdlineFini(void);
+extern char* uasm_ABI ParseCmdline(char** cmdline, int*);
+extern void uasm_ABI CmdlineFini(void);
 
 uasm_PACK_POP
 

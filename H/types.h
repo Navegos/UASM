@@ -22,16 +22,16 @@ struct qualified_type {
 
 extern struct dsym* CurrStruct; /* start of current STRUCT list */
 
-extern struct asym* CreateTypeSymbol(struct asym*, const char*, bool);
-extern struct asym* SearchNameInStruct(const struct asym*, const char*, uint_32*, int level);
-//extern ret_code    EndstructDirective( int );
-extern ret_code    GetQualifiedType(int*, struct asm_tok[], struct qualified_type*);
-extern struct asym* CreateStructField(int, struct asm_tok[], const char*, enum memtype, struct asym*, uint_32);
-extern void        UpdateStructSize(struct asym*);
-extern ret_code    SetStructCurrentOffset(int_32);
-extern ret_code    AlignInStruct(int);
-extern void        TypesInit(void);
-extern void        DeleteType(struct dsym*);
+extern struct asym* uasm_ABI    CreateTypeSymbol(struct asym*, const char*, bool);
+extern struct asym* uasm_ABI    SearchNameInStruct(const struct asym*, const char*, uint_32*, int level);
+//extern ret_code uasm_ABI      EndstructDirective( int );
+extern ret_code uasm_ABI        GetQualifiedType(int*, struct asm_tok[], struct qualified_type*);
+extern struct asym* uasm_ABI    CreateStructField(int, struct asm_tok[], const char*, enum memtype mem_type, struct asym*, uint_32);
+extern void uasm_ABI            UpdateStructSize(struct asym*);
+extern ret_code uasm_ABI        SetStructCurrentOffset(int_32);
+extern ret_code uasm_ABI        AlignInStruct(int);
+extern void uasm_ABI            TypesInit(void);
+extern void uasm_ABI            DeleteType(struct dsym*);
 
 uasm_PACK_POP
 

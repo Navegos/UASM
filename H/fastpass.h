@@ -78,15 +78,15 @@ extern bool StoreState; /* is 1 if states are to be stored in pass one */
 extern bool UseSavedState;
 
 //void SaveState( void );
-void FastpassInit(void);
-void SegmentSaveState(void);
-void AssumeSaveState(void);
-void ContextSaveState(void);
-void StoreLine(const char*, int, uint_32);
-void SkipSavedState(void);
-struct line_item* RestoreState(void);
-void SaveVariableState(struct asym* sym);
-void FreeLineStore(void);
+void uasm_ABI FastpassInit(void);
+void uasm_ABI SegmentSaveState(void);
+void uasm_ABI AssumeSaveState(void);
+void uasm_ABI ContextSaveState(void);
+void uasm_ABI StoreLine(const char*, int, uint_32);
+void uasm_ABI SkipSavedState(void);
+struct line_item* uasm_ABI RestoreState(void);
+void uasm_ABI SaveVariableState(struct asym* sym);
+void uasm_ABI FreeLineStore(void);
 
 #define FStoreLine( flags ) if ( Parse_Pass == PASS_1 ) {StoreLine( CurrSource, flags, 0 );} else 
 

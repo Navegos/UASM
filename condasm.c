@@ -71,7 +71,7 @@ static int falseblocknestlevel;
 static uint_32 elseoccured; /* 2.06: bit field, magnitude must be >= MAX_IF_NESTING */
 
 #ifdef DEBUG_OUT
-static const char* GetCurrIfStatString(void)
+static char const* const uasm_ABI GetCurrIfStatString(void)
 /********************************************/
 {
     switch (CurrIfState)
@@ -89,7 +89,7 @@ static const char* GetCurrIfStatString(void)
  * updates variables <blocknestlevel> and <falseblocknestlevel>.
 */
 
-void conditional_assembly_prepare(int directive)
+void uasm_ABI conditional_assembly_prepare(int directive)
 /************************************************/
 {
     DebugMsg1(("condasm_prepare(%s), old status: %s, lvl=%u, falselvl=%u\n",
@@ -188,7 +188,7 @@ void conditional_assembly_prepare(int directive)
  * - "" (item is T_FINAL)
  */
 
-static bool check_defd(const char* name)
+static bool uasm_ABI check_defd(const char* name)
 /****************************************/
 {
     struct asym* sym;
@@ -209,7 +209,7 @@ static bool check_defd(const char* name)
 
 /* handle [ELSE]IF[N]B
  */
-static bool check_blank(const char* string)
+static bool uasm_ABI check_blank(const char* string)
 /*******************************************/
 {
     for (; *string; string++)
@@ -222,7 +222,7 @@ static bool check_blank(const char* string)
  * Used by [ELSE]IFDIF[I] and [ELSE]IFIDN[I]
  */
 
-static bool check_dif(const char* string1, const char* string2, bool sensitive)
+static bool uasm_ABI check_dif(const char* string1, const char* string2, bool sensitive)
 /*******************************************************************************/
 {
     if (sensitive)
@@ -235,7 +235,7 @@ static bool check_dif(const char* string1, const char* string2, bool sensitive)
     }
 }
 
-ret_code CondAsmDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI CondAsmDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     int directive = tokenarray[i].tokval;
@@ -477,7 +477,7 @@ escape:
     return(NOT_ERROR);
 }
 
-static char* GetErrText(int i, struct asm_tok tokenarray[])
+static char* uasm_ABI GetErrText(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     *StringBufferEnd = NULLC;
@@ -508,7 +508,7 @@ static char* GetErrText(int i, struct asm_tok tokenarray[])
  * - .err[n]b    text_literal [, <text>]
  * - .err[n]def  symbol [, <text>]
  */
-ret_code ErrorDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI ErrorDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     struct expr opndx;
@@ -724,7 +724,7 @@ ret_code ErrorDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-void CondCheckOpen(void)
+void uasm_ABI CondCheckOpen(void)
 /************************/
 {
     if (blocknestlevel > 0)
@@ -734,13 +734,13 @@ void CondCheckOpen(void)
     return;
 }
 
-int GetIfNestLevel(void)
+int uasm_ABI GetIfNestLevel(void)
 /************************/
 {
     return(blocknestlevel);
 }
 
-void SetIfNestLevel(int newlevel)
+void uasm_ABI SetIfNestLevel(int newlevel)
 /*********************************/
 {
     blocknestlevel = newlevel;
@@ -749,7 +749,7 @@ void SetIfNestLevel(int newlevel)
 
 /* init (called once per module) */
 
-void CondInit(void)
+void uasm_ABI CondInit(void)
 /*******************/
 {
     CurrIfState = BLOCK_ACTIVE;

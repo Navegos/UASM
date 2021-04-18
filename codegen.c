@@ -66,7 +66,7 @@ enum prefix_reg
 };
 
 /* Find size for Compressed byte displacement  */
-uint_8 GetByteDisp(const struct code_info* CodeInfo)
+uint_8 uasm_ABI GetByteDisp(const struct code_info* CodeInfo)
 {
     const uint_8 fvarr[2][2][3] = { {{16, 32, 64}, {4, 4, 4}},    // Full Vector (FV)
                                   {{16, 32, 64}, {8, 8, 8}} };
@@ -128,7 +128,7 @@ uint_8 GetByteDisp(const struct code_info* CodeInfo)
 }
 
 /* Check if compressed displacement is available and stored it in comprdsp */
-bool Check4CompDisp8(const struct code_info* CodeInfo, int_8* comprdsp, int* d, int disp)
+bool uasm_ABI Check4CompDisp8(const struct code_info* CodeInfo, int_8* comprdsp, int* d, int disp)
 {
     int_32 disp32 = disp;
     uint_8 n;
@@ -155,7 +155,7 @@ bool Check4CompDisp8(const struct code_info* CodeInfo, int_8* comprdsp, int* d, 
 static const char sr_prefix[] =
 { PREFIX_ES, PREFIX_CS, PREFIX_SS, PREFIX_DS, PREFIX_FS, PREFIX_GS };
 
-static void output_opc(struct code_info* CodeInfo)
+static void uasm_ABI output_opc(struct code_info* CodeInfo)
 /**************************************************/
 /*
  * - determine what code should be output and their order.
@@ -1202,7 +1202,7 @@ static void output_opc(struct code_info* CodeInfo)
             }
             if ((CodeInfo->token >= T_KADDB) && (CodeInfo->token <= T_KUNPCKDQ))
             {       //here pay atention
-/* third byte W vvvv Lpp   */
+                /* third byte W vvvv Lpp   */
                 c = CodeInfo->reg2;
                 lbyte &= 0xc0;
                 c = (c << 3);
@@ -2985,7 +2985,7 @@ static void output_opc(struct code_info* CodeInfo)
     return;
 }
 
-static void output_data(const struct code_info* CodeInfo, enum operand_type determinant, int index)
+static void uasm_ABI output_data(const struct code_info* CodeInfo, enum operand_type determinant, int index)
 /***************************************************************************************************/
 /*
  * output address displacement and immediate data;
@@ -3203,7 +3203,7 @@ static void output_data(const struct code_info* CodeInfo, enum operand_type dete
     return;
 }
 
-static ret_code check_3rd_operand(struct code_info* CodeInfo)
+static ret_code uasm_ABI check_3rd_operand(struct code_info* CodeInfo)
 /*************************************************************/
 {
     if ((opnd_clstab[CodeInfo->pinstr->opclsidx].opnd_type_3rd == OP3_NONE) ||
@@ -3252,7 +3252,7 @@ static ret_code check_3rd_operand(struct code_info* CodeInfo)
     return(ERROR);
 }
 
-static void output_3rd_operand(struct code_info* CodeInfo)
+static void uasm_ABI output_3rd_operand(struct code_info* CodeInfo)
 /**********************************************************/
 {
     if (opnd_clstab[CodeInfo->pinstr->opclsidx].opnd_type_3rd == OP3_I8_U)
@@ -3396,7 +3396,7 @@ static void output_3rd_operand(struct code_info* CodeInfo)
     return;
 }
 
-static ret_code match_phase_3(struct code_info* CodeInfo, enum operand_type opnd1)
+static ret_code uasm_ABI match_phase_3(struct code_info* CodeInfo, enum operand_type opnd1)
 /***********************************************************************************
  * - this routine will look up the assembler opcode table and try to match
  *   the second operand with what we get;
@@ -3637,7 +3637,7 @@ static ret_code match_phase_3(struct code_info* CodeInfo, enum operand_type opnd
     return(ERROR);
 }
 
-static ret_code check_operand_2(struct code_info* CodeInfo, enum operand_type opnd1)
+static ret_code uasm_ABI check_operand_2(struct code_info* CodeInfo, enum operand_type opnd1)
 /*************************************************************************************
  * check if a second operand has been entered.
  * If yes, call match_phase_3();
@@ -3710,7 +3710,7 @@ static ret_code check_operand_2(struct code_info* CodeInfo, enum operand_type op
     return(ERROR);
 }
 
-ret_code codegen(struct code_info* CodeInfo, uint_32 oldofs)
+ret_code uasm_ABI codegen(struct code_info* CodeInfo, uint_32 oldofs)
 /*************************************************************
  * - codegen() will look up the assembler opcode table and try to find
  *   a matching first operand;

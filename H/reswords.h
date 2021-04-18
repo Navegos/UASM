@@ -62,20 +62,20 @@ struct ReservedWord {
 #endif
 };
 
-extern unsigned FindResWord(const char*, unsigned char);
-extern char* GetResWName(unsigned, char*);
-extern bool     IsKeywordDisabled(const char*, int);
-extern void     DisableKeyword(unsigned);
+extern unsigned uasm_ABI    FindResWord(const char*, unsigned char);
+extern char* uasm_ABI       GetResWName(unsigned, char*);
+extern bool uasm_ABI        IsKeywordDisabled(const char*, int);
+extern void uasm_ABI        DisableKeyword(unsigned);
 #if RENAMEKEY
-extern void     RenameKeyword(unsigned, const char*, uint_8);
+extern void uasm_ABI        RenameKeyword(unsigned, const char*, uint_8);
 #endif
 #if AMD64_SUPPORT
-extern void     Set64Bit(bool);
+extern void uasm_ABI        Set64Bit(bool);
 #endif
-extern void     ResWordsInit(void);
-extern void     ResWordsFini(void);
+extern void uasm_ABI        ResWordsInit(void);
+extern void uasm_ABI        ResWordsFini(void);
 #ifdef DEBUG_OUT
-extern void     DumpResWords(void);
+extern void uasm_ABI        DumpResWords(void);
 #endif
 
 uasm_PACK_POP

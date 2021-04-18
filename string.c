@@ -82,7 +82,7 @@ uasm_PACK_PUSH_STACK
  */
  //static const char * parmnames[] = {"p1","p2","p3"};
   //nWideCount=UTF8toWideChar((const unsigned char *)lpMultiByteStr, cbMultiByte, NULL, lpWideCharStr, cchWideChar);
-UINT_PTR UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax);
+UINT_PTR uasm_ABI UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax);
 /********************************************************************
  *
  *  UTF8toWideChar
@@ -98,7 +98,7 @@ UINT_PTR UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_
  *Returns: number of characters copied to szTarget buffer.
  ********************************************************************/
 
-UINT_PTR UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax)
+UINT_PTR uasm_ABI UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax)
 {
     static const unsigned int   lpOffsetsFromUTF8[6] = { 0x00000000, 0x00003080, 0x000E2080, 0x03C82080, 0xFA082080, 0x82082080 };
     unsigned char*              pSrc = pSource;
@@ -209,7 +209,7 @@ UINT_PTR UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_
     return (pDst - szTarget);
 }
 
-int TextItemError(struct asm_tok* item)
+int uasm_ABI TextItemError(struct asm_tok* item)
 /***************************************/
 {
     if (item->token == T_STRING && *item->string_ptr == '<')
@@ -234,7 +234,7 @@ int TextItemError(struct asm_tok* item)
  * TEXTEQU is an alias for CATSTR
  */
 
-ret_code CatStrDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI CatStrDir(int i, struct asm_tok tokenarray[])
 /******************************************************/
 {
     struct asym*        sym;
@@ -350,7 +350,7 @@ ret_code CatStrDir(int i, struct asm_tok tokenarray[])
  * - name:  identifer ( if sym == NULL )
  * - value: value of text macro ( original line, BEFORE expansion )
  */
-struct asym* SetTextMacro(struct asm_tok tokenarray[], struct asym* sym, const char* name, const char* value)
+struct asym* uasm_ABI SetTextMacro(struct asm_tok tokenarray[], struct asym* sym, const char* name, const char* value)
     /*************************************************************************************************************/
 {
     int count;
@@ -432,7 +432,7 @@ struct asym* SetTextMacro(struct asm_tok tokenarray[], struct asym* sym, const c
  * - symbols.c, SymInit()
  * this should be changed eventually.
  */
-struct asym* AddPredefinedText(const char* name, const char* value)
+struct asym* uasm_ABI AddPredefinedText(const char* name, const char* value)
     /*******************************************************************/
 {
     struct asym* sym;
@@ -454,7 +454,7 @@ struct asym* AddPredefinedText(const char* name, const char* value)
  * defines a text equate.
  * syntax: name SUBSTR <string>, pos [, size]
  */
-ret_code SubStrDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI SubStrDir(int i, struct asm_tok tokenarray[])
 /******************************************************/
 {
     struct asym*        sym;
@@ -657,7 +657,7 @@ ret_code SubStrDir(int i, struct asm_tok tokenarray[])
 /* SizeStr()
  * defines a numeric variable which contains size of a string
  */
-ret_code SizeStrDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI SizeStrDir(int i, struct asm_tok tokenarray[])
 /*******************************************************/
 {
     struct asym* sym;
@@ -703,7 +703,7 @@ ret_code SizeStrDir(int i, struct asm_tok tokenarray[])
  * syntax:
  * name INSTR [pos,]string, substr
  */
-ret_code InStrDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI InStrDir(int i, struct asm_tok tokenarray[])
 /*****************************************************/
 {
     struct asym*    sym;
@@ -821,7 +821,7 @@ ret_code InStrDir(int i, struct asm_tok tokenarray[])
  * syntax: @CatStr( literal [, literal ...] )
  */
 
-static ret_code CatStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
+static ret_code uasm_ABI CatStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
 /************************************************************************************************/
 {
 #ifdef DEBUG_OUT
@@ -849,7 +849,7 @@ static ret_code CatStrFunc(struct macro_instance* mi, char* buffer, struct asm_t
  * and by @InStr() for argument 1 ( start )
  */
 
-static ret_code GetNumber(char* string, int* pi, struct asm_tok tokenarray[])
+static ret_code uasm_ABI GetNumber(char* string, int* pi, struct asm_tok tokenarray[])
 /*****************************************************************************/
 {
     struct expr     opndx;
@@ -876,7 +876,7 @@ static ret_code GetNumber(char* string, int* pi, struct asm_tok tokenarray[])
  * syntax: @InStr( [num], literal, literal )
  * the result is returned as string in current radix
  */
-static ret_code InStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
+static ret_code uasm_ABI InStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
 /***********************************************************************************************/
 {
     int         pos = 1;
@@ -929,7 +929,7 @@ static ret_code InStrFunc(struct macro_instance* mi, char* buffer, struct asm_to
  * syntax: @SizeStr( literal )
  * the result is returned as string in current radix
  */
-static ret_code SizeStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
+static ret_code uasm_ABI SizeStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
 /*************************************************************************************************/
 {
     DebugMsg1(("@SizeStr(%s)\n", mi->parm_array[0] ? mi->parm_array[0] : ""));
@@ -947,7 +947,7 @@ static ret_code SizeStrFunc(struct macro_instance* mi, char* buffer, struct asm_
  * syntax: @SubStr( literal, num [, num ] )
  */
 
-static ret_code SubStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
+static ret_code uasm_ABI SubStrFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
 /************************************************************************************************/
 {
     int         pos;
@@ -1013,7 +1013,7 @@ static ret_code SubStrFunc(struct macro_instance* mi, char* buffer, struct asm_t
 /* string macro initialization
  * this proc is called once per module
  */
-void StringInit(void)
+void uasm_ABI StringInit(void)
 /*********************/
 {
     int             i;
@@ -1095,7 +1095,7 @@ void StringInit(void)
     return;
 }
 #ifdef DEBUG_OUT
-void StringFini(void)
+void uasm_ABI StringFini(void)
 /*********************/
 {
     if (Options.quiet == FALSE)

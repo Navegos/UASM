@@ -41,7 +41,7 @@ struct TB_LD {
     unsigned short e;
 };
 
-struct TB_LD* strtotb(const char* bufptr, struct TB_LD* pld, char negative);
+struct TB_LD* uasm_ABI strtotb(const char* bufptr, struct TB_LD* pld, char negative);
 
 uasm_PACK_POP
 

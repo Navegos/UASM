@@ -9,8 +9,8 @@
 
 uasm_PACK_PUSH_STACK
 
-extern int      PreprocessLine(char*, struct asm_tok[]);
-extern ret_code WriteCodeLabel(char*, struct asm_tok[]);
+extern int uasm_ABI      PreprocessLine(char*, struct asm_tok[]);
+extern ret_code uasm_ABI WriteCodeLabel(char*, struct asm_tok[]);
 
 uasm_PACK_POP
 

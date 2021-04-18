@@ -59,8 +59,7 @@ struct typeinfo
     uint_8 init;   /* kind of token */
 };
 
-static const char* const ModelAttr[] = {
-    "NEARSTACK", "FARSTACK", "OS_OS2", "OS_DOS" };
+static char const* const ModelAttr[] = { "NEARSTACK", "FARSTACK", "OS_OS2", "OS_DOS" };
 
 static const struct typeinfo ModelAttrValue[] = {
     { STACK_NEAR,     INIT_STACK      },
@@ -86,7 +85,7 @@ const struct format_options elf64_fmtopt = { NULL, ELF64_DISALLOWED,  "ELF64" };
 
 /* find token in a string table */
 
-static int FindToken(const char* token, const char* const* table, int size)
+static int uasm_ABI FindToken(const char* token, const char* const* table, int size)
 /****************************************************************************/
 {
     int i;
@@ -100,7 +99,7 @@ static int FindToken(const char* token, const char* const* table, int size)
     return(-1);  /* Not found */
 }
 
-static struct asym* AddPredefinedConstant(const char* name, int value)
+static struct asym* uasm_ABI AddPredefinedConstant(const char* name, int value)
 /**********************************************************************/
 {
     struct asym* sym = CreateVariable(name, value);
@@ -111,7 +110,7 @@ static struct asym* AddPredefinedConstant(const char* name, int value)
 
 /* set default wordsize for segment definitions */
 
-static ret_code SetDefaultOfssize(int size)
+static ret_code uasm_ABI SetDefaultOfssize(int size)
 /*******************************************/
 {
     /* outside any segments? */
@@ -137,7 +136,7 @@ static ret_code SetDefaultOfssize(int size)
  * Win64 only:
  * - @ReservedStack (numeric)
  */
-void SetModel(void)
+void uasm_ABI SetModel(void)
 /**************************/
 {
     int         value;
@@ -258,7 +257,7 @@ void SetModel(void)
  * if model is FLAT, defines FLAT pseudo-group
  * set default segment names for code and data
  */
-ret_code ModelDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI ModelDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     enum model_type model;
@@ -392,7 +391,7 @@ ret_code ModelDirective(int i, struct asm_tok tokenarray[])
  * OTOH, .MMX/.XMM won't automatically enable .586/.686 ( Masm does! )
 */
 
-ret_code SetCPU(enum cpu_info newcpu)
+ret_code uasm_ABI SetCPU(enum cpu_info newcpu)
 /*************************************/
 {
     int temp;
@@ -491,8 +490,8 @@ ret_code SetCPU(enum cpu_info newcpu)
 #define OPTQUAL
 #endif
 
-extern ret_code OPTQUAL SetWin64(int*, struct asm_tok[]);
-extern ret_code OPTQUAL SetSYSV64(int*, struct asm_tok[]);
+extern ret_code OPTQUAL uasm_ABI SetWin64(int*, struct asm_tok[]);
+extern ret_code OPTQUAL uasm_ABI SetSYSV64(int*, struct asm_tok[]);
 
 /* handles
  .8086,
@@ -501,7 +500,7 @@ extern ret_code OPTQUAL SetSYSV64(int*, struct asm_tok[]);
  .[2|3]87,
  .NO87, .MMX, .K3D, .XMM directives.
 */
-ret_code CpuDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI CpuDirective(int i, struct asm_tok tokenarray[])
 /*********************************************************/
 {
     enum cpu_info newcpu;

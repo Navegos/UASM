@@ -45,6 +45,12 @@
 #endif
 #endif
 
+#ifdef UASMEM
+extern void uasm_ABI _uasm_CPUFeatures_Init(int infolevel);
+extern void uasm_ABI _uasm_CPUFeatures_Fin(void);
+extern int_bool uasm_ABI _uasm_CPUFeatures_is_Inited(void);
+#endif
+
 #ifdef TRMEM
 void tm_Init(void);
 void tm_Fini(void);
@@ -97,6 +103,11 @@ int main(int argc, char** argv)
     {
         printf("argv[%u]=>%s<\n", i, argv[i]);
     }
+#endif
+
+#ifdef UASMEM
+    if (!_uasm_CPUFeatures_is_Inited())
+        _uasm_CPUFeatures_Init(1);
 #endif
 
 #ifdef TRMEM
@@ -167,6 +178,11 @@ int main(int argc, char** argv)
 
 #ifdef TRMEM
     tm_Fini();
+#endif
+
+#ifdef UASMEM
+    if (_uasm_CPUFeatures_is_Inited())
+        _uasm_CPUFeatures_Fin();
 #endif
 
     DebugMsg(("main: exit, return code=%u\n", 1 - rc));

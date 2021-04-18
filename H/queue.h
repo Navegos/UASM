@@ -51,8 +51,8 @@ struct qdesc {
 };
 
 //extern void QInit( struct qdesc * );
-extern void QEnqueue(struct qdesc*, void*);
-extern void QAddItem(struct qdesc*, const void*);
+extern void uasm_ABI QEnqueue(struct qdesc*, void*);
+extern void uasm_ABI QAddItem(struct qdesc*, const void*);
 //extern void *QDequeue( struct qdesc * );
 //extern void QJoinQueue( struct qdesc *dest, struct qdesc *src );
 

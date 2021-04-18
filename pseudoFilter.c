@@ -19,7 +19,7 @@ uasm_PACK_PUSH_STACK
      * Released under GPLv3.
 
      */
-char* itoa(int value, char* result, int base)
+char* uasm_ABI itoa(int value, char* result, int base)
 {
     // check that the base if valid
     if (base < 2 || base > 36)
@@ -52,7 +52,7 @@ char* itoa(int value, char* result, int base)
 
 #endif
 
-int get_pseudoCMPXX(char* dst, char* p1, int index)
+int uasm_ABI get_pseudoCMPXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     int i;
@@ -120,7 +120,7 @@ int get_pseudoCMPXX(char* dst, char* p1, int index)
     return index;
 }
 
-int get_pseudoVCMPXX(char* dst, char* p1, int index)
+int uasm_ABI get_pseudoVCMPXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     int i;
@@ -289,7 +289,7 @@ int get_pseudoVCMPXX(char* dst, char* p1, int index)
     return index;
 }
 
-int get_pseudoPCLMULXX(char* dst, char* p1, int index)
+int uasm_ABI get_pseudoPCLMULXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     strcpy(dst, "pclmulqdq");
@@ -320,7 +320,7 @@ int get_pseudoPCLMULXX(char* dst, char* p1, int index)
     return index;
 }
 
-int get_pseudoVPCLMULXX(char* dst, char* p1, int index)
+int uasm_ABI get_pseudoVPCLMULXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     strcpy(dst, "vpclmulqdq");

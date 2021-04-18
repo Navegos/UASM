@@ -9,7 +9,7 @@
 
 uasm_PACK_PUSH_STACK
 
-void     macho_init(struct module_info*);
+void uasm_ABI     macho_init(struct module_info*);
 
 uasm_PACK_POP
 

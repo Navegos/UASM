@@ -51,7 +51,7 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void             print_source_nesting_structure(void);
+extern void uasm_ABI             print_source_nesting_structure(void);
 extern jmp_buf          jmpenv;
 
 //static bool             Errfile_Written;
@@ -80,7 +80,7 @@ static const char usage2[] = {
 FILE* fdbglog = NULL;
 #endif
 
-void DoDebugMsg(const char* format, ...)
+void uasm_ABI DoDebugMsg(const char* format, ...)
 /****************************************/
 {
     va_list args;
@@ -106,7 +106,8 @@ void DoDebugMsg(const char* format, ...)
 #endif
 #endif
 }
-void DoDebugMsg1(const char* format, ...)
+
+void uasm_ABI DoDebugMsg1(const char* format, ...)
 /****************************************/
 {
     va_list args;
@@ -147,7 +148,7 @@ void DoDebugMsg1(const char* format, ...)
 }
 #endif
 
-int write_logo(void)
+int uasm_ABI write_logo(void)
 /********************/
 {
 #ifdef _WIN32
@@ -179,7 +180,7 @@ int write_logo(void)
     return(0);
 }
 
-void PrintUsage(void)
+void uasm_ABI PrintUsage(void)
 /*********************/
 {
     const char* p;
@@ -229,7 +230,7 @@ void PrintUsage(void)
 #endif
 }
 
-static void PutMsg(FILE* fp, int severity, int msgnum, va_list args)
+static void uasm_ABI PutMsg(FILE* fp, int severity, int msgnum, va_list args)
 /********************************************************************/
 {
     int             i, j;
@@ -298,7 +299,7 @@ static void PutMsg(FILE* fp, int severity, int msgnum, va_list args)
     }
 }
 
-static void PrtMsg(int severity, int msgnum, va_list args1, va_list args2)
+static void uasm_ABI PrtMsg(int severity, int msgnum, va_list args1, va_list args2)
 /**************************************************************************/
 {
 #ifndef __SW_BD
@@ -334,7 +335,7 @@ static void PrtMsg(int severity, int msgnum, va_list args1, va_list args2)
 
 /* notes: "included by", "macro called from", ... */
 
-void PrintNote(int msgnum, ...)
+void uasm_ABI PrintNote(int msgnum, ...)
 /*******************************/
 {
     va_list args1, args2;
@@ -347,7 +348,7 @@ void PrintNote(int msgnum, ...)
     va_end(args2);
 }
 
-int EmitErr(int msgnum, ...)
+int uasm_ABI EmitErr(int msgnum, ...)
 /****************************/
 {
     va_list args1, args2;
@@ -368,13 +369,13 @@ int EmitErr(int msgnum, ...)
     return(ERROR);
 }
 
-int EmitError(int msgnum)
+int uasm_ABI EmitError(int msgnum)
 /*************************/
 {
     return(EmitErr(msgnum));
 }
 
-void EmitWarn(int level, int msgnum, ...)
+void uasm_ABI EmitWarn(int level, int msgnum, ...)
 /*****************************************/
 {
     va_list args1, args2;
@@ -402,7 +403,7 @@ void EmitWarn(int level, int msgnum, ...)
     }
 }
 
-char* ErrnoStr(void)
+char* uasm_ABI ErrnoStr(void)
 /********************/
 {
     static char buffer[32];
@@ -413,7 +414,7 @@ char* ErrnoStr(void)
  * don't use functions which need to alloc memory here!
  * v2.08: do not exit(), just a longjmp() into AssembleModule().
  */
-void Fatal(int msgnum, ...)
+void uasm_ABI Fatal(int msgnum, ...)
 /***************************/
 {
     va_list     args1, args2;
@@ -441,7 +442,7 @@ void Fatal(int msgnum, ...)
 }
 
 #if 0
-void SeekError(void)
+void uasm_ABI SeekError(void)
 /********************/
 {
     DebugMsg(("SeekError occured\n"));
@@ -449,7 +450,7 @@ void SeekError(void)
 };
 #endif
 
-void WriteError(void)
+void uasm_ABI WriteError(void)
 /*********************/
 {
     DebugMsg(("WriteError occured\n"));
@@ -458,7 +459,7 @@ void WriteError(void)
 
 #ifndef NDEBUG
 
-int InternalError(const char* file, unsigned line)
+int uasm_ABI InternalError(const char* file, unsigned line)
 /**************************************************/
 /* it's used by myassert() function in debug version */
 {

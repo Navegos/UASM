@@ -61,5 +61,4 @@ $(OUTD)/string.obj   \
 $(OUTD)/symbols.obj  \
 $(OUTD)/tbyte.obj    \
 $(OUTD)/tokenize.obj \
-$(OUTD)/trmem.obj    \
 $(OUTD)/types.obj

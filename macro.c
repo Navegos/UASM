@@ -64,11 +64,11 @@ struct mname_list
 };
 
 #ifdef __WATCOMC__
-static _inline char HexDigit(char x)
+static _inline char uasm_ABI HexDigit(char x)
 #elif defined(_MSC_VER)
-static _inline char HexDigit(char x)
+static _inline char uasm_ABI HexDigit(char x)
 #else
-static char HexDigit(char x)
+static char uasm_ABI HexDigit(char x)
 #endif
 {
     x &= 0xF;
@@ -79,7 +79,7 @@ static char HexDigit(char x)
  * parameters and locals. A placeholder consists of escape char 0x0a,
  * followed by a one-byte index field.
  */
-void fill_placeholders(char* dst, const char* src, unsigned argc, unsigned localstart, char* argv[])
+void uasm_ABI fill_placeholders(char* dst, const char* src, unsigned argc, unsigned localstart, char* argv[])
 /****************************************************************************************************/
 {
     uint_32     i;
@@ -130,7 +130,7 @@ void fill_placeholders(char* dst, const char* src, unsigned argc, unsigned local
     return;
 }
 
-static char* replace_parm(const char* line, char* start, int len, struct mname_list* mnames)
+static char* uasm_ABI replace_parm(const char* line, char* start, int len, struct mname_list* mnames)
 /*********************************************************************************************/
 {
     /* scan list of macro paras/locals if current word is found.
@@ -191,7 +191,7 @@ static char* replace_parm(const char* line, char* start, int len, struct mname_l
     return(NULL);
 }
 
-static int store_placeholders(char* line, struct mname_list* mnames)
+static int uasm_ABI store_placeholders(char* line, struct mname_list* mnames)
 /********************************************************************/
 {
     /* scan a macro source line for parameter and local names.
@@ -280,7 +280,7 @@ static int store_placeholders(char* line, struct mname_list* mnames)
 }
 
 #ifdef DEBUG_OUT
-char* RenderMacroLine(const char* src)
+char* uasm_ABI RenderMacroLine(const char* src)
 /**************************************/
 {
     /* a macro line cannot be displayed directly due to the format of
@@ -316,7 +316,7 @@ char* RenderMacroLine(const char* src)
  * i = start index of macro params in token buffer.
  */
 
-ret_code StoreMacro(struct dsym* macro, int i, struct asm_tok tokenarray[], bool store_data)
+ret_code uasm_ABI StoreMacro(struct dsym* macro, int i, struct asm_tok tokenarray[], bool store_data)
 /********************************************************************************************/
 {
     struct macro_info*  info;
@@ -688,7 +688,7 @@ ret_code StoreMacro(struct dsym* macro, int i, struct asm_tok tokenarray[], bool
 }
 
 /* Used to compile built-in macros */
-ret_code StoreAutoMacro(struct dsym* macro, int i, struct asm_tok tokenarray[], bool store_data, char* macCode[], int macLine, int macLen)
+ret_code uasm_ABI StoreAutoMacro(struct dsym* macro, int i, struct asm_tok tokenarray[], bool store_data, char* macCode[], int macLine, int macLen)
 /********************************************************************************************/
 {
     struct macro_info*  info;
@@ -1063,7 +1063,7 @@ ret_code StoreAutoMacro(struct dsym* macro, int i, struct asm_tok tokenarray[], 
 }
 
 /* create a macro symbol */
-struct dsym* CreateMacro(const char* name)
+struct dsym* uasm_ABI CreateMacro(const char* name)
     /******************************************/
 {
     struct dsym* macro;
@@ -1086,7 +1086,7 @@ struct dsym* CreateMacro(const char* name)
 }
 
 /* clear macro data */
-void ReleaseMacroData(struct dsym* macro)
+void uasm_ABI ReleaseMacroData(struct dsym* macro)
 /*****************************************/
 {
     int             i;
@@ -1135,7 +1135,7 @@ void ReleaseMacroData(struct dsym* macro)
 /* MACRO directive: define a macro
  * i: directive token ( is to be 1 )
  */
-ret_code MacroDir(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI MacroDir(int i, struct asm_tok tokenarray[])
 /*****************************************************/
 {
     char*               name;
@@ -1205,7 +1205,7 @@ ret_code MacroDir(int i, struct asm_tok tokenarray[])
  * and cannot be used for something else.
  * Text macros cannot be purged, because the PURGE arguments are expanded.
  */
-ret_code PurgeDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI PurgeDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     struct asym* sym;
@@ -1257,7 +1257,7 @@ ret_code PurgeDirective(int i, struct asm_tok tokenarray[])
 }
 
 /* Implemented UNDEF directive v2.38 */
-ret_code UndefDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI UndefDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     struct asym* sym;
@@ -1291,7 +1291,7 @@ ret_code UndefDirective(int i, struct asm_tok tokenarray[])
 }
 
 /* Implemented DEFINE directive v2.40 */
-ret_code DefineDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI DefineDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     struct asym*    sym;
@@ -1327,7 +1327,7 @@ ret_code DefineDirective(int i, struct asm_tok tokenarray[])
 
 /* internal @Environ macro function */
 /* v2.08: ensured no buffer overflow if environment variable is larger than MAX_LINE_LEN */
-static ret_code EnvironFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
+static ret_code uasm_ABI EnvironFunc(struct macro_instance* mi, char* buffer, struct asm_tok tokenarray[])
 /*************************************************************************************************/
 {
     char* p = getenv(mi->parm_array[0]);
@@ -1348,7 +1348,7 @@ static ret_code EnvironFunc(struct macro_instance* mi, char* buffer, struct asm_
 /* macro initialization
  * this proc is called once per pass
  */
-ret_code MacroInit(int pass)
+ret_code uasm_ABI MacroInit(int pass)
 /****************************/
 {
     struct dsym* macro;
@@ -1377,7 +1377,7 @@ ret_code MacroInit(int pass)
 }
 
 #ifdef DEBUG_OUT
-void MacroFini(void)
+void uasm_ABI MacroFini(void)
 /********************/
 {
     StringFini();

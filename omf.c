@@ -105,8 +105,8 @@ union DOS_DATETIME
     time_t timet;
 };
 
-extern void cv_write_debug_tables(struct dsym*, struct dsym*, void*);
-extern void SortSegments(int);
+extern void uasm_ABI cv_write_debug_tables(struct dsym*, struct dsym*, void*);
+extern void uasm_ABI SortSegments(int);
 
 extern struct qdesc LinnumQueue;    /* queue of line_num_info items */
 extern const char szNull[];
@@ -152,7 +152,7 @@ static const struct dbg_section SymDebParm[DBGS_MAX] = {
 
 static struct dsym* SymDebSeg[DBGS_MAX];
 
-static void omf_InitRec(struct omf_rec* obj, uint_8 command)
+static void uasm_ABI omf_InitRec(struct omf_rec* obj, uint_8 command)
 /************************************************************/
 {
     obj->length = 0;
@@ -164,7 +164,7 @@ static void omf_InitRec(struct omf_rec* obj, uint_8 command)
     return;
 }
 
-static time_t timet2dostime(time_t x)
+static time_t uasm_ABI timet2dostime(time_t x)
 /*************************************/
 {
     struct tm* ltime;
@@ -180,14 +180,14 @@ static time_t timet2dostime(time_t x)
     return(dt.timet);
 }
 
-static void Put8(struct omf_rec* objr, uint_8 value)
+static void uasm_ABI Put8(struct omf_rec* objr, uint_8 value)
 /****************************************************/
 {
     /**/myassert(objr != NULL && objr->data != NULL);
     objr->data[objr->curoff++] = value;
 }
 
-static void Put16(struct omf_rec* objr, uint_16 value)
+static void uasm_ABI Put16(struct omf_rec* objr, uint_16 value)
 /******************************************************/
 {
     /**/myassert(objr != NULL && objr->data != NULL);
@@ -196,7 +196,7 @@ static void Put16(struct omf_rec* objr, uint_16 value)
     objr->curoff += sizeof(uint_16);
 }
 
-static void Put32(struct omf_rec* objr, uint_32 value)
+static void uasm_ABI Put32(struct omf_rec* objr, uint_32 value)
 /******************************************************/
 {
     /**/myassert(objr != NULL && objr->data != NULL);
@@ -206,7 +206,7 @@ static void Put32(struct omf_rec* objr, uint_32 value)
 }
 
 #if 0
-static void PutEither(struct omf_rec* objr, uint_32 data)
+static void uasm_ABI PutEither(struct omf_rec* objr, uint_32 data)
 /*********************************************************/
 {
     /**/myassert(objr != NULL && objr->data != NULL);
@@ -229,7 +229,7 @@ static void PutEither(struct omf_rec* objr, uint_32 data)
  * order byte first ( with bit 7=1 ).
  */
 
-static void PutIndex(struct omf_rec* objr, unsigned idx)
+static void uasm_ABI PutIndex(struct omf_rec* objr, unsigned idx)
 /********************************************************/
 {
     /**/myassert(objr != NULL && objr->data != NULL && idx <= 0x7FFF);
@@ -240,7 +240,7 @@ static void PutIndex(struct omf_rec* objr, unsigned idx)
     objr->data[objr->curoff++] = idx & 0xff;
 }
 
-static void PutData(struct omf_rec* objr, const uint_8* data, size_t len)
+static void uasm_ABI PutData(struct omf_rec* objr, const uint_8* data, size_t len)
 /*************************************************************************/
 {
     /**/myassert(objr != NULL && objr->data != NULL);
@@ -248,7 +248,7 @@ static void PutData(struct omf_rec* objr, const uint_8* data, size_t len)
     objr->curoff += len;
 }
 
-static void PutName(struct omf_rec* objr, const char* name, size_t len)
+static void uasm_ABI PutName(struct omf_rec* objr, const char* name, size_t len)
 /***********************************************************************/
 {
     /**/myassert(objr != NULL && objr->data != NULL);
@@ -263,7 +263,7 @@ static void PutName(struct omf_rec* objr, const char* name, size_t len)
     PutData(objr, (uint_8*)name, len);
 }
 
-static void AttachData(struct omf_rec* objr, uint_8* data, size_t len)
+static void uasm_ABI AttachData(struct omf_rec* objr, uint_8* data, size_t len)
 /**********************************************************************/
 {
     /**/myassert(objr->data == NULL);
@@ -272,7 +272,7 @@ static void AttachData(struct omf_rec* objr, uint_8* data, size_t len)
 }
 
 #if 0
-static void AllocData(struct omf_rec* objr, size_t len)
+static void uasm_ABI AllocData(struct omf_rec* objr, size_t len)
 /*******************************************************/
 {
     /**/myassert(objr->data == NULL);
@@ -283,7 +283,7 @@ static void AllocData(struct omf_rec* objr, size_t len)
 
 /* return a group's index */
 
-unsigned omf_GetGrpIdx(struct asym* sym)
+unsigned uasm_ABI omf_GetGrpIdx(struct asym* sym)
 /****************************************/
 {
     return(sym ? ((struct dsym*)sym)->e.grpinfo->grp_idx : 0);
@@ -293,7 +293,7 @@ unsigned omf_GetGrpIdx(struct asym* sym)
  * write OMF comment records about data in code.
  */
 
-void omf_OutSelect(bool is_data)
+void uasm_ABI omf_OutSelect(bool is_data)
 /********************************/
 {
     struct omf_rec      obj;
@@ -362,7 +362,7 @@ void omf_OutSelect(bool is_data)
  * v2.11: create 16- or 32-bit data variant here!
  */
 
-static void omf_write_linnum(uint_8 is32)
+static void uasm_ABI omf_write_linnum(uint_8 is32)
 /*****************************************/
 {
     unsigned                ofssize = (is32 ? sizeof(uint_32) : sizeof(uint_16));
@@ -397,7 +397,7 @@ static void omf_write_linnum(uint_8 is32)
     return;
 }
 
-static void omf_write_fixupp(struct dsym* seg, char is32)
+static void uasm_ABI omf_write_fixupp(struct dsym* seg, char is32)
 /*********************************************************/
 {
     uint_8*             data;
@@ -437,11 +437,11 @@ static void omf_write_fixupp(struct dsym* seg, char is32)
     }
 }
 
-static uint_8 get_omfalign(uint_8 alignment);
+static uint_8 uasm_ABI get_omfalign(uint_8 alignment);
 
 /* write an LEDATA record, optionally write fixups */
 
-static void omf_write_ledata(struct dsym* seg)
+static void uasm_ABI omf_write_ledata(struct dsym* seg)
 /**********************************************/
 {
     struct omf_rec  obj;
@@ -533,7 +533,7 @@ static void omf_write_ledata(struct dsym* seg)
  * write_to_file is always TRUE here
  */
 
-void omf_FlushCurrSeg(void)
+void uasm_ABI omf_FlushCurrSeg(void)
 /***************************/
 {
     //unsigned i;
@@ -556,7 +556,7 @@ void omf_FlushCurrSeg(void)
 
 /* Write a THEADR record.
  */
-static void omf_write_theadr(const char* name)
+static void uasm_ABI omf_write_theadr(const char* name)
 /**********************************************/
 {
     struct omf_rec obj;
@@ -593,7 +593,7 @@ static void omf_write_theadr(const char* name)
  * info is about to be written.
  */
 
-void omf_check_flush(const struct line_num_info* curr)
+void uasm_ABI omf_check_flush(const struct line_num_info* curr)
 /******************************************************/
 {
     uint_8 is_32;
@@ -640,7 +640,7 @@ void omf_check_flush(const struct line_num_info* curr)
 
 /* write end of pass 1 record. */
 
-static void omf_end_of_pass1(void)
+static void uasm_ABI omf_end_of_pass1(void)
 /**********************************/
 {
     struct omf_rec obj;
@@ -656,7 +656,7 @@ static void omf_end_of_pass1(void)
  * the OMF "path 2" records (LEDATA, FIXUP, LINNUM ) are written in all passes.
  */
 
-void omf_set_filepos(void)
+void uasm_ABI omf_set_filepos(void)
 /**************************/
 {
     DebugMsg1(("omf_set_filepos: reset file pos to %X\n", end_of_header));
@@ -665,7 +665,7 @@ void omf_set_filepos(void)
     fseek(CurrFile[OBJ], end_of_header, SEEK_SET);
 }
 
-static void omf_write_dosseg(void)
+static void uasm_ABI omf_write_dosseg(void)
 /**********************************/
 {
     struct omf_rec obj;
@@ -677,7 +677,7 @@ static void omf_write_dosseg(void)
     omf_write_record(&obj);
 }
 
-static void omf_write_lib(void)
+static void uasm_ABI omf_write_lib(void)
 /*******************************/
 {
     struct omf_rec      obj;
@@ -701,7 +701,7 @@ static void omf_write_lib(void)
 
 #if DLLIMPORT && WRITEIMPDEF /* writing import records in OMF not supported yet */
 
-void omf_write_import(void)
+void uasm_ABI omf_write_import(void)
 /***************************/
 {
     struct dsym*    imp;
@@ -755,7 +755,7 @@ void omf_write_import(void)
 }
 #endif
 
-static void omf_write_export(void)
+static void uasm_ABI omf_write_export(void)
 /**********************************/
 {
     uint_8          parmcnt;
@@ -823,7 +823,7 @@ static void omf_write_export(void)
 /* write OMF GRPDEF records
  */
 
-static void omf_write_grpdef(void)
+static void uasm_ABI omf_write_grpdef(void)
 /**********************************/
 {
     struct dsym*        curr;
@@ -870,7 +870,7 @@ static void omf_write_grpdef(void)
     DebugMsg1(("omf_write_grpdef exit\n"));
 }
 
-static uint_8 get_omfalign(uint_8 alignment)
+static uint_8 uasm_ABI get_omfalign(uint_8 alignment)
 /********************************************/
 {
     switch (alignment)
@@ -898,7 +898,7 @@ static uint_8 get_omfalign(uint_8 alignment)
  * the segment list!
  */
 
-static void omf_write_segdef(void)
+static void uasm_ABI omf_write_segdef(void)
 /**********************************/
 {
     struct dsym*    curr;
@@ -970,7 +970,7 @@ static void omf_write_segdef(void)
  * the record size doesn't exceed 1024 bytes.
  */
 
-static void omf_write_lnames(void)
+static void uasm_ABI omf_write_lnames(void)
 /**********************************/
 {
     int          size;
@@ -1049,7 +1049,7 @@ struct readext
  * v2.09: index (ext_idx1, ext_idx2 ) is now set inside this function.
  */
 
-static struct asym* GetExt(struct readext* r)
+static struct asym* uasm_ABI GetExt(struct readext* r)
 /*********************************************/
 {
     struct asym* sym;
@@ -1091,7 +1091,7 @@ static struct asym* GetExt(struct readext* r)
  * v2.09: external index is now set here.
  */
 
-static uint_16 omf_write_extdef(void)
+static uint_16 uasm_ABI omf_write_extdef(void)
 /*************************************/
 {
     struct omf_rec  obj;
@@ -1192,7 +1192,7 @@ static uint_16 omf_write_extdef(void)
 
 #define THREE_BYTE_MAX ( (1UL << 24) - 1 )
 
-static int get_size_of_comdef_number(uint_32 value)
+static int uasm_ABI get_size_of_comdef_number(uint_32 value)
 /***************************************************/
 {
     /* The spec allows up to 128 in a one byte size field, but lots
@@ -1219,7 +1219,7 @@ static int get_size_of_comdef_number(uint_32 value)
 
 /* for COMDEF: write item size (or number of items) */
 
-static unsigned put_comdef_number(uint_8* buffer, uint_32 value)
+static unsigned uasm_ABI put_comdef_number(uint_8* buffer, uint_32 value)
 /****************************************************************/
 {
     unsigned i;
@@ -1251,7 +1251,7 @@ static unsigned put_comdef_number(uint_8* buffer, uint_32 value)
  * the size then!
  */
 
-static uint_16 omf_write_comdef(uint_16 index)
+static uint_16 uasm_ABI omf_write_comdef(uint_16 index)
 /**********************************************/
 {
     struct omf_rec  obj;
@@ -1340,7 +1340,7 @@ static uint_16 omf_write_comdef(uint_16 index)
     return(index);
 }
 
-static time_t GetFileTimeStamp(const char* filename)
+static time_t uasm_ABI GetFileTimeStamp(const char* filename)
 /****************************************************/
 {
     struct _stat statbuf;
@@ -1357,7 +1357,7 @@ static time_t GetFileTimeStamp(const char* filename)
  * write COMENT dependency records (CMT_DEPENDENCY) for debugging
  * if line numbers are on; this is a Borland/OW thing.
  */
-static ret_code omf_write_autodep(void)
+static ret_code uasm_ABI omf_write_autodep(void)
 /***************************************/
 {
     struct omf_rec      obj;
@@ -1397,7 +1397,7 @@ static ret_code omf_write_autodep(void)
     return(NOT_ERROR);
 }
 
-static void omf_write_alias(void)
+static void uasm_ABI omf_write_alias(void)
 /*********************************/
 {
     struct omf_rec      obj;
@@ -1448,7 +1448,7 @@ static void omf_write_alias(void)
  *   - offset ( 2/4 bytes )
  *   - type ( index field, here always 0 )
  */
-static ret_code omf_write_pubdef(void)
+static ret_code uasm_ABI omf_write_pubdef(void)
 /**************************************/
 {
     struct qnode* q;
@@ -1572,7 +1572,7 @@ static ret_code omf_write_pubdef(void)
     return(NOT_ERROR);
 }
 
-static void omf_write_modend(struct fixup* fixup, uint_32 displ)
+static void uasm_ABI omf_write_modend(struct fixup* fixup, uint_32 displ)
 /****************************************************************/
 {
     struct omf_rec  obj;
@@ -1600,7 +1600,7 @@ static void omf_write_modend(struct fixup* fixup, uint_32 displ)
 
 /* this callback function is called during codeview debug info generation */
 
-static uint_8* omf_cv_flushfunc(struct dsym* seg, uint_8* curr, unsigned size, void* pv)
+static uint_8* uasm_ABI omf_cv_flushfunc(struct dsym* seg, uint_8* curr, unsigned size, void* pv)
 /****************************************************************************************/
 {
     uint_8* buffer = seg->e.seginfo->CodeBuffer;
@@ -1620,7 +1620,7 @@ static uint_8* omf_cv_flushfunc(struct dsym* seg, uint_8* curr, unsigned size, v
  *
  * Additionally, segments $$SYMBOLS, $$TYPES are added to the segment table
  */
-static void omf_write_header_dbgcv(void)
+static void uasm_ABI omf_write_header_dbgcv(void)
 /****************************************/
 {
     int i;
@@ -1644,7 +1644,7 @@ static void omf_write_header_dbgcv(void)
 
 /* write contents of segments $$SYMBOLS and $$TYPES */
 
-static void omf_write_debug_tables(void)
+static void uasm_ABI omf_write_debug_tables(void)
 /****************************************/
 {
     if (SymDebSeg[DBGS_SYMBOLS] && SymDebSeg[DBGS_TYPES])
@@ -1661,7 +1661,7 @@ static void omf_write_debug_tables(void)
  * the "normal" section contents are already written at this time.
  */
 
-static ret_code omf_write_module(struct module_info* modinfo)
+static ret_code uasm_ABI omf_write_module(struct module_info* modinfo)
 /*************************************************************/
 {
 #if TRUNCATE
@@ -1716,7 +1716,7 @@ static ret_code omf_write_module(struct module_info* modinfo)
 
 /* write OMF header info after pass 1 */
 
-static ret_code omf_write_header_initial(struct module_info* modinfo)
+static ret_code uasm_ABI omf_write_header_initial(struct module_info* modinfo)
 /*********************************************************************/
 {
     uint_16 ext_idx;
@@ -1770,7 +1770,7 @@ static ret_code omf_write_header_initial(struct module_info* modinfo)
 
 /* init. called once per module */
 
-void omf_init(struct module_info* modinfo)
+void uasm_ABI omf_init(struct module_info* modinfo)
 /******************************************/
 {
     DebugMsg(("omf_init enter\n"));

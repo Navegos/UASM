@@ -139,7 +139,7 @@ enum vex_info {
 };
 
 #endif
-extern ret_code         codegen(struct code_info*, uint_32);
+extern ret_code uasm_ABI         codegen(struct code_info*, uint_32);
 
 uasm_PACK_POP
 

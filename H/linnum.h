@@ -26,9 +26,9 @@ struct line_num_info {
     };
 };
 
-void LinnumInit(void);
-void LinnumFini(void);
-void QueueDeleteLinnum(struct qdesc*);
+void uasm_ABI LinnumInit(void);
+void uasm_ABI LinnumFini(void);
+void uasm_ABI QueueDeleteLinnum(struct qdesc*);
 
 uasm_PACK_POP
 

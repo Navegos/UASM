@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="18.0" version="18.0" Modules="simple" RootPath="." Language="en" Id="{05DC99F0-48C8-4A21-B901-4DD52C4B109E}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="18.0" version="18.1.1" Modules="simple" RootPath="." Language="en" Id="{05DC99F0-48C8-4A21-B901-4DD52C4B109E}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_CURRENT_YEAR" Value="2021" ValueLocId="-"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPHELPLINK" Value="http://www.terraspace.co.uk/uasm.html"/>

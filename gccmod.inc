@@ -62,5 +62,4 @@ $(OUTD)/string.o   \
 $(OUTD)/symbols.o  \
 $(OUTD)/tbyte.o    \
 $(OUTD)/tokenize.o \
-$(OUTD)/trmem.o    \
 $(OUTD)/types.o

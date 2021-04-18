@@ -35,7 +35,7 @@ extern int            procidx;
 static struct asym* dmyproc;
 static uint_32        lastLineNumber;
 
-static void AddLinnumData(struct line_num_info* data)
+static void uasm_ABI AddLinnumData(struct line_num_info* data)
 /*****************************************************/
 {
     struct qdesc* q = NULL;
@@ -71,7 +71,7 @@ static void AddLinnumData(struct line_num_info* data)
  * - proc.ProcDir() - in COFF, line_num is 0 then
  */
 
-void AddLinnumDataRef(unsigned srcfile, uint_32 line_num)
+void uasm_ABI AddLinnumDataRef(unsigned srcfile, uint_32 line_num)
 /*********************************************************/
 {
     struct line_num_info* curr;
@@ -201,7 +201,7 @@ void AddLinnumDataRef(unsigned srcfile, uint_32 line_num)
     return;
 }
 
-void QueueDeleteLinnum(struct qdesc* queue)
+void uasm_ABI QueueDeleteLinnum(struct qdesc* queue)
 /*******************************************/
 {
     struct line_num_info* curr;
@@ -224,7 +224,7 @@ void QueueDeleteLinnum(struct qdesc* queue)
 /* if -Zd is set and there is trailing code not inside
  * a function, set the dummy function's length now.
  */
-void LinnumFini(void)
+void uasm_ABI LinnumFini(void)
 /*********************/
 {
     if (dmyproc)
@@ -235,7 +235,7 @@ void LinnumFini(void)
     }
 }
 
-void LinnumInit(void)
+void uasm_ABI LinnumInit(void)
 /*********************/
 {
     lastLineNumber = 0;

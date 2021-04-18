@@ -133,7 +133,7 @@ char* token_stringbuf;  /* start token string buffer */
 #endif
 
 #if 0 /* v2.11: obsolete, field fullname removed */
-static char* GetFullPath(const char* name, char* buff, size_t max)
+static char* uasm_ABI GetFullPath(const char* name, char* buff, size_t max)
 /******************************************************************/
 {
     char* p;
@@ -160,10 +160,10 @@ static char* GetFullPath(const char* name, char* buff, size_t max)
 
 /* v2.12: function added - _splitpath()/_makepath() removed */
 
-const char* GetFNamePart(const char* fname)
+char const* const uasm_ABI GetFNamePart(const char* fname)
 /*******************************************/
 {
-    const char* rc;
+    char* rc;
     for (rc = fname; *fname; fname++)
         if (ISPC(*fname))
             rc = fname + 1;
@@ -172,7 +172,7 @@ const char* GetFNamePart(const char* fname)
 
 /* fixme: if the dot is at pos 0 of filename, ignore it */
 
-char* GetExtPart(const char* fname)
+char const* const uasm_ABI GetExtPart(const char* fname)
 /***********************************/
 {
     char* rc;
@@ -180,14 +180,14 @@ char* GetExtPart(const char* fname)
     {
         if (*fname == '.')
         {
-            rc = (char*)fname;
+            rc = fname;
         }
         else if (ISPC(*fname))
         {
             rc = NULL;
         }
     }
-    return(rc ? rc : (char*)fname);
+    return(rc ? rc :fname);
 }
 
 /* check if a file is in the array of known files.
@@ -197,7 +197,7 @@ char* GetExtPart(const char* fname)
  * the array is stored in the standard C heap!
  * the filenames are stored in the "local" heap.
  */
-static unsigned AddFile(char const* fname)
+static unsigned uasm_ABI AddFile(char const* fname)
 /******************************************/
 {
     unsigned    index;
@@ -227,7 +227,7 @@ static unsigned AddFile(char const* fname)
     return(index);
 }
 
-const struct fname_item* GetFName(unsigned index)
+struct fname_item const* const uasm_ABI GetFName(unsigned index)
 /*************************************************/
 {
     return(ModuleInfo.g.FNames + index);
@@ -237,7 +237,7 @@ const struct fname_item* GetFName(unsigned index)
  * this is done once for each module after the last pass.
  */
 
-static void FreeFiles(void)
+static void uasm_ABI FreeFiles(void)
 /***************************/
 {
 #if FASTMEM==0
@@ -283,7 +283,7 @@ static void FreeFiles(void)
  * simulated if a "too many errors" condition occurs.
  */
 
-void ClearSrcStack(void)
+void uasm_ABI ClearSrcStack(void)
 /************************/
 {
     struct src_item* nextfile;
@@ -307,7 +307,7 @@ void ClearSrcStack(void)
 
 /* get/set value of predefined symbol @Line */
 
-void UpdateLineNumber(struct asym* sym, void* p)
+void uasm_ABI UpdateLineNumber(struct asym* sym, void* p)
 /************************************************/
 {
     struct src_item* curr;
@@ -320,7 +320,7 @@ void UpdateLineNumber(struct asym* sym, void* p)
     return;
 }
 
-uint_32 GetLineNumber(void)
+uint_32 uasm_ABI GetLineNumber(void)
 /***************************/
 {
     UpdateLineNumber(LineCur, NULL);
@@ -329,9 +329,9 @@ uint_32 GetLineNumber(void)
 
 #ifdef DEBUG_OUT
 
-extern unsigned GetLqLine(void);
+extern unsigned uasm_ABI GetLqLine(void);
 
-char* GetTopLine(char* buffer)
+char* uasm_ABI GetTopLine(char* buffer)
 /******************************/
 {
     *buffer = NULLC;
@@ -342,7 +342,7 @@ char* GetTopLine(char* buffer)
     return(buffer);
 }
 
-char* GetTopSrcName(void)
+char* uasm_ABI GetTopSrcName(void)
 /*************************/
 {
     if (src_stack->type == SIT_MACRO)
@@ -357,7 +357,7 @@ char* GetTopSrcName(void)
  * v2.08: 00 in the stream no longer causes an exit. Hence if the
  * char occurs in the comment part, everything is ok.
  */
-static char* my_fgets(char* buffer, int max, FILE* fp)
+static char* uasm_ABI my_fgets(char* buffer, int max, FILE* fp)
 /******************************************************/
 {
     char* ptr = buffer;
@@ -401,7 +401,7 @@ static char* my_fgets(char* buffer, int max, FILE* fp)
 }
 
 #if FILESEQ
-void AddFileSeq(unsigned file)
+void uasm_ABI AddFileSeq(unsigned file)
 /******************************/
 {
     struct file_seq* node;
@@ -421,7 +421,7 @@ void AddFileSeq(unsigned file)
 /* push a new item onto the source stack.
  * type: SIT_FILE or SIT_MACRO
  */
-struct src_item* PushSrcItem(char type, void* pv)
+struct src_item* uasm_ABI PushSrcItem(char type, void* pv)
     /********************************************************/
 {
     struct src_item* curr;
@@ -443,7 +443,7 @@ struct src_item* PushSrcItem(char type, void* pv)
 
 /* push a macro onto the source stack. */
 
-void PushMacro(struct macro_instance* mi)
+void uasm_ABI PushMacro(struct macro_instance* mi)
 /*****************************************/
 {
     DebugMsg1(("PushMacro(%s)\n", mi->macro->name));
@@ -452,7 +452,7 @@ void PushMacro(struct macro_instance* mi)
 }
 
 #if FASTMEM==0
-bool MacroInUse(struct dsym* macro)
+bool uasm_ABI MacroInUse(struct dsym* macro)
 /***********************************/
 {
     struct src_item* curr;
@@ -465,7 +465,7 @@ bool MacroInUse(struct dsym* macro)
 }
 #endif
 
-unsigned get_curr_srcfile(void)
+unsigned uasm_ABI get_curr_srcfile(void)
 /*******************************/
 {
     struct src_item* curr;
@@ -476,7 +476,7 @@ unsigned get_curr_srcfile(void)
 }
 
 #if FASTPASS
-void set_curr_srcfile(unsigned file, uint_32 line_num)
+void uasm_ABI set_curr_srcfile(unsigned file, uint_32 line_num)
 /******************************************************/
 {
     if (file != 0xFFF) /* 0xFFF is the special value for macro lines */
@@ -486,7 +486,7 @@ void set_curr_srcfile(unsigned file, uint_32 line_num)
 }
 #endif
 
-void SetLineNumber(unsigned line)
+void uasm_ABI SetLineNumber(unsigned line)
 /*********************************/
 {
     src_stack->line_num = line;
@@ -497,7 +497,7 @@ void SetLineNumber(unsigned line)
 /* this function is also called if pass is > 1,
  * which is a problem for FASTPASS because the file stack is empty.
  */
-int GetCurrSrcPos(char* buffer)
+int uasm_ABI GetCurrSrcPos(char* buffer)
 /*******************************/
 {
     struct src_item* curr;
@@ -517,7 +517,7 @@ int GetCurrSrcPos(char* buffer)
  * the structure consists of include files and macros.
  */
 
-void print_source_nesting_structure(void)
+void uasm_ABI print_source_nesting_structure(void)
 /*****************************************/
 {
     struct src_item* curr;
@@ -554,7 +554,7 @@ void print_source_nesting_structure(void)
 /* Scan the include path for a file!
  * variable ModuleInfo.g.IncludePath also contains directories set with -I cmdline option.
  */
-static FILE* open_file_in_include_path(const char* name, char fullpath[])
+static FILE* uasm_ABI open_file_in_include_path(const char* name, char fullpath[])
 /*************************************************************************/
 {
     char*       curr;
@@ -619,7 +619,7 @@ static FILE* open_file_in_include_path(const char* name, char fullpath[])
  * v2.12: _splitpath()/_makepath() removed
  */
 
-FILE* SearchFile(char* path, bool queue)
+FILE* uasm_ABI SearchFile(char* path, bool queue)
 /**********************************************/
 {
     FILE*               file = NULL;
@@ -730,7 +730,7 @@ FILE* SearchFile(char* path, bool queue)
  * now return NULL in any case.
  */
 
-char* GetTextLine(char* buffer)
+char* uasm_ABI GetTextLine(char* buffer)
 /*******************************/
 {
     struct src_item* curr = src_stack;
@@ -798,7 +798,7 @@ char* GetTextLine(char* buffer)
  * the include path is rebuilt for each assembled module.
  * it is stored in the standard C heap.
  */
-void AddStringToIncludePath(const char* string)
+void uasm_ABI AddStringToIncludePath(const char* string)
 /***********************************************/
 {
     char* tmp;
@@ -831,7 +831,7 @@ void AddStringToIncludePath(const char* string)
 /* function to get value of @FileCur.
  * won't work, because text macros don't use asym.sfunc_ptr
  */
-static void GetFileCur(struct asym* sym)
+static void uasm_ABI GetFileCur(struct asym* sym)
 /****************************************/
 {
     struct src_item* curr;
@@ -869,7 +869,7 @@ static void GetFileCur(struct asym* sym)
   * - field line_flags
   */
 
-struct asm_tok* PushInputStatus(struct input_status* oldstat)
+struct asm_tok* uasm_ABI PushInputStatus(struct input_status* oldstat)
     /*************************************************************/
 {
     oldstat->token_stringbuf = token_stringbuf;
@@ -891,7 +891,7 @@ struct asm_tok* PushInputStatus(struct input_status* oldstat)
     return(ModuleInfo.tokenarray);
 }
 
-void PopInputStatus(struct input_status* newstat)
+void uasm_ABI PopInputStatus(struct input_status* newstat)
 /*************************************************/
 {
     StringBufferEnd = token_stringbuf;
@@ -913,7 +913,7 @@ void PopInputStatus(struct input_status* newstat)
 
 /* Initializer, called once for each module. */
 
-void InputInit(void)
+void uasm_ABI InputInit(void)
 /********************/
 {
     struct src_item* fl;
@@ -936,7 +936,7 @@ void InputInit(void)
 
 /* init for each pass */
 
-void InputPassInit(void)
+void uasm_ABI InputPassInit(void)
 /************************/
 {
     src_stack->line_num = 0;
@@ -948,7 +948,7 @@ void InputPassInit(void)
 
 /* release input buffers for a module */
 
-void InputFini(void)
+void uasm_ABI InputFini(void)
 /********************/
 {
     if (ModuleInfo.g.IncludePath)

@@ -170,7 +170,7 @@ struct omf_rec {
     } d; /* data depending on record type */
 };
 
-extern void omf_write_record(const struct omf_rec*);
+extern void uasm_ABI omf_write_record(const struct omf_rec*);
 
 #define FIX_GEN_MAX        11   /* max size needed for OmfFixGenFix() */
 #define FIX_GEN_MODEND_MAX  9   /* max size needed for OmfFixGenFixModend() */
@@ -180,8 +180,8 @@ enum fixgen_types {
     FIX_GEN_MS386
 };
 
-extern unsigned OmfFixGenFix(const struct fixup* fix, uint_32 start_loc, uint_8* buf, enum fixgen_types type);
-extern unsigned OmfFixGenFixModend(const struct fixup*, uint_8* buf, uint_32, enum fixgen_types type);
+extern unsigned uasm_ABI OmfFixGenFix(const struct fixup* fix, uint_32 start_loc, uint_8* buf, enum fixgen_types type);
+extern unsigned uasm_ABI OmfFixGenFixModend(const struct fixup*, uint_8* buf, uint_32, enum fixgen_types type);
 
 uasm_PACK_POP
 

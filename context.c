@@ -42,7 +42,7 @@ static const enum context_type typetab[] = {
     CONT_ASSUMES, CONT_RADIX, CONT_LISTING, CONT_CPU, CONT_ALIGNMENT, CONT_ALL
 };
 
-static const char* const contextnames[] = {
+static char const* const contextnames[] = {
     "ASSUMES", "RADIX", "LISTING", "CPU", "ALIGNMENT", "ALL"
 };
 
@@ -112,7 +112,7 @@ extern struct asym* sym_Cpu;
 
 /* v2.10: major rewrite of this function */
 
-ret_code ContextDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI ContextDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     int start = i;
@@ -275,7 +275,7 @@ ret_code ContextDirective(int i, struct asm_tok tokenarray[])
 
 /* save current context status */
 
-void ContextSaveState(void)
+void uasm_ABI ContextSaveState(void)
 /***************************/
 {
     int i;
@@ -298,7 +298,7 @@ void ContextSaveState(void)
 
 /* restore context status */
 
-static void ContextRestoreState(void)
+static void uasm_ABI ContextRestoreState(void)
 /*************************************/
 {
     int i;
@@ -323,7 +323,7 @@ static void ContextRestoreState(void)
 
 /* init context, called once per pass */
 
-void ContextInit(int pass)
+void uasm_ABI ContextInit(int pass)
 /**************************/
 {
     /* if ContextStack isn't NULL, then at least one PUSHCONTEXT
@@ -339,7 +339,7 @@ void ContextInit(int pass)
 #endif
 }
 #if FASTMEM==0
-void ContextFini(void)
+void uasm_ABI ContextFini(void)
 /**********************/
 {
     struct context* curr;

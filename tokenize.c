@@ -93,7 +93,7 @@ static const short stokstr2[] = {
  * lines!
  * v2.05: don't concat if line's an instruction.
  */
-static bool IsMultiLine(struct asm_tok tokenarray[])
+static bool uasm_ABI IsMultiLine(struct asm_tok tokenarray[])
 /****************************************************/
 {
     struct asym* sym;
@@ -125,7 +125,7 @@ static bool IsMultiLine(struct asm_tok tokenarray[])
     return(TRUE);
 }
 /* EVEX Broadcast decorators are handled here */
-void get_broads(struct line_status* p)
+void uasm_ABI get_broads(struct line_status* p)
 {
     /************************************************/
     if (!extraflags.evex)
@@ -159,7 +159,7 @@ void get_broads(struct line_status* p)
 }
 
 /* EVEX Mask decorators are handled here: {k1) or {k1){z} or {z}{k1) or {z} */
-void get_decos(struct line_status* p, bool zdeclined)
+void uasm_ABI get_decos(struct line_status* p, bool zdeclined)
 {
     unsigned char   c;
     struct asym*    sym = NULL;
@@ -309,7 +309,7 @@ void get_decos(struct line_status* p, bool zdeclined)
     }
 }
 
-static ret_code get_float(struct asm_tok* buf, struct line_status* p)
+static ret_code uasm_ABI get_float(struct asm_tok* buf, struct line_status* p)
 /*********************************************************************/
 {
     /* valid floats look like:  (int)[.(int)][e(int)]
@@ -358,7 +358,7 @@ static ret_code get_float(struct asm_tok* buf, struct line_status* p)
     return(NOT_ERROR);
 }
 
-static ret_code ConcatLine(char* src, int cnt, char* out, struct line_status* ls)
+static ret_code uasm_ABI ConcatLine(char* src, int cnt, char* out, struct line_status* ls)
 /*********************************************************************************/
 {
     char*   p = src + 1;
@@ -390,7 +390,7 @@ static ret_code ConcatLine(char* src, int cnt, char* out, struct line_status* ls
     return(EMPTY);
 }
 
-static ret_code get_string(struct asm_tok* buf, struct line_status* p)
+static ret_code uasm_ABI get_string(struct asm_tok* buf, struct line_status* p)
 /**********************************************************************/
 {
     char    symbol_o;
@@ -650,7 +650,7 @@ static ret_code get_string(struct asm_tok* buf, struct line_status* p)
     return(NOT_ERROR);
 }
 
-static ret_code get_special_symbol(struct asm_tok* buf, struct line_status* p)
+static ret_code uasm_ABI get_special_symbol(struct asm_tok* buf, struct line_status* p)
 /******************************************************************************/
 {
     char    symbol;
@@ -832,7 +832,7 @@ static ret_code get_special_symbol(struct asm_tok* buf, struct line_status* p)
 }
 
 #if 0
-static void array_mul_add(unsigned char* buf, unsigned base, unsigned num, unsigned size)
+static void uasm_ABI array_mul_add(unsigned char* buf, unsigned base, unsigned num, unsigned size)
 /*****************************************************************************************/
 {
     while (size-- > 0)
@@ -851,7 +851,7 @@ static void array_mul_add(unsigned char* buf, unsigned base, unsigned num, unsig
  * h: base 16
  * o or q: base 8
  */
-static ret_code get_number(struct asm_tok* buf, struct line_status* p)
+static ret_code uasm_ABI get_number(struct asm_tok* buf, struct line_status* p)
 /**********************************************************************/
 {
     char*               ptr = p->input;
@@ -1025,7 +1025,7 @@ number_done:
     }
 
 #if BACKQUOTES
-static ret_code get_id_in_backquotes(struct asm_tok* buf, struct line_status* p)
+static ret_code uasm_ABI get_id_in_backquotes(struct asm_tok* buf, struct line_status* p)
 /********************************************************************************/
 {
     char*   optr = p->output;
@@ -1051,7 +1051,7 @@ static ret_code get_id_in_backquotes(struct asm_tok* buf, struct line_status* p)
 #endif
 
 /* get an ID. will always return NOT_ERROR. */
-static ret_code get_id(struct asm_tok* buf, struct line_status* p)
+static ret_code uasm_ABI get_id(struct asm_tok* buf, struct line_status* p)
 /******************************************************************/
 {
     //struct ReservedWord *resw;
@@ -1295,7 +1295,7 @@ static ret_code get_id(struct asm_tok* buf, struct line_status* p)
 #undef is_valid_id_start
 #define is_valid_id_start( ch )  ( islalpha(ch) || ch=='_' || ch=='@' || ch=='$' || ch=='?' )
 
-ret_code GetToken(struct asm_tok token[], struct line_status* p)
+ret_code uasm_ABI GetToken(struct asm_tok token[], struct line_status* p)
 /****************************************************************/
 {
     if (isldigit(*p->input))
@@ -1329,7 +1329,7 @@ ret_code GetToken(struct asm_tok token[], struct line_status* p)
 
 // fixme char *IfSymbol;        /* save symbols in IFDEF's so they don't get expanded */
 
-static void StartComment(const char* p)
+static void uasm_ABI StartComment(const char* p)
 /***************************************/
 {
     while (isspace(*p)) p++;
@@ -1344,7 +1344,7 @@ static void StartComment(const char* p)
     return;
 }
 
-int Tokenize(char* line, unsigned int start, struct asm_tok tokenarray[], unsigned int flags)
+int uasm_ABI Tokenize(char* line, unsigned int start, struct asm_tok tokenarray[], unsigned int flags)
 /*********************************************************************************************/
 /*
  * create tokens from a source line.

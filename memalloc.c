@@ -159,7 +159,7 @@ extern _trmem_hdl   hTrmem;
 
 #endif
 
-void MemInit(void)
+void uasm_ABI MemInit(void)
 /******************/
 {
 #if FASTMEM
@@ -170,7 +170,7 @@ void MemInit(void)
     DebugCmd(memstart = memcalls);
 }
 
-void MemFini(void)
+void uasm_ABI MemFini(void)
 /******************/
 {
 #if FASTMEM
@@ -191,7 +191,7 @@ void MemFini(void)
 #endif
 }
 
-void* LclAlloc(size_t size)
+void* uasm_ABI LclAlloc(size_t size)
 /***************************/
 {
     void* ptr;
@@ -237,7 +237,7 @@ void* LclAlloc(size_t size)
 }
 
 #if FASTMEM==0
-void LclFree(void* ptr)
+void uasm_ABI LclFree(void* ptr)
 /***********************/
 {
     if (ptr != NULL)
@@ -250,7 +250,7 @@ void LclFree(void* ptr)
 }
 #endif
 
-void* MemAlloc(size_t size)
+void* uasm_ABI MemAlloc(size_t size)
 /***************************/
 {
     void* ptr;
@@ -266,7 +266,7 @@ void* MemAlloc(size_t size)
     return(ptr);
 }
 
-void MemFree(void* ptr)
+void uasm_ABI MemFree(void* ptr)
 /***********************/
 {
     DebugMsg1(("MemFree(0x%p) cnt=%" I32_SPEC "u\n", ptr, --memcalls));
@@ -275,7 +275,7 @@ void MemFree(void* ptr)
 }
 
 #if 0
-void* MemRealloc(void* ptr, size_t size)
+void* uasm_ABI MemRealloc(void* ptr, size_t size)
 /****************************************/
 {
     void* new;

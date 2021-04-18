@@ -1861,7 +1861,7 @@ struct data_in_code_entry {
 */
 struct tlv_descriptor
 {
-    void* (*thunk)(struct tlv_descriptor*);
+    void* (uasm_ABI *thunk)(struct tlv_descriptor*);
     unsigned long	key;
     unsigned long	offset;
 };

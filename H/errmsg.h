@@ -47,8 +47,8 @@ enum msgno {
 #undef pick
 
 #ifdef DEBUG_OUT
-extern void DoDebugMsg(const char* format, ...);
-extern void DoDebugMsg1(const char* format, ...);
+extern void uasm_ABI DoDebugMsg(const char* format, ...);
+extern void uasm_ABI DoDebugMsg1(const char* format, ...);
 #define DebugMsg( x ) DoDebugMsg x
 #define DebugMsg1( x ) DoDebugMsg1 x
 #define DebugCmd( x ) x
@@ -64,16 +64,16 @@ extern void DoDebugMsg1(const char* format, ...);
 #define errout stdout
 #endif
 
-extern void Fatal(int msgnum, ...);
-extern int  EmitError(int msgnum);
-extern int  EmitErr(int msgnum, ...);
-extern void EmitWarn(int level, int msgnum, ...);
-extern void PrintNote(int msgnum, ...);
-extern char* ErrnoStr(void);
-extern int  write_logo(void);
-extern void PrintUsage(void);
+extern void uasm_ABI Fatal(int msgnum, ...);
+extern int uasm_ABI  EmitError(int msgnum);
+extern int uasm_ABI  EmitErr(int msgnum, ...);
+extern void uasm_ABI EmitWarn(int level, int msgnum, ...);
+extern void uasm_ABI PrintNote(int msgnum, ...);
+extern char* uasm_ABI ErrnoStr(void);
+extern int uasm_ABI  write_logo(void);
+extern void uasm_ABI PrintUsage(void);
 //extern void SeekError( void );
-extern void WriteError(void);
+extern void uasm_ABI WriteError(void);
 
 uasm_PACK_POP
 

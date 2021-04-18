@@ -12,10 +12,10 @@
 
 uasm_PACK_PUSH_STACK
 
-void     bin_init(struct module_info*);
+void uasm_ABI     bin_init(struct module_info*);
 
 #if PE_SUPPORT
-void     pe_create_PE_header(void);
+void uasm_ABI     pe_create_PE_header(void);
 #endif
 
 uasm_PACK_POP

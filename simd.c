@@ -12,11 +12,11 @@ and their sub-types
 
 uasm_PACK_PUSH_STACK
 
-extern void     AddLineQueue(const char* line);
-extern void     AddLineQueueX(const char* fmt, ...);
-extern void     RunLineQueue(void);
+extern void uasm_ABI      AddLineQueue(const char* line);
+extern void uasm_ABI      AddLineQueueX(const char* fmt, ...);
+extern void uasm_ABI      RunLineQueue(void);
 
-void AddSimdTypes()
+void uasm_ABI AddSimdTypes()
 {
     struct asym* sym = 0;
 

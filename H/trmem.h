@@ -41,11 +41,11 @@ uasm_PACK_PUSH_STACK
 
 typedef struct _trmem_internal* _trmem_hdl;
 
-typedef void (*_trmem_who)(void);  /* generic pointer to code */
+typedef void (uasm_ABI *_trmem_who)(void);  /* generic pointer to code */
 #define _TRMEM_NO_ROUTINE   ((_trmem_who)0)
 
 /* generic pointer to code with realloc signature */
-typedef void* (*_trmem_realloc_who)(void*, size_t);
+typedef void* (uasm_ABI *_trmem_realloc_who)(void*, size_t);
 #define _TRMEM_NO_REALLOC ((_trmem_realloc_who)0)
 
 /*
@@ -98,12 +98,12 @@ enum {
     sure they are initialized before calling _trmem_open.
 */
 _trmem_hdl _trmem_open(
-    void* (*__alloc)(size_t),
-    void (*__free)(void*),
-    void* (*__realloc)(void*, size_t),
-    void* (*__expand)(void*, size_t),
+    void* (uasm_ABI *__alloc)(size_t),
+    void (uasm_ABI *__free)(void*),
+    void* (uasm_ABI *__realloc)(void*, size_t),
+    void* (uasm_ABI *__expand)(void*, size_t),
     FILE* __prt_parm,
-    void (*__prt_line)(FILE* __prt_parm, const char* __buf, size_t __len),
+    void (uasm_ABI *__prt_line)(FILE* __prt_parm, const char* __buf, size_t __len),
     unsigned __flags
 );
 
@@ -113,7 +113,7 @@ _trmem_hdl _trmem_open(
     allocated chunks were freed before closing the handle.
     Returns number of unfreed chunks.
 */
-unsigned _trmem_close(_trmem_hdl);
+unsigned uasm_ABI _trmem_close(_trmem_hdl);
 
 
 /*
@@ -122,29 +122,29 @@ unsigned _trmem_close(_trmem_hdl);
     with
         ptr = _trmem_alloc( size, _trmem_guess_who(), hdl );
 */
-void* _trmem_alloc(size_t, _trmem_who, _trmem_hdl);
-void _trmem_free(void*, _trmem_who, _trmem_hdl);
-void* _trmem_realloc(void*, size_t, _trmem_who, _trmem_hdl);
-void* _trmem_expand(void*, size_t, _trmem_who, _trmem_hdl);
-char* _trmem_strdup(const char* str, _trmem_who who, _trmem_hdl hdl);
-size_t _trmem_msize(void*, _trmem_hdl);
+void* uasm_ABI _trmem_alloc(size_t, _trmem_who, _trmem_hdl);
+void uasm_ABI _trmem_free(void*, _trmem_who, _trmem_hdl);
+void* uasm_ABI _trmem_realloc(void*, size_t, _trmem_who, _trmem_hdl);
+void* uasm_ABI _trmem_expand(void*, size_t, _trmem_who, _trmem_hdl);
+char* uasm_ABI _trmem_strdup(const char* str, _trmem_who who, _trmem_hdl hdl);
+size_t uasm_ABI _trmem_msize(void*, _trmem_hdl);
 
 
 /*
     _trmem_prt_usage prints the current memory usage, and peak usage.
     _trmem_prt_list prints a list of all currently allocated chunks.
 */
-void _trmem_prt_usage(_trmem_hdl);
-unsigned _trmem_prt_list(_trmem_hdl);
+void uasm_ABI _trmem_prt_usage(_trmem_hdl);
+unsigned uasm_ABI _trmem_prt_list(_trmem_hdl);
 
 /*
     _trmem_get_current_usage retrieves the current memory usage.
     _trmem_get_peak_usage retrieves the peak memory usage.
 */
-unsigned long _trmem_get_current_usage(_trmem_hdl);
-unsigned long _trmem_get_peak_usage(_trmem_hdl);
+unsigned long uasm_ABI _trmem_get_current_usage(_trmem_hdl);
+unsigned long uasm_ABI _trmem_get_peak_usage(_trmem_hdl);
 
-_trmem_who  _trmem_guess_who(void*);
+_trmem_who uasm_ABI  _trmem_guess_who(void*);
 #ifdef __WATCOMC__
 #pragma aux _trmem_guess_who = \
     0x8b 0x45 0x04      /*  mov eax,[ebp+4] */ \

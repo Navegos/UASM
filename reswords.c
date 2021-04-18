@@ -959,7 +959,7 @@ static struct
 static bool  b64bit = FALSE; /* resw tables in 64bit mode? */
 #endif
 
-static unsigned get_hash(const char* s, unsigned char size)
+static unsigned uasm_ABI get_hash(const char* s, unsigned char size)
 /***********************************************************/
 {
     uint_64 fnv_basis = 0xCBF29CE484222325 /*14695981039346656037ull*/;
@@ -973,7 +973,7 @@ static unsigned get_hash(const char* s, unsigned char size)
     return((((h >> 49) ^ h) & 0x3fff) % HASH_TABITEMS);
 }
 
-unsigned FindResWord(const char* name, unsigned char size)
+unsigned uasm_ABI FindResWord(const char* name, unsigned char size)
 /**********************************************************/
 /* search reserved word in hash table */
 {
@@ -998,7 +998,7 @@ unsigned FindResWord(const char* name, unsigned char size)
 
 /* add reserved word to hash table */
 
-static void AddResWord(int token)
+static void uasm_ABI AddResWord(int token)
 /*********************************/
 {
     int i;
@@ -1030,7 +1030,7 @@ static void AddResWord(int token)
 
 /* remove a reserved word from the hash table. */
 
-static int RemoveResWord(int token)
+static int uasm_ABI RemoveResWord(int token)
 /***********************************/
 {
     int i;
@@ -1072,7 +1072,7 @@ struct rename_node
 * - length: length of new name
 */
 
-void RenameKeyword(unsigned token, const char* newname, uint_8 length)
+void uasm_ABI RenameKeyword(unsigned token, const char* newname, uint_8 length)
 /**********************************************************************/
 {
     struct rename_node* curr;
@@ -1146,10 +1146,10 @@ void RenameKeyword(unsigned token, const char* newname, uint_8 length)
 /* depending on 64bit on or off, some instructions must be added,
 * some removed. Currently this is a bit hackish.
 */
-void Set64Bit(bool newmode)
+void uasm_ABI Set64Bit(bool newmode)
 /***************************/
 {
-    static const char* syscallname;   /* "true" syscall name stored here */
+    static char* syscallname;   /* "true" syscall name stored here */
     int token;
     int i;
 
@@ -1213,7 +1213,7 @@ void Set64Bit(bool newmode)
 }
 #endif
 
-void DisableKeyword(unsigned token)
+void uasm_ABI DisableKeyword(unsigned token)
 /***********************************/
 {
     if (!(ResWordTable[token].flags & RWF_DISABLED))
@@ -1234,7 +1234,7 @@ void DisableKeyword(unsigned token)
 /* check if a keyword is in the list of disabled words.
 */
 
-bool IsKeywordDisabled(const char* name, int len)
+bool uasm_ABI IsKeywordDisabled(const char* name, int len)
 /*************************************************/
 {
     unsigned token;
@@ -1248,7 +1248,7 @@ bool IsKeywordDisabled(const char* name, int len)
 * max size is 255.
 */
 
-char* GetResWName(unsigned resword, char* buff)
+char* uasm_ABI GetResWName(unsigned resword, char* buff)
 /***********************************************/
 {
 #ifdef __I86__
@@ -1267,7 +1267,7 @@ char* GetResWName(unsigned resword, char* buff)
 * and also the reserved words string pointers ( ResWordTable[].name + ResWordTable[].len )
 */
 
-void ResWordsInit(void)
+void uasm_ABI ResWordsInit(void)
 /***********************/
 {
     int i;
@@ -1310,7 +1310,7 @@ void ResWordsInit(void)
 * it restores the resword table
 */
 
-void ResWordsFini(void)
+void uasm_ABI ResWordsFini(void)
 /***********************/
 {
     int i;
@@ -1360,7 +1360,7 @@ void ResWordsFini(void)
 
 #ifdef DEBUG_OUT
 
-void DumpResWords(void)
+void uasm_ABI DumpResWords(void)
 /***********************/
 {
     int i;
@@ -1397,7 +1397,7 @@ void DumpResWords(void)
     printf("----------------------------------------------------------------\n");
 }
 
-void DumpInstrStats(void)
+void uasm_ABI DumpInstrStats(void)
 /*************************/
 {
     unsigned            i;

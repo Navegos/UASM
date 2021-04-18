@@ -459,6 +459,12 @@
     <ClInclude Include="..\..\H\defs.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\H\preprocessor.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\H\exports.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\.gitignore" />
@@ -540,6 +546,7 @@
     <None Include="..\..\include_WIP\uasm\types.inc">
       <Filter>include_WIP</Filter>
     </None>
+    <None Include="..\..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -566,10 +573,24 @@
     <Filter Include="include_WIP\windows\vc">
       <UniqueIdentifier>{8949af0a-d6ba-436b-9e25-447487e1cfbc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\asm">
+      <UniqueIdentifier>{e21f2d07-9629-4d58-9a84-bba37cd7569e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\UASM.rc">
       <Filter>Resources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <UASM Include="..\..\asm\cpua.asm">
+      <Filter>Sources\asm</Filter>
+    </UASM>
+    <UASM Include="..\..\asm\memset.asm">
+      <Filter>Sources\asm</Filter>
+    </UASM>
+    <UASM Include="..\..\asm\memmove.asm">
+      <Filter>Sources\asm</Filter>
+    </UASM>
   </ItemGroup>
 </Project>

@@ -59,6 +59,7 @@
    ;/INT TEXTEQU <DWORD> cannot be used instruction type*/
     BOOL TEXTEQU <DWORD>
     BOOL_T TEXTEQU <DWORD>
+    INTBOOL TEXTEQU <DWORD>
     INTBOOL_T TEXTEQU <DWORD>
     COUNT_T TEXTEQU <DWORD>
     LONG TEXTEQU <DWORD>
@@ -149,6 +150,10 @@
     ENDIF
    ;/IINT TEXTEQU <DWORD> cannot be used instruction type*/
     IBOOL TEXTEQU <DD>
+    IBOOL_T TEXTEQU <DD>
+    IINTBOOL TEXTEQU <DD>
+    IINTBOOL_T TEXTEQU <DD>
+    ICOUNT_T TEXTEQU <DD>
     ILONG TEXTEQU <DD>
     IINT32 TEXTEQU <DD>
     IUINT32 TEXTEQU <DD>
@@ -220,6 +225,7 @@
     SIZE_T_PTR TEXTEQU <QWORD PTR>
     PTR32 TEXTEQU <QWORD>
     PTR64 TEXTEQU <QWORD>
+    PTR_T TEXTEQU <QWORD>
     ENDIF ;/*__X64__*/
 
     IFDEF __X32__
@@ -232,6 +238,7 @@
     SIZE_T_PTR TEXTEQU <DWORD PTR>
     PTR32 TEXTEQU <DWORD>
     PTR64 TEXTEQU <DWORD>
+    PTR_T TEXTEQU <DWORD>
     ENDIF ;/*__X32__*/
 
     INT8_PTR TEXTEQU <BYTE PTR>
@@ -414,6 +421,7 @@
    ;/*int TEXTEQU <INT> cannot be used instruction type*/
     bool TEXTEQU <BOOL>
     bool_t TEXTEQU <BOOL_T>
+    intbool TEXTEQU <INTBOOL>
     intbool_t TEXTEQU <INTBOOL_T>
     count_t TEXTEQU <COUNT_T>
     long TEXTEQU <LONG>
@@ -500,6 +508,10 @@
     itchar TEXTEQU <ITCHAR>
    ;/*AddLineQueue("iint TEXTEQU <IINT> cannot be used instruction type*/
     ibool TEXTEQU <IBOOL>
+    ibool_t TEXTEQU <IBOOL_T>
+    iintbool TEXTEQU <IINTBOOL>
+    iintbool_t TEXTEQU <IINTBOOL_T>
+    icount_t TEXTEQU <ICOUNT_T>
     ilong TEXTEQU <ILONG>
     iint32 TEXTEQU <IINT32>
     iuint32 TEXTEQU <IUINT32>
@@ -568,7 +580,10 @@
     isize_t TEXTEQU <ISIZE_T>
     ptr_size_t TEXTEQU <PTR_SIZE_T>
     size_t_ptr TEXTEQU <SIZE_T_PTR>
-    
+    ptr32 TEXTEQU <PTR32>
+    ptr64 TEXTEQU <PTR64>
+    ptr_t TEXTEQU <PTR_T>
+
     int8_ptr TEXTEQU <INT8_PTR>
     uint8_ptr TEXTEQU <UINT8_PTR>
     sint8_ptr TEXTEQU <SINT8_PTR>

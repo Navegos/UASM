@@ -45,7 +45,7 @@ extern struct asym* SegOverride;
 int_8   Frame_Type;   /* curr fixup frame type: SEG|GRP|EXT|ABS|NONE; see omfspec.h */
 uint_16 Frame_Datum;  /* curr fixup frame value */
 
-struct fixup* CreateFixup(struct asym* sym, enum fixup_types type, enum fixup_options option)
+struct fixup* uasm_ABI CreateFixup(struct asym* sym, enum fixup_types type, enum fixup_options option)
     /*********************************************************************************************/
     /*
      * called when an instruction operand or a data item is relocatable:
@@ -119,7 +119,7 @@ struct fixup* CreateFixup(struct asym* sym, enum fixup_types type, enum fixup_op
 
 /* remove a fixup from the segment's fixup queue */
 
-void FreeFixup(struct fixup* fixup)
+void uasm_ABI FreeFixup(struct fixup* fixup)
 /***********************************/
 {
     struct dsym* dir;
@@ -157,7 +157,7 @@ void FreeFixup(struct fixup* fixup)
  * symbol has type SYM_SEG/SYM_GRP.
  */
 
-void SetFixupFrame(const struct asym* sym, char ign_grp)
+void uasm_ABI SetFixupFrame(const struct asym* sym, char ign_grp)
 /********************************************************/
 {
     struct dsym* grp;
@@ -209,7 +209,7 @@ void SetFixupFrame(const struct asym* sym, char ign_grp)
  * they no longer exist when store_fixup() is called.
  */
 
-void store_fixup(struct fixup* fixup, struct dsym* seg, int_32* pdata)
+void uasm_ABI store_fixup(struct fixup* fixup, struct dsym* seg, int_32* pdata)
 /**********************************************************************/
 {
     //struct fixup     *fixup;

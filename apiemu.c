@@ -18,7 +18,7 @@ uasm_PACK_PUSH_STACK
 
 /* v2.12: _splitpath()/_makepath() removed */
 
-char* strupr(char* str)
+char* uasm_ABI strupr(char* str)
 /***********************/
 {
     char* p;

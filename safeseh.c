@@ -25,7 +25,7 @@ uasm_PACK_PUSH_STACK
  * <handler> must be a PROC or PROTO
  */
 
-ret_code SafeSEHDirective(int i, struct asm_tok tokenarray[])
+ret_code uasm_ABI SafeSEHDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     struct asym* sym;

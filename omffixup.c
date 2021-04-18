@@ -41,7 +41,7 @@
 uasm_PACK_PUSH_STACK
 
 extern const char szNull[];
-extern unsigned omf_GetGrpIdx(struct asym* sym);
+extern unsigned uasm_ABI omf_GetGrpIdx(struct asym* sym);
 
 /* logical data for fixup subrecord creation */
 struct logref
@@ -54,7 +54,7 @@ struct logref
     int_32  target_offset;  /* offset of target for target method       */
 };
 
-static uint_8* putIndex(uint_8* p, uint_16 index)
+static uint_8* uasm_ABI putIndex(uint_8* p, uint_16 index)
 /*************************************************/
 {
     if (index > 0x7f)
@@ -65,21 +65,21 @@ static uint_8* putIndex(uint_8* p, uint_16 index)
     return(p);
 }
 
-static uint_8* put16(uint_8* p, uint_16 value)
+static uint_8* uasm_ABI put16(uint_8* p, uint_16 value)
 /**********************************************/
 {
     WriteU16(p, value);
     return(p + sizeof(uint_16));
 }
 
-static uint_8* put32(uint_8* p, uint_32 value)
+static uint_8* uasm_ABI put32(uint_8* p, uint_32 value)
 /**********************************************/
 {
     WriteU32(p, value);
     return(p + sizeof(uint_32));
 }
 
-static uint_8* putFrameDatum(uint_8* p, uint_8 method, uint_16 datum)
+static uint_8* uasm_ABI putFrameDatum(uint_8* p, uint_8 method, uint_16 datum)
 /*********************************************************************/
 {
     switch (method)
@@ -97,7 +97,7 @@ static uint_8* putFrameDatum(uint_8* p, uint_8 method, uint_16 datum)
     return(p);
 }
 
-static uint_8* putTargetDatum(uint_8* p, uint_8 method, uint_16 datum)
+static uint_8* uasm_ABI putTargetDatum(uint_8* p, uint_8 method, uint_16 datum)
 /**********************************************************************/
 {
 #if 0 /* v2.12: Uasm won't use TARGE_ABSxx; also, it's not defined for FIXUP sub-records */
@@ -121,7 +121,7 @@ static uint_8* putTargetDatum(uint_8* p, uint_8 method, uint_16 datum)
  *        TranslateLogref() has become static.
  */
 
-static unsigned TranslateLogref(const struct logref* lr, uint_8* buf, enum fixgen_types type)
+static unsigned uasm_ABI TranslateLogref(const struct logref* lr, uint_8* buf, enum fixgen_types type)
 /*********************************************************************************************/
 {
     uint_8* p;
@@ -171,7 +171,7 @@ static unsigned TranslateLogref(const struct logref* lr, uint_8* buf, enum fixge
 
 #if 0 /* v2.11: obsolete */
 
-static uint TranslatePhysref(const struct physref* ref, uint_8* buf, enum fixgen_types type)
+static uint uasm_ABI TranslatePhysref(const struct physref* ref, uint_8* buf, enum fixgen_types type)
 /********************************************************************************************/
 {
     uint_8* p;
@@ -190,7 +190,7 @@ static uint TranslatePhysref(const struct physref* ref, uint_8* buf, enum fixgen
  * v2.11: obsolete. TranslateLogref() is now called directly by writeModend() in omfint.c
  */
 
-unsigned TranslateRef(const union logphys* ref, int is_logical, uint_8* buf, enum fixgen_types type)
+unsigned uasm_ABI TranslateRef(const union logphys* ref, int is_logical, uint_8* buf, enum fixgen_types type)
 /****************************************************************************************************/
 {
     return(is_logical ? TranslateLogref(&ref->log, buf, type) : TranslatePhysref(&ref->phys, buf, type));
@@ -200,7 +200,7 @@ unsigned TranslateRef(const union logphys* ref, int is_logical, uint_8* buf, enu
 
 /* generate start address subfield for MODEND */
 
-unsigned OmfFixGenFixModend(const struct fixup* fixup, uint_8* buf, uint_32 displ, enum fixgen_types type)
+unsigned uasm_ABI OmfFixGenFixModend(const struct fixup* fixup, uint_8* buf, uint_32 displ, enum fixgen_types type)
 /**********************************************************************************************************/
 {
     struct asym* sym = fixup->sym;
@@ -251,7 +251,7 @@ unsigned OmfFixGenFixModend(const struct fixup* fixup, uint_8* buf, uint_32 disp
 
 /* fill a logref from a fixup's info */
 
-static int omf_fill_logref(const struct fixup* fixup, struct logref* lr)
+static int uasm_ABI omf_fill_logref(const struct fixup* fixup, struct logref* lr)
 /************************************************************************/
 {
     struct asym* sym;
@@ -405,7 +405,7 @@ static int omf_fill_logref(const struct fixup* fixup, struct logref* lr)
  * - WORD/DWORD, Target Displacement
  */
 
-unsigned OmfFixGenFix(const struct fixup* fixup, uint_32 start_loc, uint_8* buf, enum fixgen_types type)
+unsigned uasm_ABI OmfFixGenFix(const struct fixup* fixup, uint_32 start_loc, uint_8* buf, enum fixgen_types type)
 /********************************************************************************************************/
 {
     uint_8  locat1;

@@ -125,7 +125,7 @@
                             EXITM
                         ENDIF
                     ENDM
-                ELSEIF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL
+                ELSEIF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL
                     cnt = -1
                     FOR arg,<CL,DL,SPL,SPL,SPL,SPL,SPL,SPL,SPL,SPL,SPL,SPL,SPL,SPL,SPL,SPL>
                         cnt = cnt + 1
@@ -238,7 +238,7 @@
                             EXITM
                         ENDIF
                     ENDM
-                ELSEIF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL
+                ELSEIF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL
                     cnt = -1
                     FOR arg,<CX,DX,SP,SP,SP,SP,SP,SP,SP,SP,SP,SP,SP,SP,SP,SP>
                         cnt = cnt + 1
@@ -351,7 +351,7 @@
                             EXITM
                         ENDIF
                     ENDM
-                ELSEIF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL
+                ELSEIF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL
                     cnt = -1
                     FOR arg,<ECX,EDX,ESP,ESP,ESP,ESP,ESP,ESP,ESP,ESP,ESP,ESP,ESP,ESP,ESP,ESP>
                         cnt = cnt + 1
@@ -548,7 +548,7 @@
                             EXITM
                         ENDIF
                     ENDM
-                ELSEIF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL
+                ELSEIF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL
                     cnt = -1
                     FOR arg,<[CL+pf],[DL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf],[SPL+pf]>
                         cnt = cnt + 1
@@ -661,7 +661,7 @@
                             EXITM
                         ENDIF
                     ENDM
-                ELSEIF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL
+                ELSEIF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL
                     cnt = -1
                     FOR arg,<[CX+pf],[DX+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf],[SP+pf]>
                         cnt = cnt + 1
@@ -774,7 +774,7 @@
                             EXITM
                         ENDIF
                     ENDM
-                ELSEIF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL
+                ELSEIF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL
                     cnt = -1
                     FOR arg,<[ECX+pf],[EDX+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf],[ESP+pf]>
                         cnt = cnt + 1
@@ -987,7 +987,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <ECX>
             ELSE
                 EXITM <ESP>
@@ -1020,7 +1020,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <ECX>
             ELSE
                 EXITM <ESP>
@@ -1053,7 +1053,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
                 EXITM <EDX>
             ELSE
                 EXITM <ESP>
@@ -1466,7 +1466,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <ECX>
             ELSE
                 EXITM <ESP>
@@ -1499,7 +1499,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <ECX>
             ELSE
                 EXITM <ESP>
@@ -1532,7 +1532,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
                 EXITM <EDX>
             ELSE
                 EXITM <ESP>
@@ -1945,7 +1945,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <CX>
             ELSE
                 EXITM <SP>
@@ -1978,7 +1978,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <CX>
             ELSE
                 EXITM <SP>
@@ -2011,7 +2011,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
                 EXITM <DX>
             ELSE
                 EXITM <SP>
@@ -2424,7 +2424,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <CL>
             ELSE
                 EXITM <SPL>
@@ -2457,7 +2457,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL OR @LangType EQ LANG_THISCALL
                 EXITM <CL>
             ELSE
                 EXITM <SPL>
@@ -2490,7 +2490,7 @@
             ENDIF
         ENDIF
         IFDEF __WIN32__
-            IF @LangType EQ LANG_FASTSCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
+            IF @LangType EQ LANG_FASTCALL OR @LangType EQ LANG_VECTORCALL OR @LangType EQ LANG_REGCALL
                 EXITM <DL>
             ELSE
                 EXITM <SPL>

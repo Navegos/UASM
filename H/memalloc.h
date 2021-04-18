@@ -36,11 +36,11 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void MemInit(void);
-extern void MemFini(void);
-extern void* MemAlloc(size_t size);
-extern void* MemRealloc(void* ptr, size_t size);
-extern void MemFree(void* ptr);
+extern void uasm_ABI MemInit(void);
+extern void uasm_ABI MemFini(void);
+extern void* uasm_ABI MemAlloc(size_t size);
+extern void* uasm_ABI MemRealloc(void* ptr, size_t size);
+extern void uasm_ABI MemFree(void* ptr);
 
 uasm_PACK_POP
 
@@ -78,12 +78,12 @@ uasm_PACK_PUSH_STACK
 /* LclAlloc() and LclFree() are fast variants, which
  * are to be used for all allocations which aren't "global"
  */
-extern  void* LclAlloc(size_t);
-#if FASTMEM
+extern  void* uasm_ABI LclAlloc(size_t);
+#if FASTMEM==0
+extern  void uasm_ABI    LclFree(void*);
+#else
 /* be careful not to use a function call as argument for LclFree()! */
 #define LclFree( p ) ;
-#else
-extern  void    LclFree(void*);
 #endif
 
 uasm_PACK_POP

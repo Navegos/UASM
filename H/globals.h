@@ -213,14 +213,14 @@
 #include "queue.h"
 
 /* Uasm version info */
-#define _UASM_VERSION_STR_ "2.51.2"
-#define _UASM_VERSION_INT_ 251
+#define _UASM_VERSION_STR_ "2.53.0"
+#define _UASM_VERSION_INT_ 253
 #define _UASM_VERSION_SUFFIX_ "pre"
 #define _UASM_VERSION_ _UASM_VERSION_STR_ //_UASM_VERSION_SUFFIX_
 
 #define UASM_MAJOR_VER 2
-#define UASM_MINOR_VER 51
-#define UASM_SUBMINOR_VER 2
+#define UASM_MINOR_VER 53
+#define UASM_SUBMINOR_VER 0
 
 #if defined(_WIN32) || defined(_WIN64) 
 #define snprintf _snprintf 
@@ -776,33 +776,33 @@ struct module_vars {
     struct qdesc        SafeSEHQueue;    /* list of safeseh handlers */
     struct qdesc        LibQueue;        /* includelibs */
     struct qdesc	    LinkQueue;	     /* .pragma comment(linker,"/..") */
-    struct dll_desc* DllQueue;       /* dlls of OPTION DLLIMPORT */
-    char* imp_prefix;
-    FILE* curr_file[NUM_FILE_TYPES];  /* ASM, ERR, OBJ and LST */
-    char* curr_fname[NUM_FILE_TYPES];
+    struct dll_desc*    DllQueue;       /* dlls of OPTION DLLIMPORT */
+    char*               imp_prefix;
+    FILE*               curr_file[NUM_FILE_TYPES];  /* ASM, ERR, OBJ and LST */
+    char*               curr_fname[NUM_FILE_TYPES];
     char *              *FNames;         /* array of input files */
     unsigned            cnt_fnames;      /* items in FNames array */
-    char* IncludePath;
+    char*               IncludePath;
     struct qdesc        line_queue;      /* line queue */
-    struct src_item* src_stack;      /* source item (files & macros) stack */
+    struct src_item*    src_stack;      /* source item (files & macros) stack */
     union {
-        struct fixup* start_fixup;    /* OMF only */
-        struct asym* start_label;    /* non-OMF only: start label */
+        struct fixup*   start_fixup;    /* OMF only */
+        struct asym*    start_label;    /* non-OMF only: start label */
     };
     uint_32             start_displ;     /* OMF only, optional displ for start label */
-    struct hll_item* HllStack;       /* for .WHILE, .IF, .REPEAT */
-    struct hll_item* HllFree;        /* v2.06: stack of free <struct hll>-items */
-    struct context* ContextStack;
-    struct context* ContextFree;    /* v2.10: "free items" heap implemented. */
-    struct context* SavedContexts;
+    struct hll_item*    HllStack;       /* for .WHILE, .IF, .REPEAT */
+    struct hll_item*    HllFree;        /* v2.06: stack of free <struct hll>-items */
+    struct context*     ContextStack;
+    struct context*     ContextFree;    /* v2.10: "free items" heap implemented. */
+    struct context*     SavedContexts;
     int                 cntSavedContexts;
     /* v2.10: moved here from module_info due to problems if @@: occured on the very first line */
     unsigned            anonymous_label; /* "anonymous label" counter */
-    struct asym* StackBase;
-    struct asym* ProcStatus;
-    ret_code(*WriteModule)(struct module_info*);
-    ret_code(*EndDirHook)(struct module_info*);
-    ret_code(*Pass1Checks)(struct module_info*);
+    struct asym*        StackBase;
+    struct asym*        ProcStatus;
+    ret_code(uasm_ABI *WriteModule)(struct module_info*);
+    ret_code(uasm_ABI *EndDirHook)(struct module_info*);
+    ret_code(uasm_ABI *Pass1Checks)(struct module_info*);
     uint_8              pe_flags;        /* for PE */
 };
 
@@ -898,15 +898,15 @@ struct module_info {
     unsigned char       cv_opt;          /* option codeview */
 #endif
     unsigned            srcfile;         /* main source file - is an index for FNames[] */
-    struct dsym* currseg;        /* currently active segment */
-    struct dsym* flat_grp;       /* magic FLAT group */
-    uint_8* pCodeBuff;
+    struct dsym*        currseg;        /* currently active segment */
+    struct dsym*        flat_grp;       /* magic FLAT group */
+    uint_8*             pCodeBuff;
     unsigned int        GeneratedCode;   /* nesting level generated code */
     /* input members */
-    char* currsource;     /* current source line */
-    char* CurrComment;    /* current comment */
-    struct asm_tok* tokenarray;     /* start token buffer */
-    char* stringbufferend;/* start free space in string buffer */
+    char*               currsource;     /* current source line */
+    char*               CurrComment;    /* current comment */
+    struct asm_tok*     tokenarray;     /* start token buffer */
+    char*               stringbufferend;/* start free space in string buffer */
     int                 token_count;     /* number of tokens in curr line */
 #if STACKBASESUPP
     unsigned            basereg[3];      /* stack base register (16-, 32-, 64-bit */
@@ -939,7 +939,7 @@ struct extra_flags {
 #define H_LONG_MAX      2147483647L      // maximum (signed) long value
 
 struct format_options {
-    void (*init)(struct module_info*);
+    void (uasm_ABI *init)(struct module_info*);
     short invalid_fixup_type;
     const char formatname[6];
 };
@@ -947,14 +947,14 @@ struct format_options {
 /* global variables */
 
 /* global strings for arch:sse/avx instructions to use */
-extern char const* const MOVE_ALIGNED_FLOAT(void);
-extern char const* const MOVE_ALIGNED_INT(void);
-extern char const* const MOVE_UNALIGNED_FLOAT(void);
-extern char const* const MOVE_UNALIGNED_INT(void);
-extern char const* const MOVE_SINGLE(void);
-extern char const* const MOVE_DOUBLE(void);
-extern char const* const MOVE_SIMD_DWORD(void);
-extern char const* const MOVE_SIMD_QWORD(void);
+extern char const* const uasm_ABI MOVE_ALIGNED_FLOAT(void);
+extern char const* const uasm_ABI MOVE_ALIGNED_INT(void);
+extern char const* const uasm_ABI MOVE_UNALIGNED_FLOAT(void);
+extern char const* const uasm_ABI MOVE_UNALIGNED_INT(void);
+extern char const* const uasm_ABI MOVE_SINGLE(void);
+extern char const* const uasm_ABI MOVE_DOUBLE(void);
+extern char const* const uasm_ABI MOVE_SIMD_DWORD(void);
+extern char const* const uasm_ABI MOVE_SIMD_QWORD(void);
 
 /* global flag to indicate when inside macro body */
 extern bool inMacroBody;
@@ -972,29 +972,29 @@ extern bool                  gmaskflag;
 
 struct fixup;
 
-extern void             OutputByte(unsigned char);
-extern void             OutputBinBytes(unsigned char* pBytes, uint_32 len);
+extern void uasm_ABI             OutputByte(unsigned char);
+extern void uasm_ABI             OutputBinBytes(unsigned char* pBytes, uint_32 len);
 
 //extern void             OutputCodeByte( unsigned char );
-extern void             FillDataBytes(unsigned char, int len);
-extern void             OutputBytes(const unsigned char*, int len, struct fixup*);
+extern void uasm_ABI             FillDataBytes(unsigned char, int len);
+extern void uasm_ABI             OutputBytes(const unsigned char*, int len, struct fixup*);
 #ifdef __SW_BD
-extern int  __stdcall   AssembleModule(const char*);
+extern int  __stdcall            AssembleModule(const char*);
 #else
-extern int              AssembleModule(const char*);
+extern int uasm_ABI              AssembleModule(const char*);
 #endif
-extern void             AddLinnumDataRef(unsigned, uint_32);
-extern void             SetMasm510(bool);
-extern void             close_files(void);
-extern char*            myltoa(uint_32 value, char* buffer, unsigned radix, bool sign, bool addzero);
-extern char*            myqtoa(uint_64 value, char* buffer, unsigned radix, bool sign, bool addzero);
-extern char*            num2hex64(uint_64 value, char* buffer);
-extern char*            ConvertSectionName(const struct asym*, enum seg_type* pst, char* buffer);
-extern void             RewindToWin64(void);
-extern void             RewindToSYSV64(void);
+extern void uasm_ABI             AddLinnumDataRef(unsigned, uint_32);
+extern void uasm_ABI             SetMasm510(bool);
+extern void uasm_ABI             close_files(void);
+extern char* uasm_ABI            myltoa(uint_32 value, char* buffer, unsigned radix, bool sign, bool addzero);
+extern char* uasm_ABI            myqtoa(uint_64 value, char* buffer, unsigned radix, bool sign, bool addzero);
+extern char* uasm_ABI            num2hex64(uint_64 value, char* buffer);
+extern char* uasm_ABI            ConvertSectionName(const struct asym*, enum seg_type* pst, char* buffer);
+extern void uasm_ABI             RewindToWin64(void);
+extern void uasm_ABI             RewindToSYSV64(void);
 
 #ifndef _MSC_VER
-extern char* strupr(char* str);
+extern char* uasm_ABI strupr(char* str);
 #endif
 
 uasm_PACK_POP

@@ -71,10 +71,10 @@
 
 uasm_PACK_PUSH_STACK
 
-extern ret_code(* const directive_tab[])(int, struct asm_tok[]);
+extern ret_code(uasm_ABI *const directive_tab[])(int, struct asm_tok[]);
 
 /* parsing of branch instructions with imm operand is found in branch.c */
-extern ret_code         process_branch(struct code_info*, unsigned, const struct expr*);
+extern ret_code uasm_ABI         process_branch(struct code_info*, unsigned, const struct expr*);
 
 extern enum proc_status     ProcStatus;
 extern const int_64         maxintvalues[];
@@ -103,7 +103,7 @@ struct symbol_queue SymTables[TAB_LAST];
 /* =====================================================================
   Return true if register a simd register (xmm,ymm,zmm).
   ===================================================================== */
-bool IsSimdReg(struct asm_tok* regTok)
+bool uasm_ABI IsSimdReg(struct asm_tok* regTok)
 {
     bool result = FALSE;
     if (regTok)
@@ -133,7 +133,7 @@ bool IsSimdReg(struct asm_tok* regTok)
 }
 
 /* add item to linked list of symbols */
-void sym_add_table(struct symbol_queue* queue, struct dsym* item)
+void uasm_ABI sym_add_table(struct symbol_queue* queue, struct dsym* item)
 /*****************************************************************/
 {
 #ifdef DEBUG_OUT
@@ -157,7 +157,7 @@ void sym_add_table(struct symbol_queue* queue, struct dsym* item)
 /* remove an item from a symbol queue.
  * this is called only for TAB_UNDEF and TAB_EXT,
  * segments, groups, procs or aliases never change their state. */
-void sym_remove_table(struct symbol_queue* queue, struct dsym* item)
+void uasm_ABI sym_remove_table(struct symbol_queue* queue, struct dsym* item)
 /********************************************************************/
 {
     /* unlink the node */
@@ -178,7 +178,7 @@ void sym_remove_table(struct symbol_queue* queue, struct dsym* item)
     item->prev = NULL;
 }
 
-void sym_ext2int(struct asym* sym)
+void uasm_ABI sym_ext2int(struct asym* sym)
 /**********************************/
 /* Change symbol state from SYM_EXTERNAL to SYM_INTERNAL.
  * called by:
@@ -201,7 +201,7 @@ void sym_ext2int(struct asym* sym)
     sym->state = SYM_INTERNAL;
 }
 
-ret_code GetLangType(int* i, struct asm_tok tokenarray[], enum lang_type* plang)
+ret_code uasm_ABI GetLangType(int* i, struct asm_tok tokenarray[], enum lang_type* plang)
 /********************************************************************************/
 {
     if (tokenarray[*i].token == T_RES_ID)
@@ -241,7 +241,7 @@ ret_code GetLangType(int* i, struct asm_tok tokenarray[], enum lang_type* plang)
 /* get size of a register
  * v2.06: rewritten, since the sflags field
  * does now contain size for GPR, STx, MMX, XMM regs. */
-int SizeFromRegister(int registertoken)
+int uasm_ABI SizeFromRegister(int registertoken)
 /***************************************/
 {
     unsigned flags;
@@ -274,7 +274,7 @@ int SizeFromRegister(int registertoken)
  * and makes the type a PROTOTYPE. Due to technical (obsolete?) restrictions the
  * prototype data is stored in another symbol and is referenced in the typedef's
  * target_type member. */
-int SizeFromMemtype(enum memtype mem_type, int Ofssize, struct asym* type)
+int uasm_ABI SizeFromMemtype(enum memtype mem_type, int Ofssize, struct asym* type)
 /**************************************************************************/
 {
     if ((mem_type & MT_SPECIAL) == 0)
@@ -315,7 +315,7 @@ int SizeFromMemtype(enum memtype mem_type, int Ofssize, struct asym* type)
 }
 
 /* get memory type from size */
-ret_code MemtypeFromSize(int size, enum memtype* ptype)
+ret_code uasm_ABI MemtypeFromSize(int size, enum memtype* ptype)
 /*******************************************************/
 {
     int i;
@@ -349,7 +349,7 @@ ret_code MemtypeFromSize(int size, enum memtype* ptype)
     return(ERROR);
 }
 
-static bool IsScalarSimdInstr(enum instr_token instr)
+static bool uasm_ABI IsScalarSimdInstr(enum instr_token instr)
 {
     bool result = FALSE;
     switch (instr)
@@ -462,7 +462,7 @@ static bool IsScalarSimdInstr(enum instr_token instr)
     return(result);
 }
 
-int OperandSize(enum operand_type opnd, const struct code_info* CodeInfo)
+int uasm_ABI OperandSize(enum operand_type opnd, const struct code_info* CodeInfo)
 /*************************************************************************/
 {
     /* v2.0: OP_M8_R8 and OP_M16_R16 have the DFT bit set! */
@@ -535,7 +535,7 @@ int OperandSize(enum operand_type opnd, const struct code_info* CodeInfo)
     return(0);
 }
 
-static int comp_mem16(int reg1, int reg2)
+static int uasm_ABI comp_mem16(int reg1, int reg2)
 /*****************************************/
 /*
 - compare and return the r/m field encoding of 16-bit address mode;
@@ -564,7 +564,7 @@ static int comp_mem16(int reg1, int reg2)
     return(EmitError(MULTIPLE_BASE_REGISTERS_NOT_ALLOWED));
 }
 
-static void check_assume(struct code_info* CodeInfo, const struct asym* sym, enum assume_segreg default_reg)
+static void uasm_ABI check_assume(struct code_info* CodeInfo, const struct asym* sym, enum assume_segreg default_reg)
 /************************************************************************************************************/
 /* Check if an assumed segment register is found, and
  * set CodeInfo->RegOverride if necessary.
@@ -611,7 +611,7 @@ static void check_assume(struct code_info* CodeInfo, const struct asym* sym, enu
     }
 }
 
-static void seg_override(struct code_info* CodeInfo, int seg_reg, const struct asym* sym, bool direct)
+static void uasm_ABI seg_override(struct code_info* CodeInfo, int seg_reg, const struct asym* sym, bool direct)
 /******************************************************************************************************/
 /*
  * called by set_rm_sib(). determine if segment override is necessary
@@ -700,7 +700,7 @@ static void seg_override(struct code_info* CodeInfo, int seg_reg, const struct a
  * - idata_fixup()
  * - process_branch() in branch.c
  * - data_item() in data.c */
-void set_frame(const struct asym* sym)
+void uasm_ABI set_frame(const struct asym* sym)
 /**************************************/
 {
     SetFixupFrame(SegOverride ? SegOverride : sym, FALSE);
@@ -711,13 +711,13 @@ void set_frame(const struct asym* sym)
  * called by:
  * - idata_fixup()
  * - data_item() */
-void set_frame2(const struct asym* sym)
+void uasm_ABI set_frame2(const struct asym* sym)
 /***************************************/
 {
     SetFixupFrame(SegOverride ? SegOverride : sym, TRUE);
 }
 
-static ret_code set_rm_sib(struct code_info* CodeInfo, unsigned CurrOpnd, char ss, int index, int base, const struct asym* sym)
+static ret_code uasm_ABI set_rm_sib(struct code_info* CodeInfo, unsigned CurrOpnd, char ss, int index, int base, const struct asym* sym)
 /*******************************************************************************************************************************/
 /*
  * encode ModRM and SIB byte for memory addressing.
@@ -1016,7 +1016,7 @@ static ret_code set_rm_sib(struct code_info* CodeInfo, unsigned CurrOpnd, char s
  * 1. If it's a segment register, set CodeInfo->prefix.RegOverride.
  * 2. Set global variable SegOverride if it's a SEG/GRP symbol
  *    (or whatever is assumed for the segment register) */
-ret_code segm_override(const struct expr* opndx, struct code_info* CodeInfo)
+ret_code uasm_ABI segm_override(const struct expr* opndx, struct code_info* CodeInfo)
 /****************************************************************************/
 {
     struct asym* sym;
@@ -1065,7 +1065,7 @@ ret_code segm_override(const struct expr* opndx, struct code_info* CodeInfo)
  *   CodeInfo->data[CurrOpnd]      = value
  *   CodeInfo->prefix.opsiz
  *   CodeInfo->iswide */
-static ret_code idata_nofixup(struct code_info* CodeInfo, unsigned CurrOpnd, const struct expr* opndx)
+static ret_code uasm_ABI idata_nofixup(struct code_info* CodeInfo, unsigned CurrOpnd, const struct expr* opndx)
 /******************************************************************************************************/
 {
     enum operand_type op_type;
@@ -1198,7 +1198,7 @@ static ret_code idata_nofixup(struct code_info* CodeInfo, unsigned CurrOpnd, con
  *   CodeInfo->mem_type
  *   CodeInfo->prefix.opsiz
  * to be fixed: don't modify CodeInfo->mem_type here! */
-ret_code idata_fixup(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx)
+ret_code uasm_ABI idata_fixup(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx)
 /***************************************************************************************/
 {
     //struct fixup      *fixup;
@@ -1571,7 +1571,7 @@ ret_code idata_fixup(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr*
  * so this value must come from a label or a structure field.
  * (above comment is most likely plain wrong, see 'PF16 ptr [reg]'!
  * This code needs cleanup! */
-static void SetPtrMemtype(struct code_info* CodeInfo, struct expr* opndx)
+static void uasm_ABI SetPtrMemtype(struct code_info* CodeInfo, struct expr* opndx)
 /*************************************************************************/
 {
     struct asym* sym = opndx->sym;
@@ -1634,7 +1634,7 @@ static void SetPtrMemtype(struct code_info* CodeInfo, struct expr* opndx)
  * - prefix.opsiz
  * - prefix.rex REX_W
  * called by memory_operand() */
-static void Set_Memtype(struct code_info* CodeInfo, enum memtype mem_type)
+static void uasm_ABI Set_Memtype(struct code_info* CodeInfo, enum memtype mem_type)
 /**************************************************************************/
 {
     if (CodeInfo->token == T_LEA)
@@ -1777,7 +1777,7 @@ static void Set_Memtype(struct code_info* CodeInfo, enum memtype mem_type)
  * in: CurrOpnd=no of operand (0=first operand, 1=second operand)
  * out: CodeInfo->data[]
  * out: CodeInfo->opnd_type[] */
-static ret_code memory_operand(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx, bool with_fixup)
+static ret_code uasm_ABI memory_operand(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx, bool with_fixup)
 /******************************************************************************************************************/
 {
     char                ss = SCALE_FACTOR_1;
@@ -2123,7 +2123,7 @@ static ret_code memory_operand(struct code_info* CodeInfo, unsigned CurrOpnd, st
     return(NOT_ERROR);
 }
 
-static ret_code process_address(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx)
+static ret_code uasm_ABI process_address(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx)
 /**************************************************************************************************/
 /* parse the memory reference operand */
 {
@@ -2262,7 +2262,7 @@ static ret_code process_address(struct code_info* CodeInfo, unsigned CurrOpnd, s
 /* Handle constant operands.
  * These never need a fixup. Externals - even "absolute" ones -
  * are always labeled as EXPR_ADDR by the expression evaluator. */
-static ret_code process_const(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx)
+static ret_code uasm_ABI process_const(struct code_info* CodeInfo, unsigned CurrOpnd, struct expr* opndx)
 /************************************************************************************************/
 {
     /* v2.11: don't accept an empty string */
@@ -2280,7 +2280,7 @@ static ret_code process_const(struct code_info* CodeInfo, unsigned CurrOpnd, str
     return(idata_nofixup(CodeInfo, CurrOpnd, opndx));
 }
 
-static ret_code process_register(struct code_info* CodeInfo, unsigned CurrOpnd, const struct expr opndx[])
+static ret_code uasm_ABI process_register(struct code_info* CodeInfo, unsigned CurrOpnd, const struct expr opndx[])
 /**********************************************************************************************************/
 /*
  * parse and encode direct register operands. Modifies:
@@ -2471,7 +2471,7 @@ static ret_code process_register(struct code_info* CodeInfo, unsigned CurrOpnd, 
  * the peculiarity is that these instructions ( optionally )
  * have memory operands, which aren't used for code generation
  * <opndx> contains the last operand. */
-static void HandleStringInstructions(struct code_info* CodeInfo, const struct expr opndx[])
+static void uasm_ABI HandleStringInstructions(struct code_info* CodeInfo, const struct expr opndx[])
 /*******************************************************************************************/
 {
     int opndidx = OPND1;
@@ -2663,7 +2663,7 @@ static void HandleStringInstructions(struct code_info* CodeInfo, const struct ex
     return;
 }
 
-static ret_code check_size(struct code_info* CodeInfo, const struct expr opndx[])
+static ret_code uasm_ABI check_size(struct code_info* CodeInfo, const struct expr opndx[])
 /*********************************************************************************/
 /*
  * - use to make sure the size of first operand match the size of second operand;
@@ -3334,7 +3334,7 @@ static ret_code check_size(struct code_info* CodeInfo, const struct expr opndx[]
     return(rc);
     }
 
-static struct asym* IsType(const char* name)
+static struct asym* uasm_ABI IsType(const char* name)
 /********************************************/
 {
     struct asym* sym;
@@ -3352,7 +3352,7 @@ static struct asym* IsType(const char* name)
  * - for data items and data directives: call data_dir()
  * - for other directives: call directive[]()
  * - for instructions: fill CodeInfo and call codegen() */
-ret_code ParseLine(struct asm_tok tokenarray[])
+ret_code uasm_ABI ParseLine(struct asm_tok tokenarray[])
 {
     int                i;
     int                j;
@@ -4394,7 +4394,7 @@ nopor:
 }
 
 /* process a file. introduced in v2.11 */
-void ProcessFile(struct asm_tok tokenarray[])
+void uasm_ABI ProcessFile(struct asm_tok tokenarray[])
 /*********************************************/
 {
     /* Initialize xmmword override tokens each pass */

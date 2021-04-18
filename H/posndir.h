@@ -12,7 +12,7 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void AlignCurrOffset(int);
+extern void uasm_ABI AlignCurrOffset(int);
 
 uasm_PACK_POP
 

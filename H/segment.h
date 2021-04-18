@@ -38,27 +38,27 @@ uasm_PACK_PUSH_STACK
 
 #define GetSegm( x )     (struct dsym *)x->segment
 
-extern void             SetSymSegOfs(struct asym*);
-extern int              GetSymOfssize(const struct asym*);
+extern void uasm_ABI            SetSymSegOfs(struct asym*);
+extern int uasm_ABI             GetSymOfssize(const struct asym*);
 /* Get current segment's offset */
-extern uint_32          GetCurrOffset(void);
-extern ret_code         SetCurrOffset(struct dsym*, uint_32, bool, bool);
-extern struct asym* CreateIntSegment(const char*, const char*, uint_8, uint_8, bool);
+extern uint_32 uasm_ABI         GetCurrOffset(void);
+extern ret_code uasm_ABI        SetCurrOffset(struct dsym*, uint_32, bool, bool);
+extern struct asym* uasm_ABI    CreateIntSegment(const char*, const char*, uint_8, uint_8, bool);
 /* get symbol's segment index, from the symbol itself */
-extern unsigned         GetSegIdx(const struct asym*);
-extern void             SegmentInit(int);     /* init segments */
-extern void             SegmentFini(void);    /* exit segments */
-extern struct asym* GetGroup(const struct asym*);
-extern uint_32          GetCurrSegAlign(void);
-extern ret_code         SetOfssize(void);
-extern enum seg_type    TypeFromClassName(const struct dsym*, const struct asym*);
-extern void             DefineFlatGroup(void);
-extern ret_code         SegmentModuleExit(void);
-extern void             DeleteGroup(struct dsym*);
-//extern char             *GetLname( int );
-//extern void             FreeLnameQueue( void );
-extern void             push_seg(struct dsym*);
-extern void             pop_seg(void);
+extern unsigned uasm_ABI        GetSegIdx(const struct asym*);
+extern void uasm_ABI            SegmentInit(int);     /* init segments */
+extern void uasm_ABI            SegmentFini(void);    /* exit segments */
+extern struct asym* uasm_ABI    GetGroup(const struct asym*);
+extern uint_32 uasm_ABI         GetCurrSegAlign(void);
+extern ret_code uasm_ABI        SetOfssize(void);
+extern enum seg_type uasm_ABI   TypeFromClassName(const struct dsym*, const struct asym*);
+extern void uasm_ABI            DefineFlatGroup(void);
+extern ret_code uasm_ABI        SegmentModuleExit(void);
+extern void uasm_ABI            DeleteGroup(struct dsym*);
+//extern char uasm_ABI             *GetLname( int );
+//extern void uasm_ABI             FreeLnameQueue( void );
+extern void uasm_ABI            push_seg(struct dsym*);
+extern void uasm_ABI            pop_seg(void);
 
 /* simplified segment functions */
 
@@ -73,13 +73,13 @@ enum sim_seg {
     SIM_LAST
 };
 
-extern char* SimGetSegName(enum sim_seg);
-extern const char* GetCodeClass(void);
-extern ret_code         ModelSimSegmInit(int type);
-extern void             ModelSimSegmExit(void);
-extern void             SetModelDefaultSegNames(void);
+extern char* uasm_ABI               SimGetSegName(enum sim_seg segno);
+extern char const* const uasm_ABI   GetCodeClass(void);
+extern ret_code uasm_ABI            ModelSimSegmInit(int type);
+extern void uasm_ABI                ModelSimSegmExit(void);
+extern void uasm_ABI                SetModelDefaultSegNames(void);
 
-extern void             UpdateCurrSegVars(void);
+extern void uasm_ABI                UpdateCurrSegVars(void);
 
 uasm_PACK_POP
 

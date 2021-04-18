@@ -12,13 +12,13 @@
 
 uasm_PACK_PUSH_STACK
 
-extern void HllInit( int );    /* reset counter for hll labels */
+extern void uasm_ABI HllInit( int );    /* reset counter for hll labels */
 #if FASTMEM==0
-extern void HllFini( void );
+extern void uasm_ABI HllFini( void );
 #endif
-extern void HllCheckOpen( void );
+extern void uasm_ABI HllCheckOpen( void );
 
-extern uint_32 GetHllLabel(void);
+extern uint_32 uasm_ABI GetHllLabel(void);
 
 uasm_PACK_POP
 

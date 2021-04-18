@@ -26,14 +26,14 @@ enum lsttype {
     LSTTYPE_MACROLINE,
 };
 
-extern void LstInit(void);
-extern void LstWrite(enum lsttype, uint_32 ofs, void* sym);
-extern void LstWriteSrcLine(void);
-extern void LstWriteCRef(void);
-extern void LstPrintf(const char* format, ...);
-extern void LstNL(void);
+extern void uasm_ABI LstInit(void);
+extern void uasm_ABI LstWrite(enum lsttype type, uint_32 ofs, void* sym);
+extern void uasm_ABI LstWriteSrcLine(void);
+extern void uasm_ABI LstWriteCRef(void);
+extern void uasm_ABI LstPrintf(const char* format, ...);
+extern void uasm_ABI LstNL(void);
 #if FASTPASS
-extern void LstSetPosition(void);
+extern void uasm_ABI LstSetPosition(void);
 #endif
 
 uasm_PACK_POP

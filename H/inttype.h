@@ -48,11 +48,13 @@ typedef signed char     int_8;
 typedef unsigned short  uint_16;
 typedef signed short    int_16;
 #if defined(LONG_IS_64BITS) || defined(__LP64__)
+typedef unsigned int    int_bool;
 typedef unsigned int    uint_32;
 typedef   signed int    int_32;
 typedef unsigned long   uint_64;
 typedef   signed long   int_64;
 #else
+typedef unsigned long      int_bool;
 typedef unsigned long      uint_32;
 typedef   signed long      int_32;
 #if defined(LLONG_MAX) || defined(__GNUC__)

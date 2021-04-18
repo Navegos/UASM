@@ -128,9 +128,9 @@ uasm_PACK_POP
 
 uasm_PACK_PUSH_STACK
 
-extern int getExecutablePath(char* out, int capacity, int* dirname_length);
+extern int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length);
 
-uint_8* SetPrefixName(uint_8* p, uint_8* name, int len)
+uint_8* uasm_ABI SetPrefixName(uint_8* p, uint_8* name, int len)
 {
     if (Options.debug_symbols < CV_SIGNATURE_C13)
         *p++ = len;
@@ -152,7 +152,7 @@ uint_8* SetPrefixName(uint_8* p, uint_8* name, int len)
 
 /* translate symbol's mem_type to a codeview typeref */
 
-uint_32 GetTyperef(struct asym* sym, uint_8 Ofssize)
+uint_32 uasm_ABI GetTyperef(struct asym* sym, uint_8 Ofssize)
 {
     if ((sym->mem_type & MT_SPECIAL) == 0) {
         int size = SizeFromMemtype(sym->mem_type, Ofssize, sym->type);
@@ -178,7 +178,7 @@ uint_32 GetTyperef(struct asym* sym, uint_8 Ofssize)
             else {
                 switch (size) {
                 case 1: return ST_UCHAR;
-                case 2: return ST_UINT2;
+                case 2: return ST_CHAR16;// ST_UINT2;
                 case 4: return ST_UINT4;
                 case 6: return ST_REAL48;
                 case 8: return ST_UINT8;
@@ -234,7 +234,7 @@ uint_32 GetTyperef(struct asym* sym, uint_8 Ofssize)
 
 /* calc size of a codeview item in symbols segment */
 
-static uint_16 GetCVStructLen(struct asym* sym, uint_8 Ofssize)
+static uint_16 uasm_ABI GetCVStructLen(struct asym* sym, uint_8 Ofssize)
 {
     if (sym->state == SYM_TYPE)
         return(Options.debug_symbols == CV_SIGNATURE_C7 ? sizeof(UDTSYM_16t) - 1 : sizeof(UDTSYM) - 1);
@@ -260,7 +260,7 @@ static uint_16 GetCVStructLen(struct asym* sym, uint_8 Ofssize)
     return sizeof(DATASYM32) - 1;
 }
 
-static void PadBytes(uint_8* curr, uint_8* base)
+static void uasm_ABI PadBytes(uint_8* curr, uint_8* base)
 {
     static const char padtab[] = { LF_PAD1, LF_PAD2, LF_PAD3 };
 
@@ -270,7 +270,7 @@ static void PadBytes(uint_8* curr, uint_8* base)
 
 /* write a bitfield to $$TYPES */
 
-static void cv_write_bitfield(dbgcv* cv, struct dsym* type, struct asym* sym)
+static void uasm_ABI cv_write_bitfield(dbgcv* cv, struct dsym* type, struct asym* sym)
 {
     uint_32 tref = GetTyperef((struct asym*)type, USE16);
     uint_32 size = (Options.debug_symbols == CV_SIGNATURE_C7 ?
@@ -295,7 +295,7 @@ static void cv_write_bitfield(dbgcv* cv, struct dsym* type, struct asym* sym)
     cv->pt += size;
 }
 
-static void cv_write_array_type(struct dbgcv* cv, struct asym* sym,
+static void uasm_ABI cv_write_array_type(struct dbgcv* cv, struct asym* sym,
     uint_32 elemtype, uint_8 Ofssize)
 {
     uint_8*     tmp;
@@ -341,7 +341,7 @@ static void cv_write_array_type(struct dbgcv* cv, struct asym* sym,
  * the symbol's mem_type is MT_PTR.
  */
 
-static uint_32 cv_write_ptr_type(struct dbgcv* cv, struct asym* sym)
+static uint_32 uasm_ABI cv_write_ptr_type(struct dbgcv* cv, struct asym* sym)
 {
     uint_32 attr, type;
     uint_32 size = sizeof(CV_POINTER);
@@ -410,10 +410,10 @@ struct cv_counters {
     uint_32 ofs;  /* current start offset for member */
 };
 
-static void cv_write_type(struct dbgcv* cv, struct asym* sym);
+static void uasm_ABI cv_write_type(struct dbgcv* cv, struct asym* sym);
 
 /* type of field enumeration callback function */
-typedef void (*cv_enum_func)(struct dsym*, struct asym*, struct dbgcv*, struct cv_counters*);
+typedef void (uasm_ABI *cv_enum_func)(struct dsym*, struct asym*, struct dbgcv*, struct cv_counters*);
 
 /* field enumeration callback, does:
  * - count number of members in a field list
@@ -421,7 +421,7 @@ typedef void (*cv_enum_func)(struct dsym*, struct asym*, struct dbgcv*, struct c
  * - create types ( array, structure ) if not defined yet
  */
 
-static void cv_cntproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
+static void uasm_ABI cv_cntproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
 {
     int      numsize;
     uint_32  offset;
@@ -456,7 +456,7 @@ static void cv_cntproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, st
  * - create LF_MEMBER record
  */
 
-static void cv_memberproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
+static void uasm_ABI cv_memberproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
 {
     uint_32     offset;
     uint_32 index;
@@ -522,7 +522,7 @@ static void cv_memberproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv,
  * anonymous struct members or embedded anonymous structs are "unfolded"
  * in this function.
  */
-static void cv_enum_fields(struct dsym* sym, cv_enum_func enumfunc, struct dbgcv* cv, struct cv_counters* cc)
+static void uasm_ABI cv_enum_fields(struct dsym* sym, cv_enum_func enumfunc, struct dbgcv* cv, struct cv_counters* cc)
 {
     unsigned        i;
     struct sfield*  curr;
@@ -554,7 +554,7 @@ static void cv_enum_fields(struct dsym* sym, cv_enum_func enumfunc, struct dbgcv
 
 /* write a LF_PROCEDURE & LF_ARGLIST type for procedures */
 
-static void cv_write_type_procedure(struct dbgcv* cv, struct asym* sym, int cnt)
+static void uasm_ABI cv_write_type_procedure(struct dbgcv* cv, struct asym* sym, int cnt)
 {
     int size = sizeof(CV_PROCEDURE);
     int leaf = LF_PROCEDURE;
@@ -630,7 +630,7 @@ static void cv_write_type_procedure(struct dbgcv* cv, struct asym* sym, int cnt)
  *   sym: type to dump
  */
 
-static void cv_write_type(struct dbgcv* cv, struct asym* sym)
+static void uasm_ABI cv_write_type(struct dbgcv* cv, struct asym* sym)
 {
     struct dsym* type = (struct dsym*)sym;
     uint_8*     tmp;
@@ -767,7 +767,7 @@ static void cv_write_type(struct dbgcv* cv, struct asym* sym)
 
 /* get register values for S_REGISTER */
 
-uint_16 cv_get_register(struct asym* sym)
+uint_16 uasm_ABI cv_get_register(struct asym* sym)
 {
     uint_16 regno;
     uint_16 rc = 0;
@@ -799,7 +799,7 @@ uint_16 cv_get_register(struct asym* sym)
  */
 static const uint_8 reg64[] = { 0, 2, 3, 1, 7, 6, 4, 5 };
 
-uint_16 cv_get_x64_regno(uint_16 regno)
+uint_16 uasm_ABI cv_get_x64_regno(uint_16 regno)
 {
     if (regno >= T_RAX && regno <= T_RDI)
         return(reg64[regno - T_RAX] + CV_AMD64_RAX);
@@ -816,7 +816,7 @@ uint_16 cv_get_x64_regno(uint_16 regno)
  * the symbol has either state SYM_INTERNAL or SYM_TYPE.
  */
 
-static void cv_write_symbol(struct dbgcv* cv, struct asym* sym)
+static void uasm_ABI cv_write_symbol(struct dbgcv* cv, struct asym* sym)
 {
     int                 len;
     unsigned            ofs;
@@ -1214,7 +1214,7 @@ static void cv_write_symbol(struct dbgcv* cv, struct asym* sym)
     return;
 }
 
-static void cv_align(dbgcv* cv)
+static void uasm_ABI cv_align(dbgcv* cv)
 {
     int count = cv->section->length & 3;
     if (count)
@@ -1225,7 +1225,7 @@ static void cv_align(dbgcv* cv)
 
 /* flush section header and return memory address */
 
-static CV_SECTION* cv_FlushSection(dbgcv* cv, uint_32 signature)
+static uint_8* uasm_ABI cv_FlushSection(dbgcv* cv, uint_32 signature, uint_32 ex)
 {
     int i;
     uint_8* p, * curr;
@@ -1237,15 +1237,15 @@ static CV_SECTION* cv_FlushSection(dbgcv* cv, uint_32 signature)
     curr = cv->ps;
     cv->ps = seg->e.seginfo->CodeBuffer;
     currsize = curr - cv->ps;
-    size = currsize + sizeof(struct qditem) + sizeof(CV_SECTION);
+    size = currsize + ex + sizeof(struct qditem) + sizeof(CV_SECTION);
 
     p = (unsigned char*)LclAlloc(size);
     ((struct qditem*)p)->next = NULL;
-    ((struct qditem*)p)->size = currsize + sizeof(CV_SECTION);
+    ((struct qditem*)p)->size = currsize + ex + sizeof(CV_SECTION);
 
-    cv->section = (CV_SECTION*)&p[size - sizeof(CV_SECTION)];
+    cv->section = (CV_SECTION*)&p[size - ex - sizeof(CV_SECTION)];
     cv->section->signature = signature;
-    cv->section->length = 0;
+    cv->section->length = ex;
 
     if (currsize)
         memcpy(p + sizeof(struct qditem), seg->e.seginfo->CodeBuffer, currsize);
@@ -1258,7 +1258,7 @@ static CV_SECTION* cv_FlushSection(dbgcv* cv, uint_32 signature)
         ((struct qditem*)(cm->SymDeb[i].q.tail))->next = p;
         cm->SymDeb[i].q.tail = p;
     }
-    seg->e.seginfo->current_loc = seg->e.seginfo->start_loc + currsize + sizeof(CV_SECTION);
+    seg->e.seginfo->current_loc = seg->e.seginfo->start_loc + currsize + ex + sizeof(CV_SECTION);
     seg->e.seginfo->start_loc = seg->e.seginfo->current_loc;
 
     return(cv->section);
@@ -1271,7 +1271,7 @@ static CV_SECTION* cv_FlushSection(dbgcv* cv, uint_32 signature)
 #define MYBUFSIZ 1024*4
 #define MD5_LENGTH ( sizeof( uint_32 ) + sizeof( uint_16 ) + 16 + sizeof( uint_16 ) )
 
-static int calc_md5(const char* filename, unsigned char* sum)
+static int uasm_ABI calc_md5(const char* filename, unsigned char* sum)
 {
     FILE* fp;
     uint_8* file_buf;
@@ -1311,7 +1311,7 @@ static int calc_md5(const char* filename, unsigned char* sum)
 
 extern struct asym* CV8Label;
 
-void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
+void uasm_ABI cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
 {
     struct asym*    sym;
     struct dsym* seg;
@@ -1365,7 +1365,7 @@ void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
 
         /* source filename string table */
 
-        cv_FlushSection(&cv, 0x000000F3);
+        cv_FlushSection(&cv, 0x000000F3, 0);
         cv.section->length++;
         *cv.ps++ = '\0';
 
@@ -1382,10 +1382,8 @@ void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
                 name = cv.currdir;
             }
             len = strlen(name) + 1;
-            p = cv.ps;
             cv.ps = checkflush(cv.symbols, cv.ps, len, cv.param);
             memcpy(cv.ps, name, len);
-            if (p == cv.ps)
                 cv.ps += len;
             cv.section->length += len;
         }
@@ -1398,7 +1396,7 @@ void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
 
         /* source file info */
 
-        cv_FlushSection(&cv, 0x000000F4);
+        cv_FlushSection(&cv, 0x000000F4, 0);
 
         for (i = 0; i < ModuleInfo.g.cnt_fnames; i++) {
 
@@ -1445,15 +1443,22 @@ void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
                 CV_DebugSLinesFileBlockHeader_t* File;
                 struct line_num_info* Queue;
 
-                cv_FlushSection(&cv, 0x000000F2);
-                Header = (CV_DebugSLinesHeader_t*)cv.ps;
-                cv.ps += sizeof(CV_DebugSLinesHeader_t);
-                cv.section->length = sizeof(CV_DebugSLinesHeader_t);
+                p = cv_FlushSection(&cv, 0x000000F2,
+                    sizeof(CV_DebugSLinesHeader_t) + sizeof(CV_DebugSLinesFileBlockHeader_t));
+
+                p += sizeof(CV_SECTION);
+                Header = (CV_DebugSLinesHeader_t*)p;
+                p += sizeof(CV_DebugSLinesHeader_t);
+                File = (CV_DebugSLinesFileBlockHeader_t*)p;
 
                 Header->offCon = 0;
                 Header->segCon = 0;
                 Header->flags = 0;
                 Header->cbCon = seg->sym.max_offset;
+
+                File->offFile = 0;
+                File->nLines = 0;
+                File->cbBlock = 0;
 
                 Queue = (struct line_num_info*)((struct qdesc*)seg->e.seginfo->LinnumQueue)->head;
 
@@ -1466,14 +1471,7 @@ void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
                     if (Queue->number == 0)
                         fileStart = Queue->file;
 
-                    cv.ps = checkflush(cv.symbols, cv.ps, sizeof(CV_DebugSLinesFileBlockHeader_t), cv.param);
-                    File = (CV_DebugSLinesFileBlockHeader_t*)cv.ps;
-                    cv.ps += sizeof(CV_DebugSLinesFileBlockHeader_t);
-
-                    cv.section->length += sizeof(CV_DebugSLinesFileBlockHeader_t);
-
                     File->offFile = cv.files[fileStart].offset;
-                    File->nLines = 0;
                     File->cbBlock = 12;
                     Prev = NULL;
 
@@ -1502,14 +1500,11 @@ void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
                                 continue;
                         }
 
-                        Line = (CV_Line_t*)cv.ps;
                         cv.ps = checkflush(cv.symbols, cv.ps, sizeof(CV_Line_t), cv.param);
-                        if (Line == (CV_Line_t*)cv.ps)
+                        Line = (CV_Line_t*)cv.ps;
                             cv.ps += sizeof(CV_Line_t);
-                        else
-                            Line = (CV_Line_t*)cv.ps;
-
                         cv.section->length += sizeof(CV_Line_t);
+
                         File->nLines++;
                         File->cbBlock += 8;
 
@@ -1528,7 +1523,7 @@ void cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
 
         /* symbol information */
 
-        cv_FlushSection(&cv, 0x000000F1);
+        cv_FlushSection(&cv, 0x000000F1, 0);
         start = cv.ps;
 
         /* Name of object file */

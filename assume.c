@@ -86,13 +86,14 @@ static const char szError[] = { "ERROR" };
 static const char szNothing[] = { "NOTHING" };
 const char szDgroup[] = { "DGROUP" };
 
-void SetSegAssumeTable(void* savedstate)
+void uasm_ABI SetSegAssumeTable(void* savedstate)
 /****************************************/
 {
     DebugMsg(("SetSegAssumeTable\n"));
     memcpy(&SegAssumeTable, savedstate, sizeof(SegAssumeTable));
 }
-void GetSegAssumeTable(void* savedstate)
+
+void uasm_ABI GetSegAssumeTable(void* savedstate)
 /****************************************/
 {
     DebugMsg(("GetSegAssumeTable\n"));
@@ -106,7 +107,7 @@ void GetSegAssumeTable(void* savedstate)
  * this functions is also called by context.c, ContextDirective()!
  */
 
-void SetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
+void uasm_ABI SetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
 /***********************************************************************/
 {
     int i;
@@ -126,7 +127,7 @@ void SetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
     }
 }
 
-void GetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
+void uasm_ABI GetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
 /***********************************************************************/
 {
     int i;
@@ -146,7 +147,7 @@ void GetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
 }
 
 #if FASTPASS
-void AssumeSaveState(void)
+void uasm_ABI AssumeSaveState(void)
 /**************************/
 {
     GetSegAssumeTable(&saved_SegAssumeTable);
@@ -154,7 +155,7 @@ void AssumeSaveState(void)
 }
 #endif
 
-void AssumeInit(int pass) /* pass may be -1 here! */
+void uasm_ABI AssumeInit(int pass) /* pass may be -1 here! */
 /*************************/
 {
     int reg;
@@ -215,7 +216,7 @@ void AssumeInit(int pass) /* pass may be -1 here! */
 /* generate assume lines after .MODEL directive
  * model is in ModuleInfo.model, it can't be MODEL_NONE.
  */
-void ModelAssumeInit(void)
+void uasm_ABI ModelAssumeInit(void)
 /**************************/
 {
     char* pCS;
@@ -265,7 +266,7 @@ void ModelAssumeInit(void)
 
 /* used by INVOKE directive */
 
-struct asym* GetStdAssume(int reg)
+struct asym* uasm_ABI GetStdAssume(int reg)
     /**********************************/
 {
     if (StdAssumeTable[reg].symbol)
@@ -286,14 +287,15 @@ struct asym* GetStdAssume(int reg)
  * expression evaluator if a register is used for indirect addressing
  * v2.14 fixed by nidud
  */
-struct asym* GetStdAssumeEx(int reg)
+struct asym* uasm_ABI GetStdAssumeEx(int reg)
     /************************************/
 {
     if (reg >= NUM_STDREGS)
         return NULL;
     return(StdAssumeTable[reg].symbol);
 }
-ret_code AssumeDirective(int i, struct asm_tok tokenarray[])
+
+ret_code uasm_ABI AssumeDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 /* Handles ASSUME
  * syntax is :
@@ -502,8 +504,7 @@ ret_code AssumeDirective(int i, struct asm_tok tokenarray[])
  *   DS, SS, ES, FS, GS, CS
  */
 
-enum assume_segreg search_assume(const struct asym* sym,
-    enum assume_segreg def, bool search_grps)
+enum assume_segreg uasm_ABI search_assume(const struct asym* sym, enum assume_segreg def, bool search_grps)
     /**********************************************************/
 {
     struct asym* grp;
@@ -556,30 +557,30 @@ enum assume_segreg search_assume(const struct asym* sym,
 /*
  called by the parser's seg_override() function if
  a segment register override has been detected.
- - override: segment register override (0,1,2,3,4,5)
+ - segoverride: segment register override (0,1,2,3,4,5)
 */
 
-struct asym* GetOverrideAssume(enum assume_segreg override)
+struct asym* uasm_ABI GetOverrideAssume(enum assume_segreg segoverride)
     /***********************************************************/
 {
-    if (SegAssumeTable[override].is_flat)
+    if (SegAssumeTable[segoverride].is_flat)
     {
         return((struct asym*)ModuleInfo.flat_grp);
     }
-    return(SegAssumeTable[override].symbol);
+    return(SegAssumeTable[segoverride].symbol);
 }
 
 /*
  * GetAssume():
  * called by check_assume() in parser.c
  * in:
- * - override: SegOverride
+ * - segoverride: SegOverride
  * - sym: symbol in current memory operand
  * - def: default segment assume value
  * to be fixed: check if symbols with state==SYM_STACK are handled correctly.
  */
 
-enum assume_segreg GetAssume(const struct asym* override, const struct asym* sym, enum assume_segreg def, struct asym** passume)
+enum assume_segreg uasm_ABI GetAssume(const struct asym* segoverride, const struct asym* sym, enum assume_segreg def, struct asym** passume)
     /*********************************************************************************************************************************/
 {
     enum assume_segreg  reg;
@@ -589,9 +590,9 @@ enum assume_segreg GetAssume(const struct asym* override, const struct asym* sym
         *passume = (struct asym*)ModuleInfo.flat_grp;
         return(def);
     }
-    if (override != NULL)
+    if (segoverride != NULL)
     {
-        reg = search_assume(override, def, FALSE);
+        reg = search_assume(segoverride, def, FALSE);
 #if 1 /* v2.10: added */
     }
     else if (sym->state == SYM_STACK)

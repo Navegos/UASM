@@ -36,8 +36,8 @@
 
 uasm_PACK_PUSH_STACK
 
-extern struct asym* CreateConstant(struct asm_tok[]);
-extern struct asym* CreateVariable(const char*, int);
+extern struct asym* uasm_ABI CreateConstant(struct asm_tok[]);
+extern struct asym* uasm_ABI CreateVariable(const char*, int);
 
 uasm_PACK_POP
 

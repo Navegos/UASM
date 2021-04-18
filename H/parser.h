@@ -391,22 +391,22 @@ extern uint_16                   optable_idx[];  /* helper, access thru IndexFro
 
 #define IndexFromToken( tok )  optable_idx[ ( tok ) - SPECIAL_LAST ]
 
-extern int        SizeFromMemtype( enum memtype, int, struct asym * );
-extern ret_code   MemtypeFromSize( int, enum memtype * );
-extern int        SizeFromRegister( int );
-extern ret_code   GetLangType( int *, struct asm_tok[], enum lang_type * );
+extern int uasm_ABI        SizeFromMemtype(enum memtype mem_type, int, struct asym*);
+extern ret_code uasm_ABI   MemtypeFromSize(int, enum memtype* ptype);
+extern int uasm_ABI        SizeFromRegister(int);
+extern ret_code uasm_ABI   GetLangType(int*, struct asm_tok[], enum lang_type* plang);
 
-extern void       sym_add_table( struct symbol_queue *, struct dsym * );
-extern void       sym_remove_table( struct symbol_queue *, struct dsym * );
-extern void       sym_ext2int( struct asym * );
+extern void uasm_ABI       sym_add_table(struct symbol_queue*, struct dsym*);
+extern void uasm_ABI       sym_remove_table(struct symbol_queue*, struct dsym*);
+extern void uasm_ABI       sym_ext2int(struct asym*);
 
-extern int        OperandSize( enum operand_type, const struct code_info * );
-extern void       set_frame( const struct asym *sym );
-extern void       set_frame2( const struct asym *sym );
-extern ret_code   ParseLine( struct asm_tok[] );
-extern void       ProcessFile( struct asm_tok[] );
+extern int uasm_ABI        OperandSize(enum operand_type opnd, const struct code_info*);
+extern void uasm_ABI       set_frame(const struct asym* sym);
+extern void uasm_ABI       set_frame2(const struct asym* sym);
+extern ret_code uasm_ABI   ParseLine(struct asm_tok[]);
+extern void uasm_ABI       ProcessFile(struct asm_tok[]);
 
-extern void       WritePreprocessedLine( const char * );
+extern void uasm_ABI       WritePreprocessedLine(const char*);
 
 uasm_PACK_POP
 

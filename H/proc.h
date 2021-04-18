@@ -52,16 +52,16 @@ enum proc_status {
 
 /*---------------------------------------------------------------------------*/
 
-extern ret_code         ParseProc(struct dsym*, int, struct asm_tok[], bool, enum lang_type);
-extern struct asym* CreateProc(struct asym*, const char*, enum sym_state);
-extern void             DeleteProc(struct dsym*);
+extern ret_code uasm_ABI        ParseProc(struct dsym*, int, struct asm_tok[], bool, enum lang_type langtype);
+extern struct asym* uasm_ABI    CreateProc(struct asym*, const char*, enum sym_state state);
+extern void uasm_ABI            DeleteProc(struct dsym*);
 
-extern ret_code         CopyPrototype(struct dsym*, struct dsym*);
-extern ret_code         RetInstr(int, struct asm_tok[], int);   /* handle RET/IRET within procedures */
-extern void             write_prologue(struct asm_tok[]);
-extern void             ProcInit(void);
+extern ret_code uasm_ABI        CopyPrototype(struct dsym*, struct dsym*);
+extern ret_code uasm_ABI        RetInstr(int, struct asm_tok[], int);   /* handle RET/IRET within procedures */
+extern void uasm_ABI            write_prologue(struct asm_tok[]);
+extern void uasm_ABI            ProcInit(void);
 
-extern void             ProcCheckOpen(void);
+extern void uasm_ABI            ProcCheckOpen(void);
 
 uasm_PACK_POP
 
