@@ -63,7 +63,7 @@ typedef uint64_t ULONG_PTR, * PULONG_PTR;
 #endif
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern bool write_to_file;
 
@@ -71,8 +71,8 @@ extern int_64           maxintvalues[];
 extern int_64           minintvalues[];
 extern enum special_token stackreg[];
 extern struct dsym* CurrStruct;
-extern UINT_PTR uasm_ABI UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax);
-extern ret_code uasm_ABI      BackPatch(struct asym* sym);
+extern UINT_PTR UASM_ABI UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax);
+extern ret_code UASM_ABI      BackPatch(struct asym* sym);
 
 #ifdef __I86__
 #define NUMQUAL (long)
@@ -112,86 +112,86 @@ enum reg_used_flags
 #endif
 };
 
-extern void uasm_ABI myatoi128(const char*, uint_64[], int, int);
+extern void UASM_ABI myatoi128(const char*, uint_64[], int, int);
 static int size_vararg;    /* size of :VARARG arguments */
 static int fcscratch = 0;  /* exclusively to be used by FASTCALL helper functions */
 static int vcallpass = 0;  /* static global to determine which vectorcall pass we're in */
 
 struct fastcall_conv
 {
-    int  (uasm_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
-    void (uasm_ABI *invokeend)  (struct dsym const *, int, int);
-    int  (uasm_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+    int  (UASM_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
+    void (UASM_ABI *invokeend)  (struct dsym const *, int, int);
+    int  (UASM_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 };
 
 struct thiscall_conv
 {
-    int  (uasm_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
-    void (uasm_ABI *invokeend)  (struct dsym const *, int, int);
-    int  (uasm_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+    int  (UASM_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
+    void (UASM_ABI *invokeend)  (struct dsym const *, int, int);
+    int  (UASM_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 };
 
 struct vectorcall_conv
 {
-    int  (uasm_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
-    void (uasm_ABI *invokeend)  (struct dsym const *, int, int);
-    int  (uasm_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+    int  (UASM_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
+    void (UASM_ABI *invokeend)  (struct dsym const *, int, int);
+    int  (UASM_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 };
 
 struct sysvcall_conv
 {
-    int  (uasm_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
-    void (uasm_ABI *invokeend)  (struct dsym const *, int, int);
-    int  (uasm_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+    int  (UASM_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
+    void (UASM_ABI *invokeend)  (struct dsym const *, int, int);
+    int  (UASM_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 };
 
 struct delphicall_conv
 {
-    int  (uasm_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
-    void (uasm_ABI *invokeend)  (struct dsym const *, int, int);
-    int  (uasm_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+    int  (UASM_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
+    void (UASM_ABI *invokeend)  (struct dsym const *, int, int);
+    int  (UASM_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 };
 
 struct regcall_conv
 {
-    int (uasm_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
-    void (uasm_ABI *invokeend)  (struct dsym const *, int, int);
-    int (uasm_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+    int (UASM_ABI *invokestart)(struct dsym const *, int, int, struct asm_tok[], int*);
+    void (UASM_ABI *invokeend)  (struct dsym const *, int, int);
+    int (UASM_ABI *handleparam)(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 };
 
-static  int uasm_ABI ms32_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
-static void uasm_ABI ms32_fcend(struct dsym const *, int, int);
-static  int uasm_ABI ms32_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+static  int UASM_ABI ms32_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
+static void UASM_ABI ms32_fcend(struct dsym const *, int, int);
+static  int UASM_ABI ms32_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 
 #if OWFC_SUPPORT
-static  int uasm_ABI watc_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
-static void uasm_ABI watc_fcend(struct dsym const *, int, int);
-static  int uasm_ABI watc_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+static  int UASM_ABI watc_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
+static void UASM_ABI watc_fcend(struct dsym const *, int, int);
+static  int UASM_ABI watc_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 #endif
 
 #if AMD64_SUPPORT
-static  int uasm_ABI ms64_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
-static void uasm_ABI ms64_fcend(struct dsym const *, int, int);
-static  int uasm_ABI ms64_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+static  int UASM_ABI ms64_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
+static void UASM_ABI ms64_fcend(struct dsym const *, int, int);
+static  int UASM_ABI ms64_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 #define REGPAR_WIN64 0x0306 /* regs 1, 2, 8 and 9 */
 #define REGCALLPAR_WIN64 0xDBC7 /* regs 0, 1, 2, 6, 7, 8, 9, 11, 12, 14 and 15 (RAX, RCX, RDX, RDI, RSI, R8, R9, R11, R12, R14 and R15) */
 #endif
 
 #if SYSV_SUPPORT
-static  int uasm_ABI sysv_reg(struct dsym const *, unsigned int);
-static  int uasm_ABI sysv_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
-static void uasm_ABI sysv_fcend(struct dsym const *, int, int);
-static  int uasm_ABI sysv_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
-static  int uasm_ABI sysv_vararg_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+static  int UASM_ABI sysv_reg(struct dsym const *, unsigned int);
+static  int UASM_ABI sysv_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
+static void UASM_ABI sysv_fcend(struct dsym const *, int, int);
+static  int UASM_ABI sysv_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+static  int UASM_ABI sysv_vararg_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 #define REGPAR_SYSV 0x03C6 /* regs 6, 7, 1, 2, 8 and 9 */
 #define REGCALLPAR_UNIX64 0xDFC7 /* regs 0, 1, 2, 6, 7, 8, 9, 10, 11, 12, 14 and 15 (RAX, RCX, RDX, RDI, RSI, R8, R9, R10, R11, R12, R14 and R15) */
 #endif
 
 /* added for delphi in v2.28 */
 #if DELPHI_SUPPORT
-static  int uasm_ABI delphi32_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
-static void uasm_ABI delphi32_fcend(struct dsym const *, int, int);
-static  int uasm_ABI delphi32_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
+static  int UASM_ABI delphi32_fcstart(struct dsym const *, int, int, struct asm_tok[], int*);
+static void UASM_ABI delphi32_fcend(struct dsym const *, int, int);
+static  int UASM_ABI delphi32_param(struct dsym const *, int, struct dsym*, bool, struct expr*, char*, uint_8*);
 #define REGPAR_DELPHI 0x03 /* regs 0, 2, 1  */
 #endif
 
@@ -350,7 +350,7 @@ static const enum special_token vectorcall32_regsZMM[] = { T_ZMM0, T_ZMM1, T_ZMM
 //static const enum special_token segreg_tab[] = {
 //    T_ES, T_CS, T_SS, T_DS, T_FS, T_GS };
 
-static int uasm_ABI ms32_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
+static int UASM_ABI ms32_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
 /*******************************************************************************************************************/
 {
     struct dsym* param;
@@ -364,14 +364,14 @@ static int uasm_ABI ms32_fcstart(struct dsym const *proc, int numparams, int sta
     return(1);
 }
 
-static void uasm_ABI ms32_fcend(struct dsym const *proc, int numparams, int value)
+static void UASM_ABI ms32_fcend(struct dsym const *proc, int numparams, int value)
 /*************************************************************************/
 {
     /* nothing to do */
     return;
 }
 
-static int uasm_ABI ms32_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* r0used)
+static int UASM_ABI ms32_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* r0used)
 /*********************************************************************************************************************************************/
 {
     enum special_token const* pst;
@@ -447,14 +447,14 @@ static int uasm_ABI ms32_param(struct dsym const *proc, int index, struct dsym* 
 }
 
 /* added for delphi in v2.28 */
-static int uasm_ABI delphi32_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
+static int UASM_ABI delphi32_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
 /*******************************************************************************************************************/
 {
     return(0);
 }
 
 /* added for delphi in v2.28 */
-static void uasm_ABI delphi32_fcend(struct dsym const *proc, int numparams, int value)
+static void UASM_ABI delphi32_fcend(struct dsym const *proc, int numparams, int value)
 /*************************************************************************/
 {
     /* nothing to do */
@@ -462,7 +462,7 @@ static void uasm_ABI delphi32_fcend(struct dsym const *proc, int numparams, int 
 }
 
 /* added for delphi in v2.28 */
-static int uasm_ABI delphi32_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* r0used)
+static int UASM_ABI delphi32_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* r0used)
 /*********************************************************************************************************************************************/
 {
     enum special_token*     pst;
@@ -542,7 +542,7 @@ WINDOWS 64 FASTCALL HANDLERS
 */
 #if AMD64_SUPPORT
 
-static int uasm_ABI ms64_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
+static int UASM_ABI ms64_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
 /*******************************************************************************************************************/
 {
     int j;
@@ -586,7 +586,7 @@ static int uasm_ABI ms64_fcstart(struct dsym const *proc, int numparams, int sta
     return(0);
 }
 
-static void uasm_ABI ms64_fcend(struct dsym const *proc, int numparams, int value)
+static void UASM_ABI ms64_fcend(struct dsym const *proc, int numparams, int value)
 /*************************************************************************/
 {
     /* use <value>, which has been set by ms64_fcstart() */
@@ -642,7 +642,7 @@ static void uasm_ABI ms64_fcend(struct dsym const *proc, int numparams, int valu
 * UASM 2.49 For structs that are not 1/2/4/8 bytes in size the address is used too, else they're passed
 * in registers.
 */
-static int uasm_ABI ms64_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* regs_used)
+static int UASM_ABI ms64_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* regs_used)
 /************************************************************************************************************************************************/
 {
     uint_32             size;
@@ -2178,7 +2178,7 @@ vcalldone:
 */
 #if SYSV_SUPPORT
 
-static int uasm_ABI sysv_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
+static int UASM_ABI sysv_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
 /*******************************************************************************************************************/
 {
     if (proc->e.procinfo->has_vararg)
@@ -2200,7 +2200,7 @@ static int uasm_ABI sysv_fcstart(struct dsym const *proc, int numparams, int sta
     return(0);	// Return 0=left_to_right, 1=right_to_left
 }
 
-static void uasm_ABI sysv_fcend(struct dsym const *proc, int numparams, int value)
+static void UASM_ABI sysv_fcend(struct dsym const *proc, int numparams, int value)
 /*************************************************************************/
 {
     /* use <value>, which has been set by sysv_fcstart() */
@@ -2218,7 +2218,7 @@ static void uasm_ABI sysv_fcend(struct dsym const *proc, int numparams, int valu
 }
 
 /* Return a 0-7 index for any SystemV call reserved register */
-static int uasm_ABI sysv_reg(struct dsym const *proc, unsigned int reg)
+static int UASM_ABI sysv_reg(struct dsym const *proc, unsigned int reg)
 {
     int i;
     int base = -1;
@@ -2307,7 +2307,7 @@ static int uasm_ABI sysv_reg(struct dsym const *proc, unsigned int reg)
 }
 
 /* Return a 64bit register equivalent to the supplied */
-static int uasm_ABI sysv_regTo64(unsigned int reg)
+static int UASM_ABI sysv_regTo64(unsigned int reg)
 {
     unsigned int resultReg = T_RAX;
     if (GetValueSp(reg) & OP_XMM || GetValueSp(reg) & OP_YMM || GetValueSp(reg) & OP_ZMM)
@@ -2416,7 +2416,7 @@ static int uasm_ABI sysv_regTo64(unsigned int reg)
 }
 
 /* Return the first free GPR register useable in a SystemV invoke/call */
-static int uasm_ABI sysv_GetNextGPR(struct dsym const *proc, struct proc_info* info, int size)
+static int UASM_ABI sysv_GetNextGPR(struct dsym const *proc, struct proc_info* info, int size)
 {
     int base = 0;
 
@@ -2493,7 +2493,7 @@ static int sysv_GetNextVEC(struct dsym const *proc, struct proc_info* info, int 
 * the argument is used instead of the value, unless it's _m128/_m256 then it uses a vector register.
 * structure members are inspected one by one and slotted into available registers where possible else on stack.
 */
-static int uasm_ABI sysv_vararg_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* regs_used)
+static int UASM_ABI sysv_vararg_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* regs_used)
 /************************************************************************************************************************************************/
 {
     uint_32             psize;
@@ -2909,7 +2909,7 @@ static int uasm_ABI sysv_vararg_param(struct dsym const *proc, int index, struct
 * the argument is used instead of the value, unless it's _m128/_m256 then it uses a vector register.
 * structure members are inspected one by one and slotted into available registers where possible else on stack.
 */
-static int uasm_ABI sysv_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* regs_used)
+static int UASM_ABI sysv_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* regs_used)
 /************************************************************************************************************************************************/
 {
     uint_32             psize;
@@ -3894,7 +3894,7 @@ static int uasm_ABI sysv_param(struct dsym const *proc, int index, struct dsym* 
 * so it could be used by watc_param() as well.
 */
 
-static short uasm_ABI GetSegmentPart(struct expr* opnd, char* buffer, const char* fullparam)
+static short UASM_ABI GetSegmentPart(struct expr* opnd, char* buffer, const char* fullparam)
 /***********************************************************************************/
 {
     short reg = T_NULL;
@@ -3963,14 +3963,14 @@ static short uasm_ABI GetSegmentPart(struct expr* opnd, char* buffer, const char
 *   the third!
 */
 
-static int uasm_ABI watc_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
+static int UASM_ABI watc_fcstart(struct dsym const *proc, int numparams, int start, struct asm_tok tokenarray[], int* value)
 /*******************************************************************************************************************/
 {
     DebugMsg1(("watc_fcstart(%s, %u, %u)\n", proc->sym.name, numparams, start));
     return(1);
 }
 
-static void uasm_ABI watc_fcend(struct dsym const *proc, int numparams, int value)
+static void UASM_ABI watc_fcend(struct dsym const *proc, int numparams, int value)
 /*************************************************************************/
 {
     DebugMsg1(("watc_fcend(%s, %u, %u)\n", proc->sym.name, numparams, value));
@@ -3988,7 +3988,7 @@ static void uasm_ABI watc_fcend(struct dsym const *proc, int numparams, int valu
 /* get the register for parms 0 to 3,
 * using the watcom register parm passing conventions ( A D B C )
 */
-static int uasm_ABI watc_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* r0used)
+static int UASM_ABI watc_param(struct dsym const *proc, int index, struct dsym* param, bool addr, struct expr* opnd, char* paramvalue, uint_8* r0used)
 /*********************************************************************************************************************************************/
 {
     int         opc;
@@ -4095,7 +4095,7 @@ static int uasm_ABI watc_param(struct dsym const *proc, int index, struct dsym* 
 
 #endif
 
-static void uasm_ABI SkipTypecast(char* fullparam, int i, struct asm_tok tokenarray[])
+static void UASM_ABI SkipTypecast(char* fullparam, int i, struct asm_tok tokenarray[])
 /*****************************************************************************/
 {
     int j;
@@ -4118,7 +4118,7 @@ static void uasm_ABI SkipTypecast(char* fullparam, int i, struct asm_tok tokenar
 /* Check if a parameter (via it's string ptr) is a raw ascii string,
 if we're in a vararg, just being a raw string is sufficient,
 for normal parameters it must be qualified as PTR */
-static int uasm_ABI ParamIsString(char* pStr, int param, struct dsym* proc)
+static int UASM_ABI ParamIsString(char* pStr, int param, struct dsym* proc)
 {
     char            c;
     char*           pS = pStr;
@@ -4192,7 +4192,7 @@ static int uasm_ABI ParamIsString(char* pStr, int param, struct dsym* proc)
     return(TRUE);
 }
 
-static unsigned int uasm_ABI hashpjw(const char* s)
+static unsigned int UASM_ABI hashpjw(const char* s)
 /******************************************/
 {
     uint_64             fnv_basis = 0xCBF29CE484222325 /*14695981039346656037ull*/;
@@ -4217,7 +4217,7 @@ static unsigned int uasm_ABI hashpjw(const char* s)
 *
 * psize,asize: size of parameter/argument in bytes.
 */
-static int uasm_ABI PushInvokeParam(int i, struct asm_tok tokenarray[], struct dsym *proc, struct dsym* curr, int reqParam, uint_8* r0flags)
+static int UASM_ABI PushInvokeParam(int i, struct asm_tok tokenarray[], struct dsym *proc, struct dsym* curr, int reqParam, uint_8* r0flags)
 /**********************************************************************************************************************************/
 {
     int             currParm;
@@ -5474,7 +5474,7 @@ static int uasm_ABI PushInvokeParam(int i, struct asm_tok tokenarray[], struct d
 }
 
 /* generate a call for a prototyped procedure */
-ret_code uasm_ABI InvokeDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI InvokeDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     struct asym*        sym;
@@ -5983,4 +5983,4 @@ ret_code uasm_ABI InvokeDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

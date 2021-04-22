@@ -14,11 +14,11 @@
 
 #if defined(__UNIX__)
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* v2.12: _splitpath()/_makepath() removed */
 
-char* uasm_ABI strupr(char* str)
+char* UASM_ABI strupr(char* str)
 /***********************/
 {
     char* p;
@@ -38,7 +38,7 @@ char* uasm_ABI strupr(char* str)
     return(str);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif
 
@@ -48,7 +48,7 @@ uasm_PACK_POP
 #ifdef __FLAT__
 #ifndef DEBUG_OUT /* OW v1.8 WDW has a problem with locally defined imports */
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 union cu
 {
@@ -77,7 +77,7 @@ char* _stdcall CharUpperA(char* lpsz)
                 *p.p = *p.p - 0x20;
     return(lpsz);
 }
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif
 #endif

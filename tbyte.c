@@ -48,7 +48,7 @@
 #define MAXUI64    0xffffffffffffffffui64
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 union u192
 {
@@ -107,7 +107,7 @@ static const struct ELD tab_minus_exp[MAX_EXP_INDEX] = {
     { { 0x2DE37E46UL, 0xD2CE9FDEUL, 0xA6DD04C8UL }, 0x0AD8 }  /* 1e-4096L*/
 };
 
-static int uasm_ABI cmp_u96_max(const union u96* x)
+static int UASM_ABI cmp_u96_max(const union u96* x)
 /*******************************************
     compare u96 with maximum value before u96
     overflow after multiply by 10
@@ -143,7 +143,7 @@ static int uasm_ABI cmp_u96_max(const union u96* x)
     }
 }
 
-static int uasm_ABI add_check_u96_overflow(union u96* x, unsigned int c)
+static int UASM_ABI add_check_u96_overflow(union u96* x, unsigned int c)
 /****************************************************************
     test u96 overflow after multiply by 10
     add one decimal digit to u96
@@ -169,7 +169,7 @@ static int uasm_ABI add_check_u96_overflow(union u96* x, unsigned int c)
     }
 }
 
-static int uasm_ABI bitsize32(uint_32 x)
+static int UASM_ABI bitsize32(uint_32 x)
 /********************************
     calculate bitsize for uint_32
 */
@@ -184,7 +184,7 @@ static int uasm_ABI bitsize32(uint_32 x)
     return(i);
 }
 
-static int uasm_ABI bitsize64(uint_64 x)
+static int UASM_ABI bitsize64(uint_64 x)
 /********************************
     calculate bitsize for uint_64
 */
@@ -199,7 +199,7 @@ static int uasm_ABI bitsize64(uint_64 x)
     return(i);
 }
 
-static int uasm_ABI U96LD(const union u96* op, struct ELD* res)
+static int UASM_ABI U96LD(const union u96* op, struct ELD* res)
 /*******************************************************
     convert u96 into internal extended long double
 */
@@ -244,7 +244,7 @@ static int uasm_ABI U96LD(const union u96* op, struct ELD* res)
     return(0);
 }
 
-static int uasm_ABI normalize(union u192* res)
+static int UASM_ABI normalize(union u192* res)
 /**************************************
     normalize internal extended long double u192
     return exponent shift
@@ -286,7 +286,7 @@ static int uasm_ABI normalize(union u192* res)
     return(bs - 192);
 }
 
-static int uasm_ABI add192(union u192* res, const uint_64 x, int pos)
+static int UASM_ABI add192(union u192* res, const uint_64 x, int pos)
 /*************************************************************
     add uint_64 to u192 on uint_32 position
 */
@@ -311,7 +311,7 @@ static int uasm_ABI add192(union u192* res, const uint_64 x, int pos)
     return(0);
 }
 
-static int uasm_ABI multiply(const struct ELD* op1, const struct ELD* op2, struct ELD* res)
+static int UASM_ABI multiply(const struct ELD* op1, const struct ELD* op2, struct ELD* res)
 /***********************************************************************************
     multiply u96 by u96 into u96
     normalize and round result
@@ -361,7 +361,7 @@ static int uasm_ABI multiply(const struct ELD* op1, const struct ELD* op2, struc
     return(0);
 }
 
-static int uasm_ABI TB_create(union u96* value, int_32 exponent, struct TB_LD* ld)
+static int UASM_ABI TB_create(union u96* value, int_32 exponent, struct TB_LD* ld)
 /**************************************************************************
     create tbyte/long double from u96 value and
     decimal exponent, round result
@@ -412,7 +412,7 @@ static int uasm_ABI TB_create(union u96* value, int_32 exponent, struct TB_LD* l
     return(0);
 }
 
-struct TB_LD* uasm_ABI strtotb(const char* p, struct TB_LD* ld, char negative)
+struct TB_LD* UASM_ABI strtotb(const char* p, struct TB_LD* ld, char negative)
     /**********************************************************************
         convert string into tbyte/long double
         set result sign
@@ -537,4 +537,4 @@ struct TB_LD* uasm_ABI strtotb(const char* p, struct TB_LD* ld, char negative)
     return(ld);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

@@ -27,7 +27,7 @@
 
 #define DEFAULT_STACK_SIZE      1024
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern const char szDgroup[];
 
@@ -43,7 +43,7 @@ static char const* const SegmCombine[SIM_LAST] = {
     "PUBLIC", "STACK", "PUBLIC", "PUBLIC", "PRIVATE", "PRIVATE", "PUBLIC"
 };
 
-char* uasm_ABI SimGetSegName(enum sim_seg segno)
+char* UASM_ABI SimGetSegName(enum sim_seg segno)
 /***************************************/
 {
     char* segn;
@@ -53,7 +53,7 @@ char* uasm_ABI SimGetSegName(enum sim_seg segno)
     return(segn);
 }
 
-char const* const uasm_ABI GetCodeClass(void)
+char const* const UASM_ABI GetCodeClass(void)
 /******************************/
 {
     /* option -nc set? */
@@ -65,7 +65,7 @@ char const* const uasm_ABI GetCodeClass(void)
 
 /* emit DGROUP GROUP instruction */
 
-static void uasm_ABI AddToDgroup(enum sim_seg segm, char* name)
+static void UASM_ABI AddToDgroup(enum sim_seg segm, char* name)
 /************************************************************/
 {
     /* no DGROUP for FLAT or COFF/ELF */
@@ -82,7 +82,7 @@ static void uasm_ABI AddToDgroup(enum sim_seg segm, char* name)
 
 /* generate code to close the current segment */
 
-static void uasm_ABI close_currseg(void)
+static void UASM_ABI close_currseg(void)
 /*******************************/
 {
     if (CurrSeg)
@@ -96,7 +96,7 @@ static void uasm_ABI close_currseg(void)
  * a standard segment directive line
  */
 
-static void uasm_ABI SetSimSeg(enum sim_seg segm, char* name)
+static void UASM_ABI SetSimSeg(enum sim_seg segm, char* name)
 /**********************************************************/
 {
     char*           pAlign = "WORD";
@@ -204,14 +204,14 @@ static void uasm_ABI SetSimSeg(enum sim_seg segm, char* name)
     return;
 }
 
-static void uasm_ABI EndSimSeg(enum sim_seg segm)
+static void UASM_ABI EndSimSeg(enum sim_seg segm)
 /****************************************/
 {
     AddLineQueueX("%s %r", SegmNames[segm], T_ENDS);
     return;
 }
 
-ret_code uasm_ABI SimplifiedSegDir(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI SimplifiedSegDir(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 /*
  Handles simplified segment directives:
@@ -377,7 +377,7 @@ ret_code uasm_ABI SimplifiedSegDir(int i, struct asm_tok tokenarray[])
  * Called by ModelDirective(), at Pass 1 only.
  */
 
-void uasm_ABI SetModelDefaultSegNames(void)
+void UASM_ABI SetModelDefaultSegNames(void)
 /**********************************/
 {
     /* init segment names with default values */
@@ -414,7 +414,7 @@ void uasm_ABI SetModelDefaultSegNames(void)
  * and the caller will run RunLineQueue() later.
  * Called for each pass.
  */
-ret_code uasm_ABI ModelSimSegmInit(int model)
+ret_code UASM_ABI ModelSimSegmInit(int model)
 /************************************/
 {
     char buffer[20];
@@ -449,7 +449,7 @@ ret_code uasm_ABI ModelSimSegmInit(int model)
 }
 
 /* called when END has been found */
-void uasm_ABI ModelSimSegmExit(void)
+void UASM_ABI ModelSimSegmExit(void)
 /***************************/
 {
     /* a model is set. Close current segment if one is open. */
@@ -460,4 +460,4 @@ void uasm_ABI ModelSimSegmExit(void)
     }
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

@@ -13,7 +13,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 #if FASTPASS
 
@@ -78,15 +78,15 @@ extern bool StoreState; /* is 1 if states are to be stored in pass one */
 extern bool UseSavedState;
 
 //void SaveState( void );
-void uasm_ABI FastpassInit(void);
-void uasm_ABI SegmentSaveState(void);
-void uasm_ABI AssumeSaveState(void);
-void uasm_ABI ContextSaveState(void);
-void uasm_ABI StoreLine(const char*, int, uint_32);
-void uasm_ABI SkipSavedState(void);
-struct line_item* uasm_ABI RestoreState(void);
-void uasm_ABI SaveVariableState(struct asym* sym);
-void uasm_ABI FreeLineStore(void);
+void UASM_ABI FastpassInit(void);
+void UASM_ABI SegmentSaveState(void);
+void UASM_ABI AssumeSaveState(void);
+void UASM_ABI ContextSaveState(void);
+void UASM_ABI StoreLine(const char*, int, uint_32);
+void UASM_ABI SkipSavedState(void);
+struct line_item* UASM_ABI RestoreState(void);
+void UASM_ABI SaveVariableState(struct asym* sym);
+void UASM_ABI FreeLineStore(void);
 
 #define FStoreLine( flags ) if ( Parse_Pass == PASS_1 ) {StoreLine( CurrSource, flags, 0 );} else 
 
@@ -96,7 +96,7 @@ void uasm_ABI FreeLineStore(void);
 
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // FASTPASS_H
 

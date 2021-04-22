@@ -49,7 +49,7 @@
 #define NUM_STDREGS 8
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* prototypes */
 
@@ -86,14 +86,14 @@ static const char szError[] = { "ERROR" };
 static const char szNothing[] = { "NOTHING" };
 const char szDgroup[] = { "DGROUP" };
 
-void uasm_ABI SetSegAssumeTable(void* savedstate)
+void UASM_ABI SetSegAssumeTable(void* savedstate)
 /****************************************/
 {
     DebugMsg(("SetSegAssumeTable\n"));
     memcpy(&SegAssumeTable, savedstate, sizeof(SegAssumeTable));
 }
 
-void uasm_ABI GetSegAssumeTable(void* savedstate)
+void UASM_ABI GetSegAssumeTable(void* savedstate)
 /****************************************/
 {
     DebugMsg(("GetSegAssumeTable\n"));
@@ -107,7 +107,7 @@ void uasm_ABI GetSegAssumeTable(void* savedstate)
  * this functions is also called by context.c, ContextDirective()!
  */
 
-void uasm_ABI SetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
+void UASM_ABI SetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
 /***********************************************************************/
 {
     int i;
@@ -127,7 +127,7 @@ void uasm_ABI SetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
     }
 }
 
-void uasm_ABI GetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
+void UASM_ABI GetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
 /***********************************************************************/
 {
     int i;
@@ -147,7 +147,7 @@ void uasm_ABI GetStdAssumeTable(void* savedstate, struct stdassume_typeinfo* ti)
 }
 
 #if FASTPASS
-void uasm_ABI AssumeSaveState(void)
+void UASM_ABI AssumeSaveState(void)
 /**************************/
 {
     GetSegAssumeTable(&saved_SegAssumeTable);
@@ -155,7 +155,7 @@ void uasm_ABI AssumeSaveState(void)
 }
 #endif
 
-void uasm_ABI AssumeInit(int pass) /* pass may be -1 here! */
+void UASM_ABI AssumeInit(int pass) /* pass may be -1 here! */
 /*************************/
 {
     int reg;
@@ -216,7 +216,7 @@ void uasm_ABI AssumeInit(int pass) /* pass may be -1 here! */
 /* generate assume lines after .MODEL directive
  * model is in ModuleInfo.model, it can't be MODEL_NONE.
  */
-void uasm_ABI ModelAssumeInit(void)
+void UASM_ABI ModelAssumeInit(void)
 /**************************/
 {
     char* pCS;
@@ -266,7 +266,7 @@ void uasm_ABI ModelAssumeInit(void)
 
 /* used by INVOKE directive */
 
-struct asym* uasm_ABI GetStdAssume(int reg)
+struct asym* UASM_ABI GetStdAssume(int reg)
     /**********************************/
 {
     if (StdAssumeTable[reg].symbol)
@@ -287,7 +287,7 @@ struct asym* uasm_ABI GetStdAssume(int reg)
  * expression evaluator if a register is used for indirect addressing
  * v2.14 fixed by nidud
  */
-struct asym* uasm_ABI GetStdAssumeEx(int reg)
+struct asym* UASM_ABI GetStdAssumeEx(int reg)
     /************************************/
 {
     if (reg >= NUM_STDREGS)
@@ -295,7 +295,7 @@ struct asym* uasm_ABI GetStdAssumeEx(int reg)
     return(StdAssumeTable[reg].symbol);
 }
 
-ret_code uasm_ABI AssumeDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI AssumeDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 /* Handles ASSUME
  * syntax is :
@@ -504,7 +504,7 @@ ret_code uasm_ABI AssumeDirective(int i, struct asm_tok tokenarray[])
  *   DS, SS, ES, FS, GS, CS
  */
 
-enum assume_segreg uasm_ABI search_assume(const struct asym* sym, enum assume_segreg def, bool search_grps)
+enum assume_segreg UASM_ABI search_assume(const struct asym* sym, enum assume_segreg def, bool search_grps)
     /**********************************************************/
 {
     struct asym* grp;
@@ -560,7 +560,7 @@ enum assume_segreg uasm_ABI search_assume(const struct asym* sym, enum assume_se
  - segoverride: segment register override (0,1,2,3,4,5)
 */
 
-struct asym* uasm_ABI GetOverrideAssume(enum assume_segreg segoverride)
+struct asym* UASM_ABI GetOverrideAssume(enum assume_segreg segoverride)
     /***********************************************************/
 {
     if (SegAssumeTable[segoverride].is_flat)
@@ -580,7 +580,7 @@ struct asym* uasm_ABI GetOverrideAssume(enum assume_segreg segoverride)
  * to be fixed: check if symbols with state==SYM_STACK are handled correctly.
  */
 
-enum assume_segreg uasm_ABI GetAssume(const struct asym* segoverride, const struct asym* sym, enum assume_segreg def, struct asym** passume)
+enum assume_segreg UASM_ABI GetAssume(const struct asym* segoverride, const struct asym* sym, enum assume_segreg def, struct asym** passume)
     /*********************************************************************************************************************************/
 {
     enum assume_segreg  reg;
@@ -624,4 +624,4 @@ enum assume_segreg uasm_ABI GetAssume(const struct asym* segoverride, const stru
     return(ASSUME_NOTHING);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

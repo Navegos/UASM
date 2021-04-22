@@ -36,7 +36,7 @@
 #define GetPtr( x, y ) x->y
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* reserved words hash table */
 static uint_16 resw_table[HASH_TABITEMS];
@@ -959,7 +959,7 @@ static struct
 static bool  b64bit = FALSE; /* resw tables in 64bit mode? */
 #endif
 
-static unsigned uasm_ABI get_hash(const char* s, unsigned char size)
+static unsigned UASM_ABI get_hash(const char* s, unsigned char size)
 /***********************************************************/
 {
     uint_64 fnv_basis = 0xCBF29CE484222325 /*14695981039346656037ull*/;
@@ -973,7 +973,7 @@ static unsigned uasm_ABI get_hash(const char* s, unsigned char size)
     return((((h >> 49) ^ h) & 0x3fff) % HASH_TABITEMS);
 }
 
-unsigned uasm_ABI FindResWord(const char* name, unsigned char size)
+unsigned UASM_ABI FindResWord(const char* name, unsigned char size)
 /**********************************************************/
 /* search reserved word in hash table */
 {
@@ -998,7 +998,7 @@ unsigned uasm_ABI FindResWord(const char* name, unsigned char size)
 
 /* add reserved word to hash table */
 
-static void uasm_ABI AddResWord(int token)
+static void UASM_ABI AddResWord(int token)
 /*********************************/
 {
     int i;
@@ -1030,7 +1030,7 @@ static void uasm_ABI AddResWord(int token)
 
 /* remove a reserved word from the hash table. */
 
-static int uasm_ABI RemoveResWord(int token)
+static int UASM_ABI RemoveResWord(int token)
 /***********************************/
 {
     int i;
@@ -1072,7 +1072,7 @@ struct rename_node
 * - length: length of new name
 */
 
-void uasm_ABI RenameKeyword(unsigned token, const char* newname, uint_8 length)
+void UASM_ABI RenameKeyword(unsigned token, const char* newname, uint_8 length)
 /**********************************************************************/
 {
     struct rename_node* curr;
@@ -1146,7 +1146,7 @@ void uasm_ABI RenameKeyword(unsigned token, const char* newname, uint_8 length)
 /* depending on 64bit on or off, some instructions must be added,
 * some removed. Currently this is a bit hackish.
 */
-void uasm_ABI Set64Bit(bool newmode)
+void UASM_ABI Set64Bit(bool newmode)
 /***************************/
 {
     static char* syscallname;   /* "true" syscall name stored here */
@@ -1213,7 +1213,7 @@ void uasm_ABI Set64Bit(bool newmode)
 }
 #endif
 
-void uasm_ABI DisableKeyword(unsigned token)
+void UASM_ABI DisableKeyword(unsigned token)
 /***********************************/
 {
     if (!(ResWordTable[token].flags & RWF_DISABLED))
@@ -1234,7 +1234,7 @@ void uasm_ABI DisableKeyword(unsigned token)
 /* check if a keyword is in the list of disabled words.
 */
 
-bool uasm_ABI IsKeywordDisabled(const char* name, int len)
+bool UASM_ABI IsKeywordDisabled(const char* name, int len)
 /*************************************************/
 {
     unsigned token;
@@ -1248,7 +1248,7 @@ bool uasm_ABI IsKeywordDisabled(const char* name, int len)
 * max size is 255.
 */
 
-char* uasm_ABI GetResWName(unsigned resword, char* buff)
+char* UASM_ABI GetResWName(unsigned resword, char* buff)
 /***********************************************/
 {
 #ifdef __I86__
@@ -1267,7 +1267,7 @@ char* uasm_ABI GetResWName(unsigned resword, char* buff)
 * and also the reserved words string pointers ( ResWordTable[].name + ResWordTable[].len )
 */
 
-void uasm_ABI ResWordsInit(void)
+void UASM_ABI ResWordsInit(void)
 /***********************/
 {
     int i;
@@ -1310,7 +1310,7 @@ void uasm_ABI ResWordsInit(void)
 * it restores the resword table
 */
 
-void uasm_ABI ResWordsFini(void)
+void UASM_ABI ResWordsFini(void)
 /***********************/
 {
     int i;
@@ -1360,7 +1360,7 @@ void uasm_ABI ResWordsFini(void)
 
 #ifdef DEBUG_OUT
 
-void uasm_ABI DumpResWords(void)
+void UASM_ABI DumpResWords(void)
 /***********************/
 {
     int i;
@@ -1397,7 +1397,7 @@ void uasm_ABI DumpResWords(void)
     printf("----------------------------------------------------------------\n");
 }
 
-void uasm_ABI DumpInstrStats(void)
+void UASM_ABI DumpInstrStats(void)
 /*************************/
 {
     unsigned            i;
@@ -1442,4 +1442,4 @@ void uasm_ABI DumpInstrStats(void)
 }
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP

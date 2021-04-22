@@ -5,7 +5,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct orgFixup
 {
@@ -14,12 +14,12 @@ struct orgFixup
     void* pNext;
 };
 
-extern void uasm_ABI AddOrgFixup(int curPos, int orgValue);
+extern void UASM_ABI AddOrgFixup(int curPos, int orgValue);
 
-extern void uasm_ABI ResetOrgFixup();
+extern void UASM_ABI ResetOrgFixup();
 
-extern bool uasm_ABI InOrgRange(int position);
+extern bool UASM_ABI InOrgRange(int position);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

@@ -36,7 +36,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum macro_flags {
 #if MACROLABEL
@@ -48,40 +48,40 @@ enum macro_flags {
 
 /* functions in expans.c */
 
-extern int uasm_ABI      GetLiteralValue(char*, const char*);
-extern int uasm_ABI      RunMacro(struct dsym*, int, struct asm_tok[], char*, int, bool*);
-extern ret_code uasm_ABI ExpandText(char*, struct asm_tok[], unsigned int);
-extern int uasm_ABI      ExpandLineItems(char*, int, struct asm_tok[], int, int);
-extern ret_code uasm_ABI ExpandLine(char*, struct asm_tok[]);
-extern void uasm_ABI     ExpandLiterals(int i, struct asm_tok[]);
+extern int UASM_ABI      GetLiteralValue(char*, const char*);
+extern int UASM_ABI      RunMacro(struct dsym*, int, struct asm_tok[], char*, int, bool*);
+extern ret_code UASM_ABI ExpandText(char*, struct asm_tok[], unsigned int);
+extern int UASM_ABI      ExpandLineItems(char*, int, struct asm_tok[], int, int);
+extern ret_code UASM_ABI ExpandLine(char*, struct asm_tok[]);
+extern void UASM_ABI     ExpandLiterals(int i, struct asm_tok[]);
 
 /* functions in macro.c */
 
-extern struct dsym* uasm_ABI CreateMacro(const char*);/* create a macro symbol */
+extern struct dsym* UASM_ABI CreateMacro(const char*);/* create a macro symbol */
 
-extern void uasm_ABI     ReleaseMacroData(struct dsym*);
-extern void uasm_ABI     fill_placeholders(char*, const char*, unsigned, unsigned, char**);
-extern void uasm_ABI     SkipCurrentQueue(struct asm_tok[]);
-extern ret_code uasm_ABI StoreMacro(struct dsym*, int, struct asm_tok[], bool);  /* store macro content */
+extern void UASM_ABI     ReleaseMacroData(struct dsym*);
+extern void UASM_ABI     fill_placeholders(char*, const char*, unsigned, unsigned, char**);
+extern void UASM_ABI     SkipCurrentQueue(struct asm_tok[]);
+extern ret_code UASM_ABI StoreMacro(struct dsym*, int, struct asm_tok[], bool);  /* store macro content */
 
-extern ret_code uasm_ABI StoreAutoMacro(struct dsym*, int, struct asm_tok[], bool, char* macCode[], int, int);  /* store macro content 1st pass (builtin macros) */
+extern ret_code UASM_ABI StoreAutoMacro(struct dsym*, int, struct asm_tok[], bool, char* macCode[], int, int);  /* store macro content 1st pass (builtin macros) */
 
-extern ret_code uasm_ABI MacroInit(int);
+extern ret_code UASM_ABI MacroInit(int);
 #ifdef DEBUG_OUT
-extern void uasm_ABI     MacroFini(void);
+extern void UASM_ABI     MacroFini(void);
 #endif
 
 /* functions in string.c */
 
-extern struct asym* uasm_ABI SetTextMacro(struct asm_tok[], struct asym*, const char*, const char*); /* EQU for texts */
-extern struct asym* uasm_ABI AddPredefinedText(const char*, const char*);
-extern int uasm_ABI         TextItemError(struct asm_tok*);
+extern struct asym* UASM_ABI SetTextMacro(struct asm_tok[], struct asym*, const char*, const char*); /* EQU for texts */
+extern struct asym* UASM_ABI AddPredefinedText(const char*, const char*);
+extern int UASM_ABI         TextItemError(struct asm_tok*);
 
-extern void uasm_ABI     StringInit(void);
+extern void UASM_ABI     StringInit(void);
 #ifdef DEBUG_OUT
-extern void uasm_ABI     StringFini(void);
+extern void UASM_ABI     StringFini(void);
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

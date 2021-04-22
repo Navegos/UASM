@@ -27,7 +27,7 @@
 #include "linnum.h"
 #include "omf.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern struct qdesc   LinnumQueue;    /* queue of line_num_info items ( OMF only ) */
 extern int            procidx;
@@ -35,7 +35,7 @@ extern int            procidx;
 static struct asym* dmyproc;
 static uint_32        lastLineNumber;
 
-static void uasm_ABI AddLinnumData(struct line_num_info* data)
+static void UASM_ABI AddLinnumData(struct line_num_info* data)
 /*****************************************************/
 {
     struct qdesc* q = NULL;
@@ -71,7 +71,7 @@ static void uasm_ABI AddLinnumData(struct line_num_info* data)
  * - proc.ProcDir() - in COFF, line_num is 0 then
  */
 
-void uasm_ABI AddLinnumDataRef(unsigned srcfile, uint_32 line_num)
+void UASM_ABI AddLinnumDataRef(unsigned srcfile, uint_32 line_num)
 /*********************************************************/
 {
     struct line_num_info* curr;
@@ -201,7 +201,7 @@ void uasm_ABI AddLinnumDataRef(unsigned srcfile, uint_32 line_num)
     return;
 }
 
-void uasm_ABI QueueDeleteLinnum(struct qdesc* queue)
+void UASM_ABI QueueDeleteLinnum(struct qdesc* queue)
 /*******************************************/
 {
     struct line_num_info* curr;
@@ -224,7 +224,7 @@ void uasm_ABI QueueDeleteLinnum(struct qdesc* queue)
 /* if -Zd is set and there is trailing code not inside
  * a function, set the dummy function's length now.
  */
-void uasm_ABI LinnumFini(void)
+void UASM_ABI LinnumFini(void)
 /*********************/
 {
     if (dmyproc)
@@ -235,11 +235,11 @@ void uasm_ABI LinnumFini(void)
     }
 }
 
-void uasm_ABI LinnumInit(void)
+void UASM_ABI LinnumInit(void)
 /*********************/
 {
     lastLineNumber = 0;
     dmyproc = NULL;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

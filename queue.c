@@ -34,7 +34,7 @@
 #include "queue.h"
 #include "myassert.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 #if 0 /* v2.04: not needed */
 void QInit(struct qdesc* q)
@@ -45,7 +45,7 @@ void QInit(struct qdesc* q)
 }
 #endif
 
-void uasm_ABI QEnqueue(struct qdesc* q, void* item)
+void UASM_ABI QEnqueue(struct qdesc* q, void* item)
 /******************************************/
 {
     if (q->head == NULL)
@@ -63,7 +63,7 @@ void uasm_ABI QEnqueue(struct qdesc* q, void* item)
 
 /* add a new node to a queue */
 
-void uasm_ABI QAddItem(struct qdesc* q, const void* data)
+void UASM_ABI QAddItem(struct qdesc* q, const void* data)
 /************************************************/
 {
     struct qnode* node;
@@ -74,7 +74,7 @@ void uasm_ABI QAddItem(struct qdesc* q, const void* data)
 }
 
 #if 0
-void uasm_ABI QJoinQueue(struct qdesc* dest, struct qdesc* src)
+void UASM_ABI QJoinQueue(struct qdesc* dest, struct qdesc* src)
 /******************************************************/
 {
     if (dest->head == NULL)
@@ -97,7 +97,7 @@ void uasm_ABI QJoinQueue(struct qdesc* dest, struct qdesc* src)
 
 #if 0 /* v2.04: not needed anymore */
 
-void* uasm_ABI QDequeue(struct qdesc* q)
+void* UASM_ABI QDequeue(struct qdesc* q)
 /*******************************/
 {
     void* item;
@@ -116,4 +116,4 @@ void* uasm_ABI QDequeue(struct qdesc* q)
 }
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP

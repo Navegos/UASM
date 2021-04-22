@@ -74,16 +74,16 @@
 #define SYMCMP( x, y, z ) SymCmpFunc( x, y, z )
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern struct asym* FileCur;  /* @FileCur symbol    */
 extern struct asym* LineCur;  /* @Line symbol       */
 extern struct asym* symCurSeg;/* @CurSeg symbol     */
 
-extern void uasm_ABI   UpdateLineNumber(struct asym*, void*);
-extern void uasm_ABI   UpdateWordSize(struct asym*, void*);
-extern void uasm_ABI   UpdateLangType(struct asym*, void*);
-extern void uasm_ABI   UpdateCurPC(struct asym* sym, void* p);
+extern void UASM_ABI   UpdateLineNumber(struct asym*, void*);
+extern void UASM_ABI   UpdateWordSize(struct asym*, void*);
+extern void UASM_ABI   UpdateLangType(struct asym*, void*);
+extern void UASM_ABI   UpdateCurPC(struct asym* sym, void* p);
 
 static struct asym* gsym_table[GHASH_TABLE_SIZE];
 static struct asym* lsym_table[LHASH_TABLE_SIZE];
@@ -136,7 +136,7 @@ struct eqitem
 {
     const char* name;
     uint_32 value;
-    void (uasm_ABI *sfunc_ptr)(struct asym*, void*);
+    void (UASM_ABI *sfunc_ptr)(struct asym*, void*);
     struct asym** store;
 };
 
@@ -158,7 +158,7 @@ static const struct eqitem eqtab[] = {
 
 static bool structLookup = FALSE;
 
-static unsigned int uasm_ABI hashpjw(const char* s)
+static unsigned int UASM_ABI hashpjw(const char* s)
 /******************************************/
 {
     uint_64 fnv_basis = 0xCBF29CE484222325 /*14695981039346656037ull*/;
@@ -172,7 +172,7 @@ static unsigned int uasm_ABI hashpjw(const char* s)
     return((((h >> 16) ^ h) & 0xffff));
 }
 
-void uasm_ABI SymSetCmpFunc(void)
+void UASM_ABI SymSetCmpFunc(void)
 /************************/
 {
     SymCmpFunc = (ModuleInfo.case_sensitive == TRUE ? memcmp : (StrCmpFunc)_memicmp);
@@ -181,7 +181,7 @@ void uasm_ABI SymSetCmpFunc(void)
 
 /* reset local hash table */
 
-void uasm_ABI SymClearLocal(void)
+void UASM_ABI SymClearLocal(void)
 /************************/
 {
     memset(&lsym_table, 0, sizeof(lsym_table));
@@ -190,7 +190,7 @@ void uasm_ABI SymClearLocal(void)
 
 /* store local hash table in proc's list of local symbols */
 
-void uasm_ABI SymGetLocal(struct asym* proc)
+void UASM_ABI SymGetLocal(struct asym* proc)
 /***********************************/
 {
     int i;
@@ -215,7 +215,7 @@ void uasm_ABI SymGetLocal(struct asym* proc)
  * for local labels (not for params and locals!). Low priority!
  */
 
-void uasm_ABI SymSetLocal(struct asym* proc)
+void UASM_ABI SymSetLocal(struct asym* proc)
 /***********************************/
 {
     int i;
@@ -231,7 +231,7 @@ void uasm_ABI SymSetLocal(struct asym* proc)
     return;
 }
 
-struct asym* uasm_ABI SymAlloc(const char* name)
+struct asym* UASM_ABI SymAlloc(const char* name)
     /***************************************/
 {
     int len = strlen(name);
@@ -264,7 +264,7 @@ struct asym* uasm_ABI SymAlloc(const char* name)
     return(sym);
 }
 
-struct asym* uasm_ABI SymFind(const char* name)
+struct asym* UASM_ABI SymFind(const char* name)
     /**************************************/
     /* find a symbol in the local/global symbol table,
     * return ptr to next free entry in global table if not found.
@@ -313,7 +313,7 @@ struct asym* uasm_ABI SymFind(const char* name)
     return(NULL);
 }
 
-struct asym* uasm_ABI SymCheck(const char* name)
+struct asym* UASM_ABI SymCheck(const char* name)
     /**************************************/
     /* find a symbol in the local/global symbol table,
     * return NULL if not found.
@@ -358,7 +358,7 @@ struct asym* uasm_ABI SymCheck(const char* name)
     return(NULL);
 }
 
-struct asym* uasm_ABI SymFindLocal(const char* name)
+struct asym* UASM_ABI SymFindLocal(const char* name)
     /**************************************/
     /* find a symbol in the local symbol table,
     * return ptr to next free entry in local table if not found.
@@ -387,7 +387,7 @@ struct asym* uasm_ABI SymFindLocal(const char* name)
 }
 
 /* Version to be used during declaration of a LOCAL to avoid it being marked as used */
-struct asym* uasm_ABI SymFindDeclare(const char* name)
+struct asym* UASM_ABI SymFindDeclare(const char* name)
     /**************************************/
     /* find a symbol in the local/global symbol table,
     * return ptr to next free entry in global table if not found.
@@ -429,7 +429,7 @@ struct asym* uasm_ABI SymFindDeclare(const char* name)
 #if 0
 /* Search a symbol */
 
-struct asym* uasm_ABI SymSearch(const char* name)
+struct asym* UASM_ABI SymSearch(const char* name)
     /****************************************/
 {
     return(*SymFindDeclare(name));
@@ -437,7 +437,7 @@ struct asym* uasm_ABI SymSearch(const char* name)
 #endif
 
 /* SymLookup() creates a global label if it isn't defined yet */
-struct asym* uasm_ABI SymLookup(const char* name)
+struct asym* UASM_ABI SymLookup(const char* name)
     /****************************************/
 {
     struct asym* sym;
@@ -454,7 +454,7 @@ struct asym* uasm_ABI SymLookup(const char* name)
 /* SymLookupLocal() creates a local label if it isn't defined yet.
  * called by LabelCreate() [see labels.c]
  */
-struct asym* uasm_ABI SymLookupLocal(const char* name)
+struct asym* UASM_ABI SymLookupLocal(const char* name)
     /*********************************************/
 {
     struct asym* sym;
@@ -483,7 +483,7 @@ struct asym* uasm_ABI SymLookupLocal(const char* name)
 
 /* free state-specific info of a symbol */
 
-static void uasm_ABI free_ext(struct asym* sym)
+static void UASM_ABI free_ext(struct asym* sym)
 /**************************************/
 {
     DebugMsg(("free_ext: item=%p name=%s state=%u\n", sym, sym->name, sym->state));
@@ -547,7 +547,7 @@ static void uasm_ABI free_ext(struct asym* sym)
  * or done by the caller.
  */
 
-void uasm_ABI SymFree(struct asym* sym)
+void UASM_ABI SymFree(struct asym* sym)
 /******************************/
 {
     //DebugMsg(("SymFree: free %X, name=%s, state=%X\n", sym, sym->name, sym->state));
@@ -575,7 +575,7 @@ void uasm_ABI SymFree(struct asym* sym)
  * Called by:
  * - ParseParams() in proc.c for procedure parameters.
  */
-struct asym* uasm_ABI SymAddLocal(struct asym* sym, const char* name)
+struct asym* UASM_ABI SymAddLocal(struct asym* sym, const char* name)
     /************************************************************/
 {
     struct asym* sym2;
@@ -603,7 +603,7 @@ struct asym* uasm_ABI SymAddLocal(struct asym* sym, const char* name)
  * - RecordDirective() in types.c to add bitfield fields (which have global scope).
  */
 
-struct asym* uasm_ABI SymAddGlobal(struct asym* sym)
+struct asym* UASM_ABI SymAddGlobal(struct asym* sym)
     /*******************************************/
 {
     if (SymFind(sym->name))
@@ -617,7 +617,7 @@ struct asym* uasm_ABI SymAddGlobal(struct asym* sym)
     return(sym);
 }
 
-struct asym* uasm_ABI SymCreate(const char* name)
+struct asym* UASM_ABI SymCreate(const char* name)
     /****************************************/
     /* Create symbol and optionally insert it into the symbol table */
 {
@@ -634,7 +634,7 @@ struct asym* uasm_ABI SymCreate(const char* name)
     return(sym);
 }
 
-struct asym* uasm_ABI SymLCreate(const char* name)
+struct asym* UASM_ABI SymLCreate(const char* name)
     /*****************************************/
     /* Create symbol and insert it into the local symbol table.
      * This function is called by LocalDir() and ParseParams()
@@ -655,7 +655,7 @@ struct asym* uasm_ABI SymLCreate(const char* name)
     return(sym);
 }
 
-void uasm_ABI SymMakeAllSymbolsPublic(void)
+void UASM_ABI SymMakeAllSymbolsPublic(void)
 /**********************************/
 {
     int i;
@@ -683,10 +683,10 @@ void uasm_ABI SymMakeAllSymbolsPublic(void)
 }
 
 #ifdef DEBUG_OUT
-static void uasm_ABI DumpSymbols(void);
+static void UASM_ABI DumpSymbols(void);
 #endif
 
-void uasm_ABI SymFini(void)
+void UASM_ABI SymFini(void)
 /******************/
 {
 #if FASTMEM==0 || defined( DEBUG_OUT )
@@ -733,7 +733,7 @@ void uasm_ABI SymFini(void)
 
 /* initialize global symbol table */
 
-void uasm_ABI SymInit(void)
+void UASM_ABI SymInit(void)
 /******************/
 {
     struct asym*    sym;
@@ -794,7 +794,7 @@ void uasm_ABI SymInit(void)
     return;
 }
 
-void uasm_ABI SymPassInit(int pass)
+void UASM_ABI SymPassInit(int pass)
 /**************************/
 {
     unsigned            i;
@@ -833,7 +833,7 @@ void uasm_ABI SymPassInit(int pass)
     }
 }
 
-uint_32 uasm_ABI SymGetCount(void)
+uint_32 UASM_ABI SymGetCount(void)
 /*************************/
 {
     return(SymCount);
@@ -841,7 +841,7 @@ uint_32 uasm_ABI SymGetCount(void)
 
 /* get all symbols in global hash table */
 
-void uasm_ABI SymGetAll(struct asym** syms)
+void UASM_ABI SymGetAll(struct asym** syms)
 /**********************************/
 {
     struct asym* sym;
@@ -862,7 +862,7 @@ void uasm_ABI SymGetAll(struct asym** syms)
  * used for codeview symbolic debug output.
  */
 
-struct asym* uasm_ABI SymEnum(struct asym* sym, int* pi)
+struct asym* UASM_ABI SymEnum(struct asym* sym, int* pi)
     /***********************************************/
 {
     if (sym == NULL)
@@ -883,7 +883,7 @@ struct asym* uasm_ABI SymEnum(struct asym* sym, int* pi)
     return(sym);
 }
 
-void uasm_ABI SymSimd(struct dsym* sym)
+void UASM_ABI SymSimd(struct dsym* sym)
 {
     int             memberCount = 0;
     int             vtotal = 0;
@@ -1062,7 +1062,7 @@ void uasm_ABI SymSimd(struct dsym* sym)
 #endif
 }
 
-void uasm_ABI WriteSymbols()
+void UASM_ABI WriteSymbols()
 {
     char*           pName;
     uint_32         count = 0;
@@ -1106,7 +1106,7 @@ void uasm_ABI WriteSymbols()
 
 #ifdef DEBUG_OUT
 
-static void uasm_ABI DumpSymbol(struct asym* sym)
+static void UASM_ABI DumpSymbol(struct asym* sym)
 /****************************************/
 {
     struct dsym*    dir = (struct dsym*)sym;
@@ -1186,7 +1186,7 @@ static void uasm_ABI DumpSymbol(struct asym* sym)
     printf("%-12s  %16" I64_SPEC "X %02X %8p %c %8p %s\n", type, value, sym->mem_type, (void*)&(dir->e), sym->ispublic ? 'X' : ' ', (void*)sym->name, (char*)sym->name);
 }
 
-static void uasm_ABI DumpSymbols(void)
+static void UASM_ABI DumpSymbols(void)
 /*****************************/
 {
     struct asym*        sym;
@@ -1236,4 +1236,4 @@ static void uasm_ABI DumpSymbols(void)
 }
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP

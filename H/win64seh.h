@@ -5,7 +5,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_4
+UASM_PACK_PUSH_4
 
 /* some structures for Win64 SEH */
 
@@ -70,6 +70,6 @@ typedef struct _UNWIND_INFO {
 
 #define UNW_VERSION 1
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _WIN64SEH_H_INCLUDED_

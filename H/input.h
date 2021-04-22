@@ -34,7 +34,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct macro_instance {
     struct srcline* currline;
@@ -66,41 +66,41 @@ struct input_status {
 #endif
 };
 
-extern uint_32 uasm_ABI  GetLineNumber(void);
+extern uint_32 UASM_ABI  GetLineNumber(void);
 //#define LineNumber GetLineNumber()
 
-extern char const* const uasm_ABI GetFNamePart(const char* fname);
-extern char const* const uasm_ABI GetExtPart(const char* fname);
+extern char const* const UASM_ABI GetFNamePart(const char* fname);
+extern char const* const UASM_ABI GetExtPart(const char* fname);
 
-extern struct src_item* uasm_ABI PushSrcItem(char type, void* pv);
+extern struct src_item* UASM_ABI PushSrcItem(char type, void* pv);
 
-extern FILE* uasm_ABI   SearchFile(char* path, bool);
-extern char* uasm_ABI   GetTextLine(char* buffer);
-extern void uasm_ABI    PushMacro(struct macro_instance*);
-extern void uasm_ABI    SetLineNumber(unsigned);
+extern FILE* UASM_ABI   SearchFile(char* path, bool);
+extern char* UASM_ABI   GetTextLine(char* buffer);
+extern void UASM_ABI    PushMacro(struct macro_instance*);
+extern void UASM_ABI    SetLineNumber(unsigned);
 #if FASTMEM==0
-extern bool uasm_ABI    MacroInUse(struct dsym*);
+extern bool UASM_ABI    MacroInUse(struct dsym*);
 #endif
-extern void uasm_ABI    AddStringToIncludePath(const char* string);
-extern void uasm_ABI    InputInit(void);
-extern void uasm_ABI    InputPassInit(void);
-extern void uasm_ABI    InputFini(void);
-extern struct asm_tok* uasm_ABI PushInputStatus(struct input_status*);
-extern void  uasm_ABI   PopInputStatus(struct input_status*);
-extern int uasm_ABI     GetCurrSrcPos(char*);
-extern void  uasm_ABI   ClearSrcStack(void);
-extern unsigned uasm_ABI get_curr_srcfile(void);
+extern void UASM_ABI    AddStringToIncludePath(const char* string);
+extern void UASM_ABI    InputInit(void);
+extern void UASM_ABI    InputPassInit(void);
+extern void UASM_ABI    InputFini(void);
+extern struct asm_tok* UASM_ABI PushInputStatus(struct input_status*);
+extern void  UASM_ABI   PopInputStatus(struct input_status*);
+extern int UASM_ABI     GetCurrSrcPos(char*);
+extern void  UASM_ABI   ClearSrcStack(void);
+extern unsigned UASM_ABI get_curr_srcfile(void);
 #if FASTPASS
-extern void uasm_ABI    set_curr_srcfile(unsigned, uint_32);
+extern void UASM_ABI    set_curr_srcfile(unsigned, uint_32);
 #endif
-extern struct fname_item const* const uasm_ABI GetFName(unsigned);
+extern struct fname_item const* const UASM_ABI GetFName(unsigned);
 #ifdef DEBUG_OUT
-extern char* uasm_ABI   GetTopLine(char*);
-extern char* uasm_ABI   GetTopSrcName(void);
+extern char* UASM_ABI   GetTopLine(char*);
+extern char* UASM_ABI   GetTopSrcName(void);
 #endif
 
 #define GetAlignedPointer( x, size ) ( x + ( ( size + 1 + sizeof(void *) - 1 ) & ~( sizeof(void *) - 1 ) ) )
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

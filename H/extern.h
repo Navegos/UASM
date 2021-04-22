@@ -12,12 +12,12 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern struct asym* uasm_ABI MakeExtern(const char*, enum memtype mem_type, struct asym*, struct asym*, uint_8);
-extern void uasm_ABI        AddPublicData(struct asym*);
-extern void uasm_ABI        FreePubQueue(void);
+extern struct asym* UASM_ABI MakeExtern(const char*, enum memtype mem_type, struct asym*, struct asym*, uint_8);
+extern void UASM_ABI        AddPublicData(struct asym*);
+extern void UASM_ABI        FreePubQueue(void);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

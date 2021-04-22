@@ -7,7 +7,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* qualified_type us used for parsing a qualified type. */
 struct qualified_type {
@@ -22,17 +22,17 @@ struct qualified_type {
 
 extern struct dsym* CurrStruct; /* start of current STRUCT list */
 
-extern struct asym* uasm_ABI    CreateTypeSymbol(struct asym*, const char*, bool);
-extern struct asym* uasm_ABI    SearchNameInStruct(const struct asym*, const char*, uint_32*, int level);
-//extern ret_code uasm_ABI      EndstructDirective( int );
-extern ret_code uasm_ABI        GetQualifiedType(int*, struct asm_tok[], struct qualified_type*);
-extern struct asym* uasm_ABI    CreateStructField(int, struct asm_tok[], const char*, enum memtype mem_type, struct asym*, uint_32);
-extern void uasm_ABI            UpdateStructSize(struct asym*);
-extern ret_code uasm_ABI        SetStructCurrentOffset(int_32);
-extern ret_code uasm_ABI        AlignInStruct(int);
-extern void uasm_ABI            TypesInit(void);
-extern void uasm_ABI            DeleteType(struct dsym*);
+extern struct asym* UASM_ABI    CreateTypeSymbol(struct asym*, const char*, bool);
+extern struct asym* UASM_ABI    SearchNameInStruct(const struct asym*, const char*, uint_32*, int level);
+//extern ret_code UASM_ABI      EndstructDirective( int );
+extern ret_code UASM_ABI        GetQualifiedType(int*, struct asm_tok[], struct qualified_type*);
+extern struct asym* UASM_ABI    CreateStructField(int, struct asm_tok[], const char*, enum memtype mem_type, struct asym*, uint_32);
+extern void UASM_ABI            UpdateStructSize(struct asym*);
+extern ret_code UASM_ABI        SetStructCurrentOffset(int_32);
+extern ret_code UASM_ABI        AlignInStruct(int);
+extern void UASM_ABI            TypesInit(void);
+extern void UASM_ABI            DeleteType(struct dsym*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

@@ -10,14 +10,14 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-void uasm_ABI     bin_init(struct module_info*);
+void UASM_ABI     bin_init(struct module_info*);
 
 #if PE_SUPPORT
-void uasm_ABI     pe_create_PE_header(void);
+void UASM_ABI     pe_create_PE_header(void);
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _BIN_H_INCLUDED_

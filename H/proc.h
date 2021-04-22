@@ -34,7 +34,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern struct dsym* CurrProc;      /* current procedure */
 
@@ -52,17 +52,17 @@ enum proc_status {
 
 /*---------------------------------------------------------------------------*/
 
-extern ret_code uasm_ABI        ParseProc(struct dsym*, int, struct asm_tok[], bool, enum lang_type langtype);
-extern struct asym* uasm_ABI    CreateProc(struct asym*, const char*, enum sym_state state);
-extern void uasm_ABI            DeleteProc(struct dsym*);
+extern ret_code UASM_ABI        ParseProc(struct dsym*, int, struct asm_tok[], bool, enum lang_type langtype);
+extern struct asym* UASM_ABI    CreateProc(struct asym*, const char*, enum sym_state state);
+extern void UASM_ABI            DeleteProc(struct dsym*);
 
-extern ret_code uasm_ABI        CopyPrototype(struct dsym*, struct dsym*);
-extern ret_code uasm_ABI        RetInstr(int, struct asm_tok[], int);   /* handle RET/IRET within procedures */
-extern void uasm_ABI            write_prologue(struct asm_tok[]);
-extern void uasm_ABI            ProcInit(void);
+extern ret_code UASM_ABI        CopyPrototype(struct dsym*, struct dsym*);
+extern ret_code UASM_ABI        RetInstr(int, struct asm_tok[], int);   /* handle RET/IRET within procedures */
+extern void UASM_ABI            write_prologue(struct asm_tok[]);
+extern void UASM_ABI            ProcInit(void);
 
-extern void uasm_ABI            ProcCheckOpen(void);
+extern void UASM_ABI            ProcCheckOpen(void);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

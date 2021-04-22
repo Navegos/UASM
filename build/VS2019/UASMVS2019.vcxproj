@@ -5,23 +5,79 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|x64">
-      <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
+    <ProjectConfiguration Include="Debug_SSE2|Win32">
+      <Configuration>Debug_SSE2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_AVX|Win32">
+      <Configuration>Debug_AVX</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_AVX2|Win32">
+      <Configuration>Debug_AVX2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_AVX512|Win32">
+      <Configuration>Debug_AVX512</Configuration>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_SSE2|Win32">
+      <Configuration>Release_SSE2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_AVX|Win32">
+      <Configuration>Release_AVX</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_AVX2|Win32">
+      <Configuration>Release_AVX2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_AVX512|Win32">
+      <Configuration>Release_AVX512</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_AVX|x64">
+      <Configuration>Debug_AVX</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_AVX|x64">
+      <Configuration>Release_AVX</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_AVX2|x64">
+      <Configuration>Debug_AVX2</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_AVX2|x64">
+      <Configuration>Release_AVX2</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_AVX512|x64">
+      <Configuration>Debug_AVX512</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_AVX512|x64">
+      <Configuration>Release_AVX512</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{742E0A2F-D723-4729-8B5A-367DD9295AA1}</ProjectGuid>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>HJWasm</RootNamespace>
+    <RootNamespace>UASM</RootNamespace>
     <ProjectName>uasm</ProjectName>
     <PlatformToolset>v140</PlatformToolset>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
@@ -34,7 +90,22 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_SSE2|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -45,7 +116,75 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -58,34 +197,298 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug_SSE2|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release_AVX|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <LinkIncremental />
     <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_SSE2|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)d</TargetName>
-    <LinkIncremental />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\SSE\UASM\v142\x86
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\SSE\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\SSE\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\SSE\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_SSE2|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\SSE2\UASM\v142\x86
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\SSE2\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\SSE2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\SSE2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX\UASM\v142\x86
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\AVX\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -112,10 +515,11 @@
       <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(UASM_PATH)\v142\x86
-copy $(OutDir)$(TargetName).pdb $(UASM_PATH)\v142\x86
-xcopy  ..\..\include $(UASM_PATH)\include /hisery
-xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX2\UASM\v142\x86
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\AVX2\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UASM\BuildCustomizations /hisery</Command>
     </PostBuildEvent>
     <UASM>
       <OutputFormat>1</OutputFormat>
@@ -129,55 +533,233 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
     </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsC</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <WarningLevel>Level3</WarningLevel>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <CompileAsManaged>false</CompileAsManaged>
       <CompileAsWinRT>false</CompileAsWinRT>
-      <OmitFramePointers>false</OmitFramePointers>
-      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
       <GuardEHContMetadata>
       </GuardEHContMetadata>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies />
       <SubSystem>Console</SubSystem>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(UASM_PATH)\v142\x64
-copy $(OutDir)$(TargetName).pdb $(UASM_PATH)\v142\x64
-xcopy  ..\..\include $(UASM_PATH)\include /hisery
-xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX512\UASM\v142\x86
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\AVX512\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX512\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX512\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\UASM\BuildCustomizations /hisery</Command>
     </PostBuildEvent>
     <UASM>
-      <OutputFormat>2</OutputFormat>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
       <SetCaseMap>2</SetCaseMap>
       <CNamesDecoratedPrefix>
       </CNamesDecoratedPrefix>
-      <FASTCALLSymbolDecoration>
-      </FASTCALLSymbolDecoration>
       <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
-      <SetFastCallType>3</SetFastCallType>
+      <SetFastCallType>0</SetFastCallType>
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
-      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
     </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\SSE\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\SSE\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\SSE\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\SSE2\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\SSE2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\SSE2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -212,9 +794,10 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(UASM_PATH)\v142\x86
-xcopy  ..\..\include $(UASM_PATH)\include /hisery
-xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX2\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UASM\BuildCustomizations /hisery</Command>
     </PostBuildEvent>
     <UASM>
       <OutputFormat>1</OutputFormat>
@@ -228,8 +811,359 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
     </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>8Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX512\UASM\v142\x86
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX512\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX512\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>1</OutputFormat>
+      <UseSafeExceptionHandlers>true</UseSafeExceptionHandlers>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>0</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>4</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <OmitFramePointers>false</OmitFramePointers>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\SSE2\UASM\v142\x64
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\SSE2\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\SSE2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\SSE2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <CompileAs>CompileAsC</CompileAs>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <HeapReserveSize>
+      </HeapReserveSize>
+      <HeapCommitSize>
+      </HeapCommitSize>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\SSE2\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\SSE2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\SSE2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <OmitFramePointers>false</OmitFramePointers>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX\UASM\v142\x64
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\AVX\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <CompileAs>CompileAsC</CompileAs>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <HeapReserveSize>
+      </HeapReserveSize>
+      <HeapCommitSize>
+      </HeapCommitSize>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <OmitFramePointers>false</OmitFramePointers>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX2\UASM\v142\x64
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\AVX2\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|x64'">
     <ClCompile>
       <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -269,9 +1203,10 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(UASM_PATH)\v142\x64
-xcopy  ..\..\include $(UASM_PATH)\include /hisery
-xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX2\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX2\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX2\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UASM\BuildCustomizations /hisery</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>
@@ -290,6 +1225,129 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
     </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <OmitFramePointers>false</OmitFramePointers>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX512\UASM\v142\x64
+copy $(OutDir)$(TargetName).pdb $(SolutionDir)\..\distribution\Windows\AVX512\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX512\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX512\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>DEBUG;_DEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <CompileAs>CompileAsC</CompileAs>
+      <StringPooling>true</StringPooling>
+      <WarningLevel>Level3</WarningLevel>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <InlineFunctionExpansion>
+      </InlineFunctionExpansion>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <GuardEHContMetadata>
+      </GuardEHContMetadata>
+      <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <HeapReserveSize>
+      </HeapReserveSize>
+      <HeapCommitSize>
+      </HeapCommitSize>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) $(SolutionDir)\..\distribution\Windows\AVX512\UASM\v142\x64
+copy $(SolutionDir)\..\..\README.md $(SolutionDir)\..\distribution\Windows\AVX512\UASM /y
+xcopy  ..\..\include $(SolutionDir)\..\distribution\Windows\AVX512\UASM\include /hisery
+xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\UASM\BuildCustomizations /hisery</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <UASM>
+      <OutputFormat>2</OutputFormat>
+      <SetCaseMap>2</SetCaseMap>
+      <CNamesDecoratedPrefix>
+      </CNamesDecoratedPrefix>
+      <FASTCALLSymbolDecoration>
+      </FASTCALLSymbolDecoration>
+      <PreprocessorDefinitions>NDEBUG</PreprocessorDefinitions>
+      <SetFastCallType>3</SetFastCallType>
+      <SetMemoryModel>7</SetMemoryModel>
+      <CallingConvention>5</CallingConvention>
+      <PackAlignmentBoundary>5</PackAlignmentBoundary>
+    </UASM>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\apiemu.c" />
@@ -358,9 +1416,23 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
     <ClCompile Include="..\..\tokenize.c" />
     <ClCompile Include="..\..\trmem.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_SSE2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\types.c" />
   </ItemGroup>
@@ -399,15 +1471,43 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
     <UASM Include="..\..\asm\memmove.asm">
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_SSE2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|x64'">true</ExcludedFromBuild>
     </UASM>
     <UASM Include="..\..\asm\memset.asm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_SSE2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_SSE2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX2|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX2|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_AVX512|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_AVX512|x64'">true</ExcludedFromBuild>
     </UASM>
   </ItemGroup>
   <ItemGroup>
@@ -495,6 +1595,7 @@ xcopy  ..\..\BuildCustomizations $(UASM_PATH)\BuildCustomizations /hisery</Comma
     <ClInclude Include="..\..\H\unaryop.h" />
     <ClInclude Include="..\..\H\usage.h" />
     <ClInclude Include="..\..\H\usage2.h" />
+    <ClInclude Include="..\..\H\vers.h" />
     <ClInclude Include="..\..\H\win32.h" />
     <ClInclude Include="..\..\H\win64seh.h" />
     <ClInclude Include="..\..\H\winconsole.h" />

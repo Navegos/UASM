@@ -34,7 +34,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum reservedword_flags {
     //RWF_SPECIAL  = 1, /* keyword is NO instruction; v2.11: obsolete */
@@ -62,22 +62,22 @@ struct ReservedWord {
 #endif
 };
 
-extern unsigned uasm_ABI    FindResWord(const char*, unsigned char);
-extern char* uasm_ABI       GetResWName(unsigned, char*);
-extern bool uasm_ABI        IsKeywordDisabled(const char*, int);
-extern void uasm_ABI        DisableKeyword(unsigned);
+extern unsigned UASM_ABI    FindResWord(const char*, unsigned char);
+extern char* UASM_ABI       GetResWName(unsigned, char*);
+extern bool UASM_ABI        IsKeywordDisabled(const char*, int);
+extern void UASM_ABI        DisableKeyword(unsigned);
 #if RENAMEKEY
-extern void uasm_ABI        RenameKeyword(unsigned, const char*, uint_8);
+extern void UASM_ABI        RenameKeyword(unsigned, const char*, uint_8);
 #endif
 #if AMD64_SUPPORT
-extern void uasm_ABI        Set64Bit(bool);
+extern void UASM_ABI        Set64Bit(bool);
 #endif
-extern void uasm_ABI        ResWordsInit(void);
-extern void uasm_ABI        ResWordsFini(void);
+extern void UASM_ABI        ResWordsInit(void);
+extern void UASM_ABI        ResWordsFini(void);
 #ifdef DEBUG_OUT
-extern void uasm_ABI        DumpResWords(void);
+extern void UASM_ABI        DumpResWords(void);
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

@@ -27,9 +27,9 @@
 
 #define REMOVECOMENT 0 /* 1=remove comments from source       */
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern ret_code(uasm_ABI *const directive_tab[])(int, struct asm_tok[]);
+extern ret_code(UASM_ABI *const directive_tab[])(int, struct asm_tok[]);
 
 #ifdef DEBUG_OUT
 int_32 cntppl0;    /* count preprocessed lines 1 */
@@ -40,7 +40,7 @@ int_32 cntppl2;    /* count lines NOT handled by preprocessor */
 /* preprocessor directive or macro procedure is preceded
  * by a code label.
  */
-ret_code uasm_ABI WriteCodeLabel(char* line, struct asm_tok tokenarray[])
+ret_code UASM_ABI WriteCodeLabel(char* line, struct asm_tok tokenarray[])
 /****************************************************************/
 {
     int oldcnt;
@@ -72,7 +72,7 @@ ret_code uasm_ABI WriteCodeLabel(char* line, struct asm_tok tokenarray[])
 /* Verify a matched pair of function call brackets, assuming initial opening bracket position
    and return the closing bracket position or -1.
 */
-int uasm_ABI VerifyBrackets(struct asm_tok tokenarray[], int openIdx, bool inParam)
+int UASM_ABI VerifyBrackets(struct asm_tok tokenarray[], int openIdx, bool inParam)
 {
     /*int len;*/
     int i = openIdx;
@@ -108,7 +108,7 @@ int uasm_ABI VerifyBrackets(struct asm_tok tokenarray[], int openIdx, bool inPar
 }
 
 /* We only allow a single level of nested calls */
-static void uasm_ABI VerifyNesting(char* line, bool exprBracket)
+static void UASM_ABI VerifyNesting(char* line, bool exprBracket)
 {
     int depth = 0;
     int maxdepth = (exprBracket) ? 3 : 2;
@@ -137,7 +137,7 @@ static void uasm_ABI VerifyNesting(char* line, bool exprBracket)
     }
 }
 
-static void uasm_ABI ExpandObjCalls(char* line, struct asm_tok tokenarray[])
+static void UASM_ABI ExpandObjCalls(char* line, struct asm_tok tokenarray[])
 {
     int             i, j;
     struct dsym*    sym;
@@ -592,7 +592,7 @@ static void uasm_ABI ExpandObjCalls(char* line, struct asm_tok tokenarray[])
 }
 
 /* Expand static object type method invocations */
-static void uasm_ABI ExpandStaticObjCalls(char* line, struct asm_tok tokenarray[])
+static void UASM_ABI ExpandStaticObjCalls(char* line, struct asm_tok tokenarray[])
 {
     int             i, j;
     struct asym*    sym = NULL;
@@ -757,7 +757,7 @@ static void uasm_ABI ExpandStaticObjCalls(char* line, struct asm_tok tokenarray[
     }
 }
 
-static struct asym* uasm_ABI TraverseEquate(struct asym* sym)
+static struct asym* UASM_ABI TraverseEquate(struct asym* sym)
 {
     struct asym* resultSym = sym;
     if (sym)
@@ -770,7 +770,7 @@ static struct asym* uasm_ABI TraverseEquate(struct asym* sym)
     return(resultSym);
 }
 
-static void uasm_ABI ExpandHllCalls(char* line, struct asm_tok tokenarray[], bool inParam, int argIdx, bool inExpr)
+static void UASM_ABI ExpandHllCalls(char* line, struct asm_tok tokenarray[], bool inParam, int argIdx, bool inExpr)
 {
     int             i, j;
     struct dsym*    sym;
@@ -1023,7 +1023,7 @@ static void uasm_ABI ExpandHllCalls(char* line, struct asm_tok tokenarray[], boo
     strcpy(line, &newline);
 }
 
-static bool uasm_ABI PossibleCallExpansion(struct asm_tok tokenarray[])
+static bool UASM_ABI PossibleCallExpansion(struct asm_tok tokenarray[])
 {
     bool    result = FALSE;
     bool    gotOp = FALSE;
@@ -1057,7 +1057,7 @@ static bool uasm_ABI PossibleCallExpansion(struct asm_tok tokenarray[])
 Perform evaluation of any items required before pre-processing (ie: substitution or macro expansion).
 -> Evaluation of inline RECORD items to allow them to be handled by invoke/macros etc.
 */
-void uasm_ABI EvaluatePreprocessItems(char* line, struct asm_tok tokenarray[])
+void UASM_ABI EvaluatePreprocessItems(char* line, struct asm_tok tokenarray[])
 {
     int             i;
     struct dsym*    recsym;
@@ -1091,7 +1091,7 @@ void uasm_ABI EvaluatePreprocessItems(char* line, struct asm_tok tokenarray[])
  * 2. (text) macros are expanded by ExpandLine()
  * 3. "preprocessor" directives are executed
  */
-int uasm_ABI PreprocessLine(char* line, struct asm_tok tokenarray[])
+int UASM_ABI PreprocessLine(char* line, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     int i;
@@ -1243,4 +1243,4 @@ int uasm_ABI PreprocessLine(char* line, struct asm_tok tokenarray[])
     return(Token_Count);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

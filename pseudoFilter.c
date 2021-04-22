@@ -8,7 +8,7 @@
 #include "globals.h"
 #include "parser.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 #ifdef _WIN32
 #else
@@ -19,7 +19,7 @@ uasm_PACK_PUSH_STACK
      * Released under GPLv3.
 
      */
-char* uasm_ABI itoa(int value, char* result, int base)
+char* UASM_ABI itoa(int value, char* result, int base)
 {
     // check that the base if valid
     if (base < 2 || base > 36)
@@ -52,7 +52,7 @@ char* uasm_ABI itoa(int value, char* result, int base)
 
 #endif
 
-int uasm_ABI get_pseudoCMPXX(char* dst, char* p1, int index)
+int UASM_ABI get_pseudoCMPXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     int i;
@@ -120,7 +120,7 @@ int uasm_ABI get_pseudoCMPXX(char* dst, char* p1, int index)
     return index;
 }
 
-int uasm_ABI get_pseudoVCMPXX(char* dst, char* p1, int index)
+int UASM_ABI get_pseudoVCMPXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     int i;
@@ -289,7 +289,7 @@ int uasm_ABI get_pseudoVCMPXX(char* dst, char* p1, int index)
     return index;
 }
 
-int uasm_ABI get_pseudoPCLMULXX(char* dst, char* p1, int index)
+int UASM_ABI get_pseudoPCLMULXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     strcpy(dst, "pclmulqdq");
@@ -320,7 +320,7 @@ int uasm_ABI get_pseudoPCLMULXX(char* dst, char* p1, int index)
     return index;
 }
 
-int uasm_ABI get_pseudoVPCLMULXX(char* dst, char* p1, int index)
+int UASM_ABI get_pseudoVPCLMULXX(char* dst, char* p1, int index)
 /******************************************************************/
 {
     strcpy(dst, "vpclmulqdq");
@@ -351,4 +351,4 @@ int uasm_ABI get_pseudoVPCLMULXX(char* dst, char* p1, int index)
     return index;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

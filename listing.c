@@ -38,7 +38,7 @@
 #define NLSTR "\r\n"
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern int_32  LastCodeBufSize;
 #if STACKBASESUPP==0
@@ -94,7 +94,7 @@ struct print_item
     short type;
     short flags;
     const short* capitems;
-    void (uasm_ABI *function)();
+    void (UASM_ABI *function)();
 };
 
 static const short maccap[] = { LS_TXT_MACROS,  LS_TXT_MACROCAP  ,0 };
@@ -105,13 +105,13 @@ static const short tdcap[] = { LS_TXT_TYPEDEFS,LS_TXT_TYPEDEFCAP, 0 };
 static const short segcap[] = { LS_TXT_SEGS,    LS_TXT_SEGCAP, 0 };
 static const short prccap[] = { LS_TXT_PROCS,   LS_TXT_PROCCAP, 0 };
 
-static void uasm_ABI log_macro(const struct asym*);
-static void uasm_ABI log_struct(const struct asym*, const char* name, int_32);
-static void uasm_ABI log_record(const struct asym*);
-static void uasm_ABI log_typedef(const struct asym*);
-static void uasm_ABI log_segment(const struct asym*, const struct asym* group);
-static void uasm_ABI log_group(const struct asym*, const struct dsym*);
-static void uasm_ABI log_proc(const struct asym*);
+static void UASM_ABI log_macro(const struct asym*);
+static void UASM_ABI log_struct(const struct asym*, const char* name, int_32);
+static void UASM_ABI log_record(const struct asym*);
+static void UASM_ABI log_typedef(const struct asym*);
+static void UASM_ABI log_segment(const struct asym*, const struct asym* group);
+static void UASM_ABI log_group(const struct asym*, const struct dsym*);
+static void UASM_ABI log_proc(const struct asym*);
 
 static const struct print_item cr[] = {
     { LQ_MACROS,          0, maccap, log_macro   },
@@ -142,7 +142,7 @@ struct lstleft
  *
  */
 
-void uasm_ABI LstWrite(enum lsttype type, uint_32 oldofs, void* value)
+void UASM_ABI LstWrite(enum lsttype type, uint_32 oldofs, void* value)
 /*************************************************************/
 {
     uint_32             newofs = 0;
@@ -418,13 +418,13 @@ void uasm_ABI LstWrite(enum lsttype type, uint_32 oldofs, void* value)
     return;
 }
 
-void uasm_ABI LstWriteSrcLine(void)
+void UASM_ABI LstWriteSrcLine(void)
 /**************************/
 {
     LstWrite(LSTTYPE_MACRO, 0, NULL);
 }
 
-void uasm_ABI LstPrintf(const char* format, ...)
+void UASM_ABI LstPrintf(const char* format, ...)
 /***************************************/
 {
     va_list     args;
@@ -437,7 +437,7 @@ void uasm_ABI LstPrintf(const char* format, ...)
     }
 }
 
-void uasm_ABI LstNL(void)
+void UASM_ABI LstNL(void)
 /****************/
 {
     if (CurrFile[LST])
@@ -453,7 +453,7 @@ void uasm_ABI LstNL(void)
  */
 
 #if FASTPASS
-void uasm_ABI LstSetPosition(void)
+void UASM_ABI LstSetPosition(void)
 /*************************/
 {
     if (CurrFile[LST] && (Parse_Pass > PASS_1) && UseSavedState && ModuleInfo.GeneratedCode == 0)
@@ -465,7 +465,7 @@ void uasm_ABI LstSetPosition(void)
 }
 #endif
 
-static char const* const uasm_ABI get_seg_align(const struct seg_info* seg, char* buffer)
+static char const* const UASM_ABI get_seg_align(const struct seg_info* seg, char* buffer)
 /**************************************************************************/
 {
     switch (seg->alignment)
@@ -484,7 +484,7 @@ static char const* const uasm_ABI get_seg_align(const struct seg_info* seg, char
     }
 }
 
-static char const* const uasm_ABI get_seg_combine(const struct seg_info* seg)
+static char const* const UASM_ABI get_seg_combine(const struct seg_info* seg)
 /**************************************************************/
 {
     switch (seg->combine)
@@ -498,7 +498,7 @@ static char const* const uasm_ABI get_seg_combine(const struct seg_info* seg)
     return("?");
 }
 
-static void uasm_ABI log_macro(const struct asym* sym)
+static void UASM_ABI log_macro(const struct asym* sym)
 /*********************************************/
 {
     int i = sym->name_size;
@@ -514,7 +514,7 @@ static void uasm_ABI log_macro(const struct asym* sym)
     return;
 }
 
-static char const* const uasm_ABI SimpleTypeString(enum memtype mem_type)
+static char const* const UASM_ABI SimpleTypeString(enum memtype mem_type)
 /**********************************************************/
 {
     int size = (mem_type & 0x3f) + 1;
@@ -540,7 +540,7 @@ static char const* const uasm_ABI SimpleTypeString(enum memtype mem_type)
  * argument 'buffer' is either NULL or "very" large ( StringBufferEnd ).
  */
 
-static char const* const uasm_ABI GetMemtypeString(const struct asym* sym, char* buffer)
+static char const* const UASM_ABI GetMemtypeString(const struct asym* sym, char* buffer)
 /*************************************************************************/
 {
     char*           p;
@@ -614,7 +614,7 @@ static char const* const uasm_ABI GetMemtypeString(const struct asym* sym, char*
     return("?");
 }
 
-static char const* const uasm_ABI GetLanguage(const struct asym* sym)
+static char const* const UASM_ABI GetLanguage(const struct asym* sym)
 /******************************************************/
 {
     if (sym->langtype <= 12)
@@ -624,7 +624,7 @@ static char const* const uasm_ABI GetLanguage(const struct asym* sym)
 
 /* display STRUCTs and UNIONs */
 
-static void uasm_ABI log_struct(const struct asym* sym, const char* name, int_32 ofs)
+static void UASM_ABI log_struct(const struct asym* sym, const char* name, int_32 ofs)
 /****************************************************************************/
 {
     unsigned              i;
@@ -688,7 +688,7 @@ static void uasm_ABI log_struct(const struct asym* sym, const char* name, int_32
     prefix -= 2;
 }
 
-static void uasm_ABI log_record(const struct asym* sym)
+static void UASM_ABI log_record(const struct asym* sym)
 /**********************************************/
 {
 #if AMD64_SUPPORT
@@ -731,7 +731,7 @@ static void uasm_ABI log_record(const struct asym* sym)
 
 /* a typedef is a simple struct with no fields. Size might be 0. */
 
-static void uasm_ABI log_typedef(const struct asym* sym)
+static void UASM_ABI log_typedef(const struct asym* sym)
 /***********************************************/
 {
     //struct dsym         *dir = (struct dsym *)sym;
@@ -768,7 +768,7 @@ static void uasm_ABI log_typedef(const struct asym* sym)
     LstNL();
 }
 
-static void uasm_ABI log_segment(const struct asym* sym, const struct asym* group)
+static void UASM_ABI log_segment(const struct asym* sym, const struct asym* group)
 /*************************************************************************/
 {
     char                buffer[32];
@@ -806,7 +806,7 @@ static void uasm_ABI log_segment(const struct asym* sym, const struct asym* grou
     }
 }
 
-static void uasm_ABI log_group(const struct asym* grp, const struct dsym* segs)
+static void UASM_ABI log_group(const struct asym* grp, const struct dsym* segs)
 /**********************************************************************/
 {
     unsigned            i;
@@ -833,7 +833,7 @@ static void uasm_ABI log_group(const struct asym* grp, const struct dsym* segs)
         }
 }
 
-static char const* const uasm_ABI get_proc_type(const struct asym* sym)
+static char const* const UASM_ABI get_proc_type(const struct asym* sym)
 /********************************************************/
 {
     /* if there's no segment associated with the symbol,
@@ -856,7 +856,7 @@ static char const* const uasm_ABI get_proc_type(const struct asym* sym)
     return(" ");
 }
 
-static char const* const uasm_ABI get_sym_seg_name(const struct asym* sym)
+static char const* const UASM_ABI get_sym_seg_name(const struct asym* sym)
 /***********************************************************/
 {
     if (sym->segment)
@@ -871,7 +871,7 @@ static char const* const uasm_ABI get_sym_seg_name(const struct asym* sym)
 
 /* list Procedures and Prototypes */
 
-static void uasm_ABI log_proc(const struct asym* sym)
+static void UASM_ABI log_proc(const struct asym* sym)
 /********************************************/
 {
     struct dsym*        f;
@@ -1041,7 +1041,7 @@ static void uasm_ABI log_proc(const struct asym* sym)
 
 /* list symbols */
 
-static void uasm_ABI log_symbol(const struct asym* sym)
+static void UASM_ABI log_symbol(const struct asym* sym)
 /**********************************************/
 {
     int i = sym->name_size;
@@ -1128,7 +1128,7 @@ static void uasm_ABI log_symbol(const struct asym* sym)
     }
 }
 
-static void uasm_ABI LstCaption(const char* caption, int prefNL)
+static void UASM_ABI LstCaption(const char* caption, int prefNL)
 /*******************************************************/
 {
     for (; prefNL; prefNL--)
@@ -1146,7 +1146,7 @@ static int compare_syms(const void* p1, const void* p2)
 
 /* write symbol table listing */
 
-void uasm_ABI LstWriteCRef(void)
+void UASM_ABI LstWriteCRef(void)
 /***********************/
 {
     struct asym**       syms;
@@ -1277,7 +1277,7 @@ void uasm_ABI LstWriteCRef(void)
  * .[NO]LISTIF, .[LF|SF|TF]COND,
  * PAGE, TITLE, SUBTITLE, SUBTTL directives
  */
-ret_code uasm_ABI ListingDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI ListingDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     int directive = tokenarray[i].tokval;
@@ -1373,7 +1373,7 @@ ret_code uasm_ABI ListingDirective(int i, struct asm_tok tokenarray[])
 
 /* directives .[NO]LISTMACRO, .LISTMACROALL, .[X|L|S]ALL */
 
-ret_code uasm_ABI ListMacroDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI ListMacroDirective(int i, struct asm_tok tokenarray[])
 /***************************************************************/
 {
     if (tokenarray[i + 1].token != T_FINAL)
@@ -1386,7 +1386,7 @@ ret_code uasm_ABI ListMacroDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-void uasm_ABI LstInit(void)
+void UASM_ABI LstInit(void)
 /******************/
 {
     struct fname_item*  fn;
@@ -1409,4 +1409,4 @@ void uasm_ABI LstInit(void)
     }
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

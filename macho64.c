@@ -30,7 +30,7 @@
 
 #define ROUND_UP( i, r ) (((i)+((r)-1)) & ~((r)-1))
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* String table entry */
 struct strentry
@@ -82,7 +82,7 @@ Calculate the number of sections required for the MACHO64 Obj file
 -> An object file only contains 1 segment with sections,
 -> our internal segments become sections.
 ========================================================================================== */
-int uasm_ABI macho_section_count()
+int UASM_ABI macho_section_count()
 {
     int cnt = 0;
     struct dsym* curr;
@@ -103,7 +103,7 @@ int uasm_ABI macho_section_count()
 /* ==========================================================================================
 Build a segment_command_64 structure.
 ========================================================================================== */
-struct segment_command_64* uasm_ABI macho_build_seg_cmd(int fileofs)
+struct segment_command_64* UASM_ABI macho_build_seg_cmd(int fileofs)
 {
     struct segment_command_64* pCmd = NULL;
     pCmd = malloc(sizeof(struct segment_command_64));
@@ -128,7 +128,7 @@ struct segment_command_64* uasm_ABI macho_build_seg_cmd(int fileofs)
 /* ==========================================================================================
 Build a symtabl_command structure.
 ========================================================================================== */
-struct symtab_command* uasm_ABI macho_build_symtbl_cmd()
+struct symtab_command* UASM_ABI macho_build_symtbl_cmd()
 {
     struct symtab_command* pCmd = NULL;
     pCmd = malloc(sizeof(struct symtab_command));
@@ -144,7 +144,7 @@ struct symtab_command* uasm_ABI macho_build_symtbl_cmd()
     return(pCmd);
 }
 
-struct dysymtab_command* uasm_ABI macho_build_dysymtbl_cmd()
+struct dysymtab_command* UASM_ABI macho_build_dysymtbl_cmd()
 {
     struct dysymtab_command* pCmd = NULL;
     pCmd = malloc(sizeof(struct dysymtab_command));
@@ -159,7 +159,7 @@ struct dysymtab_command* uasm_ABI macho_build_dysymtbl_cmd()
 /* ==========================================================================================
 Add an entry to the string table.
 ========================================================================================== */
-static void uasm_ABI macho_add_string(struct strentry* pstr, struct macho_module* mm)
+static void UASM_ABI macho_add_string(struct strentry* pstr, struct macho_module* mm)
 {
     struct strentry* pCurrStr = mm->strings;
     int lastIdx = 1;
@@ -190,7 +190,7 @@ static void uasm_ABI macho_add_string(struct strentry* pstr, struct macho_module
 Create linked list of symbol names (string table)
 -> This can be later scanned to determine symbol index (1 based).
 ========================================================================================== */
-int uasm_ABI macho_build_string_tbl(struct symtab_command* pSymCmd, struct macho_module* mm)
+int UASM_ABI macho_build_string_tbl(struct symtab_command* pSymCmd, struct macho_module* mm)
 {
     int tblSize = 0;
     int i = 0;
@@ -264,7 +264,7 @@ int uasm_ABI macho_build_string_tbl(struct symtab_command* pSymCmd, struct macho
 Return the 1-based index of a symbol table entry, based on it's name
 NB: symbol table indices in other structures are 0 based.
 ========================================================================================== */
-static int uasm_ABI GetSymbolIndex(const char* pName, struct macho_module* mm)
+static int UASM_ABI GetSymbolIndex(const char* pName, struct macho_module* mm)
 {
     struct strentry* currStr = mm->strings;
     int idx = 0;
@@ -282,7 +282,7 @@ static int uasm_ABI GetSymbolIndex(const char* pName, struct macho_module* mm)
 /* ==========================================================================================
 Build a macho_section_entry structure.
 ========================================================================================== */
-struct section_64* uasm_ABI macho_build_section(const char* secName, const char* segName, uint32_t flags, const char* srcName)
+struct section_64* UASM_ABI macho_build_section(const char* secName, const char* segName, uint32_t flags, const char* srcName)
 {
     struct macho_section_entry* pSec = NULL;
     pSec = malloc(sizeof(struct macho_section_entry));
@@ -301,7 +301,7 @@ struct section_64* uasm_ABI macho_build_section(const char* secName, const char*
 /* ==========================================================================================
 Add a macho_section_entry to our module linked list.
 ========================================================================================== */
-static void uasm_ABI macho_add_section(struct macho_section_entry* pSec, struct macho_module* mm)
+static void UASM_ABI macho_add_section(struct macho_section_entry* pSec, struct macho_module* mm)
 {
     struct macho_section_entry* pCurrSec = mm->sections;
     if (pCurrSec == NULL)
@@ -321,7 +321,7 @@ static void uasm_ABI macho_add_section(struct macho_section_entry* pSec, struct 
 /* ==========================================================================================
 Return MachO section index, based on original source segment name.
 ========================================================================================== */
-static int uasm_ABI GetSectionIdx(struct asym* seg, struct macho_module* mm)
+static int UASM_ABI GetSectionIdx(struct asym* seg, struct macho_module* mm)
 {
     struct macho_section_entry* curr = NULL;
     if (seg)
@@ -340,7 +340,7 @@ static int uasm_ABI GetSectionIdx(struct asym* seg, struct macho_module* mm)
 /* ==========================================================================================
 Count the number of fixups in a source segment
 ========================================================================================== */
-static int uasm_ABI GetSegFixups(struct dsym* seg)
+static int UASM_ABI GetSegFixups(struct dsym* seg)
 {
     struct fixup* curr;
     int fixupcnt = 0;
@@ -354,7 +354,7 @@ static int uasm_ABI GetSegFixups(struct dsym* seg)
 /* ==========================================================================================
 For each macho section, find correspond source segment and sum count of relocation entries.
 ========================================================================================== */
-static int uasm_ABI GetRelocationCount(struct macho_module* mm, int baseOfs)
+static int UASM_ABI GetRelocationCount(struct macho_module* mm, int baseOfs)
 {
     struct macho_section_entry* curr = NULL;
     struct dsym* seg;
@@ -385,7 +385,7 @@ static int uasm_ABI GetRelocationCount(struct macho_module* mm, int baseOfs)
 /* ==========================================================================================
 Create all the macho obj file structures and calculate offsets.
 ========================================================================================== */
-static void uasm_ABI macho_build_structures(struct module_info* modinfo, struct macho_module mm)
+static void UASM_ABI macho_build_structures(struct module_info* modinfo, struct macho_module mm)
 {
     /*int cnt = 0;*/
     struct dsym* curr;
@@ -700,7 +700,7 @@ static void uasm_ABI macho_build_structures(struct module_info* modinfo, struct 
     }
 }
 
-static ret_code uasm_ABI macho_write_module(struct module_info* modinfo)
+static ret_code UASM_ABI macho_write_module(struct module_info* modinfo)
 {
     struct macho_module mm;
     /*int fileofs = 0;*/
@@ -739,11 +739,11 @@ static ret_code uasm_ABI macho_write_module(struct module_info* modinfo)
     return(NOT_ERROR);
 }
 
-void uasm_ABI macho_init(struct module_info* modinfo)
+void UASM_ABI macho_init(struct module_info* modinfo)
 {
     modinfo->osx_osabi = MACHOABI_OSX64;
     modinfo->g.WriteModule = macho_write_module;
     return;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

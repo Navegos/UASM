@@ -35,7 +35,7 @@
 #define MAXRECBITS 128
 //#endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct dsym* CurrStruct;
 static struct dsym* redef_struct;
@@ -44,9 +44,9 @@ static const char szStructure[] = "structure";
 static const char szRecord[] = "record";
 
 static const char szNonUnique[] = "NONUNIQUE";
-extern void uasm_ABI SymSimd(struct dsym* sym);
+extern void UASM_ABI SymSimd(struct dsym* sym);
 
-void uasm_ABI TypesInit(void)
+void UASM_ABI TypesInit(void)
 /********************/
 {
     CurrStruct = NULL;
@@ -59,7 +59,7 @@ void uasm_ABI TypesInit(void)
  * <name> might be an empty string.
  */
 
-struct asym* uasm_ABI CreateTypeSymbol(struct asym* sym, const char* name, bool global)
+struct asym* UASM_ABI CreateTypeSymbol(struct asym* sym, const char* name, bool global)
     /******************************************************************************/
 {
     struct struct_info* si;
@@ -84,7 +84,7 @@ struct asym* uasm_ABI CreateTypeSymbol(struct asym* sym, const char* name, bool 
 
 /* search a name in a struct's fieldlist */
 
-struct asym* uasm_ABI SearchNameInStruct(const struct asym* tstruct, const char* name, uint_32* poffset, int level)
+struct asym* UASM_ABI SearchNameInStruct(const struct asym* tstruct, const char* name, uint_32* poffset, int level)
     /**********************************************************************************************************/
 {
     int len = (int)strlen(name);
@@ -137,7 +137,7 @@ struct asym* uasm_ABI SearchNameInStruct(const struct asym* tstruct, const char*
 
 /* check if a struct has changed */
 
-static bool uasm_ABI AreStructsEqual(const struct dsym* newstr, const struct dsym* oldstr)
+static bool UASM_ABI AreStructsEqual(const struct dsym* newstr, const struct dsym* oldstr)
 /*********************************************************************************/
 {
     struct sfield* fold = oldstr->e.structinfo->head;
@@ -182,7 +182,7 @@ static bool uasm_ABI AreStructsEqual(const struct dsym* newstr, const struct dsy
 
 /* handle STRUCT, STRUC, UNION directives
  * i = index of directive token  */
-ret_code uasm_ABI StructDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI StructDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     char*           name;
@@ -414,7 +414,7 @@ ret_code uasm_ABI StructDirective(int i, struct asm_tok tokenarray[])
 }
 
 /* Handle special CSTRUCT directive, internal only.. this is identical to STRUCT but flags the struct as isClass */
-ret_code uasm_ABI CStructDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI CStructDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     char*           name;
@@ -652,7 +652,7 @@ ret_code uasm_ABI CStructDirective(int i, struct asm_tok tokenarray[])
 }
 
 /* Handle special RAWSTRUCT directive, internal only.. this is identical to STRUCT but flags the struct as isPtrTable */
-ret_code uasm_ABI RAWStructDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI RAWStructDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     char*           name;
@@ -898,7 +898,7 @@ ret_code uasm_ABI RAWStructDirective(int i, struct asm_tok tokenarray[])
 }
 
 /* Handle special COMSTRUCT directive, internal only.. this is identical to STRUCT but flags the struct as isClass and isCOM */
-ret_code uasm_ABI COMStructDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI COMStructDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     char*           name;
@@ -1141,7 +1141,7 @@ ret_code uasm_ABI COMStructDirective(int i, struct asm_tok tokenarray[])
 }
 
 /* handle ENDS directive when a struct/union definition is active */
-ret_code uasm_ABI EndstructDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI EndstructDirective(int i, struct asm_tok tokenarray[])
 /***************************************************************/
 {
     unsigned int    size;
@@ -1301,7 +1301,7 @@ ret_code uasm_ABI EndstructDirective(int i, struct asm_tok tokenarray[])
 }
 
 /* v2.06: new function to check fields of anonymous struct members */
-static ret_code uasm_ABI CheckAnonymousStruct(struct dsym* type)
+static ret_code UASM_ABI CheckAnonymousStruct(struct dsym* type)
 /*******************************************************/
 {
     uint_32         disp;
@@ -1340,7 +1340,7 @@ static ret_code uasm_ABI CheckAnonymousStruct(struct dsym* type)
  * - vartype: user-defined type of item if memtype is MT_TYPE
  * - size: size of type - used for alignment only
  */
-struct asym* uasm_ABI CreateStructField(int loc, struct asm_tok tokenarray[], const char* name, enum memtype mem_type, struct asym* vartype, uint_32 size)
+struct asym* UASM_ABI CreateStructField(int loc, struct asm_tok tokenarray[], const char* name, enum memtype mem_type, struct asym* vartype, uint_32 size)
     /*************************************************************************************************************************************************/
 {
     int_32                  offset;
@@ -1560,7 +1560,7 @@ struct asym* uasm_ABI CreateStructField(int loc, struct asm_tok tokenarray[], co
 /* called by AlignDirective() if ALIGN/EVEN has been found inside
  * a struct. It's already verified that <value> is a power of 2.
  */
-ret_code uasm_ABI AlignInStruct(int value)
+ret_code UASM_ABI AlignInStruct(int value)
 /*********************************/
 {
     if (CurrStruct->sym.typekind != TYPE_UNION)
@@ -1577,7 +1577,7 @@ ret_code uasm_ABI AlignInStruct(int value)
 
 /* called by data_dir() when a structure field has been created.
  */
-void uasm_ABI UpdateStructSize(struct asym* sym)
+void UASM_ABI UpdateStructSize(struct asym* sym)
 /***************************************/
 {
     if (CurrStruct->sym.typekind == TYPE_UNION)
@@ -1604,7 +1604,7 @@ void uasm_ABI UpdateStructSize(struct asym* sym)
 
 /* called if ORG occurs inside STRUCT/UNION definition */
 
-ret_code uasm_ABI SetStructCurrentOffset(int_32 offset)
+ret_code UASM_ABI SetStructCurrentOffset(int_32 offset)
 /**********************************************/
 {
     if (CurrStruct->sym.typekind == TYPE_UNION)
@@ -1629,7 +1629,7 @@ ret_code uasm_ABI SetStructCurrentOffset(int_32 offset)
  * - LABEL
  * - ASSUME for GPRs
  */
-ret_code uasm_ABI GetQualifiedType(int* pi, struct asm_tok tokenarray[], struct qualified_type* pti)
+ret_code UASM_ABI GetQualifiedType(int* pi, struct asm_tok tokenarray[], struct qualified_type* pti)
 /*******************************************************************************************/
 {
     int             type;
@@ -1818,7 +1818,7 @@ ret_code uasm_ABI GetQualifiedType(int* pi, struct asm_tok tokenarray[], struct 
 /* TYPEDEF directive. Syntax is:
  * <type name> TYPEDEF [proto|[far|near [ptr]]<qualified type>]
  */
-ret_code uasm_ABI TypedefDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI TypedefDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     struct asym*    sym;
@@ -1991,7 +1991,7 @@ ret_code uasm_ABI TypedefDirective(int i, struct asm_tok tokenarray[])
  * the memtype will be MT_BYTE, MT_WORD, MT_DWORD [, MT_QWORD in 64-bit].
  */
 
-ret_code uasm_ABI RecordDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI RecordDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     char*           name;
@@ -2234,7 +2234,7 @@ ret_code uasm_ABI RecordDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-void uasm_ABI DeleteType(struct dsym* dir)
+void UASM_ABI DeleteType(struct dsym* dir)
 /*********************************/
 {
     struct sfield* curr;
@@ -2270,4 +2270,4 @@ void uasm_ABI DeleteType(struct dsym* dir)
     return;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

@@ -35,7 +35,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct qnode {
     void* next;
@@ -51,11 +51,11 @@ struct qdesc {
 };
 
 //extern void QInit( struct qdesc * );
-extern void uasm_ABI QEnqueue(struct qdesc*, void*);
-extern void uasm_ABI QAddItem(struct qdesc*, const void*);
+extern void UASM_ABI QEnqueue(struct qdesc*, void*);
+extern void UASM_ABI QAddItem(struct qdesc*, const void*);
 //extern void *QDequeue( struct qdesc * );
 //extern void QJoinQueue( struct qdesc *dest, struct qdesc *src );
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

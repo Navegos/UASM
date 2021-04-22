@@ -19,7 +19,7 @@
 #include "preproc.h"
 #include "myassert.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern struct ReservedWord  ResWordTable[];
 
@@ -38,7 +38,7 @@ struct lq_line
 #ifdef DEBUG_OUT
 static unsigned lqlines_written; /* lq lines written by AddLineQueue() */
 static unsigned lqlines_read;    /* lq lines read by RunLineQueue() */
-unsigned uasm_ABI GetLqLine(void)
+unsigned UASM_ABI GetLqLine(void)
 {
     return(lqlines_read);
 }
@@ -46,7 +46,7 @@ unsigned uasm_ABI GetLqLine(void)
 
 /* free items of current line queue */
 
-void uasm_ABI DeleteLineQueue(void)
+void UASM_ABI DeleteLineQueue(void)
 /**************************/
 {
     struct qitem* curr;
@@ -60,7 +60,7 @@ void uasm_ABI DeleteLineQueue(void)
 }
 
 #if 0 /* v2.11: now a macro */
-bool uasm_ABI is_linequeue_populated(void)
+bool UASM_ABI is_linequeue_populated(void)
 /*********************************/
 {
     return(line_queue.head != NULL);
@@ -69,7 +69,7 @@ bool uasm_ABI is_linequeue_populated(void)
 
 /* Add a line to the current line queue. */
 
-void uasm_ABI AddLineQueue(const char* line)
+void UASM_ABI AddLineQueue(const char* line)
 /***********************************/
 {
     unsigned i = strlen(line);
@@ -100,7 +100,7 @@ void uasm_ABI AddLineQueue(const char* line)
 
 /* Add a line to the current line queue, "printf" format. */
 
-void uasm_ABI AddLineQueueX(const char* fmt, ...)
+void UASM_ABI AddLineQueueX(const char* fmt, ...)
 /****************************************/
 {
     va_list args;
@@ -179,7 +179,7 @@ void uasm_ABI AddLineQueueX(const char* fmt, ...)
     return;
 }
 
-void uasm_ABI BuildCodeLine(char* buffer, const char* fmt, ...)
+void UASM_ABI BuildCodeLine(char* buffer, const char* fmt, ...)
 /****************************************/
 {
     va_list args;
@@ -263,7 +263,7 @@ void uasm_ABI BuildCodeLine(char* buffer, const char* fmt, ...)
  * - restores input status
  */
 
-void uasm_ABI RunLineQueue(void)
+void UASM_ABI RunLineQueue(void)
 /***********************/
 {
     struct input_status         oldstat;
@@ -298,4 +298,4 @@ void uasm_ABI RunLineQueue(void)
     return;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

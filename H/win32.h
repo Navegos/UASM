@@ -31,7 +31,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /*
  * v2.10: second parameter of VirtualAlloc/Free changed to size_t ( from uint_32 ).
@@ -42,6 +42,6 @@ uasm_PACK_PUSH_STACK
 WINBASEAPI void* WINAPI VirtualAlloc(void*, size_t, uint_32, uint_32);
 WINBASEAPI int   WINAPI VirtualFree(void*, size_t, uint_32);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _WIN32_H_INCLUDED_

@@ -11,18 +11,18 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct line_num_info;
 
-void uasm_ABI      omf_init(struct module_info*);
+void UASM_ABI      omf_init(struct module_info*);
 
-void uasm_ABI      omf_set_filepos(void);
-//void uasm_ABI      omf_write_ledata( struct dsym * );
-void uasm_ABI      omf_OutSelect(bool);
-void uasm_ABI      omf_FlushCurrSeg(void);
-void uasm_ABI      omf_check_flush(const struct line_num_info*);
+void UASM_ABI      omf_set_filepos(void);
+//void UASM_ABI      omf_write_ledata( struct dsym * );
+void UASM_ABI      omf_OutSelect(bool);
+void UASM_ABI      omf_FlushCurrSeg(void);
+void UASM_ABI      omf_check_flush(const struct line_num_info*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _OMF_H_INCLUDED_

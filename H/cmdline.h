@@ -16,11 +16,11 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern char* uasm_ABI ParseCmdline(char** cmdline, int*);
-extern void uasm_ABI CmdlineFini(void);
+extern char* UASM_ABI ParseCmdline(char** cmdline, int*);
+extern void UASM_ABI CmdlineFini(void);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _CMDLINE_H_INCLUDED_

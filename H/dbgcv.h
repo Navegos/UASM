@@ -33,7 +33,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_1
+UASM_PACK_PUSH_1
 
 typedef unsigned long	CV_uoff32_t;
 typedef		 long	CV_off32_t;
@@ -3407,6 +3407,6 @@ struct CV_Column_t {
     CV_columnpos_t offColumnEnd;
 };
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

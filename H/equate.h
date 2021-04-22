@@ -34,11 +34,11 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern struct asym* uasm_ABI CreateConstant(struct asm_tok[]);
-extern struct asym* uasm_ABI CreateVariable(const char*, int);
+extern struct asym* UASM_ABI CreateConstant(struct asm_tok[]);
+extern struct asym* UASM_ABI CreateVariable(const char*, int);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

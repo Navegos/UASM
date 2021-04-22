@@ -49,9 +49,9 @@
 #include "winconsole.h"
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI             print_source_nesting_structure(void);
+extern void UASM_ABI             print_source_nesting_structure(void);
 extern jmp_buf          jmpenv;
 
 //static bool             Errfile_Written;
@@ -80,7 +80,7 @@ static const char usage2[] = {
 FILE* fdbglog = NULL;
 #endif
 
-void uasm_ABI DoDebugMsg(const char* format, ...)
+void UASM_ABI DoDebugMsg(const char* format, ...)
 /****************************************/
 {
     va_list args;
@@ -107,7 +107,7 @@ void uasm_ABI DoDebugMsg(const char* format, ...)
 #endif
 }
 
-void uasm_ABI DoDebugMsg1(const char* format, ...)
+void UASM_ABI DoDebugMsg1(const char* format, ...)
 /****************************************/
 {
     va_list args;
@@ -148,7 +148,7 @@ void uasm_ABI DoDebugMsg1(const char* format, ...)
 }
 #endif
 
-int uasm_ABI write_logo(void)
+int UASM_ABI write_logo(void)
 /********************/
 {
 #ifdef _WIN32
@@ -180,7 +180,7 @@ int uasm_ABI write_logo(void)
     return(0);
 }
 
-void uasm_ABI PrintUsage(void)
+void UASM_ABI PrintUsage(void)
 /*********************/
 {
     const char* p;
@@ -230,7 +230,7 @@ void uasm_ABI PrintUsage(void)
 #endif
 }
 
-static void uasm_ABI PutMsg(FILE* fp, int severity, int msgnum, va_list args)
+static void UASM_ABI PutMsg(FILE* fp, int severity, int msgnum, va_list args)
 /********************************************************************/
 {
     int             i, j;
@@ -299,7 +299,7 @@ static void uasm_ABI PutMsg(FILE* fp, int severity, int msgnum, va_list args)
     }
 }
 
-static void uasm_ABI PrtMsg(int severity, int msgnum, va_list args1, va_list args2)
+static void UASM_ABI PrtMsg(int severity, int msgnum, va_list args1, va_list args2)
 /**************************************************************************/
 {
 #ifndef __SW_BD
@@ -335,7 +335,7 @@ static void uasm_ABI PrtMsg(int severity, int msgnum, va_list args1, va_list arg
 
 /* notes: "included by", "macro called from", ... */
 
-void uasm_ABI PrintNote(int msgnum, ...)
+void UASM_ABI PrintNote(int msgnum, ...)
 /*******************************/
 {
     va_list args1, args2;
@@ -348,7 +348,7 @@ void uasm_ABI PrintNote(int msgnum, ...)
     va_end(args2);
 }
 
-int uasm_ABI EmitErr(int msgnum, ...)
+int UASM_ABI EmitErr(int msgnum, ...)
 /****************************/
 {
     va_list args1, args2;
@@ -369,13 +369,13 @@ int uasm_ABI EmitErr(int msgnum, ...)
     return(ERROR);
 }
 
-int uasm_ABI EmitError(int msgnum)
+int UASM_ABI EmitError(int msgnum)
 /*************************/
 {
     return(EmitErr(msgnum));
 }
 
-void uasm_ABI EmitWarn(int level, int msgnum, ...)
+void UASM_ABI EmitWarn(int level, int msgnum, ...)
 /*****************************************/
 {
     va_list args1, args2;
@@ -403,7 +403,7 @@ void uasm_ABI EmitWarn(int level, int msgnum, ...)
     }
 }
 
-char* uasm_ABI ErrnoStr(void)
+char* UASM_ABI ErrnoStr(void)
 /********************/
 {
     static char buffer[32];
@@ -414,7 +414,7 @@ char* uasm_ABI ErrnoStr(void)
  * don't use functions which need to alloc memory here!
  * v2.08: do not exit(), just a longjmp() into AssembleModule().
  */
-void uasm_ABI Fatal(int msgnum, ...)
+void UASM_ABI Fatal(int msgnum, ...)
 /***************************/
 {
     va_list     args1, args2;
@@ -442,7 +442,7 @@ void uasm_ABI Fatal(int msgnum, ...)
 }
 
 #if 0
-void uasm_ABI SeekError(void)
+void UASM_ABI SeekError(void)
 /********************/
 {
     DebugMsg(("SeekError occured\n"));
@@ -450,7 +450,7 @@ void uasm_ABI SeekError(void)
 };
 #endif
 
-void uasm_ABI WriteError(void)
+void UASM_ABI WriteError(void)
 /*********************/
 {
     DebugMsg(("WriteError occured\n"));
@@ -459,7 +459,7 @@ void uasm_ABI WriteError(void)
 
 #ifndef NDEBUG
 
-int uasm_ABI InternalError(const char* file, unsigned line)
+int UASM_ABI InternalError(const char* file, unsigned line)
 /**************************************************/
 /* it's used by myassert() function in debug version */
 {
@@ -479,4 +479,4 @@ int uasm_ABI InternalError(const char* file, unsigned line)
 }
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP

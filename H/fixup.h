@@ -34,7 +34,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* RELOFF8 - RELOFF32 must be consecutive */
 
@@ -140,13 +140,13 @@ struct fixup {
     struct asym* sym;
 };
 
-extern struct fixup* uasm_ABI CreateFixup(struct asym* sym, enum fixup_types type, enum fixup_options option);
-extern void uasm_ABI          SetFixupFrame(const struct asym* sym, char);
-extern void uasm_ABI          FreeFixup(struct fixup*);
-extern void uasm_ABI          store_fixup(struct fixup*, struct dsym*, int_32*);
+extern struct fixup* UASM_ABI CreateFixup(struct asym* sym, enum fixup_types type, enum fixup_options option);
+extern void UASM_ABI          SetFixupFrame(const struct asym* sym, char);
+extern void UASM_ABI          FreeFixup(struct fixup*);
+extern void UASM_ABI          store_fixup(struct fixup*, struct dsym*, int_32*);
 
-extern ret_code uasm_ABI      BackPatch(struct asym* sym);
+extern ret_code UASM_ABI      BackPatch(struct asym* sym);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

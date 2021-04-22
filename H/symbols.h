@@ -36,7 +36,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /*
  * SYM_LIB  - library paths are no longer added to the symbol table
@@ -135,7 +135,7 @@ enum returntype {
  */
 struct macro_instance;
 
-typedef void (uasm_ABI *internal_func)(struct asym*, void*);
+typedef void (UASM_ABI *internal_func)(struct asym*, void*);
 
 struct debug_info {
     uint_32 start_line;  /* procs's start line */
@@ -157,7 +157,7 @@ struct asym {
         uint_32        uvalue;       /* v2.01: equates (they are 33-bit!) */
         struct asym* substitute;  /* v2.04b: used by SYM_ALIAS */
                                      /* func_ptr: used by SYM_MACRO if predefined==1 */
-        ret_code(uasm_ABI *func_ptr)(struct macro_instance*, char*, struct asm_tok*);
+        ret_code(UASM_ABI *func_ptr)(struct macro_instance*, char*, struct asm_tok*);
         int_32         class_lname_idx; /* used by SYM_CLASS_LNAME */
     };
     unsigned int    tokval;			/* Used to track a PROC parameter symbol that has an assigned register */
@@ -309,7 +309,7 @@ struct grp_info {
     unsigned            numseg;         /* OMF: number of segments in the group */
 };
 
-typedef uint_8* (uasm_ABI *FlushSegFunc)(struct dsym*, uint_8*, unsigned, void*);
+typedef uint_8* (UASM_ABI *FlushSegFunc)(struct dsym*, uint_8*, unsigned, void*);
 
 struct seg_info {
     struct asym* group;         /* segment's group or NULL */
@@ -592,30 +592,30 @@ struct dsym {
     };
 };
 
-extern  struct asym* uasm_ABI   SymAlloc(const char*);
-extern  void uasm_ABI            SymFree(struct asym*);
-extern  struct asym* uasm_ABI   SymCreate(const char*);
-extern  struct asym* uasm_ABI   SymLCreate(const char*);
-extern  struct asym* uasm_ABI   SymAddGlobal(struct asym*);
-extern  struct asym* uasm_ABI   SymAddLocal(struct asym*, const char*);
-extern  struct asym* uasm_ABI   SymLookup(const char*);
-extern  struct asym* uasm_ABI   SymLookupLocal(const char*);
+extern  struct asym* UASM_ABI   SymAlloc(const char*);
+extern  void UASM_ABI            SymFree(struct asym*);
+extern  struct asym* UASM_ABI   SymCreate(const char*);
+extern  struct asym* UASM_ABI   SymLCreate(const char*);
+extern  struct asym* UASM_ABI   SymAddGlobal(struct asym*);
+extern  struct asym* UASM_ABI   SymAddLocal(struct asym*, const char*);
+extern  struct asym* UASM_ABI   SymLookup(const char*);
+extern  struct asym* UASM_ABI   SymLookupLocal(const char*);
 
-extern  struct asym* uasm_ABI   SymFind(const char* name);
-extern  struct asym* uasm_ABI   SymCheck(const char* name);
-extern  struct asym* uasm_ABI   SymFindLocal(const char* name);
-extern  struct asym* uasm_ABI   SymFindDeclare(const char* name);
+extern  struct asym* UASM_ABI   SymFind(const char* name);
+extern  struct asym* UASM_ABI   SymCheck(const char* name);
+extern  struct asym* UASM_ABI   SymFindLocal(const char* name);
+extern  struct asym* UASM_ABI   SymFindDeclare(const char* name);
 #define SymSearch(x) SymFind(x)
 
-extern  void uasm_ABI           SymInit(void);
-extern  void uasm_ABI           SymFini(void);
-extern  void uasm_ABI           SymPassInit(int pass);
-extern  void uasm_ABI           SymMakeAllSymbolsPublic(void);
-extern  void uasm_ABI           SymGetAll(struct asym**);
-extern  struct asym* uasm_ABI   SymEnum(struct asym*, int*);
-extern  uint_32 uasm_ABI        SymGetCount(void);
+extern  void UASM_ABI           SymInit(void);
+extern  void UASM_ABI           SymFini(void);
+extern  void UASM_ABI           SymPassInit(int pass);
+extern  void UASM_ABI           SymMakeAllSymbolsPublic(void);
+extern  void UASM_ABI           SymGetAll(struct asym**);
+extern  struct asym* UASM_ABI   SymEnum(struct asym*, int*);
+extern  uint_32 UASM_ABI        SymGetCount(void);
 
-extern  void uasm_ABI           WriteSymbols(void);
+extern  void UASM_ABI           WriteSymbols(void);
 
 #if defined(__WATCOMC__)
 typedef int (__watcall* StrCmpFunc)(const void*, const void*, size_t);
@@ -626,11 +626,11 @@ typedef int(*StrCmpFunc)(const void*, const void*, size_t);
 #endif
 extern StrCmpFunc SymCmpFunc;
 
-extern  void uasm_ABI           SymSetCmpFunc(void);
-extern  void uasm_ABI           SymClearLocal(void);
-extern  void uasm_ABI           SymSetLocal(struct asym*);
-extern  void uasm_ABI           SymGetLocal(struct asym*);
+extern  void UASM_ABI           SymSetCmpFunc(void);
+extern  void UASM_ABI           SymClearLocal(void);
+extern  void UASM_ABI           SymSetLocal(struct asym*);
+extern  void UASM_ABI           SymGetLocal(struct asym*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

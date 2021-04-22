@@ -21,7 +21,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_2
+UASM_PACK_PUSH_2
 struct IMAGE_FILE_HEADER {
     uint_16 Machine;
     uint_16 NumberOfSections;
@@ -330,7 +330,7 @@ typedef union {
     } CRC;
 } IMAGE_AUX_SYMBOL_EX;
 
-uasm_PACK_4
+UASM_PACK_4
 typedef struct _IMAGE_COFF_SYMBOLS_HEADER {
     uint_32 NumberOfSymbols;
     uint_32 LvaToFirstSymbol;
@@ -342,7 +342,7 @@ typedef struct _IMAGE_COFF_SYMBOLS_HEADER {
     uint_32 RvaToLastByteOfData;
 } IMAGE_COFF_SYMBOLS_HEADER;
 
-uasm_PACK_2
+UASM_PACK_2
 typedef struct _IMAGE_LINENUMBER {
     union {
         uint_32 SymbolTableIndex;
@@ -351,6 +351,6 @@ typedef struct _IMAGE_LINENUMBER {
     uint_16 Linenumber;
 } IMAGE_LINENUMBER;
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _COFF_H_INCLUDED

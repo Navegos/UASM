@@ -32,10 +32,10 @@
 #include "bin.h"
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* prototypes */
-extern ret_code uasm_ABI idata_fixup(struct code_info*, unsigned, struct expr*);
+extern ret_code UASM_ABI idata_fixup(struct code_info*, unsigned, struct expr*);
 
 struct code_line
 {
@@ -94,7 +94,7 @@ static const char szStartAddr[] = { "@Startup" };
 
 /* .STARTUP and .EXIT directives */
 
-ret_code uasm_ABI StartupExitDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI StartupExitDirective(int i, struct asm_tok tokenarray[])
 /*****************************************************************/
 {
     int         count;
@@ -211,7 +211,7 @@ ret_code uasm_ABI StartupExitDirective(int i, struct asm_tok tokenarray[])
 
 /* END directive */
 
-ret_code uasm_ABI EndDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI EndDirective(int i, struct asm_tok tokenarray[])
 /*********************************************************/
 {
     struct expr         opndx;
@@ -332,4 +332,4 @@ ret_code uasm_ABI EndDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

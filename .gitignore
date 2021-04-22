@@ -17,10 +17,18 @@
 [Rr]eleases/
 x64/
 x86/
+Win32/
 bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# Distribution copys
+AVX/
+AVX2/
+AVX512/
+SSE/
+SSE2/
 
 testers/
 GccUnixR/
@@ -32,6 +40,9 @@ MinGW-w64D/
 *.exe
 
 *.exe
+
+*.zip
+*.msi
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -52,8 +63,24 @@ TestResult.xml
 dlldata.c
 
 # Build Setups
-UASM Setup-SetupFiles/
-UASM Setup-cache/
+UASM AVX 32bits Setup-SetupFiles/
+UASM AVX 32bits Setup-cache/
+UASM AVX 64bits Setup-SetupFiles/
+UASM AVX 64bits Setup-cache/
+UASM AVX2 32bits Setup-SetupFiles/
+UASM AVX2 32bits Setup-cache/
+UASM AVX2 64bits Setup-SetupFiles/
+UASM AVX2 64bits Setup-cache/
+UASM AVX512 32bits Setup-SetupFiles/
+UASM AVX512 32bits Setup-cache/
+UASM AVX512 64bits Setup-SetupFiles/
+UASM AVX512 64bits Setup-cache/
+UASM SSE 32bits Setup-SetupFiles/
+UASM SSE 32bits Setup-cache/
+UASM SSE2 32bits Setup-SetupFiles/
+UASM SSE2 32bits Setup-cache/
+UASM SSE2 64bits Setup-SetupFiles/
+UASM SSE2 64bits Setup-cache/
 
 # DNX
 project.lock.json

@@ -111,9 +111,9 @@
 
 #include "basedefs.h"
 
-#if defined(uasm_MSVC_COMPATIBLE_COMPILER)
+#if defined(UASM_MSVC_COMPATIBLE_COMPILER)
 #define GEX_RETURN_ADDRESS() _ReturnAddress()
-#elif defined(uasm_GCC_COMPATIBLE_COMPILER)
+#elif defined(UASM_GCC_COMPATIBLE_COMPILER)
 #define GEX_RETURN_ADDRESS() __builtin_extract_return_addr(__builtin_return_address(0))
 #else
 #error unsupported compiler
@@ -123,11 +123,11 @@
 extern "C" {
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 #if defined(_WIN32)
 
-static int uasm_ABI getModulePath_(HMODULE module, char* out, int capacity, int* dirname_length)
+static int UASM_ABI getModulePath_(HMODULE module, char* out, int capacity, int* dirname_length)
 {
   wchar_t buffer1[MAX_PATH];
   wchar_t buffer2[MAX_PATH];
@@ -200,12 +200,12 @@ static int uasm_ABI getModulePath_(HMODULE module, char* out, int capacity, int*
   return length;
 }
 
-int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
 {
   return getModulePath_(NULL, out, capacity, dirname_length);
 }
 
-int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getModulePath(char* out, int capacity, int* dirname_length)
 {
   HMODULE module;
   int length = -1;
@@ -227,7 +227,7 @@ int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
 
 #elif defined(__linux__) || defined(__CYGWIN__) || defined(__sun) || defined(GEX_USE_PROC_SELF_EXE)
 
-int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
 {
   char buffer[PATH_MAX];
   char* resolved = NULL;
@@ -265,7 +265,7 @@ int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
   return length;
 }
 
-int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getModulePath(char* out, int capacity, int* dirname_length)
 {
   int length = -1;
   FILE* maps = NULL;
@@ -386,7 +386,7 @@ int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
 
 #elif defined(__APPLE__)
 
-int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
 {
   char buffer1[PATH_MAX];
   char buffer2[PATH_MAX];
@@ -437,7 +437,7 @@ int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
   return length;
 }
 
-int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getModulePath(char* out, int capacity, int* dirname_length)
 {
   char buffer[PATH_MAX];
   char* resolved = NULL;
@@ -482,7 +482,7 @@ int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
 
 #elif defined(__QNXNTO__)
 
-int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
 {
   char buffer1[PATH_MAX];
   char buffer2[PATH_MAX];
@@ -531,7 +531,7 @@ int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
   return length;
 }
 
-int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getModulePath(char* out, int capacity, int* dirname_length)
 {
   char buffer[PATH_MAX];
   char* resolved = NULL;
@@ -576,7 +576,7 @@ int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
 
 #elif defined(__DragonFly__) || defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__NetBSD__)
 
-int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
 {
   char buffer1[PATH_MAX];
   char buffer2[PATH_MAX];
@@ -629,7 +629,7 @@ int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length)
   return length;
 }
 
-int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
+int UASM_ABI getModulePath(char* out, int capacity, int* dirname_length)
 {
   char buffer[PATH_MAX];
   char* resolved = NULL;
@@ -678,7 +678,7 @@ int uasm_ABI getModulePath(char* out, int capacity, int* dirname_length)
 
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #ifdef __cplusplus
 }

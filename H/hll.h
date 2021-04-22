@@ -10,16 +10,16 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI HllInit( int );    /* reset counter for hll labels */
+extern void UASM_ABI HllInit( int );    /* reset counter for hll labels */
 #if FASTMEM==0
-extern void uasm_ABI HllFini( void );
+extern void UASM_ABI HllFini( void );
 #endif
-extern void uasm_ABI HllCheckOpen( void );
+extern void UASM_ABI HllCheckOpen( void );
 
-extern uint_32 uasm_ABI GetHllLabel(void);
+extern uint_32 UASM_ABI GetHllLabel(void);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

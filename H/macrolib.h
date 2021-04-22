@@ -5,11 +5,11 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI Adddefs(void);
-extern void uasm_ABI CreateMacroLibCases(void);
+extern void UASM_ABI Adddefs(void);
+extern void UASM_ABI CreateMacroLibCases(void);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

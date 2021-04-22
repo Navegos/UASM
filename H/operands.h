@@ -43,7 +43,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum operand_type {
     OP_NONE     = 0,
@@ -179,6 +179,6 @@ enum operand3_type {
 #endif
 };
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

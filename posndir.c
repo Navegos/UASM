@@ -42,7 +42,7 @@
 
 #include "myassert.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 static const uint_8 NopList16[] = {
     3,                  /* objlen of first NOP pattern */
@@ -92,7 +92,7 @@ static const uint_8* const NopLists[] = { NopList16, NopList32, NopList64 };
 static const uint_8* const NopLists[] = { NopList16, NopList32 };
 #endif
 
-ret_code uasm_ABI OrgDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI OrgDirective(int i, struct asm_tok tokenarray[])
 /*********************************************************/
 {
     //struct asym  *sym;
@@ -146,7 +146,7 @@ ret_code uasm_ABI OrgDirective(int i, struct asm_tok tokenarray[])
     return(EmitError(ORG_NEEDS_A_CONSTANT_OR_LOCAL_OFFSET));
 }
 
-static void uasm_ABI fill_in_objfile_space(unsigned size)
+static void UASM_ABI fill_in_objfile_space(unsigned size)
 /************************************************/
 {
     int i;
@@ -196,7 +196,7 @@ static void uasm_ABI fill_in_objfile_space(unsigned size)
 
 /* align current offset to value ( alignment is 2^value ) */
 
-void uasm_ABI AlignCurrOffset(int value)
+void UASM_ABI AlignCurrOffset(int value)
 /*******************************/
 {
     int seg_align;
@@ -214,7 +214,7 @@ void uasm_ABI AlignCurrOffset(int value)
 
 #define align_value opndx.value
 
-ret_code uasm_ABI AlignDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI AlignDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     int seg_align;
@@ -306,4 +306,4 @@ ret_code uasm_ABI AlignDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

@@ -18,14 +18,14 @@
 
 #if COFF_SUPPORT
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* .SAFESEH works for coff format only.
  * syntax is: .SAFESEH handler
  * <handler> must be a PROC or PROTO
  */
 
-ret_code uasm_ABI SafeSEHDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI SafeSEHDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     struct asym* sym;
@@ -104,6 +104,6 @@ ret_code uasm_ABI SafeSEHDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

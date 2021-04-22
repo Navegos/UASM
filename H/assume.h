@@ -34,7 +34,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* flags for error field, used for GPR's ASSUME:ERROR|NOTHING */
 enum err_flags {
@@ -71,21 +71,21 @@ extern struct assume_info StdAssumeTable[];
 
 #define NUM_SEGREGS 6
 
-extern void uasm_ABI AssumeInit(int);     /* init assume tables */
+extern void UASM_ABI AssumeInit(int);     /* init assume tables */
 
-extern enum assume_segreg uasm_ABI search_assume(const struct asym* sym, enum assume_segreg def, bool search_grps);
-extern enum assume_segreg uasm_ABI GetAssume(const struct asym*, const struct asym*, enum assume_segreg def, struct asym**);
+extern enum assume_segreg UASM_ABI search_assume(const struct asym* sym, enum assume_segreg def, bool search_grps);
+extern enum assume_segreg UASM_ABI GetAssume(const struct asym*, const struct asym*, enum assume_segreg def, struct asym**);
 
-extern struct asym* uasm_ABI GetOverrideAssume(enum assume_segreg segoverride);
-extern struct asym* uasm_ABI GetStdAssume(int);
-extern struct asym* uasm_ABI GetStdAssumeEx(int);
+extern struct asym* UASM_ABI GetOverrideAssume(enum assume_segreg segoverride);
+extern struct asym* UASM_ABI GetStdAssume(int);
+extern struct asym* UASM_ABI GetStdAssumeEx(int);
 
-extern void uasm_ABI             ModelAssumeInit(void);
-extern void uasm_ABI             SetSegAssumeTable(void*);
-extern void uasm_ABI             GetSegAssumeTable(void*);
-extern void uasm_ABI             SetStdAssumeTable(void*, struct stdassume_typeinfo*);
-extern void uasm_ABI             GetStdAssumeTable(void*, struct stdassume_typeinfo*);
+extern void UASM_ABI             ModelAssumeInit(void);
+extern void UASM_ABI             SetSegAssumeTable(void*);
+extern void UASM_ABI             GetSegAssumeTable(void*);
+extern void UASM_ABI             SetStdAssumeTable(void*, struct stdassume_typeinfo*);
+extern void UASM_ABI             GetStdAssumeTable(void*, struct stdassume_typeinfo*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

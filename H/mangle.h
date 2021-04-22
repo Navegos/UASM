@@ -34,11 +34,11 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern int uasm_ABI  Mangle(struct asym*, char*);
-extern void uasm_ABI SetMangler(struct asym*, enum lang_type langtype, enum oformat output_format, enum sformat sub_format, enum fastcall_type fctype, const char*);
+extern int UASM_ABI  Mangle(struct asym*, char*);
+extern void UASM_ABI SetMangler(struct asym*, enum lang_type langtype, enum oformat output_format, enum sformat sub_format, enum fastcall_type fctype, const char*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

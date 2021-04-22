@@ -6,11 +6,11 @@
 
 #include "orgfixup.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct orgFixup* pOrgTable = NULL;
 
-void uasm_ABI AddOrgFixup(int curPos, int orgValue)
+void UASM_ABI AddOrgFixup(int curPos, int orgValue)
 {
     struct orgFixup* curPtr = pOrgTable;
     struct orgFixup* pFixup = (struct orgFixup*)malloc(sizeof(struct orgFixup));
@@ -31,7 +31,7 @@ void uasm_ABI AddOrgFixup(int curPos, int orgValue)
     return;
 }
 
-void uasm_ABI ResetOrgFixup()
+void UASM_ABI ResetOrgFixup()
 {
     struct orgFixup* curPtr = pOrgTable;
     struct orgFixup* nextPtr;
@@ -50,7 +50,7 @@ void uasm_ABI ResetOrgFixup()
     pOrgTable = NULL;
 }
 
-bool uasm_ABI InOrgRange(int position)
+bool UASM_ABI InOrgRange(int position)
 {
     struct orgFixup* curPtr = pOrgTable;
     bool retval = FALSE;
@@ -69,4 +69,4 @@ bool uasm_ABI InOrgRange(int position)
     return(retval);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

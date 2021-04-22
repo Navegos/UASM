@@ -7,7 +7,7 @@
 
 #include "codegenv2.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct Mem_Def MemTable32[] = {
     /* INDEX---> AX CX DX BX SP BP  SI DI R8 R9 R10 R11 R12  R13 R14 R15 RIP NONE																  */
@@ -347,7 +347,7 @@ struct Mem_Def MemTable32[] = {
     { MRM_RIP,  (MEMF_MODRM | MEMF_DSP32), (NO_SIB) }, /* [none+none] == disp32 */
 };
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _MEMTABLE32_H_
 

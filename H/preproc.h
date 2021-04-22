@@ -7,11 +7,11 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern int uasm_ABI      PreprocessLine(char*, struct asm_tok[]);
-extern ret_code uasm_ABI WriteCodeLabel(char*, struct asm_tok[]);
+extern int UASM_ABI      PreprocessLine(char*, struct asm_tok[]);
+extern ret_code UASM_ABI WriteCodeLabel(char*, struct asm_tok[]);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

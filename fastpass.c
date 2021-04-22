@@ -28,7 +28,7 @@
 
 #if FASTPASS
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern uint_32 list_pos;  /* current LST file position */
 
@@ -49,7 +49,7 @@ bool UseSavedState;
  * and the precompiled lines are used for assembly then.
  */
 
-static void uasm_ABI SaveState(void)
+static void UASM_ABI SaveState(void)
 /***************************/
 {
     DebugMsg1(("SaveState enter\n"));
@@ -67,7 +67,7 @@ static void uasm_ABI SaveState(void)
     DebugMsg(("SaveState exit\n"));
 }
 
-void uasm_ABI StoreLine(const char* srcline, int flags, uint_32 lst_position)
+void UASM_ABI StoreLine(const char* srcline, int flags, uint_32 lst_position)
 /********************************************************************/
 {
     int i, j;
@@ -126,7 +126,7 @@ void uasm_ABI StoreLine(const char* srcline, int flags, uint_32 lst_position)
  reported in pass 2, so ensure that a full source scan is done then
  */
 
-void uasm_ABI SkipSavedState(void)
+void UASM_ABI SkipSavedState(void)
 /*************************/
 {
     DebugMsg(("SkipSavedState enter\n"));
@@ -144,7 +144,7 @@ void uasm_ABI SkipSavedState(void)
  - it was defined when StoreState() is called
  */
 
-void uasm_ABI SaveVariableState(struct asym* sym)
+void UASM_ABI SaveVariableState(struct asym* sym)
 /****************************************/
 {
     struct equ_item* p;
@@ -170,7 +170,7 @@ void uasm_ABI SaveVariableState(struct asym* sym)
     //    printf("state of symbol >%s< saved, value=%u, defined=%u\n", sym->name, sym->value, sym->defined);
 }
 
-struct line_item* uasm_ABI RestoreState(void)
+struct line_item* UASM_ABI RestoreState(void)
     /************************************/
 {
     DebugMsg1(("RestoreState enter\n"));
@@ -220,7 +220,7 @@ struct line_item* uasm_ABI RestoreState(void)
  * are both either TRUE or FALSE.
  * It's active if both DEBUG and TRMEM is set in Makefile.
  */
-void uasm_ABI FreeLineStore(void)
+void UASM_ABI FreeLineStore(void)
 /************************/
 {
     struct line_item* next;
@@ -233,7 +233,7 @@ void uasm_ABI FreeLineStore(void)
 }
 #endif
 
-void uasm_ABI FastpassInit(void)
+void UASM_ABI FastpassInit(void)
 /***********************/
 {
     StoreState = FALSE;
@@ -243,6 +243,6 @@ void uasm_ABI FastpassInit(void)
     UseSavedState = FALSE;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

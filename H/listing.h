@@ -12,7 +12,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum lsttype {
     LSTTYPE_DATA,
@@ -26,16 +26,16 @@ enum lsttype {
     LSTTYPE_MACROLINE,
 };
 
-extern void uasm_ABI LstInit(void);
-extern void uasm_ABI LstWrite(enum lsttype type, uint_32 ofs, void* sym);
-extern void uasm_ABI LstWriteSrcLine(void);
-extern void uasm_ABI LstWriteCRef(void);
-extern void uasm_ABI LstPrintf(const char* format, ...);
-extern void uasm_ABI LstNL(void);
+extern void UASM_ABI LstInit(void);
+extern void UASM_ABI LstWrite(enum lsttype type, uint_32 ofs, void* sym);
+extern void UASM_ABI LstWriteSrcLine(void);
+extern void UASM_ABI LstWriteCRef(void);
+extern void UASM_ABI LstPrintf(const char* format, ...);
+extern void UASM_ABI LstNL(void);
 #if FASTPASS
-extern void uasm_ABI LstSetPosition(void);
+extern void UASM_ABI LstSetPosition(void);
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

@@ -30,13 +30,13 @@ extern struct asym* sym_Interface;
 #define OPTQUAL
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-#define OPTFUNC( name ) extern ret_code OPTQUAL uasm_ABI name( int *pi, struct asm_tok tokenarray[] )
-extern void uasm_ABI UpdateStackBase(struct asym*, void*);
-extern void uasm_ABI UpdateProcStatus(struct asym*, void*);
+#define OPTFUNC( name ) extern ret_code OPTQUAL UASM_ABI name( int *pi, struct asm_tok tokenarray[] )
+extern void UASM_ABI UpdateStackBase(struct asym*, void*);
+extern void UASM_ABI UpdateProcStatus(struct asym*, void*);
 
-static struct asym* uasm_ABI AddPredefinedConstant(const char* name, int value)
+static struct asym* UASM_ABI AddPredefinedConstant(const char* name, int value)
 /**********************************************************************/
 {
     struct asym* sym = CreateVariable(name, value);
@@ -507,7 +507,7 @@ OPTFUNC(SetNoSignExt)
     return(NOT_ERROR);
 }
 
-static void uasm_ABI SkipOption(int* pi, struct asm_tok tokenarray[])
+static void UASM_ABI SkipOption(int* pi, struct asm_tok tokenarray[])
 /************************************************************/
 {
     while (tokenarray[*pi].token != T_FINAL &&
@@ -1337,7 +1337,7 @@ OPTFUNC(SetSYSV64)
 
 #if DLLIMPORT
 
-static struct dll_desc* uasm_ABI IncludeDll(const char* name)
+static struct dll_desc* UASM_ABI IncludeDll(const char* name)
 /****************************************************/
 {
     struct dll_desc** q;
@@ -1516,7 +1516,7 @@ OPTFUNC(SetFlat)
 struct asm_option
 {
     const char* name;
-    ret_code OPTQUAL(uasm_ABI *func)(int*, struct asm_tok[]);
+    ret_code OPTQUAL(UASM_ABI *func)(int*, struct asm_tok[]);
 };
 
 /* the table must be here after the option helper functions
@@ -1608,7 +1608,7 @@ static const struct asm_option optiontab[] = {
  * syntax:
  * OPTION option[:value][,option[:value,...]]
  */
-ret_code uasm_ABI OptionDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI OptionDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     int idx = -1;
@@ -1663,4 +1663,4 @@ ret_code uasm_ABI OptionDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

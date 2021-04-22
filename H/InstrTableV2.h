@@ -4,7 +4,7 @@
 
 #include "codegenv2.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct Instr_Def InstrTableV2[] = {
 
@@ -514,4 +514,4 @@ struct Instr_Def InstrTableV2[] = {
 
 };
 
-uasm_PACK_POP
+UASM_PACK_POP

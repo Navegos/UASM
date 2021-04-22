@@ -10,11 +10,11 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 //extern const char *MsgGet( int, char * );
-extern char const* const uasm_ABI MsgGetEx(int); /* doesn't need a buffer */
+extern char const* const UASM_ABI MsgGetEx(int); /* doesn't need a buffer */
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

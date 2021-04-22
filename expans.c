@@ -37,21 +37,21 @@
 #define TEVALUE_UNSIGNED 1
 #define MAX_TEXTMACRO_NESTING 20
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern char* uasm_ABI GetMacroLine(struct macro_instance*, char*);
+extern char* UASM_ABI GetMacroLine(struct macro_instance*, char*);
 
 int           MacroLocals;     /* counter for LOCAL names */
 uint_8        MacroLevel;      /* current macro nesting level */
 
 static const char __digits[16] = { "0123456789ABCDEF" };
 
-static ret_code uasm_ABI ExpandTMacro(char* const, struct asm_tok tokenarray[], int equmode, int level);
+static ret_code UASM_ABI ExpandTMacro(char* const, struct asm_tok tokenarray[], int equmode, int level);
 
 /* C ltoa() isn't fully compatible since hex digits are lower case.
  * for Uasm, it's ensured that 2 <= radix <= 16.
  */
-char* uasm_ABI myltoa(uint_32 value, char* buffer, unsigned radix, bool sign, bool addzero)
+char* UASM_ABI myltoa(uint_32 value, char* buffer, unsigned radix, bool sign, bool addzero)
 /**********************************************************************************/
 {
     char* p;
@@ -84,7 +84,7 @@ char* uasm_ABI myltoa(uint_32 value, char* buffer, unsigned radix, bool sign, bo
 * for Uasm, it's ensured that 2 <= radix <= 16.
 */
 #if AMD64_SUPPORT
-char* uasm_ABI myqtoa(uint_64 value, char* buffer, unsigned radix, bool sign, bool addzero)
+char* UASM_ABI myqtoa(uint_64 value, char* buffer, unsigned radix, bool sign, bool addzero)
 /**********************************************************************************/
 {
     char* p;
@@ -115,7 +115,7 @@ char* uasm_ABI myqtoa(uint_64 value, char* buffer, unsigned radix, bool sign, bo
 #endif
 
 /* this is implemented for printing 16 numeric chars  for the MASK 128 bit v2.44 */
-char* uasm_ABI num2hex64(uint_64 value, char* buffer)
+char* UASM_ABI num2hex64(uint_64 value, char* buffer)
 /**********************************************************************************/
 {
     char* p;
@@ -133,7 +133,7 @@ char* uasm_ABI num2hex64(uint_64 value, char* buffer)
 /* returns no of characters copied into buffer (without terminating 00) */
 /* v2.09: obsolete, the text is stored without '!' operators now */
 #if 0
-int uasm_ABI GetLiteralValue(char* buffer, const char* p)
+int UASM_ABI GetLiteralValue(char* buffer, const char* p)
 /************************************************/
 {
     char* dest = buffer;
@@ -152,7 +152,7 @@ int uasm_ABI GetLiteralValue(char* buffer, const char* p)
 
 /* Read the current (macro) queue until it's done. */
 
-static void uasm_ABI SkipMacro(struct asm_tok tokenarray[])
+static void UASM_ABI SkipMacro(struct asm_tok tokenarray[])
 /**************************************************/
 {
     char buffer[MAX_LINE_LEN];
@@ -180,7 +180,7 @@ static void uasm_ABI SkipMacro(struct asm_tok tokenarray[])
  * - is_exitm: returns TRUE if EXITM has been hit
  * returns index of token not processed or -1 on errors
  */
-int uasm_ABI RunMacro(struct dsym* macro, int idx, struct asm_tok tokenarray[], char* out, int mflags, bool* is_exitm)
+int UASM_ABI RunMacro(struct dsym* macro, int idx, struct asm_tok tokenarray[], char* out, int mflags, bool* is_exitm)
 /*************************************************************************************************************/
 {
     char*       currparm;
@@ -938,7 +938,7 @@ int uasm_ABI RunMacro(struct dsym* macro, int idx, struct asm_tok tokenarray[], 
 
 /* make room (or delete items) in the token buffer at position <start> */
 
-static void uasm_ABI AddTokens(struct asm_tok tokenarray[], int start, int count, int end)
+static void UASM_ABI AddTokens(struct asm_tok tokenarray[], int start, int count, int end)
 /*********************************************************************************/
 {
     int i;
@@ -967,7 +967,7 @@ static void uasm_ABI AddTokens(struct asm_tok tokenarray[], int start, int count
  * Both text macros and macro functions are expanded!
  */
 
-ret_code uasm_ABI ExpandText(char* line, struct asm_tok tokenarray[], unsigned int substitute)
+ret_code UASM_ABI ExpandText(char* line, struct asm_tok tokenarray[], unsigned int substitute)
 /*************************************************************************************/
 {
     char*           pSrc;
@@ -1148,7 +1148,7 @@ ret_code uasm_ABI ExpandText(char* line, struct asm_tok tokenarray[], unsigned i
  * outbuf out: expanded value
  * equmode: if 1, don't expand macro functions
  */
-static ret_code uasm_ABI ExpandTMacro(char* const outbuf, struct asm_tok tokenarray[], int equmode, int level)
+static ret_code UASM_ABI ExpandTMacro(char* const outbuf, struct asm_tok tokenarray[], int equmode, int level)
 /******************************************************************************************************/
 {
     int             old_tokencount = Token_Count;
@@ -1236,7 +1236,7 @@ static ret_code uasm_ABI ExpandTMacro(char* const outbuf, struct asm_tok tokenar
  * - oldlen = old length of item i
  * - pos_line = position of item in source line
 */
-static ret_code uasm_ABI RebuildLine(const char* newstring, int i, struct asm_tok tokenarray[], unsigned oldlen, unsigned pos_line, int addbrackets)
+static ret_code UASM_ABI RebuildLine(const char* newstring, int i, struct asm_tok tokenarray[], unsigned oldlen, unsigned pos_line, int addbrackets)
 /*******************************************************************************************************************************************/
 {
     char*       dest;
@@ -1293,7 +1293,7 @@ static ret_code uasm_ABI RebuildLine(const char* newstring, int i, struct asm_to
  * *pi: index of token in tokenarray
  * equmode: if 1, dont expand macro functions
  */
-static ret_code uasm_ABI ExpandToken(char* line, int* pi, struct asm_tok tokenarray[], int max, int bracket_flags, int equmode)
+static ret_code UASM_ABI ExpandToken(char* line, int* pi, struct asm_tok tokenarray[], int max, int bracket_flags, int equmode)
 /**********************************************************************************************************************/
 {
     int             pos;
@@ -1539,7 +1539,7 @@ static ret_code uasm_ABI ExpandToken(char* line, int* pi, struct asm_tok tokenar
  * equmode: 1=don't expand macro functions
  */
 
-int uasm_ABI ExpandLineItems(char* line, int i, struct asm_tok tokenarray[], int addbrackets, int equmode)
+int UASM_ABI ExpandLineItems(char* line, int i, struct asm_tok tokenarray[], int addbrackets, int equmode)
 /*************************************************************************************************/
 {
     int k;
@@ -1580,7 +1580,7 @@ int uasm_ABI ExpandLineItems(char* line, int i, struct asm_tok tokenarray[], int
  * the literals explicitly.
  */
 
-void uasm_ABI ExpandLiterals(int i, struct asm_tok tokenarray[])
+void UASM_ABI ExpandLiterals(int i, struct asm_tok tokenarray[])
 /*******************************************************/
 {
     int cnt = 0;
@@ -1609,7 +1609,7 @@ void uasm_ABI ExpandLiterals(int i, struct asm_tok tokenarray[])
  * this is only called when the % operator is not the first item.
  */
 
-ret_code uasm_ABI ExpandLine(char* string, struct asm_tok tokenarray[])
+ret_code UASM_ABI ExpandLine(char* string, struct asm_tok tokenarray[])
 /**************************************************************/
 {
     int             count;
@@ -1786,4 +1786,4 @@ ret_code uasm_ABI ExpandLine(char* string, struct asm_tok tokenarray[])
     return(rc);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

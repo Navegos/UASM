@@ -2,23 +2,23 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">All</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>0b019894-9fc5-4c10-8dd5-e663cd2a805e</ProjectGuid>
+    <ProjectGuid>bdbea14c-7fb6-4a20-9be6-e363c7f8f984</ProjectGuid>
     <OutputType>msi</OutputType>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>UASM Setup.aip</StartupFile>
+    <StartupFile>UASM SSE2 32bits Setup.aip</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <IsWindowsApplication>True</IsWindowsApplication>
-    <AssemblyName>UASM Setup</AssemblyName>
-    <Name>UASM Setup</Name>
-    <RootNamespace>UASM Setup</RootNamespace>
+    <AssemblyName>UASM SSE2 32bits Setup</AssemblyName>
+    <Name>UASM SSE2 32bits Setup</Name>
+    <RootNamespace>UASM SSE2 32bits Setup</RootNamespace>
     <LoadFromTemplate>
     </LoadFromTemplate>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'DefaultBuild' " />
   <ItemGroup>
-    <Compile Include="UASM Setup.aip">
+    <Compile Include="UASM SSE2 32bits Setup.aip">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

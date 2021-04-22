@@ -7,10 +7,10 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-void uasm_ABI     elf_init(struct module_info*);
+void UASM_ABI     elf_init(struct module_info*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _ELF_H_INCLUDED_

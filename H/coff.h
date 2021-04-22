@@ -7,7 +7,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum dbgseg_index {
     DBGS_SYMBOLS,
@@ -43,8 +43,8 @@ struct coffmod {
     } LongNames;
 };
 
-extern void uasm_ABI coff_init(struct module_info*);
+extern void UASM_ABI coff_init(struct module_info*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _COFF_H_INCLUDED

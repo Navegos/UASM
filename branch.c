@@ -60,9 +60,9 @@
 /* v2.03: OutputCodeByte no longer needed */
 #define OutputCodeByte( x ) OutputByte( x )
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern ret_code uasm_ABI segm_override(const struct expr* opndx, struct code_info* CodeInfo);
+extern ret_code UASM_ABI segm_override(const struct expr* opndx, struct code_info* CodeInfo);
 extern struct asym* SegOverride;
 
 /* "short jump extension": extend a (conditional) jump.
@@ -76,7 +76,7 @@ extern struct asym* SegOverride;
  * of 7D-7F (16bit), because the additional "jmp label" will increase
  * the code size.
  */
-static void uasm_ABI jumpExtend(struct code_info* CodeInfo, int far_flag)
+static void UASM_ABI jumpExtend(struct code_info* CodeInfo, int far_flag)
 /****************************************************************/
 {
     //uint_8 opcode;
@@ -120,7 +120,7 @@ static void uasm_ABI jumpExtend(struct code_info* CodeInfo, int far_flag)
 /* "far call optimisation": a far call is done to a near label
  * optimize (call SSSS:OOOO -> PUSH CS, CALL OOOO)
  */
-static void uasm_ABI FarCallToNear(struct code_info* CodeInfo)
+static void UASM_ABI FarCallToNear(struct code_info* CodeInfo)
 /*****************************************************/
 {
     if (Parse_Pass == PASS_2)
@@ -132,7 +132,7 @@ static void uasm_ABI FarCallToNear(struct code_info* CodeInfo)
     return;
 }
 
-ret_code uasm_ABI process_branch(struct code_info* CodeInfo, unsigned CurrOpnd, const struct expr* opndx)
+ret_code UASM_ABI process_branch(struct code_info* CodeInfo, unsigned CurrOpnd, const struct expr* opndx)
 /************************************************************************************************/
 /*
  * called by idata_fixup(), idata_nofixup().
@@ -731,4 +731,4 @@ ret_code uasm_ABI process_branch(struct code_info* CodeInfo, unsigned CurrOpnd, 
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

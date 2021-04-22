@@ -34,14 +34,14 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct qualified_type;
 
-extern void uasm_ABI         LabelInit(void);
-extern char* uasm_ABI        GetAnonymousLabel(char*, int);
-extern struct asym* uasm_ABI CreateLabel(const char*, enum memtype mem_type, struct qualified_type*, bool);
+extern void UASM_ABI         LabelInit(void);
+extern char* UASM_ABI        GetAnonymousLabel(char*, int);
+extern struct asym* UASM_ABI CreateLabel(const char*, enum memtype mem_type, struct qualified_type*, bool);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

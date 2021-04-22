@@ -40,7 +40,7 @@
   */
 #define SIZE_CV_SEGBUF ( MAX_LINE_LEN * 2 )
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct stringitem
 {
@@ -48,7 +48,7 @@ struct stringitem
     char string[1];
 };
 
-extern void uasm_ABI cv_write_debug_tables(struct dsym*, struct dsym*, void*);
+extern void UASM_ABI cv_write_debug_tables(struct dsym*, struct dsym*, void*);
 
 /* -Zi option section info */
 static char const* const SymDebName[DBGS_MAX] = { ".debug$S", ".debug$T" };
@@ -80,7 +80,7 @@ static const IMAGE_SYMBOL isCompId = {
 
 /* alloc a string which will be stored in the COFF string table */
 
-static uint_32 uasm_ABI Coff_AllocString(struct coffmod* cm, const char* string, int len)
+static uint_32 UASM_ABI Coff_AllocString(struct coffmod* cm, const char* string, int len)
 /********************************************************************************/
 {
     struct stringitem* name;
@@ -104,7 +104,7 @@ static uint_32 uasm_ABI Coff_AllocString(struct coffmod* cm, const char* string,
 
 /* return number of line number items */
 
-static unsigned uasm_ABI GetLinnumItems(struct qdesc* q)
+static unsigned UASM_ABI GetLinnumItems(struct qdesc* q)
 /***********************************************/
 {
     unsigned i;
@@ -116,7 +116,7 @@ static unsigned uasm_ABI GetLinnumItems(struct qdesc* q)
 
 /* write COFF section table */
 
-static ret_code uasm_ABI coff_write_section_table(struct module_info* modinfo, struct coffmod* cm)
+static ret_code UASM_ABI coff_write_section_table(struct module_info* modinfo, struct coffmod* cm)
 /*****************************************************************************************/
 {
     struct dsym* curr;
@@ -269,7 +269,7 @@ static ret_code uasm_ABI coff_write_section_table(struct module_info* modinfo, s
  * get value for field 'type' ( IMAGE_SYM_TYPE_x ) in symbol table.
  * MS tools use only 0x0 or 0x20.
  */
-static short uasm_ABI CoffGetType(const struct asym* sym)
+static short UASM_ABI CoffGetType(const struct asym* sym)
 /************************************************/
 {
     if (sym->isproc)
@@ -281,7 +281,7 @@ static short uasm_ABI CoffGetType(const struct asym* sym)
 /*
  * get value for field 'class' ( IMAGE_SYM_CLASS_x ) in symbol table.
  */
-static short uasm_ABI CoffGetClass(const struct asym* sym)
+static short UASM_ABI CoffGetClass(const struct asym* sym)
 /*************************************************/
 {
     if (sym->state == SYM_EXTERNAL)
@@ -304,7 +304,7 @@ static short uasm_ABI CoffGetClass(const struct asym* sym)
 
 /* calc number of entries in symbol table for a file entry */
 
-static unsigned uasm_ABI GetFileAuxEntries(uint_16 file, char** fname)
+static unsigned UASM_ABI GetFileAuxEntries(uint_16 file, char** fname)
 /**************************************************************/
 {
     struct fname_item* curr;
@@ -319,7 +319,7 @@ static unsigned uasm_ABI GetFileAuxEntries(uint_16 file, char** fname)
 /* v2.10: COMDAT CRC calculation ( suggestion by drizz, slightly modified ) */
 static uint_32 CRC32Table[256]; /* table is initialized if needed */
 
-static void uasm_ABI InitCRC32(void)
+static void UASM_ABI InitCRC32(void)
 /***************************/
 {
     int i, j;
@@ -334,7 +334,7 @@ static void uasm_ABI InitCRC32(void)
     }
 }
 
-static uint_32 uasm_ABI CRC32Comdat(uint_8* lpBuffer, uint_32 dwBufLen, uint_32 dwCRC)
+static uint_32 UASM_ABI CRC32Comdat(uint_8* lpBuffer, uint_32 dwBufLen, uint_32 dwCRC)
 /*****************************************************************************/
 {
     static bool init = FALSE;
@@ -356,7 +356,7 @@ static uint_32 uasm_ABI CRC32Comdat(uint_8* lpBuffer, uint_32 dwBufLen, uint_32 
     return(dwCRC);
 }
 
-static void uasm_ABI coff_write_symbol(char* name, int_32 strpos, int_32 value,
+static void UASM_ABI coff_write_symbol(char* name, int_32 strpos, int_32 value,
     int section, int type, int storageclass, int aux)
 {
     IMAGE_SYMBOL sym;
@@ -377,7 +377,7 @@ static void uasm_ABI coff_write_symbol(char* name, int_32 strpos, int_32 value,
         WriteError();
 }
 
-static void uasm_ABI coff_write_aux(void* sym, char* name)
+static void UASM_ABI coff_write_aux(void* sym, char* name)
 {
     uint_32 size = sizeof(IMAGE_AUX_SYMBOL);
 
@@ -397,7 +397,7 @@ static void uasm_ABI coff_write_aux(void* sym, char* name)
  * - aliases (weak externals)
  */
 
-static uint_32 uasm_ABI coff_write_symbols(struct module_info* modinfo, struct coffmod* cm)
+static uint_32 UASM_ABI coff_write_symbols(struct module_info* modinfo, struct coffmod* cm)
 /**********************************************************************************/
 {
     uint_32         cntSymbols = 0;
@@ -639,7 +639,7 @@ static uint_32 uasm_ABI coff_write_symbols(struct module_info* modinfo, struct c
     return(cntSymbols);
 }
 
-static int uasm_ABI GetStartLabel(char* buffer, bool msg)
+static int UASM_ABI GetStartLabel(char* buffer, bool msg)
 /************************************************/
 {
     int size = 0;
@@ -670,7 +670,7 @@ static int uasm_ABI GetStartLabel(char* buffer, bool msg)
 
 /* callback to flush contents of codeview symbolic debug info sections */
 
-static uint_8* uasm_ABI coff_flushfunc(struct dsym* seg, uint_8* curr, unsigned size, void* pv)
+static uint_8* UASM_ABI coff_flushfunc(struct dsym* seg, uint_8* curr, unsigned size, void* pv)
 /**************************************************************************************/
 {
     unsigned currsize = curr - seg->e.seginfo->CodeBuffer;
@@ -704,7 +704,7 @@ static uint_8* uasm_ABI coff_flushfunc(struct dsym* seg, uint_8* curr, unsigned 
  * so we know the index if a new entry has to be added
  * called by coff_write_data()
  */
-static uint_32 uasm_ABI SetSymbolIndices(struct module_info* ModuleInfo, struct coffmod* cm)
+static uint_32 UASM_ABI SetSymbolIndices(struct module_info* ModuleInfo, struct coffmod* cm)
 /***********************************************************************************/
 {
     struct qnode*   q;
@@ -786,7 +786,7 @@ static uint_32 uasm_ABI SetSymbolIndices(struct module_info* ModuleInfo, struct 
 
 /* write fixups for a section. */
 
-static void uasm_ABI coff_write_fixup(uint_32 addr, uint_32 index, uint_16 type)
+static void UASM_ABI coff_write_fixup(uint_32 addr, uint_32 index, uint_16 type)
 {
     IMAGE_RELOCATION ir;
 
@@ -798,7 +798,7 @@ static void uasm_ABI coff_write_fixup(uint_32 addr, uint_32 index, uint_16 type)
         WriteError();
 }
 
-static void uasm_ABI coff_write_fixups(struct dsym* section, uint_32* poffset, uint_32* pindex)
+static void UASM_ABI coff_write_fixups(struct dsym* section, uint_32* poffset, uint_32* pindex)
 /**************************************************************************************/
 {
     uint_32         offset = *poffset;
@@ -918,7 +918,7 @@ static void uasm_ABI coff_write_fixups(struct dsym* section, uint_32* poffset, u
 
 /* write section data */
 
-static ret_code uasm_ABI coff_write_data(struct module_info* modinfo, struct coffmod* cm)
+static ret_code UASM_ABI coff_write_data(struct module_info* modinfo, struct coffmod* cm)
 /********************************************************************************/
 {
     struct dsym* section;
@@ -1050,7 +1050,7 @@ static ret_code uasm_ABI coff_write_data(struct module_info* modinfo, struct cof
  * if yes, create it and set its contents.
  */
 
-static void uasm_ABI coff_create_drectve(struct module_info* modinfo, struct coffmod* cm)
+static void UASM_ABI coff_create_drectve(struct module_info* modinfo, struct coffmod* cm)
 /********************************************************************************/
 {
     struct dsym* exp;
@@ -1180,7 +1180,7 @@ static void uasm_ABI coff_create_drectve(struct module_info* modinfo, struct cof
  * This function is called AFTER all assembly passes have been done.
  */
 
-static ret_code uasm_ABI coff_write_module(struct module_info* modinfo)
+static ret_code UASM_ABI coff_write_module(struct module_info* modinfo)
 /**************************************************************/
 {
     struct stringitem* pName;
@@ -1285,7 +1285,7 @@ static ret_code uasm_ABI coff_write_module(struct module_info* modinfo)
     return(NOT_ERROR);
 }
 
-void uasm_ABI coff_init(struct module_info* modinfo)
+void UASM_ABI coff_init(struct module_info* modinfo)
 /*******************************************/
 {
     modinfo->g.WriteModule = coff_write_module;
@@ -1293,4 +1293,4 @@ void uasm_ABI coff_init(struct module_info* modinfo)
 }
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP

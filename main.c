@@ -46,9 +46,9 @@
 #endif
 
 #ifdef UASMEM
-extern void uasm_ABI _uasm_CPUFeatures_Init(int infolevel);
-extern void uasm_ABI _uasm_CPUFeatures_Fin(void);
-extern int_bool uasm_ABI _uasm_CPUFeatures_is_Inited(void);
+extern void UASM_ABI _uasm_CPUFeatures_Init(int infolevel);
+extern void UASM_ABI _uasm_CPUFeatures_Fin(void);
+extern int_bool UASM_ABI _uasm_CPUFeatures_is_Inited(void);
 #endif
 
 #ifdef TRMEM
@@ -62,7 +62,7 @@ void tm_Fini(void);
 #endif
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 static void genfailure(int signo)
 /*********************************/
@@ -189,4 +189,4 @@ int main(int argc, char** argv)
     return(1 - rc); /* zero if no errors */
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

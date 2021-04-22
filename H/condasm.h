@@ -34,7 +34,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum if_state {
     BLOCK_ACTIVE,    /* current cond is true */
@@ -55,12 +55,12 @@ enum cond_class {
 
 extern enum if_state CurrIfState;
 
-extern void uasm_ABI conditional_assembly_prepare(int);
-extern int uasm_ABI  GetIfNestLevel(void);
-extern void uasm_ABI SetIfNestLevel(int);
-extern void uasm_ABI CondCheckOpen(void);
-extern void uasm_ABI CondInit(void);
+extern void UASM_ABI conditional_assembly_prepare(int);
+extern int UASM_ABI  GetIfNestLevel(void);
+extern void UASM_ABI SetIfNestLevel(int);
+extern void UASM_ABI CondCheckOpen(void);
+extern void UASM_ABI CondInit(void);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

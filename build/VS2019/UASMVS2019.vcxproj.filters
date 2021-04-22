@@ -465,6 +465,9 @@
     <ClInclude Include="..\..\H\exports.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\H\vers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\.gitignore" />

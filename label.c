@@ -52,15 +52,15 @@
 #include "expreval.h"
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-void uasm_ABI LabelInit(void)
+void UASM_ABI LabelInit(void)
 /********************/
 {
     ModuleInfo.g.anonymous_label = 0;
 }
 
-char* uasm_ABI GetAnonymousLabel(char* buffer, int value)
+char* UASM_ABI GetAnonymousLabel(char* buffer, int value)
 /************************************************/
 {
     sprintf(buffer, "L&_%04u", ModuleInfo.g.anonymous_label + value);
@@ -74,7 +74,7 @@ char* uasm_ABI GetAnonymousLabel(char* buffer, int value)
  * - bLocal: if TRUE, code label is to be defined locally; it's ensured
  *   that CurrProc is != NULL and ModuleInfo.scoped == TRUE then.
  */
-struct asym* uasm_ABI CreateLabel(const char* name, enum memtype mem_type, struct qualified_type* ti, bool bLocal)
+struct asym* UASM_ABI CreateLabel(const char* name, enum memtype mem_type, struct qualified_type* ti, bool bLocal)
     /*********************************************************************************************************/
 {
     struct asym*        sym;
@@ -233,7 +233,7 @@ struct asym* uasm_ABI CreateLabel(const char* name, enum memtype mem_type, struc
  * syntax: <label_name> LABEL <qualified type>
  */
 
-ret_code uasm_ABI LabelDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI LabelDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     struct qualified_type   ti;
@@ -332,4 +332,4 @@ ret_code uasm_ABI LabelDirective(int i, struct asm_tok tokenarray[])
     return(ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

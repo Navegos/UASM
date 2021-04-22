@@ -86,7 +86,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
  /*
   * values for <byte1_info>
@@ -139,8 +139,8 @@ enum vex_info {
 };
 
 #endif
-extern ret_code uasm_ABI         codegen(struct code_info*, uint_32);
+extern ret_code UASM_ABI         codegen(struct code_info*, uint_32);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _CODEGEN_H_INCLUDED

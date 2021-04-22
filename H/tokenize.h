@@ -34,7 +34,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct line_status {
     char* input;
@@ -59,9 +59,9 @@ enum tok_flags3 {
     TF3_EXPANSION = 0x02,  /* expansion operator % at pos 0 */
 };
 
-extern ret_code uasm_ABI GetToken(struct asm_tok[], struct line_status*);
-extern int uasm_ABI      Tokenize(char*, unsigned int, struct asm_tok[], unsigned int);
+extern ret_code UASM_ABI GetToken(struct asm_tok[], struct line_status*);
+extern int UASM_ABI      Tokenize(char*, unsigned int, struct asm_tok[], unsigned int);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

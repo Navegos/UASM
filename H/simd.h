@@ -7,10 +7,10 @@
 #include "basedefs.h"
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI AddSimdTypes();
+extern void UASM_ABI AddSimdTypes();
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

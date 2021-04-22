@@ -41,7 +41,7 @@
 #define FFQUAL
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 #pragma pack( push, 1 )
 /* fields cmd, reclen and buffer must be consecutive */
@@ -54,7 +54,7 @@ struct outbuff
 };
 #pragma pack( pop )
 
-static void uasm_ABI safeWrite(FILE* file, const uint_8* buf, unsigned len)
+static void UASM_ABI safeWrite(FILE* file, const uint_8* buf, unsigned len)
 /******************************************************************/
 {
     if (fwrite(buf, 1, len, file) != len)
@@ -66,7 +66,7 @@ static void uasm_ABI safeWrite(FILE* file, const uint_8* buf, unsigned len)
  * length field for update. Now always the full record is
  * kept in the buffer until WEndRec().
  */
-static void uasm_ABI safeSeek(FILE* file, int_32 offset, int mode)
+static void UASM_ABI safeSeek(FILE* file, int_32 offset, int mode)
 /*********************************************************/
 {
     if (fseek(file, offset, mode) != 0)
@@ -76,7 +76,7 @@ static void uasm_ABI safeSeek(FILE* file, int_32 offset, int mode)
 
 /* start a buffered OMF record output */
 
-static void uasm_ABI WBegRec(struct outbuff* out, uint_8 command)
+static void UASM_ABI WBegRec(struct outbuff* out, uint_8 command)
 /********************************************************/
 {
     out->in_buf = 0;
@@ -89,7 +89,7 @@ static void uasm_ABI WBegRec(struct outbuff* out, uint_8 command)
  * - writes the contents of the buffer(cmd, length, contents, checksum)
  */
 
-static void uasm_ABI WEndRec(struct outbuff* out)
+static void UASM_ABI WEndRec(struct outbuff* out)
 /****************************************/
 {
     uint_8  checksum;
@@ -119,7 +119,7 @@ static void uasm_ABI WEndRec(struct outbuff* out)
 
 /* write a byte to the current record */
 
-static void uasm_ABI PutByte(struct outbuff* out, uint_8 value)
+static void UASM_ABI PutByte(struct outbuff* out, uint_8 value)
 /******************************************************/
 {
     out->buffer[out->in_buf++] = value;
@@ -127,7 +127,7 @@ static void uasm_ABI PutByte(struct outbuff* out, uint_8 value)
 
 /* write an index - 1|2 byte(s) - to the current record */
 
-static void uasm_ABI PutIndex(struct outbuff* out, uint_16 index)
+static void UASM_ABI PutIndex(struct outbuff* out, uint_16 index)
 /********************************************************/
 {
     if (index > 0x7f)
@@ -139,7 +139,7 @@ static void uasm_ABI PutIndex(struct outbuff* out, uint_16 index)
 
 /* write a word to the current record */
 
-static void uasm_ABI PutWord(struct outbuff* out, uint_16 value)
+static void UASM_ABI PutWord(struct outbuff* out, uint_16 value)
 /*******************************************************/
 {
     WriteU16(out->buffer + out->in_buf, value);
@@ -148,7 +148,7 @@ static void uasm_ABI PutWord(struct outbuff* out, uint_16 value)
 
 /* write a dword to the current record */
 
-static void uasm_ABI PutDword(struct outbuff* out, uint_32 value)
+static void UASM_ABI PutDword(struct outbuff* out, uint_32 value)
 /********************************************************/
 {
     WriteU32(out->buffer + out->in_buf, value);
@@ -157,7 +157,7 @@ static void uasm_ABI PutDword(struct outbuff* out, uint_32 value)
 
 /* write a byte sequence to the current record */
 
-static void uasm_ABI PutMem(struct outbuff* out, const uint_8* buf, unsigned length)
+static void UASM_ABI PutMem(struct outbuff* out, const uint_8* buf, unsigned length)
 /***************************************************************************/
 {
     /* ensure that there is enough free space in the buffer,
@@ -180,7 +180,7 @@ static void uasm_ABI PutMem(struct outbuff* out, const uint_8* buf, unsigned len
 
 /* For 16-bit records which are the same under Intel and MS OMFs */
 
-static int FFQUAL uasm_ABI writeMisc(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeMisc(struct outbuff* out, const struct omf_rec* objr)
 /****************************************************************************/
 {
     /**/myassert(objr->data != NULL);
@@ -193,7 +193,7 @@ static int FFQUAL uasm_ABI writeMisc(struct outbuff* out, const struct omf_rec* 
 
 /* For 32-bit records which are the same under Intel and MS OMFs */
 
-static int FFQUAL uasm_ABI writeMisc32(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeMisc32(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->data != NULL);
@@ -204,7 +204,7 @@ static int FFQUAL uasm_ABI writeMisc32(struct outbuff* out, const struct omf_rec
     return(0);
 }
 
-static int FFQUAL uasm_ABI writeComent(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeComent(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->data != NULL);
@@ -217,7 +217,7 @@ static int FFQUAL uasm_ABI writeComent(struct outbuff* out, const struct omf_rec
     return(0);
 }
 
-static int FFQUAL uasm_ABI writeSegdef(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeSegdef(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     int         is32;
@@ -319,7 +319,7 @@ static int FFQUAL uasm_ABI writeSegdef(struct outbuff* out, const struct omf_rec
  * - content
  */
 
-static int FFQUAL uasm_ABI writeLedata(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeLedata(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->command == CMD_LEDATA || objr->command == CMD_LIDATA);
@@ -339,7 +339,7 @@ static int FFQUAL uasm_ABI writeLedata(struct outbuff* out, const struct omf_rec
     return(0);
 }
 
-static int FFQUAL uasm_ABI writeTheadr(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeTheadr(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->command == CMD_THEADR);
@@ -347,7 +347,7 @@ static int FFQUAL uasm_ABI writeTheadr(struct outbuff* out, const struct omf_rec
     return(writeMisc(out, objr));
 }
 
-static int FFQUAL uasm_ABI writeModend(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeModend(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     int     is32;
@@ -384,7 +384,7 @@ static int FFQUAL uasm_ABI writeModend(struct outbuff* out, const struct omf_rec
 
 /* write public base field of COMDAT, PUBDEF or LINNUM records */
 
-static void uasm_ABI PutBase(struct outbuff* out, const struct base_info* base)
+static void UASM_ABI PutBase(struct outbuff* out, const struct base_info* base)
 /**********************************************************************/
 {
     PutIndex(out, base->grp_idx);
@@ -395,7 +395,7 @@ static void uasm_ABI PutBase(struct outbuff* out, const struct base_info* base)
     }
 }
 
-static int FFQUAL uasm_ABI writePubdef(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writePubdef(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->command == CMD_PUBDEF || objr->command == CMD_LPUBDEF);
@@ -407,7 +407,7 @@ static int FFQUAL uasm_ABI writePubdef(struct outbuff* out, const struct omf_rec
     return(0);
 }
 
-static int FFQUAL uasm_ABI writeLinnum(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeLinnum(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->command == CMD_LINNUM);
@@ -425,7 +425,7 @@ static int FFQUAL uasm_ABI writeLinnum(struct outbuff* out, const struct omf_rec
  * This isn't used yet for OMF.
  */
 
-static int FFQUAL uasm_ABI writeComdat(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeComdat(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->command == CMD_COMDAT);
@@ -457,7 +457,7 @@ static int FFQUAL uasm_ABI writeComdat(struct outbuff* out, const struct omf_rec
 
 /* LINSYM record types are only used in conjunction with COMDAT. */
 
-static int FFQUAL uasm_ABI writeLinsym(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeLinsym(struct outbuff* out, const struct omf_rec* objr)
 /******************************************************************************/
 {
     /**/myassert(objr->command == CMD_LINSYM);
@@ -472,7 +472,7 @@ static int FFQUAL uasm_ABI writeLinsym(struct outbuff* out, const struct omf_rec
 
 #endif
 
-static int FFQUAL uasm_ABI writeUnexp(struct outbuff* out, const struct omf_rec* objr)
+static int FFQUAL UASM_ABI writeUnexp(struct outbuff* out, const struct omf_rec* objr)
 /*****************************************************************************/
 {
     DebugMsg(("unexpected OMF record type 0x%02X\n", objr->command));
@@ -481,7 +481,7 @@ static int FFQUAL uasm_ABI writeUnexp(struct outbuff* out, const struct omf_rec*
     return(0);
 }
 
-typedef int FFQUAL(uasm_ABI *pobj_filter)(struct outbuff*, const struct omf_rec*);
+typedef int FFQUAL(UASM_ABI *pobj_filter)(struct outbuff*, const struct omf_rec*);
 
 static const pobj_filter myFuncs[] = {
     writeUnexp,
@@ -539,7 +539,7 @@ static const uint_8 func_index[] = {
 
 /* call a function - bit 0 of command is always 0 */
 
-void uasm_ABI omf_write_record(const struct omf_rec* objr)
+void UASM_ABI omf_write_record(const struct omf_rec* objr)
 /*************************************************/
 {
     struct outbuff out;
@@ -549,4 +549,4 @@ void uasm_ABI omf_write_record(const struct omf_rec* objr)
     myFuncs[func_index[JUMP_INDEX(objr->command)]](&out, objr);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

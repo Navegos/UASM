@@ -38,7 +38,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_2
+UASM_PACK_PUSH_2
 
 typedef struct {
     uint_8   e_ident[EI_NIDENT];     // +0 signature & ID info
@@ -711,6 +711,6 @@ typedef struct {
     uint_32  lib_name;
 } Elf32_Library;
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _ELFSPEC_H_INCLUDED_

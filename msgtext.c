@@ -15,7 +15,7 @@
 
 #define USERESOURCES 0 /* 1=use Win string resources, won't work for Linux! */
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 #if USERESOURCES
 
@@ -68,7 +68,7 @@ const char szCVCompiler[] = { "Microsoft (R) Macro Assembler Version 6.15.8803" 
 const char szCVCompiler[] = { "Uasm v" _UASM_VERSION_STR_ };
 #endif
 
-static char const* const uasm_ABI MsgGet(int msgid, char* buffer)
+static char const* const UASM_ABI MsgGet(int msgid, char* buffer)
 /**************************************************/
 {
 #if USERESOURCES
@@ -113,10 +113,10 @@ static char const* const uasm_ABI MsgGet(int msgid, char* buffer)
     return(buffer);
 }
 
-char const* const uasm_ABI MsgGetEx(int msgid)
+char const* const UASM_ABI MsgGetEx(int msgid)
 /*******************************/
 {
     return(MsgGet(msgid, NULL));
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

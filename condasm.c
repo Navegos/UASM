@@ -63,7 +63,7 @@
   it was necessary because lines may have been tokenized multiple times.
 */
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum if_state CurrIfState;
 static int blocknestlevel;
@@ -71,7 +71,7 @@ static int falseblocknestlevel;
 static uint_32 elseoccured; /* 2.06: bit field, magnitude must be >= MAX_IF_NESTING */
 
 #ifdef DEBUG_OUT
-static char const* const uasm_ABI GetCurrIfStatString(void)
+static char const* const UASM_ABI GetCurrIfStatString(void)
 /********************************************/
 {
     switch (CurrIfState)
@@ -89,7 +89,7 @@ static char const* const uasm_ABI GetCurrIfStatString(void)
  * updates variables <blocknestlevel> and <falseblocknestlevel>.
 */
 
-void uasm_ABI conditional_assembly_prepare(int directive)
+void UASM_ABI conditional_assembly_prepare(int directive)
 /************************************************/
 {
     DebugMsg1(("condasm_prepare(%s), old status: %s, lvl=%u, falselvl=%u\n",
@@ -188,7 +188,7 @@ void uasm_ABI conditional_assembly_prepare(int directive)
  * - "" (item is T_FINAL)
  */
 
-static bool uasm_ABI check_defd(const char* name)
+static bool UASM_ABI check_defd(const char* name)
 /****************************************/
 {
     struct asym* sym;
@@ -209,7 +209,7 @@ static bool uasm_ABI check_defd(const char* name)
 
 /* handle [ELSE]IF[N]B
  */
-static bool uasm_ABI check_blank(const char* string)
+static bool UASM_ABI check_blank(const char* string)
 /*******************************************/
 {
     for (; *string; string++)
@@ -222,7 +222,7 @@ static bool uasm_ABI check_blank(const char* string)
  * Used by [ELSE]IFDIF[I] and [ELSE]IFIDN[I]
  */
 
-static bool uasm_ABI check_dif(const char* string1, const char* string2, bool sensitive)
+static bool UASM_ABI check_dif(const char* string1, const char* string2, bool sensitive)
 /*******************************************************************************/
 {
     if (sensitive)
@@ -235,7 +235,7 @@ static bool uasm_ABI check_dif(const char* string1, const char* string2, bool se
     }
 }
 
-ret_code uasm_ABI CondAsmDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI CondAsmDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     int directive = tokenarray[i].tokval;
@@ -477,7 +477,7 @@ escape:
     return(NOT_ERROR);
 }
 
-static char* uasm_ABI GetErrText(int i, struct asm_tok tokenarray[])
+static char* UASM_ABI GetErrText(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     *StringBufferEnd = NULLC;
@@ -508,7 +508,7 @@ static char* uasm_ABI GetErrText(int i, struct asm_tok tokenarray[])
  * - .err[n]b    text_literal [, <text>]
  * - .err[n]def  symbol [, <text>]
  */
-ret_code uasm_ABI ErrorDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI ErrorDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     struct expr opndx;
@@ -724,7 +724,7 @@ ret_code uasm_ABI ErrorDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-void uasm_ABI CondCheckOpen(void)
+void UASM_ABI CondCheckOpen(void)
 /************************/
 {
     if (blocknestlevel > 0)
@@ -734,13 +734,13 @@ void uasm_ABI CondCheckOpen(void)
     return;
 }
 
-int uasm_ABI GetIfNestLevel(void)
+int UASM_ABI GetIfNestLevel(void)
 /************************/
 {
     return(blocknestlevel);
 }
 
-void uasm_ABI SetIfNestLevel(int newlevel)
+void UASM_ABI SetIfNestLevel(int newlevel)
 /*********************************/
 {
     blocknestlevel = newlevel;
@@ -749,7 +749,7 @@ void uasm_ABI SetIfNestLevel(int newlevel)
 
 /* init (called once per module) */
 
-void uasm_ABI CondInit(void)
+void UASM_ABI CondInit(void)
 /*******************/
 {
     CurrIfState = BLOCK_ACTIVE;
@@ -757,4 +757,4 @@ void uasm_ABI CondInit(void)
     falseblocknestlevel = 0;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

@@ -10,15 +10,15 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /*---------------------------------------------------------------------------*/
 
-extern void uasm_ABI      ContextInit(int);
+extern void UASM_ABI      ContextInit(int);
 #if FASTMEM==0
-extern void uasm_ABI      ContextFini(void);
+extern void UASM_ABI      ContextFini(void);
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

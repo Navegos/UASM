@@ -39,7 +39,7 @@
 
 static char szCVCompiler[] = "UASM Macro Assembler";
 
-uasm_PACK_PUSH_1
+UASM_PACK_PUSH_1
 
 typedef struct cv_file {
     char* name;
@@ -124,13 +124,13 @@ struct leaf32 {
     uint_32 value32;
 };
 
-uasm_PACK_POP
+UASM_PACK_POP
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern int uasm_ABI getExecutablePath(char* out, int capacity, int* dirname_length);
+extern int UASM_ABI getExecutablePath(char* out, int capacity, int* dirname_length);
 
-uint_8* uasm_ABI SetPrefixName(uint_8* p, uint_8* name, int len)
+uint_8* UASM_ABI SetPrefixName(uint_8* p, uint_8* name, int len)
 {
     if (Options.debug_symbols < CV_SIGNATURE_C13)
         *p++ = len;
@@ -152,7 +152,7 @@ uint_8* uasm_ABI SetPrefixName(uint_8* p, uint_8* name, int len)
 
 /* translate symbol's mem_type to a codeview typeref */
 
-uint_32 uasm_ABI GetTyperef(struct asym* sym, uint_8 Ofssize)
+uint_32 UASM_ABI GetTyperef(struct asym* sym, uint_8 Ofssize)
 {
     if ((sym->mem_type & MT_SPECIAL) == 0) {
         int size = SizeFromMemtype(sym->mem_type, Ofssize, sym->type);
@@ -234,7 +234,7 @@ uint_32 uasm_ABI GetTyperef(struct asym* sym, uint_8 Ofssize)
 
 /* calc size of a codeview item in symbols segment */
 
-static uint_16 uasm_ABI GetCVStructLen(struct asym* sym, uint_8 Ofssize)
+static uint_16 UASM_ABI GetCVStructLen(struct asym* sym, uint_8 Ofssize)
 {
     if (sym->state == SYM_TYPE)
         return(Options.debug_symbols == CV_SIGNATURE_C7 ? sizeof(UDTSYM_16t) - 1 : sizeof(UDTSYM) - 1);
@@ -260,7 +260,7 @@ static uint_16 uasm_ABI GetCVStructLen(struct asym* sym, uint_8 Ofssize)
     return sizeof(DATASYM32) - 1;
 }
 
-static void uasm_ABI PadBytes(uint_8* curr, uint_8* base)
+static void UASM_ABI PadBytes(uint_8* curr, uint_8* base)
 {
     static const char padtab[] = { LF_PAD1, LF_PAD2, LF_PAD3 };
 
@@ -270,7 +270,7 @@ static void uasm_ABI PadBytes(uint_8* curr, uint_8* base)
 
 /* write a bitfield to $$TYPES */
 
-static void uasm_ABI cv_write_bitfield(dbgcv* cv, struct dsym* type, struct asym* sym)
+static void UASM_ABI cv_write_bitfield(dbgcv* cv, struct dsym* type, struct asym* sym)
 {
     uint_32 tref = GetTyperef((struct asym*)type, USE16);
     uint_32 size = (Options.debug_symbols == CV_SIGNATURE_C7 ?
@@ -295,7 +295,7 @@ static void uasm_ABI cv_write_bitfield(dbgcv* cv, struct dsym* type, struct asym
     cv->pt += size;
 }
 
-static void uasm_ABI cv_write_array_type(struct dbgcv* cv, struct asym* sym,
+static void UASM_ABI cv_write_array_type(struct dbgcv* cv, struct asym* sym,
     uint_32 elemtype, uint_8 Ofssize)
 {
     uint_8*     tmp;
@@ -341,7 +341,7 @@ static void uasm_ABI cv_write_array_type(struct dbgcv* cv, struct asym* sym,
  * the symbol's mem_type is MT_PTR.
  */
 
-static uint_32 uasm_ABI cv_write_ptr_type(struct dbgcv* cv, struct asym* sym)
+static uint_32 UASM_ABI cv_write_ptr_type(struct dbgcv* cv, struct asym* sym)
 {
     uint_32 attr, type;
     uint_32 size = sizeof(CV_POINTER);
@@ -410,10 +410,10 @@ struct cv_counters {
     uint_32 ofs;  /* current start offset for member */
 };
 
-static void uasm_ABI cv_write_type(struct dbgcv* cv, struct asym* sym);
+static void UASM_ABI cv_write_type(struct dbgcv* cv, struct asym* sym);
 
 /* type of field enumeration callback function */
-typedef void (uasm_ABI *cv_enum_func)(struct dsym*, struct asym*, struct dbgcv*, struct cv_counters*);
+typedef void (UASM_ABI *cv_enum_func)(struct dsym*, struct asym*, struct dbgcv*, struct cv_counters*);
 
 /* field enumeration callback, does:
  * - count number of members in a field list
@@ -421,7 +421,7 @@ typedef void (uasm_ABI *cv_enum_func)(struct dsym*, struct asym*, struct dbgcv*,
  * - create types ( array, structure ) if not defined yet
  */
 
-static void uasm_ABI cv_cntproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
+static void UASM_ABI cv_cntproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
 {
     int      numsize;
     uint_32  offset;
@@ -456,7 +456,7 @@ static void uasm_ABI cv_cntproc(struct dsym* type, struct asym* mbr, struct dbgc
  * - create LF_MEMBER record
  */
 
-static void uasm_ABI cv_memberproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
+static void UASM_ABI cv_memberproc(struct dsym* type, struct asym* mbr, struct dbgcv* cv, struct cv_counters* cc)
 {
     uint_32     offset;
     uint_32 index;
@@ -522,7 +522,7 @@ static void uasm_ABI cv_memberproc(struct dsym* type, struct asym* mbr, struct d
  * anonymous struct members or embedded anonymous structs are "unfolded"
  * in this function.
  */
-static void uasm_ABI cv_enum_fields(struct dsym* sym, cv_enum_func enumfunc, struct dbgcv* cv, struct cv_counters* cc)
+static void UASM_ABI cv_enum_fields(struct dsym* sym, cv_enum_func enumfunc, struct dbgcv* cv, struct cv_counters* cc)
 {
     unsigned        i;
     struct sfield*  curr;
@@ -554,7 +554,7 @@ static void uasm_ABI cv_enum_fields(struct dsym* sym, cv_enum_func enumfunc, str
 
 /* write a LF_PROCEDURE & LF_ARGLIST type for procedures */
 
-static void uasm_ABI cv_write_type_procedure(struct dbgcv* cv, struct asym* sym, int cnt)
+static void UASM_ABI cv_write_type_procedure(struct dbgcv* cv, struct asym* sym, int cnt)
 {
     int size = sizeof(CV_PROCEDURE);
     int leaf = LF_PROCEDURE;
@@ -630,7 +630,7 @@ static void uasm_ABI cv_write_type_procedure(struct dbgcv* cv, struct asym* sym,
  *   sym: type to dump
  */
 
-static void uasm_ABI cv_write_type(struct dbgcv* cv, struct asym* sym)
+static void UASM_ABI cv_write_type(struct dbgcv* cv, struct asym* sym)
 {
     struct dsym* type = (struct dsym*)sym;
     uint_8*     tmp;
@@ -767,7 +767,7 @@ static void uasm_ABI cv_write_type(struct dbgcv* cv, struct asym* sym)
 
 /* get register values for S_REGISTER */
 
-uint_16 uasm_ABI cv_get_register(struct asym* sym)
+uint_16 UASM_ABI cv_get_register(struct asym* sym)
 {
     uint_16 regno;
     uint_16 rc = 0;
@@ -799,7 +799,7 @@ uint_16 uasm_ABI cv_get_register(struct asym* sym)
  */
 static const uint_8 reg64[] = { 0, 2, 3, 1, 7, 6, 4, 5 };
 
-uint_16 uasm_ABI cv_get_x64_regno(uint_16 regno)
+uint_16 UASM_ABI cv_get_x64_regno(uint_16 regno)
 {
     if (regno >= T_RAX && regno <= T_RDI)
         return(reg64[regno - T_RAX] + CV_AMD64_RAX);
@@ -816,7 +816,7 @@ uint_16 uasm_ABI cv_get_x64_regno(uint_16 regno)
  * the symbol has either state SYM_INTERNAL or SYM_TYPE.
  */
 
-static void uasm_ABI cv_write_symbol(struct dbgcv* cv, struct asym* sym)
+static void UASM_ABI cv_write_symbol(struct dbgcv* cv, struct asym* sym)
 {
     int                 len;
     unsigned            ofs;
@@ -1214,7 +1214,7 @@ static void uasm_ABI cv_write_symbol(struct dbgcv* cv, struct asym* sym)
     return;
 }
 
-static void uasm_ABI cv_align(dbgcv* cv)
+static void UASM_ABI cv_align(dbgcv* cv)
 {
     int count = cv->section->length & 3;
     if (count)
@@ -1225,7 +1225,7 @@ static void uasm_ABI cv_align(dbgcv* cv)
 
 /* flush section header and return memory address */
 
-static uint_8* uasm_ABI cv_FlushSection(dbgcv* cv, uint_32 signature, uint_32 ex)
+static uint_8* UASM_ABI cv_FlushSection(dbgcv* cv, uint_32 signature, uint_32 ex)
 {
     int i;
     uint_8* p, * curr;
@@ -1271,7 +1271,7 @@ static uint_8* uasm_ABI cv_FlushSection(dbgcv* cv, uint_32 signature, uint_32 ex
 #define MYBUFSIZ 1024*4
 #define MD5_LENGTH ( sizeof( uint_32 ) + sizeof( uint_16 ) + 16 + sizeof( uint_16 ) )
 
-static int uasm_ABI calc_md5(const char* filename, unsigned char* sum)
+static int UASM_ABI calc_md5(const char* filename, unsigned char* sum)
 {
     FILE* fp;
     uint_8* file_buf;
@@ -1311,7 +1311,7 @@ static int uasm_ABI calc_md5(const char* filename, unsigned char* sum)
 
 extern struct asym* CV8Label;
 
-void uasm_ABI cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
+void UASM_ABI cv_write_debug_tables(struct dsym* symbols, struct dsym* types, void* pv)
 {
     struct asym*    sym;
     struct dsym* seg;
@@ -1694,4 +1694,4 @@ void uasm_ABI cv_write_debug_tables(struct dsym* symbols, struct dsym* types, vo
     symbols->e.seginfo->start_loc = 0; /* required for COFF */
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

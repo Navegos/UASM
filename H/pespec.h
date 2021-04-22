@@ -9,7 +9,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_2
+UASM_PACK_PUSH_2
 
 struct IMAGE_DOS_HEADER {
     uint_16 e_magic;          // Magic number
@@ -217,6 +217,6 @@ struct IMAGE_RESOURCE_DATA_ENTRY {
 
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

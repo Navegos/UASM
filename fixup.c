@@ -38,14 +38,14 @@
 
 #define GNURELOCS 1
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern struct asym* SegOverride;
 
 int_8   Frame_Type;   /* curr fixup frame type: SEG|GRP|EXT|ABS|NONE; see omfspec.h */
 uint_16 Frame_Datum;  /* curr fixup frame value */
 
-struct fixup* uasm_ABI CreateFixup(struct asym* sym, enum fixup_types type, enum fixup_options option)
+struct fixup* UASM_ABI CreateFixup(struct asym* sym, enum fixup_types type, enum fixup_options option)
     /*********************************************************************************************/
     /*
      * called when an instruction operand or a data item is relocatable:
@@ -119,7 +119,7 @@ struct fixup* uasm_ABI CreateFixup(struct asym* sym, enum fixup_types type, enum
 
 /* remove a fixup from the segment's fixup queue */
 
-void uasm_ABI FreeFixup(struct fixup* fixup)
+void UASM_ABI FreeFixup(struct fixup* fixup)
 /***********************************/
 {
     struct dsym* dir;
@@ -157,7 +157,7 @@ void uasm_ABI FreeFixup(struct fixup* fixup)
  * symbol has type SYM_SEG/SYM_GRP.
  */
 
-void uasm_ABI SetFixupFrame(const struct asym* sym, char ign_grp)
+void UASM_ABI SetFixupFrame(const struct asym* sym, char ign_grp)
 /********************************************************/
 {
     struct dsym* grp;
@@ -209,7 +209,7 @@ void uasm_ABI SetFixupFrame(const struct asym* sym, char ign_grp)
  * they no longer exist when store_fixup() is called.
  */
 
-void uasm_ABI store_fixup(struct fixup* fixup, struct dsym* seg, int_32* pdata)
+void UASM_ABI store_fixup(struct fixup* fixup, struct dsym* seg, int_32* pdata)
 /**********************************************************************/
 {
     //struct fixup     *fixup;
@@ -332,4 +332,4 @@ void uasm_ABI store_fixup(struct fixup* fixup, struct dsym* seg, int_32* pdata)
     return;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

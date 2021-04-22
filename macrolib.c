@@ -30,12 +30,12 @@
 #include "orgfixup.h"
 #include "macrolib.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI     AddLineQueue(const char* line);
-extern void uasm_ABI     AddLineQueueX(const char* fmt, ...);
+extern void UASM_ABI     AddLineQueue(const char* line);
+extern void UASM_ABI     AddLineQueueX(const char* fmt, ...);
 
-void uasm_ABI Adddefs()
+void UASM_ABI Adddefs()
 {
     AddLineQueue("IFNDEF WITHMACROLIB");
     AddLineQueue(" WITHMACROLIB EQU 1");
@@ -50,7 +50,7 @@ void uasm_ABI Adddefs()
     }
 }
 
-void uasm_ABI CreateMacroLibCases(void)
+void UASM_ABI CreateMacroLibCases(void)
 {
     /* Create case alternative names for macrolib functions */
     if (ModuleInfo.case_sensitive && !ModuleInfo.convert_uppercase)
@@ -69,4 +69,4 @@ void uasm_ABI CreateMacroLibCases(void)
 
 #endif //BUILD_MACROLIB
 
-uasm_PACK_POP
+UASM_PACK_POP

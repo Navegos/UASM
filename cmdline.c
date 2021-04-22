@@ -62,7 +62,7 @@
 #define OPTQUAL
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern char     banner_printed;
 
@@ -185,7 +185,7 @@ static const enum cpu_info cpuoption[] = {
 };
 
 #if 0 /* v2.10: removed, because factually never called */
-static void uasm_ABI StripQuotes(char* fname)
+static void UASM_ABI StripQuotes(char* fname)
 /************************************/
 {
     char* s;
@@ -212,7 +212,7 @@ static void uasm_ABI StripQuotes(char* fname)
     }
 }
 
-static char* uasm_ABI GetAFileName(void)
+static char* UASM_ABI GetAFileName(void)
 /*******************************/
 {
     DebugMsg(("GetAFileName() enter, OptName=>%s<\n", OptName));
@@ -224,7 +224,7 @@ static char* uasm_ABI GetAFileName(void)
 #endif
 
 #if BUILD_TARGET
-static void uasm_ABI SetTargName(char* name, unsigned len)
+static void UASM_ABI SetTargName(char* name, unsigned len)
 /*************************************************/
 {
     if (Options.names[OPTN_BUILD_TARGET] != NULL)
@@ -242,7 +242,7 @@ static void uasm_ABI SetTargName(char* name, unsigned len)
 
 /* called by -0, -1, ... argument */
 
-static void uasm_ABI SetCpuCmdline(enum cpu_info value, const char* parm)
+static void UASM_ABI SetCpuCmdline(enum cpu_info value, const char* parm)
 /****************************************************************/
 {
     Options.cpu &= ~(P_CPU_MASK | P_EXT_MASK | P_PM);
@@ -285,7 +285,7 @@ static void uasm_ABI SetCpuCmdline(enum cpu_info value, const char* parm)
    this is called for cmdline options -D, -I and -Fi
  */
 
-static void uasm_ABI queue_item(int i, const char* string)
+static void UASM_ABI queue_item(int i, const char* string)
 /*************************************************/
 {
     struct qitem* p;
@@ -306,7 +306,7 @@ static void uasm_ABI queue_item(int i, const char* string)
     return;
 }
 
-static void uasm_ABI get_fname(int type, const char* token)
+static void UASM_ABI get_fname(int type, const char* token)
 /**************************************************/
 /*
  * called by -Fo, -Fw or -Fl (for .OBJ, .ERR or .LST filenames ).
@@ -367,7 +367,7 @@ static void uasm_ABI get_fname(int type, const char* token)
     strcpy(Options.names[type], name);
 }
 
-static void uasm_ABI set_option_n_name(int idx, const char* name)
+static void UASM_ABI set_option_n_name(int idx, const char* name)
 /********************************************************/
 /* option -n: set name of
  * - nd: data seg
@@ -393,62 +393,62 @@ static void uasm_ABI set_option_n_name(int idx, const char* name)
 //static void OPTQUAL Ignore( void ) {};
 
 #if BUILD_TARGET
-static void OPTQUAL uasm_ABI Set_bt(void)
+static void OPTQUAL UASM_ABI Set_bt(void)
 {
     SetTargName(OptName, strlen(OptName));
 }
 #endif
 
-static void OPTQUAL uasm_ABI Set_c(void)
+static void OPTQUAL UASM_ABI Set_c(void)
 {}
 
 #ifdef DEBUG_OUT
-static void OPTQUAL uasm_ABI Set_ce(void)
+static void OPTQUAL UASM_ABI Set_ce(void)
 {
     rspidx = 1 / rspidx;
 }
 #endif
 
-static void OPTQUAL uasm_ABI Set_Cp(void)
+static void OPTQUAL UASM_ABI Set_Cp(void)
 {
     Options.case_sensitive = TRUE;   Options.convert_uppercase = FALSE;
 }
-static void OPTQUAL uasm_ABI Set_Cu(void)
+static void OPTQUAL UASM_ABI Set_Cu(void)
 {
     Options.case_sensitive = FALSE;  Options.convert_uppercase = TRUE;
 }
-static void OPTQUAL uasm_ABI Set_Cx(void)
+static void OPTQUAL UASM_ABI Set_Cx(void)
 {
     Options.case_sensitive = FALSE;  Options.convert_uppercase = FALSE;
 }
 
-static void OPTQUAL uasm_ABI Set_SSE(void)
+static void OPTQUAL UASM_ABI Set_SSE(void)
 {
     ModuleInfo.arch = ARCH_SSE;
     extraflags.MODULEARCH = ARCH_SSE;
 }
 
-static void OPTQUAL uasm_ABI Set_AVX(void)
+static void OPTQUAL UASM_ABI Set_AVX(void)
 {
     ModuleInfo.arch = ARCH_AVX;
     extraflags.MODULEARCH = ARCH_AVX;
 }
 
-static void OPTQUAL uasm_ABI Set_NOMLIB(void)
+static void OPTQUAL UASM_ABI Set_NOMLIB(void)
 {
     Options.nomlib = TRUE;
 }
 
-static void OPTQUAL uasm_ABI Set_LessOutput(void)
+static void OPTQUAL UASM_ABI Set_LessOutput(void)
 {
     Options.lessoutput = TRUE;
 }
 
-static void OPTQUAL uasm_ABI Set_Zd(void)
+static void OPTQUAL UASM_ABI Set_Zd(void)
 {
     Options.line_numbers = TRUE;
 }
-static void OPTQUAL uasm_ABI Set_Zi( void )
+static void OPTQUAL UASM_ABI Set_Zi( void )
 {
     Set_Zd();
     Options.debug_symbols = 1;
@@ -479,7 +479,7 @@ static void OPTQUAL uasm_ABI Set_Zi( void )
     }
 }
 
-static void OPTQUAL uasm_ABI Set_Zp(void)
+static void OPTQUAL UASM_ABI Set_Zp(void)
 /********************************/
 {
     uint_8 power;
@@ -493,7 +493,7 @@ static void OPTQUAL uasm_ABI Set_Zp(void)
     return;
 }
 
-static void OPTQUAL uasm_ABI Set_Sp(void)
+static void OPTQUAL UASM_ABI Set_Sp(void)
 /********************************/
 {
     uint_8 power;
@@ -507,75 +507,75 @@ static void OPTQUAL uasm_ABI Set_Sp(void)
     return;
 }
 
-static void OPTQUAL uasm_ABI Set_D(void)
+static void OPTQUAL UASM_ABI Set_D(void)
 {
     queue_item(OPTQ_MACRO, GetAFileName());
 }
-static void OPTQUAL uasm_ABI Set_Fi(void)
+static void OPTQUAL UASM_ABI Set_Fi(void)
 {
     queue_item(OPTQ_FINCLUDE, GetAFileName());
 }
-static void OPTQUAL uasm_ABI Set_I(void)
+static void OPTQUAL UASM_ABI Set_I(void)
 {
     queue_item(OPTQ_INCPATH, GetAFileName());
 }
 
-static void OPTQUAL uasm_ABI Set_e(void)
+static void OPTQUAL UASM_ABI Set_e(void)
 {
     Options.error_limit = OptValue;
 }
 
-static void OPTQUAL uasm_ABI Set_nologo(void)
+static void OPTQUAL UASM_ABI Set_nologo(void)
 {
     banner_printed = TRUE;
 }
-static void OPTQUAL uasm_ABI Set_q(void)
+static void OPTQUAL UASM_ABI Set_q(void)
 {
     Set_nologo(); Options.quiet = TRUE;
 }
-static void OPTQUAL uasm_ABI Set_EP(void)
+static void OPTQUAL UASM_ABI Set_EP(void)
 {
     Options.preprocessor_stdout = TRUE; Set_q();
 }
 
 #if DLLIMPORT
-static void OPTQUAL uasm_ABI Set_Fd(void)
+static void OPTQUAL UASM_ABI Set_Fd(void)
 {
     get_fname(OPTN_LNKDEF_FN, GetAFileName()); Options.write_impdef = TRUE;
 }
 #endif
-static void OPTQUAL uasm_ABI Set_Fw(void)
+static void OPTQUAL UASM_ABI Set_Fw(void)
 {
     get_fname(OPTN_ERR_FN, GetAFileName());
 }
-static void OPTQUAL uasm_ABI Set_Fs(void)
+static void OPTQUAL UASM_ABI Set_Fs(void)
 {
     get_fname(OPTN_SYM_FN, GetAFileName()); Options.dumpSymbols = TRUE;
 }
-static void OPTQUAL uasm_ABI Set_Fl(void)
+static void OPTQUAL UASM_ABI Set_Fl(void)
 {
     get_fname(OPTN_LST_FN, GetAFileName()); Options.write_listing = TRUE;
 }
-static void OPTQUAL uasm_ABI Set_Fo(void)
+static void OPTQUAL UASM_ABI Set_Fo(void)
 {
     get_fname(OPTN_OBJ_FN, GetAFileName());
 }
 
-static void OPTQUAL uasm_ABI Set_fp(void)
+static void OPTQUAL UASM_ABI Set_fp(void)
 {
     Options.cpu &= ~P_FPU_MASK; Options.cpu = OptValue;
 }
-static void OPTQUAL uasm_ABI Set_FPx(void)
+static void OPTQUAL UASM_ABI Set_FPx(void)
 {
     Options.floating_point = OptValue;
 }
-static void OPTQUAL uasm_ABI Set_G(void)
+static void OPTQUAL UASM_ABI Set_G(void)
 {
     Options.langtype = OptValue;
     ModuleInfo.langtype = OptValue;
 }
 
-static void OPTQUAL uasm_ABI Set_Sa(void)
+static void OPTQUAL UASM_ABI Set_Sa(void)
 /********************************/
 {
     Options.listif = TRUE;
@@ -583,41 +583,41 @@ static void OPTQUAL uasm_ABI Set_Sa(void)
     Options.list_macro = LM_LISTMACROALL;
 }
 
-static void OPTQUAL uasm_ABI Set_True(void)
+static void OPTQUAL UASM_ABI Set_True(void)
 /**********************************/
 {
     char* p = ((char*)&Options) + OptValue;
     *p = TRUE;
 }
 
-static void OPTQUAL uasm_ABI Set_m(void)
+static void OPTQUAL UASM_ABI Set_m(void)
 {
     Options.model = OptValue;
 }
 
-static void OPTQUAL uasm_ABI Set_n(void)
+static void OPTQUAL UASM_ABI Set_n(void)
 {
     set_option_n_name(OptValue, OptName);
 }
 
 #ifdef DEBUG_OUT
-static void OPTQUAL uasm_ABI Set_pm(void)
+static void OPTQUAL UASM_ABI Set_pm(void)
 {
     Options.max_passes = OptValue;
 };
 #endif
 
-static void OPTQUAL uasm_ABI Set_WX(void)
+static void OPTQUAL UASM_ABI Set_WX(void)
 {
     Options.warning_error = TRUE;
 }
 
-static void OPTQUAL uasm_ABI Set_w(void)
+static void OPTQUAL UASM_ABI Set_w(void)
 {
     Set_WX(); Options.warning_level = 0;
 }
 
-static void OPTQUAL uasm_ABI Set_W(void)
+static void OPTQUAL UASM_ABI Set_W(void)
 /*******************************/
 {
     if (OptValue <= 4)
@@ -626,10 +626,10 @@ static void OPTQUAL uasm_ABI Set_W(void)
         EmitWarn(1, INVALID_CMDLINE_VALUE, "W");
 }
 
-extern void uasm_ABI UpdateStackBase(struct asym*, void*);
-extern void uasm_ABI UpdateProcStatus(struct asym*, void*);
+extern void UASM_ABI UpdateStackBase(struct asym*, void*);
+extern void UASM_ABI UpdateProcStatus(struct asym*, void*);
 
-static void OPTQUAL uasm_ABI Set_ofmt(void)
+static void OPTQUAL UASM_ABI Set_ofmt(void)
 /**********************************/
 {
     Options.output_format = OptValue & 0xff;
@@ -652,50 +652,50 @@ static void OPTQUAL uasm_ABI Set_ofmt(void)
     ModuleInfo.sub_format = Options.sub_format;
 }
 
-static void OPTQUAL uasm_ABI Set_zcm(void)
+static void OPTQUAL UASM_ABI Set_zcm(void)
 {
     Options.no_cdecl_decoration = FALSE;
 }
 #if OWFC_SUPPORT
-static void OPTQUAL uasm_ABI Set_zf(void)
+static void OPTQUAL UASM_ABI Set_zf(void)
 {
     Options.fctype = OptValue;
 }
 #endif
 
-static void OPTQUAL uasm_ABI Set_zt(void)
+static void OPTQUAL UASM_ABI Set_zt(void)
 {
     Options.stdcall_decoration = OptValue;
 }
 #ifndef __SW_BD
-static void OPTQUAL uasm_ABI Set_h(void)
+static void OPTQUAL UASM_ABI Set_h(void)
 {
     PrintUsage();  exit(EXIT_SUCCESS);
 }
 #endif
 
-static void OPTQUAL uasm_ABI Set_zr(void)
+static void OPTQUAL UASM_ABI Set_zr(void)
 {
     Options.fastcall_decoration = OptValue;
 }
 
-static void OPTQUAL uasm_ABI Set_zv(void)
+static void OPTQUAL UASM_ABI Set_zv(void)
 {
     Options.vectorcall_decoration = OptValue;
 }
 
-static void OPTQUAL uasm_ABI Set_ze(void)
+static void OPTQUAL UASM_ABI Set_ze(void)
 {
     Options.regcall_decoration = OptValue;
 }
 
-static void OPTQUAL uasm_ABI Set_gev(void)
+static void OPTQUAL UASM_ABI Set_gev(void)
 {
     Options.regcall_version = OptValue;
 }
 
 #ifdef DEBUG_OUT
-static void OPTQUAL uasm_ABI Set_dm(void)
+static void OPTQUAL UASM_ABI Set_dm(void)
 {
     int i;
     for (i = 0; i < MSG_LAST; i++)
@@ -704,7 +704,7 @@ static void OPTQUAL uasm_ABI Set_dm(void)
     }
 }
 
-static void OPTQUAL uasm_ABI Set_dt(void)
+static void OPTQUAL UASM_ABI Set_dt(void)
 /********************************/
 {
     Options.debug = TRUE;
@@ -713,7 +713,7 @@ static void OPTQUAL uasm_ABI Set_dt(void)
 }
 
 #if FASTPASS
-static void OPTQUAL uasm_ABI Set_nfp(void)
+static void OPTQUAL UASM_ABI Set_nfp(void)
 /*********************************/
 {
     Options.nofastpass = TRUE;
@@ -721,7 +721,7 @@ static void OPTQUAL uasm_ABI Set_nfp(void)
 }
 #endif
 
-static void OPTQUAL uasm_ABI Set_nbp(void)
+static void OPTQUAL UASM_ABI Set_nbp(void)
 /*********************************/
 {
     Options.nobackpatch = TRUE;
@@ -733,7 +733,7 @@ struct  cmdloption
 {
     const char* name;
     unsigned    value;
-    void OPTQUAL(uasm_ABI *function)(void);
+    void OPTQUAL(UASM_ABI *function)(void);
 };
 
 #define optofs( x ) offsetof( struct global_options, x )
@@ -939,7 +939,7 @@ static struct cmdloption const cmdl_options[] = {
  * type=$ : (macro) identifier [=value] ( -D, -nc, -nd, -nm, -nt )
  * type=0 : something else ( -0..-10 )
  */
-static char const* const uasm_ABI GetNameToken(char* dst, const char* str, int max, char type)
+static char const* const UASM_ABI GetNameToken(char* dst, const char* str, int max, char type)
 /*******************************************************************************/
 {
     bool equatefound = FALSE;
@@ -1002,7 +1002,7 @@ is_quote:
  * so check if it is a file and, if yes, read it.
  */
 
-static char* uasm_ABI ReadParamFile(const char* name)
+static char* UASM_ABI ReadParamFile(const char* name)
 /********************************************/
 {
     char* env;
@@ -1060,7 +1060,7 @@ static char* uasm_ABI ReadParamFile(const char* name)
 
 /* current cmdline string is done, get the next one! */
 
-static char const* const uasm_ABI getnextcmdstring(char** cmdline)
+static char const* const UASM_ABI getnextcmdstring(char** cmdline)
 /*********************************************************/
 {
     char** src;
@@ -1080,7 +1080,7 @@ static char const* const uasm_ABI getnextcmdstring(char** cmdline)
     return(*cmdline);
 }
 
-static char const* const uasm_ABI GetNumber(const char* p)
+static char const* const UASM_ABI GetNumber(const char* p)
 /*******************************************/
 {
     OptValue = 0;
@@ -1097,7 +1097,7 @@ static char const* const uasm_ABI GetNumber(const char* p)
 
 /* scan option table and if option is known, process it */
 
-static void uasm_ABI ProcessOption(char** cmdline, char* buffer)
+static void UASM_ABI ProcessOption(char** cmdline, char* buffer)
 /*************************************************************/
 {
     int   i;
@@ -1203,7 +1203,7 @@ opt_error_exit:
 
 #define MAX_OS_NAME_SIZE 7
 
-static void uasm_ABI set_default_build_target(void)
+static void UASM_ABI set_default_build_target(void)
 /******************************************/
 {
     if (Options.names[OPTN_BUILD_TARGET] == NULL)
@@ -1258,7 +1258,7 @@ static void uasm_ABI set_default_build_target(void)
  * - handle (nested) response files
  */
 
-char* uasm_ABI ParseCmdline(char** cmdline, int* pCntArgs)
+char* UASM_ABI ParseCmdline(char** cmdline, int* pCntArgs)
 /****************************************************************/
 {
     int i;
@@ -1366,7 +1366,7 @@ char* uasm_ABI ParseCmdline(char** cmdline, int* pCntArgs)
     return(NULL);
 }
 
-void uasm_ABI CmdlineFini(void)
+void UASM_ABI CmdlineFini(void)
 /******************************/
 /* Free resources allocated by cmdline options */
 {
@@ -1402,4 +1402,4 @@ void uasm_ABI CmdlineFini(void)
     return;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

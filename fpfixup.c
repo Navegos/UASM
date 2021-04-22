@@ -40,7 +40,7 @@
 #include "omf.h"
 #include "omfspec.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum fp_patches
 {
@@ -66,7 +66,7 @@ static const char patchchr2[] = {
     'W', 'D', 'E', 'C', 'S', 'A', 'F', 'G'
 };
 
-void uasm_ABI AddFloatingPointEmulationFixup(struct code_info* CodeInfo)
+void UASM_ABI AddFloatingPointEmulationFixup(struct code_info* CodeInfo)
 /***************************************************************/
 {
     int i;
@@ -136,4 +136,4 @@ void uasm_ABI AddFloatingPointEmulationFixup(struct code_info* CodeInfo)
     return;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

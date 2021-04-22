@@ -5,7 +5,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_4
+UASM_PACK_PUSH_4
 
 #define STD_OUTPUT_HANDLE   ((DWORD)-11)
 typedef void* HANDLE;
@@ -45,7 +45,7 @@ typedef int                 BOOL;
 #define WINAPI __stdcall
 #endif
 
-uasm_PACK_STACK
+UASM_PACK_STACK
 
 WINBASEAPI HANDLE WINAPI GetStdHandle(DWORD nStdHandle);
 
@@ -53,6 +53,6 @@ WINBASEAPI BOOL WINAPI GetConsoleScreenBufferInfo(HANDLE hConsoleOutput, PCONSOL
 
 WINBASEAPI BOOL WINAPI SetConsoleTextAttribute(HANDLE hConsoleOutput, WORD wAttributes);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _WINCONSLE_H_INCLUDED_

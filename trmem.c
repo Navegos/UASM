@@ -51,7 +51,7 @@ typedef unsigned        uint;
 
 #define MEMSET(p,c,l)   memset(p,c,l)
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /*
     _PtrCmp( a, op, b ) compares two pointer as in ( a ) op ( b )
@@ -120,27 +120,27 @@ struct _trmem_internal
     uint_32     mem_used;
     uint_32     max_mem;
     uint_32     alloc_no;
-    void*       (uasm_ABI *alloc)(size_t);
-    void        (uasm_ABI *free)(void*);
-    void*       (uasm_ABI *realloc)(void*, size_t);
-    void*       (uasm_ABI *expand)(void*, size_t);
+    void*       (UASM_ABI *alloc)(size_t);
+    void        (UASM_ABI *free)(void*);
+    void*       (UASM_ABI *realloc)(void*, size_t);
+    void*       (UASM_ABI *expand)(void*, size_t);
     FILE*       prt_parm;
-    void        (uasm_ABI *prt_line)(FILE*, const char*, size_t);
+    void        (UASM_ABI *prt_line)(FILE*, const char*, size_t);
     uint        flags;
     size_t      min_alloc;
 };
 
-static int uasm_ABI isValidChunk(entry_ptr, const char*, _trmem_who, _trmem_hdl);
+static int UASM_ABI isValidChunk(entry_ptr, const char*, _trmem_who, _trmem_hdl);
 
 #ifdef __WATCOMC__
 #pragma warning 579 9;  // shut up pointer truncated warning
 #endif
-static void uasm_ABI setSize(entry_ptr p, size_t size)
+static void UASM_ABI setSize(entry_ptr p, size_t size)
 {
     p->size = size ^ (size_t)p->mem ^ (size_t)p->who ^ (size_t)p;
 }
 
-static size_t uasm_ABI getSize(entry_ptr p)
+static size_t UASM_ABI getSize(entry_ptr p)
 {
     return(p->size ^ (size_t)p->mem ^ (size_t)p->who ^ (size_t)p);
 }
@@ -150,7 +150,7 @@ static size_t uasm_ABI getSize(entry_ptr p)
 #endif
 
 #ifndef __unix__
-static char* uasm_ABI stpcpy(char* dest, const char* src)
+static char* UASM_ABI stpcpy(char* dest, const char* src)
 {
     *dest = *src;
     while (*dest)
@@ -163,7 +163,7 @@ static char* uasm_ABI stpcpy(char* dest, const char* src)
 }
 #endif
 
-static char* uasm_ABI formHex(char* ptr, uint_32 data, uint size)
+static char* UASM_ABI formHex(char* ptr, uint_32 data, uint size)
 {
     char* str;
 
@@ -179,7 +179,7 @@ static char* uasm_ABI formHex(char* ptr, uint_32 data, uint size)
 }
 
 #if defined(M_I86LM) || defined(M_I86HM) || defined(M_I86MM) || defined(M_I86CM)
-static char* uasm_ABI formFarPtr(char* ptr, void far* data)
+static char* UASM_ABI formFarPtr(char* ptr, void far* data)
 /***************************************************/
 {
     ptr = formHex(ptr, FP_SEG(data), 2);
@@ -191,7 +191,7 @@ static char* uasm_ABI formFarPtr(char* ptr, void far* data)
 }
 #endif
 
-static char* uasm_ABI formCodePtr(_trmem_hdl hdl, char* ptr, _trmem_who who)
+static char* UASM_ABI formCodePtr(_trmem_hdl hdl, char* ptr, _trmem_who who)
 {
 #if defined( M_I86LM ) || defined( M_I86HM ) || defined( M_I86MM )
     return formFarPtr(ptr, who);
@@ -200,7 +200,7 @@ static char* uasm_ABI formCodePtr(_trmem_hdl hdl, char* ptr, _trmem_who who)
 #endif
 }
 
-static void uasm_ABI trPrt(_trmem_hdl hdl, const char* fmt, ...)
+static void UASM_ABI trPrt(_trmem_hdl hdl, const char* fmt, ...)
 {
     va_list     args;
     char        buff[100];
@@ -314,7 +314,7 @@ static void uasm_ABI trPrt(_trmem_hdl hdl, const char* fmt, ...)
     hdl->prt_line(hdl->prt_parm, buff, ptr - buff);
 }
 
-static entry_ptr uasm_ABI allocEntry(_trmem_hdl hdl)
+static entry_ptr UASM_ABI allocEntry(_trmem_hdl hdl)
 {
     entry_ptr   tr;
 
@@ -326,18 +326,18 @@ static entry_ptr uasm_ABI allocEntry(_trmem_hdl hdl)
     return(tr);
 }
 
-static void uasm_ABI freeEntry(entry_ptr tr, _trmem_hdl hdl)
+static void UASM_ABI freeEntry(entry_ptr tr, _trmem_hdl hdl)
 {
     hdl->free(tr);
 }
 
-static void uasm_ABI addToList(entry_ptr tr, _trmem_hdl hdl)
+static void UASM_ABI addToList(entry_ptr tr, _trmem_hdl hdl)
 {
     tr->next = hdl->alloc_list;
     hdl->alloc_list = tr;
 }
 
-static entry_ptr uasm_ABI findOnList(void* mem, _trmem_hdl hdl)
+static entry_ptr UASM_ABI findOnList(void* mem, _trmem_hdl hdl)
 {
     entry_ptr       walk;
 
@@ -353,7 +353,7 @@ static entry_ptr uasm_ABI findOnList(void* mem, _trmem_hdl hdl)
     return(NULL);
 }
 
-static entry_ptr uasm_ABI removeFromList(void* mem, _trmem_hdl hdl)
+static entry_ptr UASM_ABI removeFromList(void* mem, _trmem_hdl hdl)
 /**********************************************************/
 {
     entry_ptr_ptr   walk;
@@ -374,13 +374,13 @@ static entry_ptr uasm_ABI removeFromList(void* mem, _trmem_hdl hdl)
     return(NULL);
 }
 
-_trmem_hdl uasm_ABI _trmem_open(
-    void* (uasm_ABI *alloc)(size_t),
-    void (uasm_ABI *free)(void*),
-    void* (uasm_ABI *realloc)(void*, size_t),
-    void* (uasm_ABI *expand)(void*, size_t),
+_trmem_hdl UASM_ABI _trmem_open(
+    void* (UASM_ABI *alloc)(size_t),
+    void (UASM_ABI *free)(void*),
+    void* (UASM_ABI *realloc)(void*, size_t),
+    void* (UASM_ABI *expand)(void*, size_t),
     FILE* prt_parm,
-    void (uasm_ABI *prt_line)(FILE*, const char*, size_t),
+    void (UASM_ABI *prt_line)(FILE*, const char*, size_t),
     unsigned flags)
     /*****************************************************/
 {
@@ -406,7 +406,7 @@ _trmem_hdl uasm_ABI _trmem_open(
     return(hdl);
 }
 
-int uasm_ABI _trmem_validate_all(_trmem_hdl hdl)
+int UASM_ABI _trmem_validate_all(_trmem_hdl hdl)
 /****************************************/
 {
     entry_ptr   walk;
@@ -425,7 +425,7 @@ int uasm_ABI _trmem_validate_all(_trmem_hdl hdl)
     return result;
 }
 
-unsigned uasm_ABI _trmem_close(_trmem_hdl hdl)
+unsigned UASM_ABI _trmem_close(_trmem_hdl hdl)
 /*************************************/
 {
     uint        chunks;
@@ -466,13 +466,13 @@ unsigned uasm_ABI _trmem_close(_trmem_hdl hdl)
     return(chunks);
 }
 
-void uasm_ABI _trmem_set_min_alloc(size_t size, _trmem_hdl hdl)
+void UASM_ABI _trmem_set_min_alloc(size_t size, _trmem_hdl hdl)
 /******************************************************/
 {
     hdl->min_alloc = size;
 }
 
-void* uasm_ABI _trmem_alloc(size_t size, _trmem_who who, _trmem_hdl hdl)
+void* UASM_ABI _trmem_alloc(size_t size, _trmem_who who, _trmem_hdl hdl)
 /***************************************************************/
 {
     void*       mem;
@@ -510,7 +510,7 @@ void* uasm_ABI _trmem_alloc(size_t size, _trmem_who who, _trmem_hdl hdl)
     return(mem);
 }
 
-static int uasm_ABI isValidChunk(entry_ptr tr, const char* rtn,
+static int UASM_ABI isValidChunk(entry_ptr tr, const char* rtn,
                         _trmem_who who, _trmem_hdl hdl)
 {
     void* mem;
@@ -543,7 +543,7 @@ static int uasm_ABI isValidChunk(entry_ptr tr, const char* rtn,
     return(1);
 }
 
-int uasm_ABI _trmem_validate(void* mem, _trmem_who who, _trmem_hdl hdl)
+int UASM_ABI _trmem_validate(void* mem, _trmem_who who, _trmem_hdl hdl)
 /**************************************************************/
 {
     entry_ptr tr;
@@ -557,7 +557,7 @@ int uasm_ABI _trmem_validate(void* mem, _trmem_who who, _trmem_hdl hdl)
     return(isValidChunk(tr, "Validate", who, hdl));
 }
 
-void uasm_ABI _trmem_free(void* mem, _trmem_who who, _trmem_hdl hdl)
+void UASM_ABI _trmem_free(void* mem, _trmem_who who, _trmem_hdl hdl)
 /***********************************************************/
 {
     entry_ptr   tr;
@@ -587,8 +587,8 @@ void uasm_ABI _trmem_free(void* mem, _trmem_who who, _trmem_hdl hdl)
     hdl->free(mem);
 }
 
-static void* uasm_ABI ChangeAlloc(void* old, size_t size, _trmem_who who,
-                         _trmem_hdl hdl, void* (uasm_ABI *fn)(void*, size_t),
+static void* UASM_ABI ChangeAlloc(void* old, size_t size, _trmem_who who,
+                         _trmem_hdl hdl, void* (UASM_ABI *fn)(void*, size_t),
                          char* name)
     /*********************************************************************/
 {
@@ -699,19 +699,19 @@ static void* uasm_ABI ChangeAlloc(void* old, size_t size, _trmem_who who,
     return(new_block);
 }
 
-void* uasm_ABI _trmem_realloc(void* old, size_t size, _trmem_who who, _trmem_hdl hdl)
+void* UASM_ABI _trmem_realloc(void* old, size_t size, _trmem_who who, _trmem_hdl hdl)
 /****************************************************************************/
 {
     return(ChangeAlloc(old, size, who, hdl, hdl->realloc, "Realloc"));
 }
 
-void* uasm_ABI _trmem_expand(void* old, size_t size, _trmem_who who, _trmem_hdl hdl)
+void* UASM_ABI _trmem_expand(void* old, size_t size, _trmem_who who, _trmem_hdl hdl)
 /***************************************************************************/
 {
     return(ChangeAlloc(old, size, who, hdl, hdl->expand, "Expand"));
 }
 
-char* uasm_ABI _trmem_strdup(const char* str, _trmem_who who, _trmem_hdl hdl)
+char* UASM_ABI _trmem_strdup(const char* str, _trmem_who who, _trmem_hdl hdl)
 /********************************************************************/
 {
     char* mem;
@@ -724,7 +724,7 @@ char* uasm_ABI _trmem_strdup(const char* str, _trmem_who who, _trmem_hdl hdl)
     return(mem);
 }
 
-int uasm_ABI _trmem_chk_range(void* start, size_t len,
+int UASM_ABI _trmem_chk_range(void* start, size_t len,
                      _trmem_who who, _trmem_hdl hdl)
     /**********************************************/
 {
@@ -756,13 +756,13 @@ int uasm_ABI _trmem_chk_range(void* start, size_t len,
     return(isValidChunk(tr, "ChkRange", who, hdl));
 }
 
-void uasm_ABI _trmem_prt_usage(_trmem_hdl hdl)
+void UASM_ABI _trmem_prt_usage(_trmem_hdl hdl)
 /*************************************/
 {
     trPrt(hdl, MSG_PRT_USAGE, hdl->mem_used, hdl->max_mem);
 }
 
-unsigned uasm_ABI _trmem_prt_list(_trmem_hdl hdl)
+unsigned UASM_ABI _trmem_prt_list(_trmem_hdl hdl)
 /****************************************/
 {
     entry_ptr   tr;
@@ -796,26 +796,26 @@ unsigned uasm_ABI _trmem_prt_list(_trmem_hdl hdl)
     return(chunks);
 }
 
-size_t uasm_ABI _trmem_msize(void* mem, _trmem_hdl hdl)
+size_t UASM_ABI _trmem_msize(void* mem, _trmem_hdl hdl)
 {
     /************************************************/
     return(getSize(findOnList(mem, hdl)));
 }
 
-unsigned long uasm_ABI _trmem_get_current_usage(_trmem_hdl hdl)
+unsigned long UASM_ABI _trmem_get_current_usage(_trmem_hdl hdl)
 {
     /********************************************************/
     return hdl->mem_used;
 }
 
-unsigned long uasm_ABI _trmem_get_peak_usage(_trmem_hdl hdl)
+unsigned long UASM_ABI _trmem_get_peak_usage(_trmem_hdl hdl)
 {
     /*****************************************************/
     return hdl->max_mem;
 }
 
 #ifndef __WATCOMC__
-_trmem_who uasm_ABI  _trmem_guess_who(void* p)
+_trmem_who UASM_ABI  _trmem_guess_who(void* p)
 /*************************************/
 {
     return((_trmem_who) * ((void**)p - 1));
@@ -823,7 +823,7 @@ _trmem_who uasm_ABI  _trmem_guess_who(void* p)
 #endif
 
 #if !defined(_M_IX86) || !defined(__WATCOMC__)
-_trmem_who uasm_ABI  _trmem_whoami(void)
+_trmem_who UASM_ABI  _trmem_whoami(void)
 /*******************************/
 /* NYI: stubbed for now */
 {
@@ -841,7 +841,7 @@ FILE* FileTrmem;  /* file handle we'll write() to */
 
 #define TRMEM_LOGFN "~Uasm.trk"
 
-static void uasm_ABI memLine(FILE* fh, const char* buf, unsigned size)
+static void UASM_ABI memLine(FILE* fh, const char* buf, unsigned size)
 /*************************************************************/
 {
     //fwrite( "***",1, 3, stderr );
@@ -849,7 +849,7 @@ static void uasm_ABI memLine(FILE* fh, const char* buf, unsigned size)
     fwrite(buf, 1, size, fh);
 }
 
-void uasm_ABI tm_Init(void)
+void UASM_ABI tm_Init(void)
 /******************/
 {
     if ((FileTrmem = fopen(TRMEM_LOGFN, "w")))
@@ -870,7 +870,7 @@ void uasm_ABI tm_Init(void)
     }
 }
 
-void uasm_ABI tm_Fini(void)
+void UASM_ABI tm_Fini(void)
 /******************/
 {
     /* if tm_Fini() is called, both hTrmem & memFile are != NULL */
@@ -879,4 +879,4 @@ void uasm_ABI tm_Fini(void)
     fclose(FileTrmem);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

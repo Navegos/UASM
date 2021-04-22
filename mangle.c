@@ -41,16 +41,16 @@
 #endif
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-typedef int (uasm_ABI *mangle_func)(const struct asym*, char*);
+typedef int (UASM_ABI *mangle_func)(const struct asym*, char*);
 
-static int uasm_ABI ms32_decorate(const struct asym* sym, char* buffer);
+static int UASM_ABI ms32_decorate(const struct asym* sym, char* buffer);
 #if OWFC_SUPPORT
-static int uasm_ABI ow_decorate(const struct asym* sym, char* buffer);
+static int UASM_ABI ow_decorate(const struct asym* sym, char* buffer);
 #endif
 #if AMD64_SUPPORT
-static int uasm_ABI ms64_decorate(const struct asym* sym, char* buffer);
+static int UASM_ABI ms64_decorate(const struct asym* sym, char* buffer);
 #endif
 
 /* table of FASTCALL types.
@@ -70,7 +70,7 @@ static const mangle_func fcmanglers[] = {
 
 /* VoidMangler: no change to symbol name */
 
-static int uasm_ABI VoidMangler(const struct asym* sym, char* buffer)
+static int UASM_ABI VoidMangler(const struct asym* sym, char* buffer)
 /************************************************************/
 {
     memcpy(buffer, sym->name, sym->name_size + 1);
@@ -79,7 +79,7 @@ static int uasm_ABI VoidMangler(const struct asym* sym, char* buffer)
 
 /* UCaseMangler: convert symbol name to upper case */
 
-static int uasm_ABI UCaseMangler(const struct asym* sym, char* buffer)
+static int UASM_ABI UCaseMangler(const struct asym* sym, char* buffer)
 /*************************************************************/
 {
     memcpy(buffer, sym->name, sym->name_size + 1);
@@ -89,7 +89,7 @@ static int uasm_ABI UCaseMangler(const struct asym* sym, char* buffer)
 
 /* UScoreMangler: add '_' prefix to symbol name */
 
-static int uasm_ABI UScoreMangler(const struct asym* sym, char* buffer)
+static int UASM_ABI UScoreMangler(const struct asym* sym, char* buffer)
 /**************************************************************/
 {
     buffer[0] = '_';
@@ -99,7 +99,7 @@ static int uasm_ABI UScoreMangler(const struct asym* sym, char* buffer)
 
 /* RegCallMangler: add '__regcall4__' prefix to symbol name */
 
-static int uasm_ABI RegcallMangler(const struct asym* sym, char* buffer)
+static int UASM_ABI RegcallMangler(const struct asym* sym, char* buffer)
 /**************************************************************/
 {
     switch (Options.regcall_version)
@@ -122,7 +122,7 @@ static int uasm_ABI RegcallMangler(const struct asym* sym, char* buffer)
 /* StdcallMangler: add '_' prefix and '@size' suffix to proc names */
 /*                 add '_' prefix to other symbols */
 
-static int uasm_ABI StdcallMangler(const struct asym* sym, char* buffer)
+static int UASM_ABI StdcallMangler(const struct asym* sym, char* buffer)
 /***************************************************************/
 {
     const struct dsym* dir = (struct dsym*)sym;
@@ -139,7 +139,7 @@ static int uasm_ABI StdcallMangler(const struct asym* sym, char* buffer)
 
 /* MS FASTCALL or VECTORCALL 32bit */
 
-static int uasm_ABI ms32_decorate(const struct asym* sym, char* buffer)
+static int UASM_ABI ms32_decorate(const struct asym* sym, char* buffer)
 /**************************************************************/
 {
     // return ( sprintf( buffer, "@%s@%u", sym->name, ((struct dsym *)sym)->e.procinfo->parasize ) );
@@ -174,7 +174,7 @@ enum changes
  *  add '_' prefix to other symbols
  */
 
-static int uasm_ABI ow_decorate(const struct asym* sym, char* buffer)
+static int UASM_ABI ow_decorate(const struct asym* sym, char* buffer)
 /************************************************************/
 {
     char* name;
@@ -217,7 +217,7 @@ static int uasm_ABI ow_decorate(const struct asym* sym, char* buffer)
 
 /* MS FASTCALL or VECTORCALL 64bit */
 
-static int uasm_ABI ms64_decorate(const struct asym* sym, char* buffer)
+static int UASM_ABI ms64_decorate(const struct asym* sym, char* buffer)
 /**************************************************************/
 {
     //memcpy( buffer, sym->name, sym->name_size + 1 );
@@ -236,7 +236,7 @@ static int uasm_ABI ms64_decorate(const struct asym* sym, char* buffer)
 #endif
 
 #if MANGLERSUPP
-static char* uasm_ABI CMangler(const struct asym* sym, char* buffer)
+static char* UASM_ABI CMangler(const struct asym* sym, char* buffer)
 /***********************************************************/
 {
     if (Options.naming_convention == NC_ADD_USCORES)
@@ -249,7 +249,7 @@ static char* uasm_ABI CMangler(const struct asym* sym, char* buffer)
     }
 }
 
-static mangle_func uasm_ABI GetMangler(const char* mangle_type)
+static mangle_func UASM_ABI GetMangler(const char* mangle_type)
 /******************************************************/
 {
     if (mangle_type != NULL && mangle_type[1] == NULLC)
@@ -269,7 +269,7 @@ static mangle_func uasm_ABI GetMangler(const char* mangle_type)
 }
 #endif
 
-int uasm_ABI Mangle(struct asym* sym, char* buffer)
+int UASM_ABI Mangle(struct asym* sym, char* buffer)
 /******************************************/
 {
     mangle_func mangler;
@@ -321,7 +321,7 @@ int uasm_ABI Mangle(struct asym* sym, char* buffer)
 /* the "mangle_type" is an extension inherited from OW Wasm
  * accepted are "C" and "N". It's NULL if MANGLESUPP == 0 (standard)
  */
-void uasm_ABI SetMangler(struct asym* sym, enum lang_type langtype, enum oformat output_format, enum sformat sub_format, enum fastcall_type fctype, const char* mangle_type)
+void UASM_ABI SetMangler(struct asym* sym, enum lang_type langtype, enum oformat output_format, enum sformat sub_format, enum fastcall_type fctype, const char* mangle_type)
 /************************************************************************/
 {
 #if MANGLERSUPP
@@ -357,4 +357,4 @@ void uasm_ABI SetMangler(struct asym* sym, enum lang_type langtype, enum oformat
 #endif
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

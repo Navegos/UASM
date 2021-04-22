@@ -10,10 +10,10 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI AlignCurrOffset(int);
+extern void UASM_ABI AlignCurrOffset(int);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

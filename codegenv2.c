@@ -40,12 +40,12 @@ struct Instr_Def* InstrHash[16384];
 #include "MemTable64.h"
 #include "InstrTableV2.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern unsigned uasm_ABI get_curr_srcfile(void);
-extern uint_32 uasm_ABI GetLineNumber(void);
+extern unsigned UASM_ABI get_curr_srcfile(void);
+extern uint_32 UASM_ABI GetLineNumber(void);
 
-static unsigned int uasm_ABI hash(const uint_8* data, int size)
+static unsigned int UASM_ABI hash(const uint_8* data, int size)
 /******************************************/
 {
     uint_64 fnv_basis = 0xCBF29CE484222325 /*14695981039346656037ull*/;
@@ -60,12 +60,12 @@ static unsigned int uasm_ABI hash(const uint_8* data, int size)
     return((((h >> 49) ^ h) & 0x3fff));
 }
 
-struct Instr_Def* uasm_ABI AllocInstruction()
+struct Instr_Def* UASM_ABI AllocInstruction()
 {
     return malloc(sizeof(struct Instr_Def));
 }
 
-void uasm_ABI InsertInstruction(struct Instr_Def* pInstruction, uint_32 hash)
+void UASM_ABI InsertInstruction(struct Instr_Def* pInstruction, uint_32 hash)
 {
     struct Instr_Def* curPtr = NULL;
     curPtr = InstrHash[hash];
@@ -81,7 +81,7 @@ void uasm_ABI InsertInstruction(struct Instr_Def* pInstruction, uint_32 hash)
     curPtr->next = pInstruction;
 }
 
-uint_32 uasm_ABI GenerateInstrHash(struct Instr_Def* pInstruction)
+uint_32 UASM_ABI GenerateInstrHash(struct Instr_Def* pInstruction)
 {
     uint_8 hashBuffer[32];
     int len = strlen(pInstruction->mnemonic);
@@ -105,7 +105,7 @@ uint_32 uasm_ABI GenerateInstrHash(struct Instr_Def* pInstruction)
     return hash(&hashBuffer, len);
 }
 
-void uasm_ABI BuildInstructionTable(void)
+void UASM_ABI BuildInstructionTable(void)
 {
     uint_32 hash = 0;
     struct Instr_Def* pInstrTbl = &InstrTableV2;
@@ -128,7 +128,7 @@ void uasm_ABI BuildInstructionTable(void)
   Demotion allows us to check the instruction table twice, once using the explicit register should it exist,
   secondly after demotion to look for a generic case.
 ===================================================================== */
-enum op_type uasm_ABI DemoteOperand(enum op_type op)
+enum op_type UASM_ABI DemoteOperand(enum op_type op)
 {
     enum op_type ret = op;
 
@@ -158,7 +158,7 @@ enum op_type uasm_ABI DemoteOperand(enum op_type op)
     return(ret);
 }
 
-enum op_type uasm_ABI MatchOperand(struct code_info* CodeInfo, struct opnd_item op, struct expr opExpr)
+enum op_type UASM_ABI MatchOperand(struct code_info* CodeInfo, struct opnd_item op, struct expr opExpr)
 {
     enum op_type result;
     switch (op.type)
@@ -373,7 +373,7 @@ enum op_type uasm_ABI MatchOperand(struct code_info* CodeInfo, struct opnd_item 
     return result;
 }
 
-struct Instr_Def* uasm_ABI LookupInstruction(struct Instr_Def* instr, bool memReg, unsigned char encodeMode, int srcRegNo, int dstRegNo, struct code_info* CodeInfo)
+struct Instr_Def* UASM_ABI LookupInstruction(struct Instr_Def* instr, bool memReg, unsigned char encodeMode, int srcRegNo, int dstRegNo, struct code_info* CodeInfo)
 {
     uint_32           hash;
     struct Instr_Def* pInstruction = NULL;
@@ -433,7 +433,7 @@ struct Instr_Def* uasm_ABI LookupInstruction(struct Instr_Def* instr, bool memRe
     return pInstruction;
 }
 
-bool uasm_ABI Require_OPND_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo)
+bool UASM_ABI Require_OPND_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo)
 {
     if (instr->useOSO == OP_SIZE_OVERRIDE)
     {
@@ -445,12 +445,12 @@ bool uasm_ABI Require_OPND_Size_Override(struct Instr_Def* instr, struct code_in
     return FALSE;
 }
 
-bool uasm_ABI Require_ADDR_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo)
+bool UASM_ABI Require_ADDR_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo)
 {
     return FALSE;
 }
 
-bool uasm_ABI IsValidInCPUMode(struct Instr_Def* instr)
+bool UASM_ABI IsValidInCPUMode(struct Instr_Def* instr)
 {
     bool          result = TRUE;
     unsigned char cpuModes = instr->validModes;
@@ -473,7 +473,7 @@ bool uasm_ABI IsValidInCPUMode(struct Instr_Def* instr)
   Given an input token (string) for a register name, match it and return
   the correct register number for encoding reg/rm fields.
   ===================================================================== */
-unsigned char uasm_ABI GetRegisterNo(struct asm_tok* regTok)
+unsigned char UASM_ABI GetRegisterNo(struct asm_tok* regTok)
 {
     unsigned char regNo = 17;
     if (regTok)
@@ -602,7 +602,7 @@ unsigned char uasm_ABI GetRegisterNo(struct asm_tok* regTok)
 /* =====================================================================
   Build up instruction ModRM byte.
   ===================================================================== */
-unsigned char uasm_ABI BuildModRM(unsigned char modRM, struct Instr_Def* instr, struct expr opnd[4], bool* needModRM, bool* needSIB, bool isVEX)
+unsigned char UASM_ABI BuildModRM(unsigned char modRM, struct Instr_Def* instr, struct expr opnd[4], bool* needModRM, bool* needSIB, bool isVEX)
 {
     int sourceIdx = 1;
 
@@ -657,7 +657,7 @@ unsigned char uasm_ABI BuildModRM(unsigned char modRM, struct Instr_Def* instr, 
 /* =====================================================================
   Build up instruction REX prefix byte.
   ===================================================================== */
-unsigned char uasm_ABI BuildREX(unsigned char RexByte, struct Instr_Def* instr, struct expr opnd[4])
+unsigned char UASM_ABI BuildREX(unsigned char RexByte, struct Instr_Def* instr, struct expr opnd[4])
 {
     /* Only if the identified instruction requires a REX prefix. */
     /* REX flag is set which indicates the instruction table entry has preset values defining REX.R,.X,.B */
@@ -715,7 +715,7 @@ unsigned char uasm_ABI BuildREX(unsigned char RexByte, struct Instr_Def* instr, 
 /* =====================================================================
   Build up instruction VEX prefix bytes.
   ===================================================================== */
-void uasm_ABI BuildVEX(bool* needVex, unsigned char* vexSize, unsigned char* vexBytes, struct Instr_Def* instr, struct expr opnd[4], bool needB, bool needX, uint_32 opCount)
+void UASM_ABI BuildVEX(bool* needVex, unsigned char* vexSize, unsigned char* vexBytes, struct Instr_Def* instr, struct expr opnd[4], bool needB, bool needX, uint_32 opCount)
 {
     /* VEX 3 byte form */
     /*   7                           0     7                           0    */
@@ -862,7 +862,7 @@ void uasm_ABI BuildVEX(bool* needVex, unsigned char* vexSize, unsigned char* vex
 /* =====================================================================
   Build up instruction EVEX prefix bytes.
   ===================================================================== */
-void uasm_ABI BuildEVEX(bool* needEvex, unsigned char* evexBytes, struct Instr_Def* instr, struct expr opnd[4], bool needB, bool needX, bool needRR, uint_32 opCount, struct code_info* CodeInfo)
+void UASM_ABI BuildEVEX(bool* needEvex, unsigned char* evexBytes, struct Instr_Def* instr, struct expr opnd[4], bool needB, bool needX, bool needRR, uint_32 opCount, struct code_info* CodeInfo)
 {
     /* BYTE0: EVEX prefix is always 4 bytes and the first byte is always 0x62.
 
@@ -1167,7 +1167,7 @@ void uasm_ABI BuildEVEX(bool* needEvex, unsigned char* evexBytes, struct Instr_D
 /* =====================================================================
   Check for an EVEX Comp8 Displacement and amend value if required.
   ===================================================================== */
-bool uasm_ABI CompDisp(struct expr* memOpnd, struct Instr_Def* instr, struct code_info* CodeInfo)
+bool UASM_ABI CompDisp(struct expr* memOpnd, struct Instr_Def* instr, struct code_info* CodeInfo)
 {
     int_32 elements = (extraflags.broadflags == 0 && (instr->evexflags & EVEX_BRD) != 0)?1:instr->op_elements;
     int_32 elemSize = (instr->op_size / elements);
@@ -1191,7 +1191,7 @@ bool uasm_ABI CompDisp(struct expr* memOpnd, struct Instr_Def* instr, struct cod
 /* =====================================================================
   Return true if register a simd register (xmm,ymm,zmm).
   ===================================================================== */
-bool uasm_ABI IsSimdRegister(struct asm_tok* regTok)
+bool UASM_ABI IsSimdRegister(struct asm_tok* regTok)
 {
     bool result = FALSE;
     if (regTok)
@@ -1223,7 +1223,7 @@ bool uasm_ABI IsSimdRegister(struct asm_tok* regTok)
 /* =====================================================================
   Build up instruction SIB, ModRM and REX bytes for memory operand.
   ===================================================================== */
-int uasm_ABI BuildMemoryEncoding(unsigned char* pmodRM, unsigned char* pSIB, unsigned char* pREX, bool* needModRM, bool* needSIB,
+int UASM_ABI BuildMemoryEncoding(unsigned char* pmodRM, unsigned char* pSIB, unsigned char* pREX, bool* needModRM, bool* needSIB,
                         unsigned int* dispSize, uint_64* pDisp, struct Instr_Def* instr, struct expr opExpr[4], bool* needB,
                         bool* needX, bool* needRR, struct code_info* CodeInfo)
 {
@@ -1477,7 +1477,7 @@ int uasm_ABI BuildMemoryEncoding(unsigned char* pmodRM, unsigned char* pSIB, uns
   -> produce incorrect estimated broadcast size due to the change
   -> in destination element count, fix it.
   ===================================================================== */
-void uasm_ABI PromoteBroadcast(struct Instr_Def* instr, struct code_info* CodeInfo)
+void UASM_ABI PromoteBroadcast(struct Instr_Def* instr, struct code_info* CodeInfo)
 {
     /* {1to2}  == 0x10
        {1to4}  == 0x20
@@ -1494,7 +1494,7 @@ void uasm_ABI PromoteBroadcast(struct Instr_Def* instr, struct code_info* CodeIn
     }
 }
 
-ret_code uasm_ABI CodeGenV2(const char* instr, struct code_info* CodeInfo, uint_32 oldofs, uint_32 opCount, struct expr opExpr[4])
+ret_code UASM_ABI CodeGenV2(const char* instr, struct code_info* CodeInfo, uint_32 oldofs, uint_32 opCount, struct expr opExpr[4])
 {
     struct Instr_Def  instrToMatch;
     ret_code          retcode = NOT_ERROR;
@@ -2004,4 +2004,4 @@ ret_code uasm_ABI CodeGenV2(const char* instr, struct code_info* CodeInfo, uint_
     return retcode;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

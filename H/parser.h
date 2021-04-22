@@ -38,7 +38,7 @@
 #include "symbols.h"
 #include "token.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* define tokens for SpecialTable (registers, operators, ... ) */
 enum special_token {
@@ -391,23 +391,23 @@ extern uint_16                   optable_idx[];  /* helper, access thru IndexFro
 
 #define IndexFromToken( tok )  optable_idx[ ( tok ) - SPECIAL_LAST ]
 
-extern int uasm_ABI        SizeFromMemtype(enum memtype mem_type, int, struct asym*);
-extern ret_code uasm_ABI   MemtypeFromSize(int, enum memtype* ptype);
-extern int uasm_ABI        SizeFromRegister(int);
-extern ret_code uasm_ABI   GetLangType(int*, struct asm_tok[], enum lang_type* plang);
+extern int UASM_ABI        SizeFromMemtype(enum memtype mem_type, int, struct asym*);
+extern ret_code UASM_ABI   MemtypeFromSize(int, enum memtype* ptype);
+extern int UASM_ABI        SizeFromRegister(int);
+extern ret_code UASM_ABI   GetLangType(int*, struct asm_tok[], enum lang_type* plang);
 
-extern void uasm_ABI       sym_add_table(struct symbol_queue*, struct dsym*);
-extern void uasm_ABI       sym_remove_table(struct symbol_queue*, struct dsym*);
-extern void uasm_ABI       sym_ext2int(struct asym*);
+extern void UASM_ABI       sym_add_table(struct symbol_queue*, struct dsym*);
+extern void UASM_ABI       sym_remove_table(struct symbol_queue*, struct dsym*);
+extern void UASM_ABI       sym_ext2int(struct asym*);
 
-extern int uasm_ABI        OperandSize(enum operand_type opnd, const struct code_info*);
-extern void uasm_ABI       set_frame(const struct asym* sym);
-extern void uasm_ABI       set_frame2(const struct asym* sym);
-extern ret_code uasm_ABI   ParseLine(struct asm_tok[]);
-extern void uasm_ABI       ProcessFile(struct asm_tok[]);
+extern int UASM_ABI        OperandSize(enum operand_type opnd, const struct code_info*);
+extern void UASM_ABI       set_frame(const struct asym* sym);
+extern void UASM_ABI       set_frame2(const struct asym* sym);
+extern ret_code UASM_ABI   ParseLine(struct asm_tok[]);
+extern void UASM_ABI       ProcessFile(struct asm_tok[]);
 
-extern void uasm_ABI       WritePreprocessedLine(const char*);
+extern void UASM_ABI       WritePreprocessedLine(const char*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

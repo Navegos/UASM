@@ -34,15 +34,15 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI MemInit(void);
-extern void uasm_ABI MemFini(void);
-extern void* uasm_ABI MemAlloc(size_t size);
-extern void* uasm_ABI MemRealloc(void* ptr, size_t size);
-extern void uasm_ABI MemFree(void* ptr);
+extern void UASM_ABI MemInit(void);
+extern void UASM_ABI MemFini(void);
+extern void* UASM_ABI MemAlloc(size_t size);
+extern void* UASM_ABI MemRealloc(void* ptr, size_t size);
+extern void UASM_ABI MemFree(void* ptr);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #if defined(__WATCOMC__) || defined(__BORLANDC__) || defined(__OCC__)
 
@@ -73,19 +73,19 @@ uasm_PACK_POP
 
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* LclAlloc() and LclFree() are fast variants, which
  * are to be used for all allocations which aren't "global"
  */
-extern  void* uasm_ABI LclAlloc(size_t);
+extern  void* UASM_ABI LclAlloc(size_t);
 #if FASTMEM==0
-extern  void uasm_ABI    LclFree(void*);
+extern  void UASM_ABI    LclFree(void*);
 #else
 /* be careful not to use a function call as argument for LclFree()! */
 #define LclFree( p ) ;
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

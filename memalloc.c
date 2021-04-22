@@ -72,7 +72,7 @@
 #endif
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 struct linked_list
 {
@@ -159,7 +159,7 @@ extern _trmem_hdl   hTrmem;
 
 #endif
 
-void uasm_ABI MemInit(void)
+void UASM_ABI MemInit(void)
 /******************/
 {
 #if FASTMEM
@@ -170,7 +170,7 @@ void uasm_ABI MemInit(void)
     DebugCmd(memstart = memcalls);
 }
 
-void uasm_ABI MemFini(void)
+void UASM_ABI MemFini(void)
 /******************/
 {
 #if FASTMEM
@@ -191,7 +191,7 @@ void uasm_ABI MemFini(void)
 #endif
 }
 
-void* uasm_ABI LclAlloc(size_t size)
+void* UASM_ABI LclAlloc(size_t size)
 /***************************/
 {
     void* ptr;
@@ -237,7 +237,7 @@ void* uasm_ABI LclAlloc(size_t size)
 }
 
 #if FASTMEM==0
-void uasm_ABI LclFree(void* ptr)
+void UASM_ABI LclFree(void* ptr)
 /***********************/
 {
     if (ptr != NULL)
@@ -250,7 +250,7 @@ void uasm_ABI LclFree(void* ptr)
 }
 #endif
 
-void* uasm_ABI MemAlloc(size_t size)
+void* UASM_ABI MemAlloc(size_t size)
 /***************************/
 {
     void* ptr;
@@ -266,7 +266,7 @@ void* uasm_ABI MemAlloc(size_t size)
     return(ptr);
 }
 
-void uasm_ABI MemFree(void* ptr)
+void UASM_ABI MemFree(void* ptr)
 /***********************/
 {
     DebugMsg1(("MemFree(0x%p) cnt=%" I32_SPEC "u\n", ptr, --memcalls));
@@ -275,7 +275,7 @@ void uasm_ABI MemFree(void* ptr)
 }
 
 #if 0
-void* uasm_ABI MemRealloc(void* ptr, size_t size)
+void* UASM_ABI MemRealloc(void* ptr, size_t size)
 /****************************************/
 {
     void* new;
@@ -289,4 +289,4 @@ void* uasm_ABI MemRealloc(void* ptr, size_t size)
 }
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP

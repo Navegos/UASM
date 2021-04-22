@@ -26,7 +26,7 @@
 #define SavedContexts ModuleInfo.g.SavedContexts
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 enum context_type
 {
@@ -112,7 +112,7 @@ extern struct asym* sym_Cpu;
 
 /* v2.10: major rewrite of this function */
 
-ret_code uasm_ABI ContextDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI ContextDirective(int i, struct asm_tok tokenarray[])
 /*************************************************************/
 {
     int start = i;
@@ -275,7 +275,7 @@ ret_code uasm_ABI ContextDirective(int i, struct asm_tok tokenarray[])
 
 /* save current context status */
 
-void uasm_ABI ContextSaveState(void)
+void UASM_ABI ContextSaveState(void)
 /***************************/
 {
     int i;
@@ -298,7 +298,7 @@ void uasm_ABI ContextSaveState(void)
 
 /* restore context status */
 
-static void uasm_ABI ContextRestoreState(void)
+static void UASM_ABI ContextRestoreState(void)
 /*************************************/
 {
     int i;
@@ -323,7 +323,7 @@ static void uasm_ABI ContextRestoreState(void)
 
 /* init context, called once per pass */
 
-void uasm_ABI ContextInit(int pass)
+void UASM_ABI ContextInit(int pass)
 /**************************/
 {
     /* if ContextStack isn't NULL, then at least one PUSHCONTEXT
@@ -339,7 +339,7 @@ void uasm_ABI ContextInit(int pass)
 #endif
 }
 #if FASTMEM==0
-void uasm_ABI ContextFini(void)
+void UASM_ABI ContextFini(void)
 /**********************/
 {
     struct context* curr;
@@ -355,4 +355,4 @@ void uasm_ABI ContextFini(void)
 }
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP

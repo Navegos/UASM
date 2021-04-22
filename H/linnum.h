@@ -5,7 +5,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* internal line number information used if -Zd or -Zi is set */
 
@@ -26,10 +26,10 @@ struct line_num_info {
     };
 };
 
-void uasm_ABI LinnumInit(void);
-void uasm_ABI LinnumFini(void);
-void uasm_ABI QueueDeleteLinnum(struct qdesc*);
+void UASM_ABI LinnumInit(void);
+void UASM_ABI LinnumFini(void);
+void UASM_ABI QueueDeleteLinnum(struct qdesc*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _LINNUM_H_

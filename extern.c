@@ -41,7 +41,7 @@
  */
 #define MASM_EXTCOND 1  /* 1 is Masm compatible */
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 static const char szCOMM[] = "COMM";
 
@@ -57,7 +57,7 @@ static const char szCOMM[] = "COMM";
  * COMM [ [ mangle_type, ] langtype] [NEAR|FAR] name: ...
  * mangle_type must be a 'string'.
  */
-static char* uasm_ABI Check4Mangler(int* i, struct asm_tok tokenarray[])
+static char* UASM_ABI Check4Mangler(int* i, struct asm_tok tokenarray[])
 /***************************************************************/
 {
     char* mangle_type = NULL;
@@ -83,7 +83,7 @@ static char* uasm_ABI Check4Mangler(int* i, struct asm_tok tokenarray[])
 /* create external.
  * sym must be NULL or of state SYM_UNDEFINED!
  */
-static struct asym* uasm_ABI CreateExternal(struct asym* sym, const char* name, char weak)
+static struct asym* UASM_ABI CreateExternal(struct asym* sym, const char* name, char weak)
 /*********************************************************************************/
 {
     if (sym == NULL)
@@ -105,7 +105,7 @@ static struct asym* uasm_ABI CreateExternal(struct asym* sym, const char* name, 
 /* create communal.
  * sym must be NULL or of state SYM_UNDEFINED!
  */
-static struct asym* uasm_ABI CreateComm(struct asym* sym, const char* name)
+static struct asym* UASM_ABI CreateComm(struct asym* sym, const char* name)
 /******************************************************************/
 {
     if (sym == NULL)
@@ -129,7 +129,7 @@ static struct asym* uasm_ABI CreateComm(struct asym* sym, const char* name)
  * used by PROTO, EXTERNDEF and EXT[E]RN directives.
  */
 
-static struct asym* uasm_ABI CreateProto(int i, struct asm_tok tokenarray[], const char* name, enum lang_type langtype)
+static struct asym* UASM_ABI CreateProto(int i, struct asm_tok tokenarray[], const char* name, enum lang_type langtype)
 /**************************************************************************************************************/
 {
     struct asym* sym;
@@ -194,7 +194,7 @@ static struct asym* uasm_ABI CreateProto(int i, struct asm_tok tokenarray[], con
 
 /* externdef [ attr ] symbol:type [, symbol:type,...] */
 
-ret_code uasm_ABI ExterndefDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI ExterndefDirective(int i, struct asm_tok tokenarray[])
 /***************************************************************/
 {
     char*               token;
@@ -416,7 +416,7 @@ ret_code uasm_ABI ExterndefDirective(int i, struct asm_tok tokenarray[])
  * EXTERNDEF <name>: PROTO <params>
  */
 
-ret_code uasm_ABI ProtoDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI ProtoDirective(int i, struct asm_tok tokenarray[])
 /***********************************************************/
 {
     if (Parse_Pass != PASS_1)
@@ -440,7 +440,7 @@ ret_code uasm_ABI ProtoDirective(int i, struct asm_tok tokenarray[])
  * sym must be NULL or of state SYM_UNDEFINED!
  */
 
-struct asym* uasm_ABI MakeExtern(const char* name, enum memtype mem_type, struct asym* vartype, struct asym* sym, uint_8 Ofssize)
+struct asym* UASM_ABI MakeExtern(const char* name, enum memtype mem_type, struct asym* vartype, struct asym* sym, uint_8 Ofssize)
     /************************************************************************************************************************/
 {
     sym = CreateExternal(sym, name, FALSE);
@@ -463,7 +463,7 @@ struct asym* uasm_ABI MakeExtern(const char* name, enum memtype mem_type, struct
 /* handle optional alternate names in EXTERN directive
  */
 
-static ret_code uasm_ABI HandleAltname(char* altname, struct asym* sym)
+static ret_code UASM_ABI HandleAltname(char* altname, struct asym* sym)
 /**************************************************************/
 {
     struct asym* symalt;
@@ -552,7 +552,7 @@ static ret_code uasm_ABI HandleAltname(char* altname, struct asym* sym)
 
 /* syntax: EXT[E]RN [lang_type] name (altname) :type [, ...] */
 
-ret_code uasm_ABI ExternDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI ExternDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
     char*                   token;
@@ -753,7 +753,7 @@ ret_code uasm_ABI ExternDirective(int i, struct asm_tok tokenarray[])
 
 /* helper for COMM directive */
 
-static struct asym* uasm_ABI MakeComm(char* name, struct asym* sym, uint_32 size, uint_32 count, bool isfar)
+static struct asym* UASM_ABI MakeComm(char* name, struct asym* sym, uint_32 size, uint_32 count, bool isfar)
 /***************************************************************************************************/
 {
     sym = CreateComm(sym, name);
@@ -786,7 +786,7 @@ static struct asym* uasm_ABI MakeComm(char* name, struct asym* sym, uint_32 size
  * the size & count values must NOT be forward references!
  */
 
-ret_code uasm_ABI CommDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI CommDirective(int i, struct asm_tok tokenarray[])
 /**********************************************************/
 {
     char*           token;
@@ -925,7 +925,7 @@ ret_code uasm_ABI CommDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-void uasm_ABI AddPublicData(struct asym* sym)
+void UASM_ABI AddPublicData(struct asym* sym)
 /************************************/
 {
     DebugMsg1(("AddPublicData(%s)\n", sym->name));
@@ -967,7 +967,7 @@ struct asym* GetPublicSymbols(void** vp)
 
 #endif
 
-void uasm_ABI FreePubQueue(void)
+void UASM_ABI FreePubQueue(void)
 /***********************/
 {
 #if FASTMEM==0
@@ -984,7 +984,7 @@ void uasm_ABI FreePubQueue(void)
 
 /* syntax: PUBLIC [lang_type] name [, ...] */
 
-ret_code uasm_ABI PublicDirective(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI PublicDirective(int i, struct asm_tok tokenarray[])
 /************************************************************/
 {
 #if MANGLERSUPP
@@ -1103,4 +1103,4 @@ ret_code uasm_ABI PublicDirective(int i, struct asm_tok tokenarray[])
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

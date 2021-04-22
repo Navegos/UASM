@@ -17,13 +17,13 @@
 
 #define USESTRTOF 0 /* 0=use strtod() and convert "manually", 1=use strtof() */
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI myatoi128(const char*, uint_64[], int, int);
+extern void UASM_ABI myatoi128(const char*, uint_64[], int, int);
 
 /* it's ensured that 'out' points to a buffer with a size of at least 16 */
 
-void uasm_ABI atofloat(void* out, const char* inp, unsigned size, bool negative, uint_8 ftype)
+void UASM_ABI atofloat(void* out, const char* inp, unsigned size, bool negative, uint_8 ftype)
 /*************************************************************************************/
 {
     //const char *inp;
@@ -108,4 +108,4 @@ void uasm_ABI atofloat(void* out, const char* inp, unsigned size, bool negative,
     return;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

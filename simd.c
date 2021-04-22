@@ -10,13 +10,13 @@ and their sub-types
 #include "globals.h"
 #include "symbols.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern void uasm_ABI      AddLineQueue(const char* line);
-extern void uasm_ABI      AddLineQueueX(const char* fmt, ...);
-extern void uasm_ABI      RunLineQueue(void);
+extern void UASM_ABI      AddLineQueue(const char* line);
+extern void UASM_ABI      AddLineQueueX(const char* fmt, ...);
+extern void UASM_ABI      RunLineQueue(void);
 
-void uasm_ABI AddSimdTypes()
+void UASM_ABI AddSimdTypes()
 {
     struct asym* sym = 0;
 
@@ -356,4 +356,4 @@ void uasm_ABI AddSimdTypes()
     RunLineQueue();
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

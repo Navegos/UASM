@@ -36,7 +36,7 @@
 
 #include "parser.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* v2.11: EXPR_UNDEF changed to EXPR_ERROR, value -1 */
 
@@ -143,10 +143,10 @@ enum expr_flags {
     EXPF_IN_SQBR = 8   /* private flag, used inside expreval.c only */
 };
 
-extern ret_code uasm_ABI     EvalOperand(int*, struct asm_tok[], int, struct expr*, uint_8);
-extern void uasm_ABI         ExprEvalInit(void);
-extern ret_code uasm_ABI     EmitConstError(const struct expr*);
+extern ret_code UASM_ABI     EvalOperand(int*, struct asm_tok[], int, struct expr*, uint_8);
+extern void UASM_ABI         ExprEvalInit(void);
+extern ret_code UASM_ABI     EmitConstError(const struct expr*);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

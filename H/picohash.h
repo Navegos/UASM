@@ -39,7 +39,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 typedef struct {
     uint_fast32_t lo, hi;
@@ -48,9 +48,9 @@ typedef struct {
     uint_fast32_t block[PICOHASH_MD5_DIGEST_LENGTH];
 } _picohash_md5_ctx_t;
 
-static void uasm_ABI _picohash_md5_init(_picohash_md5_ctx_t* ctx);
-static void uasm_ABI _picohash_md5_update(_picohash_md5_ctx_t* ctx, const void* data, size_t size);
-static void uasm_ABI _picohash_md5_final(_picohash_md5_ctx_t* ctx, void* digest);
+static void UASM_ABI _picohash_md5_init(_picohash_md5_ctx_t* ctx);
+static void UASM_ABI _picohash_md5_update(_picohash_md5_ctx_t* ctx, const void* data, size_t size);
+static void UASM_ABI _picohash_md5_final(_picohash_md5_ctx_t* ctx, void* digest);
 
 #define PICOHASH_SHA1_BLOCK_LENGTH 64
 #define PICOHASH_SHA1_DIGEST_LENGTH 20
@@ -62,9 +62,9 @@ typedef struct {
     uint8_t bufferOffset;
 } _picohash_sha1_ctx_t;
 
-static void uasm_ABI _picohash_sha1_init(_picohash_sha1_ctx_t* ctx);
-static void uasm_ABI _picohash_sha1_update(_picohash_sha1_ctx_t* ctx, const void* input, size_t len);
-static void uasm_ABI _picohash_sha1_final(_picohash_sha1_ctx_t* ctx, void* digest);
+static void UASM_ABI _picohash_sha1_init(_picohash_sha1_ctx_t* ctx);
+static void UASM_ABI _picohash_sha1_update(_picohash_sha1_ctx_t* ctx, const void* input, size_t len);
+static void UASM_ABI _picohash_sha1_final(_picohash_sha1_ctx_t* ctx, void* digest);
 
 #define PICOHASH_SHA256_BLOCK_LENGTH 64
 #define PICOHASH_SHA256_DIGEST_LENGTH 32
@@ -78,11 +78,11 @@ typedef struct {
     unsigned char buf[PICOHASH_SHA256_BLOCK_LENGTH];
 } _picohash_sha256_ctx_t;
 
-static void uasm_ABI _picohash_sha256_init(_picohash_sha256_ctx_t* ctx);
-static void uasm_ABI _picohash_sha256_update(_picohash_sha256_ctx_t* ctx, const void* data, size_t len);
-static void uasm_ABI _picohash_sha256_final(_picohash_sha256_ctx_t* ctx, void* digest);
-static void uasm_ABI _picohash_sha224_init(_picohash_sha256_ctx_t* ctx);
-static void uasm_ABI _picohash_sha224_final(_picohash_sha256_ctx_t* ctx, void* digest);
+static void UASM_ABI _picohash_sha256_init(_picohash_sha256_ctx_t* ctx);
+static void UASM_ABI _picohash_sha256_update(_picohash_sha256_ctx_t* ctx, const void* data, size_t len);
+static void UASM_ABI _picohash_sha256_final(_picohash_sha256_ctx_t* ctx, void* digest);
+static void UASM_ABI _picohash_sha224_init(_picohash_sha256_ctx_t* ctx);
+static void UASM_ABI _picohash_sha224_final(_picohash_sha256_ctx_t* ctx, void* digest);
 
 #define PICOHASH_MAX_BLOCK_LENGTH 64
 #define PICOHASH_MAX_DIGEST_LENGTH 32
@@ -95,25 +95,25 @@ typedef struct {
     };
     size_t block_length;
     size_t digest_length;
-    void (uasm_ABI *_reset)(void* ctx);
-    void (uasm_ABI *_update)(void* ctx, const void* input, size_t len);
-    void (uasm_ABI *_final)(void* ctx, void* digest);
+    void (UASM_ABI *_reset)(void* ctx);
+    void (UASM_ABI *_update)(void* ctx, const void* input, size_t len);
+    void (UASM_ABI *_final)(void* ctx, void* digest);
     struct {
         unsigned char key[PICOHASH_MAX_BLOCK_LENGTH];
-        void (uasm_ABI *hash_reset)(void* ctx);
-        void (uasm_ABI *hash_final)(void* ctx, void* digest);
+        void (UASM_ABI *hash_reset)(void* ctx);
+        void (UASM_ABI *hash_final)(void* ctx, void* digest);
     } _hmac;
 } picohash_ctx_t;
 
-static void uasm_ABI picohash_init_md5(picohash_ctx_t* ctx);
-static void uasm_ABI picohash_init_sha1(picohash_ctx_t* ctx);
-static void uasm_ABI picohash_init_sha224(picohash_ctx_t* ctx);
-static void uasm_ABI picohash_init_sha256(picohash_ctx_t* ctx);
-static void uasm_ABI picohash_update(picohash_ctx_t* ctx, const void* input, size_t len);
-static void uasm_ABI picohash_final(picohash_ctx_t* ctx, void* digest);
-static void uasm_ABI picohash_reset(picohash_ctx_t* ctx);
+static void UASM_ABI picohash_init_md5(picohash_ctx_t* ctx);
+static void UASM_ABI picohash_init_sha1(picohash_ctx_t* ctx);
+static void UASM_ABI picohash_init_sha224(picohash_ctx_t* ctx);
+static void UASM_ABI picohash_init_sha256(picohash_ctx_t* ctx);
+static void UASM_ABI picohash_update(picohash_ctx_t* ctx, const void* input, size_t len);
+static void UASM_ABI picohash_final(picohash_ctx_t* ctx, void* digest);
+static void UASM_ABI picohash_reset(picohash_ctx_t* ctx);
 
-static void uasm_ABI picohash_init_hmac(picohash_ctx_t* ctx, void (uasm_ABI *initf)(picohash_ctx_t*), const void* key, size_t key_len);
+static void UASM_ABI picohash_init_hmac(picohash_ctx_t* ctx, void (UASM_ABI *initf)(picohash_ctx_t*), const void* key, size_t key_len);
 
 /* following are private definitions */
 
@@ -158,7 +158,7 @@ static void uasm_ABI picohash_init_hmac(picohash_ctx_t* ctx, void (uasm_ABI *ini
     * This processes one or more 64-byte data blocks, but does NOT update
     * the bit counters.  There're no alignment requirements.
     */
-static const void* uasm_ABI _picohash_md5_body(_picohash_md5_ctx_t* ctx, const void* data, size_t size)
+static const void* UASM_ABI _picohash_md5_body(_picohash_md5_ctx_t* ctx, const void* data, size_t size)
 {
     unsigned char* ptr;
     uint_fast32_t a, b, c, d;
@@ -265,7 +265,7 @@ static const void* uasm_ABI _picohash_md5_body(_picohash_md5_ctx_t* ctx, const v
     return ptr;
 }
 
-inline void uasm_ABI _picohash_md5_init(_picohash_md5_ctx_t* ctx)
+inline void UASM_ABI _picohash_md5_init(_picohash_md5_ctx_t* ctx)
 {
     ctx->a = 0x67452301;
     ctx->b = 0xefcdab89;
@@ -276,7 +276,7 @@ inline void uasm_ABI _picohash_md5_init(_picohash_md5_ctx_t* ctx)
     ctx->hi = 0;
 }
 
-inline void uasm_ABI _picohash_md5_update(_picohash_md5_ctx_t* ctx, const void* data, size_t size)
+inline void UASM_ABI _picohash_md5_update(_picohash_md5_ctx_t* ctx, const void* data, size_t size)
 {
     uint_fast32_t saved_lo;
     unsigned long used, free;
@@ -310,7 +310,7 @@ inline void uasm_ABI _picohash_md5_update(_picohash_md5_ctx_t* ctx, const void* 
     memcpy(ctx->buffer, data, size);
 }
 
-inline void uasm_ABI _picohash_md5_final(_picohash_md5_ctx_t* ctx, void* _digest)
+inline void UASM_ABI _picohash_md5_final(_picohash_md5_ctx_t* ctx, void* _digest)
 {
     unsigned char* digest = _digest;
     unsigned long used, free;
@@ -367,12 +367,12 @@ inline void uasm_ABI _picohash_md5_final(_picohash_md5_ctx_t* ctx, void* _digest
 #define _PICOHASH_SHA1_K40 0x8f1bbcdc
 #define _PICOHASH_SHA1_K60 0xca62c1d6
 
-static inline uint32_t uasm_ABI _picohash_sha1_rol32(uint32_t number, uint8_t bits)
+static inline uint32_t UASM_ABI _picohash_sha1_rol32(uint32_t number, uint8_t bits)
 {
     return ((number << bits) | (number >> (32 - bits)));
 }
 
-static inline void uasm_ABI _picohash_sha1_hash_block(_picohash_sha1_ctx_t* s)
+static inline void UASM_ABI _picohash_sha1_hash_block(_picohash_sha1_ctx_t* s)
 {
     uint8_t i;
     uint32_t a, b, c, d, e, t;
@@ -413,7 +413,7 @@ static inline void uasm_ABI _picohash_sha1_hash_block(_picohash_sha1_ctx_t* s)
     s->state[4] += e;
 }
 
-static inline void uasm_ABI _picohash_sha1_add_uncounted(_picohash_sha1_ctx_t* s, uint8_t data)
+static inline void UASM_ABI _picohash_sha1_add_uncounted(_picohash_sha1_ctx_t* s, uint8_t data)
 {
     uint8_t* const b = (uint8_t*)s->buffer;
 #ifdef _PICOHASH_BIG_ENDIAN
@@ -428,7 +428,7 @@ static inline void uasm_ABI _picohash_sha1_add_uncounted(_picohash_sha1_ctx_t* s
     }
 }
 
-inline void uasm_ABI _picohash_sha1_init(_picohash_sha1_ctx_t* s)
+inline void UASM_ABI _picohash_sha1_init(_picohash_sha1_ctx_t* s)
 {
     s->state[0] = 0x67452301;
     s->state[1] = 0xefcdab89;
@@ -439,7 +439,7 @@ inline void uasm_ABI _picohash_sha1_init(_picohash_sha1_ctx_t* s)
     s->bufferOffset = 0;
 }
 
-inline void uasm_ABI _picohash_sha1_update(_picohash_sha1_ctx_t* s, const void* _data, size_t len)
+inline void UASM_ABI _picohash_sha1_update(_picohash_sha1_ctx_t* s, const void* _data, size_t len)
 {
     const uint8_t* data = _data;
     for (; len != 0; --len) {
@@ -448,7 +448,7 @@ inline void uasm_ABI _picohash_sha1_update(_picohash_sha1_ctx_t* s, const void* 
     }
 }
 
-inline void uasm_ABI _picohash_sha1_final(_picohash_sha1_ctx_t* s, void* digest)
+inline void UASM_ABI _picohash_sha1_final(_picohash_sha1_ctx_t* s, void* digest)
 {
     // Pad with 0x80 followed by 0x00 until the end of the block
     _picohash_sha1_add_uncounted(s, 0x80);
@@ -493,7 +493,7 @@ inline void uasm_ABI _picohash_sha1_final(_picohash_sha1_ctx_t* s, void* digest)
     d += t0;                                                                                                                       \
     h = t0 + t1;
 
-static inline void uasm_ABI _picohash_sha256_compress(_picohash_sha256_ctx_t* ctx, unsigned char* buf)
+static inline void UASM_ABI _picohash_sha256_compress(_picohash_sha256_ctx_t* ctx, unsigned char* buf)
 {
     static const uint32_t K[64] = {
         0x428a2f98UL, 0x71374491UL, 0xb5c0fbcfUL, 0xe9b5dba5UL, 0x3956c25bUL, 0x59f111f1UL, 0x923f82a4UL, 0xab1c5ed5UL,
@@ -539,7 +539,7 @@ static inline void uasm_ABI _picohash_sha256_compress(_picohash_sha256_ctx_t* ct
         ctx->state[i] = ctx->state[i] + S[i];
 }
 
-static inline void uasm_ABI _picohash_sha256_do_final(_picohash_sha256_ctx_t* ctx, void* digest, size_t len)
+static inline void UASM_ABI _picohash_sha256_do_final(_picohash_sha256_ctx_t* ctx, void* digest, size_t len)
 {
     unsigned char* out = digest;
     size_t i;
@@ -581,7 +581,7 @@ static inline void uasm_ABI _picohash_sha256_do_final(_picohash_sha256_ctx_t* ct
     }
 }
 
-inline void uasm_ABI _picohash_sha256_init(_picohash_sha256_ctx_t* ctx)
+inline void UASM_ABI _picohash_sha256_init(_picohash_sha256_ctx_t* ctx)
 {
     ctx->curlen = 0;
     ctx->length = 0;
@@ -595,7 +595,7 @@ inline void uasm_ABI _picohash_sha256_init(_picohash_sha256_ctx_t* ctx)
     ctx->state[7] = 0x5BE0CD19UL;
 }
 
-inline void uasm_ABI _picohash_sha256_update(_picohash_sha256_ctx_t* ctx, const void* data, size_t len)
+inline void UASM_ABI _picohash_sha256_update(_picohash_sha256_ctx_t* ctx, const void* data, size_t len)
 {
     unsigned char* in = data;
     size_t n;
@@ -624,12 +624,12 @@ inline void uasm_ABI _picohash_sha256_update(_picohash_sha256_ctx_t* ctx, const 
     }
 }
 
-inline void uasm_ABI _picohash_sha256_final(_picohash_sha256_ctx_t* ctx, void* digest)
+inline void UASM_ABI _picohash_sha256_final(_picohash_sha256_ctx_t* ctx, void* digest)
 {
     _picohash_sha256_do_final(ctx, digest, PICOHASH_SHA256_DIGEST_LENGTH);
 }
 
-inline void uasm_ABI _picohash_sha224_init(_picohash_sha256_ctx_t* ctx)
+inline void UASM_ABI _picohash_sha224_init(_picohash_sha256_ctx_t* ctx)
 {
     ctx->curlen = 0;
     ctx->length = 0;
@@ -643,12 +643,12 @@ inline void uasm_ABI _picohash_sha224_init(_picohash_sha256_ctx_t* ctx)
     ctx->state[7] = 0xbefa4fa4UL;
 }
 
-inline void uasm_ABI _picohash_sha224_final(_picohash_sha256_ctx_t* ctx, void* digest)
+inline void UASM_ABI _picohash_sha224_final(_picohash_sha256_ctx_t* ctx, void* digest)
 {
     _picohash_sha256_do_final(ctx, digest, PICOHASH_SHA224_DIGEST_LENGTH);
 }
 
-inline void uasm_ABI picohash_init_md5(picohash_ctx_t* ctx)
+inline void UASM_ABI picohash_init_md5(picohash_ctx_t* ctx)
 {
     ctx->block_length = PICOHASH_MD5_BLOCK_LENGTH;
     ctx->digest_length = PICOHASH_MD5_DIGEST_LENGTH;
@@ -659,7 +659,7 @@ inline void uasm_ABI picohash_init_md5(picohash_ctx_t* ctx)
     _picohash_md5_init(&ctx->_md5);
 }
 
-inline void uasm_ABI picohash_init_sha1(picohash_ctx_t* ctx)
+inline void UASM_ABI picohash_init_sha1(picohash_ctx_t* ctx)
 {
     ctx->block_length = PICOHASH_SHA1_BLOCK_LENGTH;
     ctx->digest_length = PICOHASH_SHA1_DIGEST_LENGTH;
@@ -669,7 +669,7 @@ inline void uasm_ABI picohash_init_sha1(picohash_ctx_t* ctx)
     _picohash_sha1_init(&ctx->_sha1);
 }
 
-inline void uasm_ABI picohash_init_sha224(picohash_ctx_t* ctx)
+inline void UASM_ABI picohash_init_sha224(picohash_ctx_t* ctx)
 {
     ctx->block_length = PICOHASH_SHA224_BLOCK_LENGTH;
     ctx->digest_length = PICOHASH_SHA224_DIGEST_LENGTH;
@@ -679,7 +679,7 @@ inline void uasm_ABI picohash_init_sha224(picohash_ctx_t* ctx)
     _picohash_sha224_init(&ctx->_sha256);
 }
 
-inline void uasm_ABI picohash_init_sha256(picohash_ctx_t* ctx)
+inline void UASM_ABI picohash_init_sha256(picohash_ctx_t* ctx)
 {
     ctx->block_length = PICOHASH_SHA256_BLOCK_LENGTH;
     ctx->digest_length = PICOHASH_SHA256_DIGEST_LENGTH;
@@ -689,22 +689,22 @@ inline void uasm_ABI picohash_init_sha256(picohash_ctx_t* ctx)
     _picohash_sha256_init(&ctx->_sha256);
 }
 
-inline void uasm_ABI picohash_update(picohash_ctx_t* ctx, const void* input, size_t len)
+inline void UASM_ABI picohash_update(picohash_ctx_t* ctx, const void* input, size_t len)
 {
     ctx->_update(ctx, input, len);
 }
 
-inline void uasm_ABI picohash_final(picohash_ctx_t* ctx, void* digest)
+inline void UASM_ABI picohash_final(picohash_ctx_t* ctx, void* digest)
 {
     ctx->_final(ctx, digest);
 }
 
-inline void uasm_ABI picohash_reset(picohash_ctx_t* ctx)
+inline void UASM_ABI picohash_reset(picohash_ctx_t* ctx)
 {
     ctx->_reset(ctx);
 }
 
-static inline void uasm_ABI _picohash_hmac_apply_key(picohash_ctx_t* ctx, unsigned char delta)
+static inline void UASM_ABI _picohash_hmac_apply_key(picohash_ctx_t* ctx, unsigned char delta)
 {
     size_t i;
     for (i = 0; i != ctx->block_length; ++i)
@@ -714,7 +714,7 @@ static inline void uasm_ABI _picohash_hmac_apply_key(picohash_ctx_t* ctx, unsign
         ctx->_hmac.key[i] ^= delta;
 }
 
-static void uasm_ABI _picohash_hmac_final(picohash_ctx_t* ctx, void* digest)
+static void UASM_ABI _picohash_hmac_final(picohash_ctx_t* ctx, void* digest)
 {
     unsigned char inner_digest[PICOHASH_MAX_DIGEST_LENGTH];
 
@@ -728,13 +728,13 @@ static void uasm_ABI _picohash_hmac_final(picohash_ctx_t* ctx, void* digest)
     ctx->_hmac.hash_final(ctx, digest);
 }
 
-static inline void uasm_ABI _picohash_hmac_reset(picohash_ctx_t* ctx)
+static inline void UASM_ABI _picohash_hmac_reset(picohash_ctx_t* ctx)
 {
     ctx->_hmac.hash_reset(ctx);
     _picohash_hmac_apply_key(ctx, 0x36);
 }
 
-inline void uasm_ABI picohash_init_hmac(picohash_ctx_t* ctx, void (uasm_ABI *initf)(picohash_ctx_t*), const void* key, size_t key_len)
+inline void UASM_ABI picohash_init_hmac(picohash_ctx_t* ctx, void (UASM_ABI *initf)(picohash_ctx_t*), const void* key, size_t key_len)
 {
     initf(ctx);
 
@@ -759,6 +759,6 @@ inline void uasm_ABI picohash_init_hmac(picohash_ctx_t* ctx, void (uasm_ABI *ini
     _picohash_hmac_apply_key(ctx, 0x36);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

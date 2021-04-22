@@ -50,9 +50,9 @@
 #define SkipFixup()
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-static void uasm_ABI DoPatch(struct asym* sym, struct fixup* fixup)
+static void UASM_ABI DoPatch(struct asym* sym, struct fixup* fixup)
 /**********************************************************/
 {
     int_32              disp;
@@ -254,7 +254,7 @@ static void uasm_ABI DoPatch(struct asym* sym, struct fixup* fixup)
     return;
 }
 
-ret_code uasm_ABI BackPatch(struct asym* sym)
+ret_code UASM_ABI BackPatch(struct asym* sym)
 /************************************/
 /*
  * patching for forward reference labels in Jmp/Call instructions;
@@ -292,4 +292,4 @@ ret_code uasm_ABI BackPatch(struct asym* sym)
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

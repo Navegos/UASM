@@ -8,7 +8,7 @@
 #include "globals.h"
 #include "expreval.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* This order must remain as-is! */
 enum instr_group {
@@ -379,33 +379,33 @@ struct Instr_Def {
 extern struct Instr_Def InstrTableV2[];
 
 /* Public functions */
-extern void uasm_ABI     BuildInstructionTable(void);
-extern ret_code uasm_ABI CodeGenV2(const char* instr, struct code_info* CodeInfo, uint_32 oldofs, uint_32 opCount, struct expr opExpr[4]);
+extern void UASM_ABI     BuildInstructionTable(void);
+extern ret_code UASM_ABI CodeGenV2(const char* instr, struct code_info* CodeInfo, uint_32 oldofs, uint_32 opCount, struct expr opExpr[4]);
 
 /* Private functions */
-enum op_type uasm_ABI      DemoteOperand(enum op_type op);
-void uasm_ABI              InsertInstruction(struct Instr_Def* pInstruction, uint_32 hash);
-struct Instr_Def* uasm_ABI AllocInstruction();
-uint_32 uasm_ABI           GenerateInstrHash(struct Instr_Def* pInstruction);
-struct Instr_Def* uasm_ABI LookupInstruction(struct Instr_Def* instr, bool memReg, unsigned char encodeMode, int srcRegNo, int dstRegNo, struct code_info* CodeInfo);
-enum op_type uasm_ABI      MatchOperand(struct code_info* CodeInfo, struct opnd_item op, struct expr opExpr);
+enum op_type UASM_ABI      DemoteOperand(enum op_type op);
+void UASM_ABI              InsertInstruction(struct Instr_Def* pInstruction, uint_32 hash);
+struct Instr_Def* UASM_ABI AllocInstruction();
+uint_32 UASM_ABI           GenerateInstrHash(struct Instr_Def* pInstruction);
+struct Instr_Def* UASM_ABI LookupInstruction(struct Instr_Def* instr, bool memReg, unsigned char encodeMode, int srcRegNo, int dstRegNo, struct code_info* CodeInfo);
+enum op_type UASM_ABI      MatchOperand(struct code_info* CodeInfo, struct opnd_item op, struct expr opExpr);
 
-bool uasm_ABI Require_OPND_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo);
-bool uasm_ABI Require_ADDR_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo);
-bool uasm_ABI IsValidInCPUMode(struct Instr_Def* instr);
+bool UASM_ABI Require_OPND_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo);
+bool UASM_ABI Require_ADDR_Size_Override(struct Instr_Def* instr, struct code_info* CodeInfo);
+bool UASM_ABI IsValidInCPUMode(struct Instr_Def* instr);
 
-unsigned char uasm_ABI BuildModRM(unsigned char modRM, struct Instr_Def* instr, struct expr opnd[4], bool* needRM, bool* needSIB, bool isVEX); /* Build instruction ModRM byte */
-unsigned char uasm_ABI BuildREX(unsigned char RexByte, struct Instr_Def* instr, struct expr opnd[4]); /* Build REX prefix byte        */
-void uasm_ABI          BuildVEX(bool* needVex, unsigned char* vexSize, unsigned char* vexBytes, struct Instr_Def* instr,
+unsigned char UASM_ABI BuildModRM(unsigned char modRM, struct Instr_Def* instr, struct expr opnd[4], bool* needRM, bool* needSIB, bool isVEX); /* Build instruction ModRM byte */
+unsigned char UASM_ABI BuildREX(unsigned char RexByte, struct Instr_Def* instr, struct expr opnd[4]); /* Build REX prefix byte        */
+void UASM_ABI          BuildVEX(bool* needVex, unsigned char* vexSize, unsigned char* vexBytes, struct Instr_Def* instr,
                                 struct expr opnd[4], bool needB, bool needX, uint_32 opCount);				/* Build VEX prefix bytes       */
-void uasm_ABI          BuildEVEX(bool* needEvex, unsigned char* evexBytes, struct Instr_Def* instr, struct expr opnd[4],
+void UASM_ABI          BuildEVEX(bool* needEvex, unsigned char* evexBytes, struct Instr_Def* instr, struct expr opnd[4],
                                  bool needB, bool needX, bool needRR, uint_32 opCount, struct code_info* CodeInfo);					/* Build EVEX prefix bytes      */
-int uasm_ABI           BuildMemoryEncoding(unsigned char* pmodRM, unsigned char* pSIB, unsigned char* pREX, bool* needRM, bool* needSIB,
+int UASM_ABI           BuildMemoryEncoding(unsigned char* pmodRM, unsigned char* pSIB, unsigned char* pREX, bool* needRM, bool* needSIB,
                                   unsigned int* dispSize, uint_64* pDisp, struct Instr_Def* instr,
                                   struct expr opExpr[4], bool* needB, bool* needX, 
                                   bool* needRR, struct code_info *CodeInfo);											    /* Build Memory encoding ModRM/SIB bytes   */
-unsigned char uasm_ABI GetRegisterNo(struct asm_tok* regTok); /* Get Register Encoding Number from Token */
+unsigned char UASM_ABI GetRegisterNo(struct asm_tok* regTok); /* Get Register Encoding Number from Token */
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif // _CODEGENV2_H_INCLUDED

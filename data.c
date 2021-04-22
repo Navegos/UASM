@@ -82,21 +82,21 @@ typedef int64_t __int64;
 #endif
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern ret_code uasm_ABI segm_override(const struct expr*, struct code_info*);
+extern ret_code UASM_ABI segm_override(const struct expr*, struct code_info*);
 extern struct asym* SegOverride;
 extern const char szNull[];
-extern UINT_PTR uasm_ABI UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax);
-static ret_code uasm_ABI data_item(int*, struct asm_tok[], struct asym*, uint_32, const struct asym*, uint_32, bool inside_struct, bool, bool, int);
-extern void uasm_ABI OutputInterleavedBytes(const unsigned char* pbytes, int len, struct fixup* fixup);
-extern void uasm_ABI OutputBytes(const unsigned char* pbytes, int len, struct fixup* fixup);
+extern UINT_PTR UASM_ABI UTF8toWideChar(const unsigned char* pSource, UINT_PTR nSourceLen, UINT_PTR* nSourceDone, unsigned short* szTarget, UINT_PTR nTargetMax);
+static ret_code UASM_ABI data_item(int*, struct asm_tok[], struct asym*, uint_32, const struct asym*, uint_32, bool inside_struct, bool, bool, int);
+extern void UASM_ABI OutputInterleavedBytes(const unsigned char* pbytes, int len, struct fixup* fixup);
+extern void UASM_ABI OutputBytes(const unsigned char* pbytes, int len, struct fixup* fixup);
 
 #define OutputDataBytes( x, y ) OutputBytes( x, y, NULL )
 #define OutputInterleavedDataBytes( x, y ) OutputInterleavedBytes( x, y, NULL );
 
 /* This function shifts left 128 for the RECORD */
-void uasm_ABI ShiftLeft(uint_64* dstHi, uint_64* dstLo, uint_64 num, int pos)
+void UASM_ABI ShiftLeft(uint_64* dstHi, uint_64* dstLo, uint_64 num, int pos)
 {
     uint_64 orHi = 0;
     uint_64 orLo = num;
@@ -126,7 +126,7 @@ void uasm_ABI ShiftLeft(uint_64* dstHi, uint_64* dstLo, uint_64 num, int pos)
  * - a literal enclosed in <> or {} which then is supposed to contain
  *   single items.
  */
-static ret_code uasm_ABI InitializeArray(const struct sfield* f, int* pi, struct asm_tok tokenarray[])
+static ret_code UASM_ABI InitializeArray(const struct sfield* f, int* pi, struct asm_tok tokenarray[])
 /*********************************************************************************************/
 {
     uint_32 oldofs;
@@ -252,7 +252,7 @@ static ret_code uasm_ABI InitializeArray(const struct sfield* f, int* pi, struct
  * Since this function may be reentered, it's necessary to save/restore
  * global variable Token_Count.
  */
-static ret_code uasm_ABI InitStructuredVar(int index, struct asm_tok tokenarray[], const struct dsym* symtype, struct asym* embedded)
+static ret_code UASM_ABI InitStructuredVar(int index, struct asm_tok tokenarray[], const struct dsym* symtype, struct asym* embedded)
 /****************************************************************************************************************************/
 {
     //char            *ptr;
@@ -525,7 +525,7 @@ static ret_code uasm_ABI InitStructuredVar(int index, struct asm_tok tokenarray[
  * convert a string into little endian format - ( LSB 1st, LSW 1st ... etc ).
  * <len> is the TYPE, may be 2,4,6,8,10?,16
  */
-static char* uasm_ABI little_endian(const char* src, unsigned len)
+static char* UASM_ABI little_endian(const char* src, unsigned len)
 /*********************************************************/
 {
     /* v2.06: input and output buffer must be different! */
@@ -543,7 +543,7 @@ static char* uasm_ABI little_endian(const char* src, unsigned len)
     return(StringBufferEnd);
 }
 
-static void uasm_ABI output_float(const struct expr* opnd, unsigned size)
+static void UASM_ABI output_float(const struct expr* opnd, unsigned size)
 /****************************************************************/
 {
     /* v2.07: buffer extended to max size of a data item (=32).
@@ -602,7 +602,7 @@ static void uasm_ABI output_float(const struct expr* opnd, unsigned size)
  * 3. item size is 1 and a quoted string with len > 1 is used as initializer
  */
 
-static ret_code uasm_ABI data_item(int* start_pos, struct asm_tok tokenarray[], struct asym* sym, uint_32 no_of_bytes, const struct asym* type_sym, uint_32 dup, bool inside_struct, bool is_float, bool first, int end)
+static ret_code UASM_ABI data_item(int* start_pos, struct asm_tok tokenarray[], struct asym* sym, uint_32 no_of_bytes, const struct asym* type_sym, uint_32 dup, bool inside_struct, bool is_float, bool first, int end)
 /***************************************************************************************************************************************************************************************************************/
 {
     int                 i;
@@ -1400,7 +1400,7 @@ static ret_code uasm_ABI data_item(int* start_pos, struct asm_tok tokenarray[], 
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI checktypes(const struct asym* sym, enum memtype mem_type, const struct asym* type_sym)
+static ret_code UASM_ABI checktypes(const struct asym* sym, enum memtype mem_type, const struct asym* type_sym)
 /******************************************************************************************************/
 {
     /* for EXTERNDEF, check type changes */
@@ -1440,7 +1440,7 @@ static ret_code uasm_ABI checktypes(const struct asym* sym, enum memtype mem_typ
  * type_sym: userdef type or NULL
  */
 
-ret_code uasm_ABI data_dir(int i, struct asm_tok tokenarray[], struct asym* type_sym)
+ret_code UASM_ABI data_dir(int i, struct asm_tok tokenarray[], struct asym* type_sym)
 /****************************************************************************/
 {
     uint_32             no_of_bytes;
@@ -1758,4 +1758,4 @@ ret_code uasm_ABI data_dir(int i, struct asm_tok tokenarray[], struct asym* type
     return(NOT_ERROR);
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

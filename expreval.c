@@ -67,7 +67,7 @@
 #define ERRLOC( i )
 #endif
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 #if STACKBASESUPP==0
 extern enum special_token basereg[];
@@ -78,16 +78,16 @@ bool gmaskflag;
 #ifdef DEBUG_OUT
 static int evallvl = 0;
 #endif
-extern uint_32 uasm_ABI     GetCurrOffset(void);
-extern void uasm_ABI        ShiftLeft(uint_64* dstHi, uint_64* dstLo, uint_64 num, int pos);
+extern uint_32 UASM_ABI     GetCurrOffset(void);
+extern void UASM_ABI        ShiftLeft(uint_64* dstHi, uint_64* dstLo, uint_64 num, int pos);
 //extern ret_code data_item( int *, struct asm_tok[], struct asym *, uint_32, const struct asym *, uint_32, bool inside_struct, bool, bool, int );
-extern ret_code uasm_ABI    BackPatch(struct asym* sym);
+extern ret_code UASM_ABI    BackPatch(struct asym* sym);
 /* the following static variables should be moved to ModuleInfo. */
 static struct asym*         thissym; /* helper symbol for THIS operator */
 static struct asym*         nullstruct; /* used for T_DOT if second op is a forward ref */
 static struct asym*         nullmbr; /* used for T_DOT if "current" struct is a forward ref */
-static int (uasm_ABI        *fnEmitErr)(int, ...);
-static int uasm_ABI         noEmitErr(int msg, ...);
+static int (UASM_ABI        *fnEmitErr)(int, ...);
+static int UASM_ABI         noEmitErr(int msg, ...);
 
 /* code label type values - returned by SIZE and TYPE operators */
 enum labelsize
@@ -100,7 +100,7 @@ enum labelsize
     LS_FAR32 = 0xFF06,
 };
 
-static void uasm_ABI init_expr(struct expr* opnd)
+static void UASM_ABI init_expr(struct expr* opnd)
 /****************************************/
 {
     opnd->value = 0;
@@ -123,7 +123,7 @@ static void uasm_ABI init_expr(struct expr* opnd)
     opnd->isptr = FALSE;
 }
 
-static ret_code uasm_ABI GetMask128(struct expr* opnd1, int index, struct asm_tok tokenarray[])
+static ret_code UASM_ABI GetMask128(struct expr* opnd1, int index, struct asm_tok tokenarray[])
 {
     uint_64         dst128Hi = opnd1->hlvalue;
     uint_64         dst128Lo = opnd1->llvalue;
@@ -243,7 +243,7 @@ static ret_code uasm_ABI GetMask128(struct expr* opnd1, int index, struct asm_to
 *    mov     al, COLOR<1, 7, 0, 1>         ;1 111 0 001 = F1
 *    mov     cobalt.rc, COLOR<1, 7, 0, 1>  ;1 111 0 001 = F1
 */
-static ret_code uasm_ABI InitRecordVar(struct expr* opnd1, int index, struct asm_tok tokenarray[], const struct dsym* symtype)
+static ret_code UASM_ABI InitRecordVar(struct expr* opnd1, int index, struct asm_tok tokenarray[], const struct dsym* symtype)
 /****************************************************************************************************************************/
 {
     char*           ptr/*, * ptr2, * ptr3*/;
@@ -627,7 +627,7 @@ exit:
 //push   254
 //movq  xmm1, [esp]
 
-static void uasm_ABI TokenAssign(struct expr* opnd1, const struct expr* opnd2)
+static void UASM_ABI TokenAssign(struct expr* opnd1, const struct expr* opnd2)
 /*********************************************************************/
 {
 #if 1
@@ -659,7 +659,7 @@ static void uasm_ABI TokenAssign(struct expr* opnd1, const struct expr* opnd2)
 //#define PLUS_PRECEDENCE    9
 #define CMP_PRECEDENCE    10
 
-static int uasm_ABI get_precedence(const struct asm_tok* item)
+static int UASM_ABI get_precedence(const struct asm_tok* item)
 /*****************************************************/
 {
     /* The following table is taken verbatim from MASM 6.1 Programmer's Guide,
@@ -753,7 +753,7 @@ static int uasm_ABI get_precedence(const struct asm_tok* item)
 }
 
 #if 0
-static bool uasm_ABI is_operator(enum tok_type tt)
+static bool UASM_ABI is_operator(enum tok_type tt)
 /*****************************************/
 /* determine if token is an operator */
 {
@@ -764,7 +764,7 @@ static bool uasm_ABI is_operator(enum tok_type tt)
     return(tt >= T_OP_BRACKET || tt == T_UNARY_OPERATOR || tt == T_BINARY_OPERATOR);
 }
 
-static bool uasm_ABI is_unary_op(enum tok_type tt)
+static bool UASM_ABI is_unary_op(enum tok_type tt)
 /*****************************************/
 /* determine if token is an unary operator */
 {
@@ -780,7 +780,7 @@ static bool uasm_ABI is_unary_op(enum tok_type tt)
  * NEAR, FAR and PROC are handled slightly differently:
  * the HIBYTE is set to 0xFF, and PROC depends on the memory model
  */
-static unsigned int uasm_ABI GetTypeSize(enum memtype mem_type, int Ofssize)
+static unsigned int UASM_ABI GetTypeSize(enum memtype mem_type, int Ofssize)
 /*******************************************************************/
 {
     if ((mem_type & MT_SPECIAL) == 0)
@@ -804,9 +804,9 @@ static unsigned int uasm_ABI GetTypeSize(enum memtype mem_type, int Ofssize)
 }
 
 #if AMD64_SUPPORT
-static uint_64 uasm_ABI GetRecordMask(struct dsym* record)
+static uint_64 UASM_ABI GetRecordMask(struct dsym* record)
 #else
-static uint_32 uasm_ABI GetRecordMask(struct dsym* record)
+static uint_32 UASM_ABI GetRecordMask(struct dsym* record)
 #endif
 /*************************************************/
 {
@@ -838,7 +838,7 @@ static uint_32 uasm_ABI GetRecordMask(struct dsym* record)
  * generated code is run, the old strategy needed too much space.
  */
 
-void uasm_ABI myatoi128(const char* src, uint_64 dst[], int base, int size)
+void UASM_ABI myatoi128(const char* src, uint_64 dst[], int base, int size)
 /******************************************************************/
 {
     uint_32             val;
@@ -886,7 +886,7 @@ void uasm_ABI myatoi128(const char* src, uint_64 dst[], int base, int size)
  * - variable (internal, external, stack ) or constant (EQU, '=')
  * valid reserved IDs are types (BYTE, WORD, ... ) and FLAT
  */
-static ret_code uasm_ABI get_operand(struct expr* opnd, int* idx, struct asm_tok tokenarray[], const uint_8 flags)
+static ret_code UASM_ABI get_operand(struct expr* opnd, int* idx, struct asm_tok tokenarray[], const uint_8 flags)
 /*********************************************************************************************************/
 {
     char*           tmp;
@@ -1497,7 +1497,7 @@ static ret_code uasm_ABI get_operand(struct expr* opnd, int* idx, struct asm_tok
 }
 
 #if 0
-static bool uasm_ABI check_same(struct expr* opnd1, struct expr* opnd2, enum exprtype kind)
+static bool UASM_ABI check_same(struct expr* opnd1, struct expr* opnd2, enum exprtype kind)
 /**********************************************************************************/
 /* Check if both tok_1 and tok_2 equal type */
 {
@@ -1507,7 +1507,7 @@ static bool uasm_ABI check_same(struct expr* opnd1, struct expr* opnd2, enum exp
 #define check_same( first, second, KIND ) ( first->kind == KIND && second->kind == KIND )
 #endif
 
-static bool uasm_ABI check_both(const struct expr* opnd1, const struct expr* opnd2, enum exprtype type1, enum exprtype type2)
+static bool UASM_ABI check_both(const struct expr* opnd1, const struct expr* opnd2, enum exprtype type1, enum exprtype type2)
 /********************************************************************************************************************/
 /* Check if tok_1 == type1 and tok_2 == type2 or vice versa */
 {
@@ -1518,7 +1518,7 @@ static bool uasm_ABI check_both(const struct expr* opnd1, const struct expr* opn
     return(FALSE);
 }
 
-static ret_code uasm_ABI index_connect(struct expr* opnd1, const struct expr* opnd2)
+static ret_code UASM_ABI index_connect(struct expr* opnd1, const struct expr* opnd2)
 /***************************************************************************/
 /* Connects the register lists. called by plus_op() and dot_op() */
 {
@@ -1575,7 +1575,7 @@ static ret_code uasm_ABI index_connect(struct expr* opnd1, const struct expr* op
  * assume it is referencing a constant, not a label.
  */
 
-static void uasm_ABI MakeConst(struct expr* opnd)
+static void UASM_ABI MakeConst(struct expr* opnd)
 /****************************************/
 {
     if ((opnd->kind != EXPR_ADDR) || opnd->indirect) /* v2.09: check for indirect added */
@@ -1636,7 +1636,7 @@ static void uasm_ABI MakeConst(struct expr* opnd)
 /* used by EQ, NE, GT, GE, LE, LT if item is a direct address
  */
 
-static ret_code uasm_ABI MakeConst2(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI MakeConst2(struct expr* opnd1, struct expr* opnd2)
 /******************************************************************/
 {
     if (opnd1->sym->state == SYM_EXTERNAL)
@@ -1658,7 +1658,7 @@ static ret_code uasm_ABI MakeConst2(struct expr* opnd1, struct expr* opnd2)
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI ConstError(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI ConstError(struct expr* opnd1, struct expr* opnd2)
 /******************************************************************/
 {
     if (opnd1->is_opattr)
@@ -1672,7 +1672,7 @@ static ret_code uasm_ABI ConstError(struct expr* opnd1, struct expr* opnd2)
 
 /* used by + and - binary operators */
 
-static void uasm_ABI fix_struct_value(struct expr* opnd)
+static void UASM_ABI fix_struct_value(struct expr* opnd)
 /***********************************************/
 {
     if (opnd->mbr && (opnd->mbr->state == SYM_TYPE))
@@ -1682,7 +1682,7 @@ static void uasm_ABI fix_struct_value(struct expr* opnd)
     }
 }
 
-static int uasm_ABI check_direct_reg(const struct expr* opnd1, const struct expr* opnd2)
+static int UASM_ABI check_direct_reg(const struct expr* opnd1, const struct expr* opnd2)
 /*******************************************************************************/
 {
     if (((opnd1->kind == EXPR_REG) && (opnd1->indirect == FALSE))
@@ -1693,7 +1693,7 @@ static int uasm_ABI check_direct_reg(const struct expr* opnd1, const struct expr
     return(NOT_ERROR);
 }
 
-static unsigned uasm_ABI GetSizeValue(struct asym* sym)
+static unsigned UASM_ABI GetSizeValue(struct asym* sym)
 /**********************************************/
 {
     if (sym->mem_type == MT_PTR)
@@ -1701,7 +1701,7 @@ static unsigned uasm_ABI GetSizeValue(struct asym* sym)
     return(SizeFromMemtype(sym->mem_type, sym->Ofssize, sym->type));
 }
 
-static unsigned uasm_ABI IsOffset(struct expr* opnd)
+static unsigned UASM_ABI IsOffset(struct expr* opnd)
 /*******************************************/
 {
     if (opnd->mem_type == MT_EMPTY)
@@ -1717,7 +1717,7 @@ static unsigned uasm_ABI IsOffset(struct expr* opnd)
     return(0);
 }
 
-static ret_code uasm_ABI invalid_operand(struct expr* opnd, char* oprtr, char* operand)
+static ret_code UASM_ABI invalid_operand(struct expr* opnd, char* oprtr, char* operand)
 /******************************************************************************/
 {
     if (!opnd->is_opattr)
@@ -1737,7 +1737,7 @@ static ret_code uasm_ABI invalid_operand(struct expr* opnd, char* oprtr, char* o
  * also accepted, but no plain numbers!?
  */
 
-static ret_code uasm_ABI sizlen_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI sizlen_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*********************************************************************************************************/
 {
     opnd1->kind = EXPR_CONST;
@@ -1883,7 +1883,7 @@ static ret_code uasm_ABI sizlen_op(int oper, struct expr* opnd1, struct expr* op
 
 /* TYPE operator */
 
-static ret_code uasm_ABI type_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI type_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*******************************************************************************************************/
 {
     DebugMsg1(("type_op: opnd2 kind=%d memtype=%X sym=%s type=%s instr=%d istype=%u explicit=%u\n",
@@ -2099,7 +2099,7 @@ enum opattr_bits
  * T_DOT_TYPE: implement .TYPE as an alias for OPATTR
  * T_OPATTR:
  */
-static ret_code uasm_ABI opattr_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI opattr_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*********************************************************************************************************/
 {
     DebugMsg1(("opattr_op: arg kind=%d memtype=%X sym=%s\n",
@@ -2201,7 +2201,7 @@ static ret_code uasm_ABI opattr_op(int oper, struct expr* opnd1, struct expr* op
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI short_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI short_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /********************************************************************************************************/
 {
     if (opnd2->kind != EXPR_ADDR ||
@@ -2216,7 +2216,7 @@ static ret_code uasm_ABI short_op(int oper, struct expr* opnd1, struct expr* opn
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI seg_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI seg_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /******************************************************************************************************/
 {
     /* v2.10: check for sym==NULL ( seg ds:[0] ) added */
@@ -2235,7 +2235,7 @@ static ret_code uasm_ABI seg_op(int oper, struct expr* opnd1, struct expr* opnd2
 /*
  handles FRAMEOFS operator.
 */
-static ret_code uasm_ABI frameofs_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI frameofs_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 {
     if ((sym && sym->state == SYM_GRP) || opnd2->instr == T_SEG)
     {
@@ -2266,7 +2266,7 @@ static ret_code uasm_ABI frameofs_op(int oper, struct expr* opnd1, struct expr* 
 /*
 handles ARGIDX operator.
 */
-static ret_code uasm_ABI argidx_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI argidx_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 {
     int argNo = 1;
     bool argFound = FALSE;
@@ -2330,7 +2330,7 @@ static ret_code uasm_ABI argidx_op(int oper, struct expr* opnd1, struct expr* op
 /*
 handles ARGSIZE operator.
 */
-static ret_code uasm_ABI argsize_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI argsize_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 {
     int argNo = 1;
     bool argFound = FALSE;
@@ -2396,7 +2396,7 @@ static ret_code uasm_ABI argsize_op(int oper, struct expr* opnd1, struct expr* o
 /*
 handles ARGTYPE operator.
 */
-static ret_code uasm_ABI argtype_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI argtype_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 {
     int argNo = 1;
     bool argFound = FALSE;
@@ -2463,7 +2463,7 @@ static ret_code uasm_ABI argtype_op(int oper, struct expr* opnd1, struct expr* o
  * OFFSET, LROFFSEG, IMAGEREL, SECTIONREL
  */
 
-static ret_code uasm_ABI offset_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI offset_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*********************************************************************************************************/
 {
     if (oper == T_OFFSET)
@@ -2505,7 +2505,7 @@ static ret_code uasm_ABI offset_op(int oper, struct expr* opnd1, struct expr* op
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI lowword_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI lowword_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /**********************************************************************************************************/
 {
     TokenAssign(opnd1, opnd2);
@@ -2519,7 +2519,7 @@ static ret_code uasm_ABI lowword_op(int oper, struct expr* opnd1, struct expr* o
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI highword_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI highword_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /***********************************************************************************************************/
 {
     TokenAssign(opnd1, opnd2);
@@ -2533,7 +2533,7 @@ static ret_code uasm_ABI highword_op(int oper, struct expr* opnd1, struct expr* 
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI low_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI low_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /******************************************************************************************************/
 {
     TokenAssign(opnd1, opnd2);
@@ -2557,7 +2557,7 @@ static ret_code uasm_ABI low_op(int oper, struct expr* opnd1, struct expr* opnd2
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI high_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI high_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*******************************************************************************************************/
 {
     TokenAssign(opnd1, opnd2);
@@ -2583,7 +2583,7 @@ static ret_code uasm_ABI high_op(int oper, struct expr* opnd1, struct expr* opnd
 
 #if LOHI32
 
-static ret_code uasm_ABI low32_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI low32_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /********************************************************************************************************/
 {
     /* v2.06: added support for double constants */
@@ -2606,7 +2606,7 @@ static ret_code uasm_ABI low32_op(int oper, struct expr* opnd1, struct expr* opn
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI high32_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI high32_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*********************************************************************************************************/
 {
     /* v2.06: added support for double constants */
@@ -2631,7 +2631,7 @@ static ret_code uasm_ABI high32_op(int oper, struct expr* opnd1, struct expr* op
 
 #endif
 
-static ret_code uasm_ABI this_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI this_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*******************************************************************************************************/
 {
     if (opnd2->is_type == FALSE)
@@ -2680,7 +2680,7 @@ static ret_code uasm_ABI this_op(int oper, struct expr* opnd1, struct expr* opnd
 
 /* WIDTH and MASK operators */
 
-static ret_code uasm_ABI wimask_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
+static ret_code UASM_ABI wimask_op(int oper, struct expr* opnd1, struct expr* opnd2, struct asym* sym, char* name)
 /*********************************************************************************************************/
 {
     uint_64         dwRecIHi;
@@ -2775,14 +2775,14 @@ static ret_code uasm_ABI wimask_op(int oper, struct expr* opnd1, struct expr* op
 }
 
 #define  res(token, function) function ,
-static ret_code(uasm_ABI * const unaryop[])(int, struct expr*, struct expr*, struct asym*, char*) = {
+static ret_code(UASM_ABI * const unaryop[])(int, struct expr*, struct expr*, struct asym*, char*) = {
 #include "unaryop.h"
 };
 #undef res
 
 /* plus_op() is called by [], () and + operator handlers */
 
-static ret_code uasm_ABI plus_op(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI plus_op(struct expr* opnd1, struct expr* opnd2)
 /***************************************************************/
 {
     DebugMsg1(("plus_op: kind=%d/%d memtype=%Xh-%Xh value=%d-%d sym=%s-%s mbr=%s-%s type=%s-%s\n",
@@ -2923,7 +2923,7 @@ static ret_code uasm_ABI plus_op(struct expr* opnd1, struct expr* opnd2)
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI minus_op(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI minus_op(struct expr* opnd1, struct expr* opnd2)
 /****************************************************************/
 {
     struct asym* sym;
@@ -3086,7 +3086,7 @@ static ret_code uasm_ABI minus_op(struct expr* opnd1, struct expr* opnd2)
 
 /* v2.10: don't emit "struct field expected" error if item is an operand of OPATTR */
 
-static ret_code uasm_ABI struct_field_error(struct expr* opnd)
+static ret_code UASM_ABI struct_field_error(struct expr* opnd)
 /*****************************************************/
 {
     if (opnd->is_opattr)
@@ -3097,7 +3097,7 @@ static ret_code uasm_ABI struct_field_error(struct expr* opnd)
     return(fnEmitErr(STRUCTURE_FIELD_EXPECTED));
 }
 
-static ret_code uasm_ABI dot_op(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI dot_op(struct expr* opnd1, struct expr* opnd2)
 /**************************************************************/
 {
     /* this code needs cleanup! some stuff is obsolete. */
@@ -3319,7 +3319,7 @@ static ret_code uasm_ABI dot_op(struct expr* opnd1, struct expr* opnd2)
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI colon_op(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI colon_op(struct expr* opnd1, struct expr* opnd2)
 /****************************************************************/
 {
     int_32              temp;
@@ -3464,7 +3464,7 @@ static ret_code uasm_ABI colon_op(struct expr* opnd1, struct expr* opnd2)
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI positive_op(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI positive_op(struct expr* opnd1, struct expr* opnd2)
 /*******************************************************************/
 {
     DebugMsg1(("positive_op: value=%" I64_SPEC "X high=%" I64_SPEC "X\n", opnd2->llvalue, opnd2->hlvalue));
@@ -3497,7 +3497,7 @@ static ret_code uasm_ABI positive_op(struct expr* opnd1, struct expr* opnd2)
     return(NOT_ERROR);
 }
 
-static ret_code uasm_ABI negative_op(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI negative_op(struct expr* opnd1, struct expr* opnd2)
 /*******************************************************************/
 {
     DebugMsg1(("negative_op: value=%" I64_SPEC "X high=%" I64_SPEC "X\n", opnd2->llvalue, opnd2->hlvalue));
@@ -3537,7 +3537,7 @@ static ret_code uasm_ABI negative_op(struct expr* opnd1, struct expr* opnd2)
 /* v2.07: moved out from get_operand, case T_REG
  * this function is now called from calculate() only.
  */
-static void uasm_ABI CheckAssume(struct expr* opnd)
+static void UASM_ABI CheckAssume(struct expr* opnd)
 /******************************************/
 {
     struct asym* sym = NULL;
@@ -3609,7 +3609,7 @@ static void uasm_ABI CheckAssume(struct expr* opnd)
 
 /* get floating-point register index */
 
-static ret_code uasm_ABI check_streg(struct expr* opnd1, struct expr* opnd2)
+static ret_code UASM_ABI check_streg(struct expr* opnd1, struct expr* opnd2)
 /*******************************************************************/
 {
     if (opnd1->scale > 0)
@@ -3627,7 +3627,7 @@ static ret_code uasm_ABI check_streg(struct expr* opnd1, struct expr* opnd2)
 
 /* v2.10: comparison of type operands moved from calculate() to this function. */
 
-static void uasm_ABI cmp_types(struct expr* opnd1, struct expr* opnd2, int trueval)
+static void UASM_ABI cmp_types(struct expr* opnd1, struct expr* opnd2, int trueval)
 /**************************************************************************/
 {
     struct asym* type1;
@@ -3673,7 +3673,7 @@ static void uasm_ABI cmp_types(struct expr* opnd1, struct expr* opnd2, int truev
     }
 }
 
-static ret_code uasm_ABI calculate(struct expr* opnd1, struct expr* opnd2, const struct asm_tok* oper)
+static ret_code UASM_ABI calculate(struct expr* opnd1, struct expr* opnd2, const struct asm_tok* oper)
 /*********************************************************************************************/
 /* Performs operation <oper> with operands <opnd1> and <opnd2>.
  * the result will be returned in <opnd1>.
@@ -4380,7 +4380,7 @@ static ret_code uasm_ABI calculate(struct expr* opnd1, struct expr* opnd2, const
 
 /* this code runs BEFORE the - right - operand of an operator is read */
 
-static void uasm_ABI PrepareOp(struct expr* opnd, const struct expr* old, const struct asm_tok* oper)
+static void UASM_ABI PrepareOp(struct expr* opnd, const struct expr* old, const struct asm_tok* oper)
 /********************************************************************************************/
 {
     opnd->is_opattr = old->is_opattr;
@@ -4434,7 +4434,7 @@ static void uasm_ABI PrepareOp(struct expr* opnd, const struct expr* old, const 
     }
 }
 
-static void uasm_ABI OperErr(int i, struct asm_tok tokenarray[])
+static void UASM_ABI OperErr(int i, struct asm_tok tokenarray[])
 /*******************************************************/
 {
     if (tokenarray[i].token <= T_BAD_NUM)
@@ -4449,7 +4449,7 @@ static void uasm_ABI OperErr(int i, struct asm_tok tokenarray[])
 
 #define IsCurrToken( tok )  ( tokenarray[*i].token == tok )
 
-static ret_code uasm_ABI evaluate(struct expr* opnd1, int* i, struct asm_tok tokenarray[], int end, const uint_8 flags)
+static ret_code UASM_ABI evaluate(struct expr* opnd1, int* i, struct asm_tok tokenarray[], int end, const uint_8 flags)
 /********************************************************************************************************************/
 {
     ret_code        rc = NOT_ERROR;
@@ -4713,7 +4713,7 @@ static ret_code uasm_ABI evaluate(struct expr* opnd1, int* i, struct asm_tok tok
     return(rc);
 }
 
-static bool uasm_ABI is_expr_item(struct asm_tok* item)
+static bool UASM_ABI is_expr_item(struct asm_tok* item)
 /**********************************************/
 /* Check if a token is a valid part of an expression.
  * chars + - * / . : [] and () are operators.
@@ -4773,7 +4773,7 @@ static bool uasm_ABI is_expr_item(struct asm_tok* item)
     return(TRUE);
 }
 
-static int uasm_ABI noEmitErr(int msg, ...)
+static int UASM_ABI noEmitErr(int msg, ...)
 /**********************************/
 {
     return(ERROR);
@@ -4783,7 +4783,7 @@ static int uasm_ABI noEmitErr(int msg, ...)
  * start_tok: index of first token of expression
  * end_tok:   index of last  token of expression
  */
-ret_code uasm_ABI EvalOperand(int* start_tok, struct asm_tok tokenarray[], int end_tok, struct expr* result, uint_8 flags)
+ret_code UASM_ABI EvalOperand(int* start_tok, struct asm_tok tokenarray[], int end_tok, struct expr* result, uint_8 flags)
 /*****************************************************************************************************************/
 {
     int         i;
@@ -4801,7 +4801,7 @@ ret_code uasm_ABI EvalOperand(int* start_tok, struct asm_tok tokenarray[], int e
     return (evaluate(result, start_tok, tokenarray, i, flags));
 }
 
-ret_code uasm_ABI EmitConstError(const struct expr* opnd)
+ret_code UASM_ABI EmitConstError(const struct expr* opnd)
 /************************************************/
 {
     if (opnd->hlvalue != 0)
@@ -4813,7 +4813,7 @@ ret_code uasm_ABI EmitConstError(const struct expr* opnd)
 
 /* global init (called once for each module) */
 
-void uasm_ABI ExprEvalInit(void)
+void UASM_ABI ExprEvalInit(void)
 /***********************/
 {
     thissym = NULL;
@@ -4821,4 +4821,4 @@ void uasm_ABI ExprEvalInit(void)
     nullmbr = NULL;
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

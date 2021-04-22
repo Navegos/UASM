@@ -35,7 +35,7 @@
 
 #include "basedefs.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 /* error IDs */
 #undef pick
@@ -47,8 +47,8 @@ enum msgno {
 #undef pick
 
 #ifdef DEBUG_OUT
-extern void uasm_ABI DoDebugMsg(const char* format, ...);
-extern void uasm_ABI DoDebugMsg1(const char* format, ...);
+extern void UASM_ABI DoDebugMsg(const char* format, ...);
+extern void UASM_ABI DoDebugMsg1(const char* format, ...);
 #define DebugMsg( x ) DoDebugMsg x
 #define DebugMsg1( x ) DoDebugMsg1 x
 #define DebugCmd( x ) x
@@ -64,17 +64,17 @@ extern void uasm_ABI DoDebugMsg1(const char* format, ...);
 #define errout stdout
 #endif
 
-extern void uasm_ABI Fatal(int msgnum, ...);
-extern int uasm_ABI  EmitError(int msgnum);
-extern int uasm_ABI  EmitErr(int msgnum, ...);
-extern void uasm_ABI EmitWarn(int level, int msgnum, ...);
-extern void uasm_ABI PrintNote(int msgnum, ...);
-extern char* uasm_ABI ErrnoStr(void);
-extern int uasm_ABI  write_logo(void);
-extern void uasm_ABI PrintUsage(void);
+extern void UASM_ABI Fatal(int msgnum, ...);
+extern int UASM_ABI  EmitError(int msgnum);
+extern int UASM_ABI  EmitErr(int msgnum, ...);
+extern void UASM_ABI EmitWarn(int level, int msgnum, ...);
+extern void UASM_ABI PrintNote(int msgnum, ...);
+extern char* UASM_ABI ErrnoStr(void);
+extern int UASM_ABI  write_logo(void);
+extern void UASM_ABI PrintUsage(void);
 //extern void SeekError( void );
-extern void uasm_ABI WriteError(void);
+extern void UASM_ABI WriteError(void);
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif

@@ -49,9 +49,9 @@
 
 #include "myassert.h"
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
-extern ret_code uasm_ABI    EndstructDirective(int, struct asm_tok tokenarray[]);
+extern ret_code UASM_ABI    EndstructDirective(int, struct asm_tok tokenarray[]);
 
 struct asym* symCurSeg;     /* @CurSeg symbol */
 
@@ -104,7 +104,7 @@ static const uint_16 min_cpu[] = { P_86, P_386, P_64 };
 
 /* find token in a string table */
 
-static int uasm_ABI FindToken(const char* token, const char* const* table, int size)
+static int UASM_ABI FindToken(const char* token, const char* const* table, int size)
 /****************************************************************************/
 {
     int i;
@@ -119,7 +119,7 @@ static int uasm_ABI FindToken(const char* token, const char* const* table, int s
 }
 
 /* set value of $ symbol */
-void uasm_ABI UpdateCurPC(struct asym* sym, void* p)
+void UASM_ABI UpdateCurPC(struct asym* sym, void* p)
 /*******************************************/
 {
     if (CurrStruct)
@@ -138,7 +138,7 @@ void uasm_ABI UpdateCurPC(struct asym* sym, void* p)
         EmitErr(MUST_BE_IN_SEGMENT_BLOCK);
 }
 
-static void uasm_ABI AddLnameItem(struct asym* sym)
+static void UASM_ABI AddLnameItem(struct asym* sym)
 /******************************************/
 {
     QAddItem(&ModuleInfo.g.LnameQueue, sym);
@@ -151,7 +151,7 @@ static void uasm_ABI AddLnameItem(struct asym* sym)
  * SYM_CLASS_LNAME : class names
 */
 
-static void uasm_ABI FreeLnameQueue(void)
+static void UASM_ABI FreeLnameQueue(void)
 /********************************/
 {
     struct qnode* curr;
@@ -175,7 +175,7 @@ static void uasm_ABI FreeLnameQueue(void)
 /* set CS assume entry whenever current segment is changed.
  * Also updates values of text macro @CurSeg.
  */
-void uasm_ABI UpdateCurrSegVars(void)
+void UASM_ABI UpdateCurrSegVars(void)
 /***********************************/
 {
     struct assume_info* info;
@@ -208,7 +208,7 @@ void uasm_ABI UpdateCurrSegVars(void)
     return;
 }
 
-void uasm_ABI push_seg(struct dsym* seg)
+void UASM_ABI push_seg(struct dsym* seg)
 /**************************************/
 /* Push a segment into the current segment stack */
 {
@@ -224,7 +224,7 @@ void uasm_ABI push_seg(struct dsym* seg)
     return;
 }
 
-void uasm_ABI pop_seg(void)
+void UASM_ABI pop_seg(void)
 /*************************/
 /* Pop a segment out of the current segment stack */
 {
@@ -241,13 +241,13 @@ void uasm_ABI pop_seg(void)
     return;
 }
 
-uint_32 uasm_ABI GetCurrOffset(void)
+uint_32 UASM_ABI GetCurrOffset(void)
 /***************************/
 {
     return(CurrSeg ? CurrSeg->e.seginfo->current_loc : 0);
 }
 
-uint_32 uasm_ABI GetCurrSegAlign(void)
+uint_32 UASM_ABI GetCurrSegAlign(void)
 /*****************************/
 {
     if (CurrSeg == NULL)
@@ -257,7 +257,7 @@ uint_32 uasm_ABI GetCurrSegAlign(void)
     return(1 << CurrSeg->e.seginfo->alignment);
 }
 
-static struct dsym* uasm_ABI CreateGroup(const char* name)
+static struct dsym* UASM_ABI CreateGroup(const char* name)
 /*************************************************/
 {
     struct dsym* grp;
@@ -290,7 +290,7 @@ static struct dsym* uasm_ABI CreateGroup(const char* name)
     return(grp);
 }
 
-static struct dsym* uasm_ABI CreateSegment(struct dsym* seg, const char* name, bool add_global)
+static struct dsym* UASM_ABI CreateSegment(struct dsym* seg, const char* name, bool add_global)
 /**************************************************************************************/
 {
     if (seg == NULL)
@@ -322,7 +322,7 @@ static struct dsym* uasm_ABI CreateSegment(struct dsym* seg, const char* name, b
     return(seg);
 }
 
-void uasm_ABI DeleteGroup(struct dsym* dir)
+void UASM_ABI DeleteGroup(struct dsym* dir)
 /**********************************/
 {
 #if FASTMEM==0 || defined(DEBUG_OUT)
@@ -340,7 +340,7 @@ void uasm_ABI DeleteGroup(struct dsym* dir)
 }
 
 /* handle GROUP directive */
-ret_code uasm_ABI GrpDir(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI GrpDir(int i, struct asm_tok tokenarray[])
 /***************************************************/
 {
     char* name;
@@ -463,7 +463,7 @@ ret_code uasm_ABI GrpDir(int i, struct asm_tok tokenarray[])
 }
 
 /* get/set value of predefined symbol @WordSize */
-void uasm_ABI UpdateWordSize(struct asym* sym, void* p)
+void UASM_ABI UpdateWordSize(struct asym* sym, void* p)
 /**********************************************/
 {
     sym->value = CurrWordSize;
@@ -471,7 +471,7 @@ void uasm_ABI UpdateWordSize(struct asym* sym, void* p)
 }
 
 /* get/set value of predefined symbol @LangType */
-void uasm_ABI UpdateLangType(struct asym* sym, void* p)
+void UASM_ABI UpdateLangType(struct asym* sym, void* p)
 /**********************************************/
 {
     sym->value = CurrLangType;
@@ -479,7 +479,7 @@ void uasm_ABI UpdateLangType(struct asym* sym, void* p)
 }
 
 /* called by SEGMENT and ENDS directives */
-ret_code uasm_ABI SetOfssize(void)
+ret_code UASM_ABI SetOfssize(void)
 /*************************/
 {
     if (CurrSeg == NULL)
@@ -501,7 +501,7 @@ ret_code uasm_ABI SetOfssize(void)
 }
 
 /* close segment */
-static ret_code uasm_ABI CloseSeg(const char* name)
+static ret_code UASM_ABI CloseSeg(const char* name)
 /******************************************/
 {
     if (CurrSeg == NULL || (SymCmpFunc(CurrSeg->sym.name, name, CurrSeg->sym.name_size) != 0))
@@ -521,7 +521,7 @@ static ret_code uasm_ABI CloseSeg(const char* name)
     return(NOT_ERROR);
 }
 
-void uasm_ABI DefineFlatGroup(void)
+void UASM_ABI DefineFlatGroup(void)
 /**************************/
 {
     if (ModuleInfo.flat_grp == NULL)
@@ -533,7 +533,7 @@ void uasm_ABI DefineFlatGroup(void)
     ModuleInfo.flat_grp->sym.isdefined = TRUE; /* v2.09 */
 }
 
-unsigned uasm_ABI GetSegIdx(const struct asym* sym)
+unsigned UASM_ABI GetSegIdx(const struct asym* sym)
 /******************************************/
 /* get idx to sym's segment */
 {
@@ -542,7 +542,7 @@ unsigned uasm_ABI GetSegIdx(const struct asym* sym)
     return(0);
 }
 
-struct asym* uasm_ABI GetGroup(const struct asym* sym)
+struct asym* UASM_ABI GetGroup(const struct asym* sym)
     /*********************************************/
     /* get a symbol's group */
 {
@@ -554,7 +554,7 @@ struct asym* uasm_ABI GetGroup(const struct asym* sym)
     return(NULL);
 }
 
-int uasm_ABI GetSymOfssize(const struct asym* sym)
+int UASM_ABI GetSymOfssize(const struct asym* sym)
 /*****************************************/
 /* get sym's offset size (64=2, 32=1, 16=0) */
 {
@@ -579,7 +579,7 @@ int uasm_ABI GetSymOfssize(const struct asym* sym)
     return(ModuleInfo.Ofssize);
 }
 
-void uasm_ABI SetSymSegOfs(struct asym* sym)
+void UASM_ABI SetSymSegOfs(struct asym* sym)
 /***********************************/
 {
     sym->segment = &CurrSeg->sym;
@@ -587,7 +587,7 @@ void uasm_ABI SetSymSegOfs(struct asym* sym)
 }
 
 /* get segment type from alignment, combine type or class name */
-enum seg_type uasm_ABI TypeFromClassName(const struct dsym* seg, const struct asym* clname)
+enum seg_type UASM_ABI TypeFromClassName(const struct dsym* seg, const struct asym* clname)
     /**********************************************************************************/
 {
     int     slen;
@@ -636,7 +636,7 @@ enum seg_type uasm_ABI TypeFromClassName(const struct dsym* seg, const struct as
 /* search a class item by name.
  * the classes aren't stored in the symbol table!
  */
-static struct asym* uasm_ABI FindClass(const char* name, int len)
+static struct asym* UASM_ABI FindClass(const char* name, int len)
 /********************************************************/
 {
     struct qnode* node;
@@ -653,7 +653,7 @@ static struct asym* uasm_ABI FindClass(const char* name, int len)
 /* add a class name to the lname queue
  * if it doesn't exist yet.
  */
-static struct asym* uasm_ABI CreateClassLname(const char* name)
+static struct asym* UASM_ABI CreateClassLname(const char* name)
 /******************************************************/
 {
     struct asym* sym;
@@ -680,7 +680,7 @@ static struct asym* uasm_ABI CreateClassLname(const char* name)
 /* set the segment's class. report an error if the class has been set
  * already and the new value differs. */
 
-static ret_code uasm_ABI SetSegmentClass(struct dsym* seg, const char* name)
+static ret_code UASM_ABI SetSegmentClass(struct dsym* seg, const char* name)
 /*******************************************************************/
 {
     struct asym* clsym;
@@ -698,7 +698,7 @@ static ret_code uasm_ABI SetSegmentClass(struct dsym* seg, const char* name)
 /* CreateIntSegment(), used for internally defined segments:
  * codeview debugging segments, COFF .drectve, COFF .sxdata
  */
-struct asym* uasm_ABI CreateIntSegment(const char* name, const char* classname, uint_8 alignment, uint_8 Ofssize, bool add_global)
+struct asym* UASM_ABI CreateIntSegment(const char* name, const char* classname, uint_8 alignment, uint_8 Ofssize, bool add_global)
     /*************************************************************************************************************************/
 {
     struct dsym* seg;
@@ -734,7 +734,7 @@ struct asym* uasm_ABI CreateIntSegment(const char* name, const char* classname, 
 }
 
 /* ENDS directive */
-ret_code uasm_ABI EndsDir(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI EndsDir(int i, struct asm_tok tokenarray[])
 /****************************************************/
 {
     if (CurrStruct != NULL)
@@ -762,7 +762,7 @@ ret_code uasm_ABI EndsDir(int i, struct asm_tok tokenarray[])
 }
 
 /* SEGMENT directive if pass is > 1 */
-static ret_code uasm_ABI SetCurrSeg(int i, struct asm_tok tokenarray[])
+static ret_code UASM_ABI SetCurrSeg(int i, struct asm_tok tokenarray[])
 /**************************************************************/
 {
     struct asym* sym;
@@ -788,7 +788,7 @@ static ret_code uasm_ABI SetCurrSeg(int i, struct asm_tok tokenarray[])
     return(SetOfssize());
 }
 
-static void uasm_ABI UnlinkSeg(struct dsym* dir)
+static void UASM_ABI UnlinkSeg(struct dsym* dir)
 /***************************************/
 {
     struct dsym* curr;
@@ -815,7 +815,7 @@ static void uasm_ABI UnlinkSeg(struct dsym* dir)
 /* Start label for Code View 8 */
 struct asym* CV8Label = NULL;
 
-ret_code uasm_ABI SegmentDir(int i, struct asm_tok tokenarray[])
+ret_code UASM_ABI SegmentDir(int i, struct asm_tok tokenarray[])
 /*******************************************************/
 {
     char                is_old = FALSE;
@@ -1219,7 +1219,7 @@ ret_code uasm_ABI SegmentDir(int i, struct asm_tok tokenarray[])
  * type = 1: sort by name ( .ALPHA )
  * type = 2: sort by segment type+name ( PE format ). member lname_idx is misused here for "type"
  */
-void uasm_ABI SortSegments(int type)
+void UASM_ABI SortSegments(int type)
 /***************************/
 {
     bool changed = TRUE;
@@ -1270,7 +1270,7 @@ void uasm_ABI SortSegments(int type)
 }
 
 /* END directive has been found. */
-ret_code uasm_ABI SegmentModuleExit(void)
+ret_code UASM_ABI SegmentModuleExit(void)
 /********************************/
 {
     if (ModuleInfo.model != MODEL_NONE)
@@ -1287,7 +1287,7 @@ ret_code uasm_ABI SegmentModuleExit(void)
 }
 
 /* this is called once per module after the last pass is finished */
-void uasm_ABI SegmentFini(void)
+void UASM_ABI SegmentFini(void)
 /**********************/
 {
 #if FASTPASS
@@ -1300,7 +1300,7 @@ void uasm_ABI SegmentFini(void)
 }
 
 /* init. called for each pass */
-void uasm_ABI SegmentInit(int pass)
+void UASM_ABI SegmentInit(int pass)
 /**************************/
 {
     struct dsym* curr;
@@ -1393,7 +1393,7 @@ void uasm_ABI SegmentInit(int pass)
 
 }
 
-void uasm_ABI SegmentSaveState(void)
+void UASM_ABI SegmentSaveState(void)
 /***************************/
 {
     saved_CurrSeg = CurrSeg;
@@ -1405,4 +1405,4 @@ void uasm_ABI SegmentSaveState(void)
     }
 }
 
-uasm_PACK_POP
+UASM_PACK_POP

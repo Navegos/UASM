@@ -212,15 +212,17 @@
 #include "errmsg.h"  /* must be located AFTER #defines lines */
 #include "queue.h"
 
+#include "vers.h"
+
 /* Uasm version info */
-#define _UASM_VERSION_STR_ "2.53.0"
-#define _UASM_VERSION_INT_ 253
-#define _UASM_VERSION_SUFFIX_ "pre"
+#define _UASM_VERSION_STR_ UASM_FULL_VERSION_STR //"2.54.0"
+#define _UASM_VERSION_INT_ 254
+#define _UASM_VERSION_SUFFIX_ UASM_RELEASE_NAME //"pre"
 #define _UASM_VERSION_ _UASM_VERSION_STR_ //_UASM_VERSION_SUFFIX_
 
-#define UASM_MAJOR_VER 2
-#define UASM_MINOR_VER 53
-#define UASM_SUBMINOR_VER 0
+#define UASM_MAJOR_VER UASM_VERSION_MAJOR //2
+#define UASM_MINOR_VER UASM_VERSION_MINOR //54
+#define UASM_SUBMINOR_VER UASM_VERSION_PATCH //0
 
 #if defined(_WIN32) || defined(_WIN64) 
 #define snprintf _snprintf 
@@ -243,7 +245,7 @@
 #define _LABEL      0x40    /* UPPER + LOWER + '@' + '_' + '$' + '?' */
 #define _LHEX       0x80    /* hexadecimal digit */
 
-uasm_PACK_PUSH_STACK
+UASM_PACK_PUSH_STACK
 
 extern unsigned char _ltype[];  /* Label type array */
 
@@ -800,9 +802,9 @@ struct module_vars {
     unsigned            anonymous_label; /* "anonymous label" counter */
     struct asym*        StackBase;
     struct asym*        ProcStatus;
-    ret_code(uasm_ABI *WriteModule)(struct module_info*);
-    ret_code(uasm_ABI *EndDirHook)(struct module_info*);
-    ret_code(uasm_ABI *Pass1Checks)(struct module_info*);
+    ret_code(UASM_ABI *WriteModule)(struct module_info*);
+    ret_code(UASM_ABI *EndDirHook)(struct module_info*);
+    ret_code(UASM_ABI *Pass1Checks)(struct module_info*);
     uint_8              pe_flags;        /* for PE */
 };
 
@@ -939,7 +941,7 @@ struct extra_flags {
 #define H_LONG_MAX      2147483647L      // maximum (signed) long value
 
 struct format_options {
-    void (uasm_ABI *init)(struct module_info*);
+    void (UASM_ABI *init)(struct module_info*);
     short invalid_fixup_type;
     const char formatname[6];
 };
@@ -947,14 +949,14 @@ struct format_options {
 /* global variables */
 
 /* global strings for arch:sse/avx instructions to use */
-extern char const* const uasm_ABI MOVE_ALIGNED_FLOAT(void);
-extern char const* const uasm_ABI MOVE_ALIGNED_INT(void);
-extern char const* const uasm_ABI MOVE_UNALIGNED_FLOAT(void);
-extern char const* const uasm_ABI MOVE_UNALIGNED_INT(void);
-extern char const* const uasm_ABI MOVE_SINGLE(void);
-extern char const* const uasm_ABI MOVE_DOUBLE(void);
-extern char const* const uasm_ABI MOVE_SIMD_DWORD(void);
-extern char const* const uasm_ABI MOVE_SIMD_QWORD(void);
+extern char const* const UASM_ABI MOVE_ALIGNED_FLOAT(void);
+extern char const* const UASM_ABI MOVE_ALIGNED_INT(void);
+extern char const* const UASM_ABI MOVE_UNALIGNED_FLOAT(void);
+extern char const* const UASM_ABI MOVE_UNALIGNED_INT(void);
+extern char const* const UASM_ABI MOVE_SINGLE(void);
+extern char const* const UASM_ABI MOVE_DOUBLE(void);
+extern char const* const UASM_ABI MOVE_SIMD_DWORD(void);
+extern char const* const UASM_ABI MOVE_SIMD_QWORD(void);
 
 /* global flag to indicate when inside macro body */
 extern bool inMacroBody;
@@ -972,31 +974,31 @@ extern bool                  gmaskflag;
 
 struct fixup;
 
-extern void uasm_ABI             OutputByte(unsigned char);
-extern void uasm_ABI             OutputBinBytes(unsigned char* pBytes, uint_32 len);
+extern void UASM_ABI             OutputByte(unsigned char);
+extern void UASM_ABI             OutputBinBytes(unsigned char* pBytes, uint_32 len);
 
 //extern void             OutputCodeByte( unsigned char );
-extern void uasm_ABI             FillDataBytes(unsigned char, int len);
-extern void uasm_ABI             OutputBytes(const unsigned char*, int len, struct fixup*);
+extern void UASM_ABI             FillDataBytes(unsigned char, int len);
+extern void UASM_ABI             OutputBytes(const unsigned char*, int len, struct fixup*);
 #ifdef __SW_BD
 extern int  __stdcall            AssembleModule(const char*);
 #else
-extern int uasm_ABI              AssembleModule(const char*);
+extern int UASM_ABI              AssembleModule(const char*);
 #endif
-extern void uasm_ABI             AddLinnumDataRef(unsigned, uint_32);
-extern void uasm_ABI             SetMasm510(bool);
-extern void uasm_ABI             close_files(void);
-extern char* uasm_ABI            myltoa(uint_32 value, char* buffer, unsigned radix, bool sign, bool addzero);
-extern char* uasm_ABI            myqtoa(uint_64 value, char* buffer, unsigned radix, bool sign, bool addzero);
-extern char* uasm_ABI            num2hex64(uint_64 value, char* buffer);
-extern char* uasm_ABI            ConvertSectionName(const struct asym*, enum seg_type* pst, char* buffer);
-extern void uasm_ABI             RewindToWin64(void);
-extern void uasm_ABI             RewindToSYSV64(void);
+extern void UASM_ABI             AddLinnumDataRef(unsigned, uint_32);
+extern void UASM_ABI             SetMasm510(bool);
+extern void UASM_ABI             close_files(void);
+extern char* UASM_ABI            myltoa(uint_32 value, char* buffer, unsigned radix, bool sign, bool addzero);
+extern char* UASM_ABI            myqtoa(uint_64 value, char* buffer, unsigned radix, bool sign, bool addzero);
+extern char* UASM_ABI            num2hex64(uint_64 value, char* buffer);
+extern char* UASM_ABI            ConvertSectionName(const struct asym*, enum seg_type* pst, char* buffer);
+extern void UASM_ABI             RewindToWin64(void);
+extern void UASM_ABI             RewindToSYSV64(void);
 
 #ifndef _MSC_VER
-extern char* uasm_ABI strupr(char* str);
+extern char* UASM_ABI strupr(char* str);
 #endif
 
-uasm_PACK_POP
+UASM_PACK_POP
 
 #endif
