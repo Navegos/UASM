@@ -1,6 +1,7 @@
 Source: uasm
 Section: devel
 Priority: optional
+Rules-Requires-Root: no
 Maintainer: Navegos QA <navegos@outlook.com>
 Standards-Version: 4.4.0
 Build-Depends:
@@ -18,7 +19,7 @@ Depends:
  ${shlibs:Depends},
  libc6-dev,
  uasm-dev,
-Description: UASM is a free MASM-compatible and x86/x64 linux/mac/win assembler
+Description: The UASM is a free MASM-compatible and x86/x64 linux/mac/win assembler
  based on JWasm with more and enhanced features.
  .
  Please visit http://www.terraspace.co.uk/uasm.html for more info.
@@ -35,14 +36,14 @@ Depends:
  ${shlibs:Depends},
  libc6-dev,
  uasm-dev,
-Description: UASM (debug version) is a free MASM-compatible and x86/x64 linux/mac/win assembler
+Description: The UASM (debug version) is a free MASM-compatible and x86/x64 linux/mac/win assembler
  based on JWasm with more and enhanced features.
  .
  Please visit http://www.terraspace.co.uk/uasm.html for more info.
  .
  UASM is released under the Sybase Open Watcom Public License version 1.0
  and under the Apache License, Version 2.0.
- 
+
 Package: uasm-dev
 Architecture: any
 Section: libdevel
@@ -51,11 +52,10 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  libc6-dev,
-Description: UASM (include files) for the free MASM-compatible and x86/x64 linux/mac/win assembler
+Description: The UASM (include files) for the free MASM-compatible and x86/x64 linux/mac/win assembler
  based on JWasm with more and enhanced features.
  .
  Please visit http://www.terraspace.co.uk/uasm.html for more info.
  .
  UASM is released under the Sybase Open Watcom Public License version 1.0
  and under the Apache License, Version 2.0.
- 
