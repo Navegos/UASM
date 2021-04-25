@@ -62,6 +62,59 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cmd", "cmd", "{33AF60CC-EF9
 		uasmv.cmd = uasmv.cmd
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F84DBB86-06CE-41D4-961E-C531225B9A4E}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.gitignore = ..\..\.gitignore
+		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Makefiles", "Makefiles", "{0DC8BE28-9E86-4F35-BC73-660F5E41FD10}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Clang3.8Linux.mak = ..\..\Clang3.8Linux.mak
+		..\..\ClangLinux64.mak = ..\..\ClangLinux64.mak
+		..\..\ClangOSX64.mak = ..\..\ClangOSX64.mak
+		..\..\GccDos.mak = ..\..\GccDos.mak
+		..\..\GccLinux64.mak = ..\..\GccLinux64.mak
+		..\..\gccmod.inc = ..\..\gccmod.inc
+		..\..\GccWin.mak = ..\..\GccWin.mak
+		..\..\GccWin64.mak = ..\..\GccWin64.mak
+		..\..\IntelC32.mak = ..\..\IntelC32.mak
+		..\..\IntelC64.mak = ..\..\IntelC64.mak
+		..\..\msmod.inc = ..\..\msmod.inc
+		..\..\Msvc.mak = ..\..\Msvc.mak
+		..\..\Msvc64.mak = ..\..\Msvc64.mak
+		..\..\MsvcDll.mak = ..\..\MsvcDll.mak
+		..\..\OC.mak = ..\..\OC.mak
+		..\..\OWDOS16.mak = ..\..\OWDOS16.mak
+		..\..\OWLinux.mak = ..\..\OWLinux.mak
+		..\..\owmod.inc = ..\..\owmod.inc
+		..\..\OWWin.mak = ..\..\OWWin.mak
+		..\..\PCC.mak = ..\..\PCC.mak
+		..\..\PellesC.mak = ..\..\PellesC.mak
+		..\..\TCC.mak = ..\..\TCC.mak
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildCustomizations", "BuildCustomizations", "{1E190452-FA4D-4AA3-A419-6CB0F247BE0F}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\BuildCustomizations\uasm.props = ..\..\BuildCustomizations\uasm.props
+		..\..\BuildCustomizations\uasm.targets = ..\..\BuildCustomizations\uasm.targets
+		..\..\BuildCustomizations\uasm.xml = ..\..\BuildCustomizations\uasm.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{9D642861-945A-47C3-A2FD-F35FE19367CE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\include\uasm\cpubits.inc = ..\..\include\uasm\cpubits.inc
+		..\..\include\uasm\defines.inc = ..\..\include\uasm\defines.inc
+		..\..\include\uasm\LICENSE = ..\..\include\uasm\LICENSE
+		..\..\include\uasm\limits.inc = ..\..\include\uasm\limits.inc
+		..\..\include\uasm\macrolib.inc = ..\..\include\uasm\macrolib.inc
+		..\..\include\uasm\macros.inc = ..\..\include\uasm\macros.inc
+		..\..\include\uasm\params.inc = ..\..\include\uasm\params.inc
+		..\..\include\uasm\real4limits.inc = ..\..\include\uasm\real4limits.inc
+		..\..\include\uasm\real8limits.inc = ..\..\include\uasm\real8limits.inc
+		..\..\include\uasm\types.inc = ..\..\include\uasm\types.inc
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|Win32 = All|Win32

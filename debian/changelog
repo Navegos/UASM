@@ -1,3 +1,21 @@
+uasm (2.54.0-1ubuntu2) focal; urgency=medium
+
+  * New upstream release, platform ABI, optional SIMD instructions releases
+
+ -- Navegos QA <navegos@outlook.com>  Sat, 24 Apr 2021 22:56:45 +0000
+
+uasm (2.53.0-1ubuntu2) focal; urgency=medium
+
+  * New upstream release
+
+ -- Navegos QA <navegos@outlook.com>  Sat, 10 Apr 2021 16:21:28 +0000
+
+uasm (2.52.0-1ubuntu2) focal; urgency=medium
+
+  * New upstream release
+
+ -- Navegos QA <navegos@outlook.com>  Sat, 27 Mar 2021 14:46:32 +0000
+
 uasm (2.51.2-1ubuntu2) focal; urgency=medium
 
   * New upstream release

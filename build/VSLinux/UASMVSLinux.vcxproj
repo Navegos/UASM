@@ -33,18 +33,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>Remote_Clang_1_0</PlatformToolset>
+    <UseOfStl>libstdc++_static</UseOfStl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Remote_Clang_1_0</PlatformToolset>
+    <UseOfStl>libstdc++_static</UseOfStl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>Remote_Clang_1_0</PlatformToolset>
+    <UseOfStl>libstdc++_static</UseOfStl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Remote_Clang_1_0</PlatformToolset>
+    <UseOfStl>libstdc++_static</UseOfStl>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -311,66 +315,14 @@
     <ClCompile Include="..\..\symbols.c" />
     <ClCompile Include="..\..\tbyte.c" />
     <ClCompile Include="..\..\tokenize.c" />
-    <ClCompile Include="..\..\trmem.c" />
+    <ClCompile Include="..\..\trmem.c">
+      <FileType>CppCode</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x86'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\types.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\.gitignore" />
-    <None Include="..\..\Clang3.8Linux.mak" />
-    <None Include="..\..\ClangLinux64.mak" />
-    <None Include="..\..\ClangOSX64.mak" />
-    <None Include="..\..\debian\changelog" />
-    <None Include="..\..\debian\compat" />
-    <None Include="..\..\debian\control" />
-    <None Include="..\..\debian\copyright" />
-    <None Include="..\..\debian\gbp.conf" />
-    <None Include="..\..\debian\rules" />
-    <None Include="..\..\debian\source\format" />
-    <None Include="..\..\debian\uasm-dev.install" />
-    <None Include="..\..\debian\uasm.dirs" />
-    <None Include="..\..\debian\uasm.install" />
-    <None Include="..\..\debian\uasmd.dirs" />
-    <None Include="..\..\debian\uasmd.install" />
-    <None Include="..\..\debian\watch" />
-    <None Include="..\..\GccDos.mak" />
-    <None Include="..\..\gccLinux64.mak" />
-    <None Include="..\..\gccmod.inc" />
-    <None Include="..\..\GccWin.mak" />
-    <None Include="..\..\GccWin64.mak" />
-    <None Include="..\..\include\uasm\cpubits.inc" />
-    <None Include="..\..\include\uasm\defines.inc" />
-    <None Include="..\..\include\uasm\limits.inc" />
-    <None Include="..\..\include\uasm\macrolib.inc" />
-    <None Include="..\..\include\uasm\macros.inc" />
-    <None Include="..\..\include\uasm\params.inc" />
-    <None Include="..\..\include\uasm\real4limits.inc" />
-    <None Include="..\..\include\uasm\real8limits.inc" />
-    <None Include="..\..\include\uasm\types.inc" />
-    <None Include="..\..\include_WIP\uasm\cpubits.inc" />
-    <None Include="..\..\include_WIP\uasm\defines.inc" />
-    <None Include="..\..\include_WIP\uasm\limits.inc" />
-    <None Include="..\..\include_WIP\uasm\macrolib.inc" />
-    <None Include="..\..\include_WIP\uasm\macros.inc" />
-    <None Include="..\..\include_WIP\uasm\params.inc" />
-    <None Include="..\..\include_WIP\uasm\real4limits.inc" />
-    <None Include="..\..\include_WIP\uasm\real8limits.inc" />
-    <None Include="..\..\include_WIP\uasm\types.inc" />
-    <None Include="..\..\include_WIP\uasm\windows\vc\vadefs.inc" />
-    <None Include="..\..\include_WIP\uasm\windows\vc\vcruntime.inc" />
-    <None Include="..\..\IntelC32.mak" />
-    <None Include="..\..\IntelC64.mak" />
-    <None Include="..\..\msmod.inc" />
-    <None Include="..\..\Msvc.mak" />
-    <None Include="..\..\Msvc64.mak" />
-    <None Include="..\..\MsvcDll.mak" />
-    <None Include="..\..\OC.mak" />
-    <None Include="..\..\OWDOS16.mak" />
-    <None Include="..\..\OWLinux.mak" />
-    <None Include="..\..\owmod.inc" />
-    <None Include="..\..\OWWin.mak" />
-    <None Include="..\..\PCC.mak" />
-    <None Include="..\..\PellesC.mak" />
-    <None Include="..\..\TCC.mak" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\H\assume.h" />
@@ -397,6 +349,7 @@
     <ClInclude Include="..\..\H\elfspec.h" />
     <ClInclude Include="..\..\H\equate.h" />
     <ClInclude Include="..\..\H\errmsg.h" />
+    <ClInclude Include="..\..\H\exports.h" />
     <ClInclude Include="..\..\H\expreval.h" />
     <ClInclude Include="..\..\H\extern.h" />
     <ClInclude Include="..\..\H\fastpass.h" />
@@ -438,6 +391,7 @@
     <ClInclude Include="..\..\H\picohash.h" />
     <ClInclude Include="..\..\H\posndir.h" />
     <ClInclude Include="..\..\H\preproc.h" />
+    <ClInclude Include="..\..\H\preprocessor.h" />
     <ClInclude Include="..\..\H\proc.h" />
     <ClInclude Include="..\..\H\pseudoFilter.h" />
     <ClInclude Include="..\..\H\queue.h" />
@@ -455,6 +409,7 @@
     <ClInclude Include="..\..\H\unaryop.h" />
     <ClInclude Include="..\..\H\usage.h" />
     <ClInclude Include="..\..\H\usage2.h" />
+    <ClInclude Include="..\..\H\vers.h" />
     <ClInclude Include="..\..\H\win32.h" />
     <ClInclude Include="..\..\H\win64seh.h" />
     <ClInclude Include="..\..\H\winconsole.h" />

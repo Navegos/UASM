@@ -456,174 +456,15 @@
     <ClInclude Include="..\..\H\defs.h">
       <Filter>Headers</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\.gitignore" />
-    <None Include="..\..\include\uasm\cpubits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\defines.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\limits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\macrolib.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\macros.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\params.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\real4limits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\real8limits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\types.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\debian\changelog">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\compat">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\control">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\copyright">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\gbp.conf">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\rules">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\watch">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\source\format">
-      <Filter>debian\source</Filter>
-    </None>
-    <None Include="..\..\GccWin.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\GccWin64.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\IntelC32.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\IntelC64.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\ClangOSX64.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\GccDos.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\gccLinux64.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\OWLinux.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\PCC.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\PellesC.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\TCC.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\Msvc.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\Msvc64.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\MsvcDll.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\OC.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\OWDOS16.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\gccmod.inc">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\msmod.inc">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\owmod.inc">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\debian\uasm.dirs">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\uasm.install">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\ClangLinux64.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\Clang3.8Linux.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\OWWin.mak">
-      <Filter>Makefiles</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\types.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\cpubits.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\defines.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\limits.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\macrolib.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\macros.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\params.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\real4limits.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\real8limits.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\windows\vc\vadefs.inc">
-      <Filter>include_WIP\windows\vc</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\windows\vc\vcruntime.inc">
-      <Filter>include_WIP\windows\vc</Filter>
-    </None>
-    <None Include="..\..\debian\uasmd.install">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\uasmd.dirs">
-      <Filter>debian</Filter>
-    </None>
-    <None Include="..\..\debian\uasm-dev.install">
-      <Filter>debian</Filter>
-    </None>
+    <ClInclude Include="..\..\H\preprocessor.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\H\exports.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\H\vers.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -631,27 +472,6 @@
     </Filter>
     <Filter Include="Sources">
       <UniqueIdentifier>{b8189196-4d60-439d-88a1-69f66a58d9d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{7a53866a-29be-4e3d-ab7c-b7f452330cbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="debian">
-      <UniqueIdentifier>{0b02db6e-22b8-4ce4-b103-d5dbcf9a6ba4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="debian\source">
-      <UniqueIdentifier>{18727354-2f67-4a35-8368-b6944a4a3438}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Makefiles">
-      <UniqueIdentifier>{85ec10ab-9674-48c0-bcaa-e51dbce1c36e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include_WIP">
-      <UniqueIdentifier>{fb655770-3d16-499b-8c8c-1f61dd3bf815}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include_WIP\windows">
-      <UniqueIdentifier>{cb1d9ab6-cab8-41de-856b-5d06848fb5a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include_WIP\windows\vc">
-      <UniqueIdentifier>{39fc5b10-0d1f-4b98-b85a-44e790f56c4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

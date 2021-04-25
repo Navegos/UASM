@@ -1,10 +1,10 @@
 @echo off
 
-7z a -tzip -mx=9 UASM_AVX.zip AVX\
-7z a -tzip -mx=9 UASM_AVX2.zip AVX2\
-7z a -tzip -mx=9 UASM_AVX512.zip AVX\
-7z a -tzip -mx=9 UASM_SSE.zip SSE\
-7z a -tzip -mx=9 UASM_SSE2.zip SSE2\
+7z a -tzip -mx=9 UASM_WIN_AVX.zip AVX\
+7z a -tzip -mx=9 UASM_WIN_AVX2.zip AVX2\
+7z a -tzip -mx=9 UASM_WIN_AVX512.zip AVX\
+7z a -tzip -mx=9 UASM_WIN_SSE.zip SSE\
+7z a -tzip -mx=9 UASM_WIN_SSE2.zip SSE2\
 
 copy ".\..\..\Setup\UASM SSE 32bits Setup\UASM SSE 32bits Setup-SetupFiles\UASM SSE 32bits Setup.msi" .\ /y
 copy ".\..\..\Setup\UASM SSE2 32bits Setup\UASM SSE2 32bits Setup-SetupFiles\UASM SSE2 32bits Setup.msi" .\ /y

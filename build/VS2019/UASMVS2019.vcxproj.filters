@@ -470,88 +470,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\.gitignore" />
-    <None Include="..\..\include\uasm\cpubits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\defines.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\limits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\macrolib.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\macros.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\params.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\real4limits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\real8limits.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\include\uasm\types.inc">
-      <Filter>include</Filter>
-    </None>
-    <None Include="..\..\BuildCustomizations\uasm.props">
-      <Filter>BuildCustomizations</Filter>
-    </None>
-    <None Include="..\..\BuildCustomizations\uasm.targets">
-      <Filter>BuildCustomizations</Filter>
-    </None>
-    <None Include="..\..\BuildCustomizations\uasm.xml">
-      <Filter>BuildCustomizations</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\windows\basetsd.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\windows\vadefs.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\windows\vcruntime.inc">
-      <Filter>include_WIP\windows</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\windows\vc\vadefs.inc">
-      <Filter>include_WIP\windows\vc</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\windows\vc\vcruntime.inc">
-      <Filter>include_WIP\windows\vc</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\cpubits.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\defines.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\limits.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\macrolib.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\macros.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\params.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\real4limits.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\real8limits.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\include_WIP\uasm\types.inc">
-      <Filter>include_WIP</Filter>
-    </None>
-    <None Include="..\..\README.md" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Headers">
       <UniqueIdentifier>{d39871ad-dcdd-42b4-9759-a3dd6a05ce05}</UniqueIdentifier>
     </Filter>
@@ -561,22 +479,7 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{2e9fce11-6fdf-4850-ad22-516e7cc324ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BuildCustomizations">
-      <UniqueIdentifier>{eae9c661-4276-4856-801a-662666e68a8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include">
-      <UniqueIdentifier>{7a53866a-29be-4e3d-ab7c-b7f452330cbd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include_WIP">
-      <UniqueIdentifier>{fb4d5874-fde5-4a97-a767-8bcca9b87222}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include_WIP\windows">
-      <UniqueIdentifier>{2215fb17-283f-4dc5-b779-32c3df6fef88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="include_WIP\windows\vc">
-      <UniqueIdentifier>{8949af0a-d6ba-436b-9e25-447487e1cfbc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\asm">
+    <Filter Include="Assembly">
       <UniqueIdentifier>{e21f2d07-9629-4d58-9a84-bba37cd7569e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -587,13 +490,13 @@
   </ItemGroup>
   <ItemGroup>
     <UASM Include="..\..\asm\cpua.asm">
-      <Filter>Sources\asm</Filter>
+      <Filter>Assembly</Filter>
     </UASM>
     <UASM Include="..\..\asm\memset.asm">
-      <Filter>Sources\asm</Filter>
+      <Filter>Assembly</Filter>
     </UASM>
     <UASM Include="..\..\asm\memmove.asm">
-      <Filter>Sources\asm</Filter>
+      <Filter>Assembly</Filter>
     </UASM>
   </ItemGroup>
 </Project>

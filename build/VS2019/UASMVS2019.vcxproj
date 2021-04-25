@@ -607,7 +607,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\U
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>8Bytes</StructMemberAlignment>
@@ -664,7 +663,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE\UASM
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>8Bytes</StructMemberAlignment>
@@ -721,7 +719,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UAS
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>8Bytes</StructMemberAlignment>
@@ -778,7 +775,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>8Bytes</StructMemberAlignment>
@@ -835,7 +831,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UAS
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>8Bytes</StructMemberAlignment>
@@ -944,7 +939,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UAS
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>16Bytes</StructMemberAlignment>
@@ -1063,7 +1057,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>16Bytes</StructMemberAlignment>
@@ -1182,7 +1175,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UAS
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>16Bytes</StructMemberAlignment>
@@ -1301,7 +1293,6 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\U
       <InlineFunctionExpansion>
       </InlineFunctionExpansion>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions512</EnableEnhancedInstructionSet>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <StructMemberAlignment>16Bytes</StructMemberAlignment>
@@ -1437,37 +1428,9 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\U
     <ClCompile Include="..\..\types.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\.gitignore" />
-    <None Include="..\..\README.md" />
     <UASM Include="..\..\asm\cpua.asm">
       <FileType>Document</FileType>
     </UASM>
-    <None Include="..\..\BuildCustomizations\uasm.props" />
-    <None Include="..\..\BuildCustomizations\uasm.targets" />
-    <None Include="..\..\BuildCustomizations\uasm.xml" />
-    <None Include="..\..\include\uasm\cpubits.inc" />
-    <None Include="..\..\include\uasm\defines.inc" />
-    <None Include="..\..\include\uasm\limits.inc" />
-    <None Include="..\..\include\uasm\macrolib.inc" />
-    <None Include="..\..\include\uasm\macros.inc" />
-    <None Include="..\..\include\uasm\params.inc" />
-    <None Include="..\..\include\uasm\real4limits.inc" />
-    <None Include="..\..\include\uasm\real8limits.inc" />
-    <None Include="..\..\include\uasm\types.inc" />
-    <None Include="..\..\include_WIP\uasm\cpubits.inc" />
-    <None Include="..\..\include_WIP\uasm\defines.inc" />
-    <None Include="..\..\include_WIP\uasm\limits.inc" />
-    <None Include="..\..\include_WIP\uasm\macrolib.inc" />
-    <None Include="..\..\include_WIP\uasm\macros.inc" />
-    <None Include="..\..\include_WIP\uasm\params.inc" />
-    <None Include="..\..\include_WIP\uasm\real4limits.inc" />
-    <None Include="..\..\include_WIP\uasm\real8limits.inc" />
-    <None Include="..\..\include_WIP\uasm\types.inc" />
-    <None Include="..\..\include_WIP\uasm\windows\basetsd.inc" />
-    <None Include="..\..\include_WIP\uasm\windows\vadefs.inc" />
-    <None Include="..\..\include_WIP\uasm\windows\vcruntime.inc" />
-    <None Include="..\..\include_WIP\uasm\windows\vc\vadefs.inc" />
-    <None Include="..\..\include_WIP\uasm\windows\vc\vcruntime.inc" />
     <UASM Include="..\..\asm\memmove.asm">
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

@@ -39,9 +39,9 @@ Calling convention  // currently defined for windows only for (MSVC / Intel ICW)
 */
 #if defined(UASM_MSVC_COMPATIBLE_COMPILER) && !defined(UASM_MIC)
 #  if defined(UASM_X86_OR_X64_CPU)
-#     define UASM_cdecl __cdecl
-#     define UASM_stdcall __stdcall
-#     define UASM_fastcall __fastcall
+#       define UASM_cdecl __cdecl
+#       define UASM_stdcall __stdcall
+#       define UASM_fastcall __fastcall
 #    ifndef UASM_callconv
 #      if defined(UASM_VECTORCALL_SUPPORT)
 #        if defined(UASM_VC) || defined(UASM_CLANGW) || defined(UASM_ICW)
@@ -84,10 +84,12 @@ Calling convention  // currently defined for windows only for (MSVC / Intel ICW)
 #       define UASM_regcall
 #   endif //UASM_X86_OR_X64_CPU
 #elif defined(UASM_GCC_COMPATIBLE_COMPILER)
-#  if defined(UASM_X86_OR_X64_CPU)
-#   if defined(UASM_WINDOWS)
-#    ifndef UASM_callconv
-#      if defined(UASM_VECTORCALL_SUPPORT)
+#  if defined(UASM_X86_OR_X64_CPU) && defined(UASM_WINDOWS)
+#       define UASM_cdecl __attribute__((cdecl))
+#       define UASM_fastcall __attribute__((fastcall))
+#       define UASM_stdcall  __attribute__((stdcall))
+#   ifndef UASM_callconv
+#       if defined(UASM_VECTORCALL_SUPPORT)
 #        if defined(UASM_CLANG) || defined(UASM_ICC)
 #           define UASM_callconv __attribute__((vectorcall))
 #        elif defined(UASM_GCC)
@@ -114,7 +116,7 @@ Calling convention  // currently defined for windows only for (MSVC / Intel ICW)
 #    endif //UASM_veccall
 #    ifndef UASM_regcall
 #      if defined(UASM_REGCALL_SUPPORT)
-#        if defined(UASM_CLANG) || defined(UASM_ICC) && !defined(UASM_VC)
+#        if defined(UASM_CLANG) || defined(UASM_ICC)
 #           define UASM_regcall __attribute__((regcall))
 #        else
 #           define UASM_regcall
@@ -123,36 +125,40 @@ Calling convention  // currently defined for windows only for (MSVC / Intel ICW)
 #           define UASM_regcall
 #      endif
 #    endif //UASM_regcall
-/*
-# if defined(UASM_ICREGCALL)
-#   define UASM_callconv(T) __attribute__((regcall)) T
-#   define UASM_veccall(T) __attribute__((regcall)) T
-#else*/
-#  if defined(UASM_X86_OR_X64_CPU) && !defined(UASM_MIC)
-#   define UASM_callconv __attribute__((sysv_abi))
-#   define UASM_veccall __attribute__((sysv_abi))
+#  elif defined(UASM_X86_OR_X64_CPU) && !defined(UASM_MIC)
+#       define UASM_cdecl
+#       define UASM_fastcall
+#       define UASM_stdcall
+#       define UASM_veccall
+#   ifndef UASM_callconv
+#       define UASM_callconv __attribute__((sysv_abi))
+#   endif
+#   ifndef UASM_regcall
+#      if defined(UASM_REGCALL_SUPPORT)
+#        if defined(UASM_CLANG) || defined(UASM_ICC)
+#           define UASM_regcall __attribute__((regcall))
+#        else
+#           define UASM_regcall
+#        endif
+#      else
+#           define UASM_regcall
+#      endif
+#   endif //UASM_regcall
 #  else
-#   define UASM_callconv
-#   define UASM_veccall
+#       define UASM_cdecl
+#       define UASM_stdcall
+#       define UASM_fastcall
+#       define UASM_callconv
+#       define UASM_veccall
+#       define UASM_regcall
 #  endif
-/*# endif*/
-#   if defined(UASM_X86_OR_X64_CPU) && !defined(UASM_MIC)
-#   define UASM_cdecl __attribute__((cdecl))
-#   define UASM_fastcall __attribute__((fastcall))
-#   define UASM_stdcall  __attribute__((stdcall))
-# else
-#   define UASM_cdecl
-#   define UASM_fastcall
-#   define UASM_stdcall
-# endif
-#    endif //UASM_WINDOWS
-#   endif //UASM_X86_OR_X64_CPU
 #else
-#   define UASM_callconv
-#   define UASM_veccall
-#   define UASM_cdecl
-#   define UASM_stdcall
-#   define UASM_fastcall
+#       define UASM_cdecl
+#       define UASM_stdcall
+#       define UASM_fastcall
+#       define UASM_callconv
+#       define UASM_veccall
+#       define UASM_regcall
 #endif
 
 #if defined(UASM_X86_OR_X64_ABI) && (defined(UASM_MSVC_COMPATIBLE_COMPILER))

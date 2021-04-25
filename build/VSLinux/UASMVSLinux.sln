@@ -5,6 +5,73 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uasm", "UASMVSLinux.vcxproj", "{7ED9331B-15B0-44B8-BC5C-AB83C629878D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "debian", "debian", "{57736AB5-9300-454B-8EBA-BF4A8549B544}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\debian\changelog = ..\..\debian\changelog
+		..\..\debian\compat = ..\..\debian\compat
+		..\..\debian\control = ..\..\debian\control
+		..\..\debian\copyright = ..\..\debian\copyright
+		..\..\debian\gbp.conf = ..\..\debian\gbp.conf
+		..\..\debian\rules = ..\..\debian\rules
+		..\..\debian\uasm-dev.install = ..\..\debian\uasm-dev.install
+		..\..\debian\uasm.dirs = ..\..\debian\uasm.dirs
+		..\..\debian\uasm.install = ..\..\debian\uasm.install
+		..\..\debian\uasmd.dirs = ..\..\debian\uasmd.dirs
+		..\..\debian\uasmd.install = ..\..\debian\uasmd.install
+		..\..\debian\watch = ..\..\debian\watch
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{DF5CC3BF-2E9D-4FED-AD6D-86052E46C17D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\debian\source\format = ..\..\debian\source\format
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{667D3867-89A2-46BC-B0A8-1DD2470F32F3}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\include\uasm\cpubits.inc = ..\..\include\uasm\cpubits.inc
+		..\..\include\uasm\defines.inc = ..\..\include\uasm\defines.inc
+		..\..\include\uasm\LICENSE = ..\..\include\uasm\LICENSE
+		..\..\include\uasm\limits.inc = ..\..\include\uasm\limits.inc
+		..\..\include\uasm\macrolib.inc = ..\..\include\uasm\macrolib.inc
+		..\..\include\uasm\macros.inc = ..\..\include\uasm\macros.inc
+		..\..\include\uasm\params.inc = ..\..\include\uasm\params.inc
+		..\..\include\uasm\real4limits.inc = ..\..\include\uasm\real4limits.inc
+		..\..\include\uasm\real8limits.inc = ..\..\include\uasm\real8limits.inc
+		..\..\include\uasm\types.inc = ..\..\include\uasm\types.inc
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Makefiles", "Makefiles", "{FD88BC2C-195B-4896-B05D-A7C3A1903B84}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Clang3.8Linux.mak = ..\..\Clang3.8Linux.mak
+		..\..\ClangLinux64.mak = ..\..\ClangLinux64.mak
+		..\..\ClangOSX64.mak = ..\..\ClangOSX64.mak
+		..\..\GccDos.mak = ..\..\GccDos.mak
+		..\..\GccLinux64.mak = ..\..\GccLinux64.mak
+		..\..\gccmod.inc = ..\..\gccmod.inc
+		..\..\GccWin.mak = ..\..\GccWin.mak
+		..\..\GccWin64.mak = ..\..\GccWin64.mak
+		..\..\IntelC32.mak = ..\..\IntelC32.mak
+		..\..\IntelC64.mak = ..\..\IntelC64.mak
+		..\..\msmod.inc = ..\..\msmod.inc
+		..\..\Msvc.mak = ..\..\Msvc.mak
+		..\..\Msvc64.mak = ..\..\Msvc64.mak
+		..\..\MsvcDll.mak = ..\..\MsvcDll.mak
+		..\..\OC.mak = ..\..\OC.mak
+		..\..\OWDOS16.mak = ..\..\OWDOS16.mak
+		..\..\OWLinux.mak = ..\..\OWLinux.mak
+		..\..\owmod.inc = ..\..\owmod.inc
+		..\..\OWWin.mak = ..\..\OWWin.mak
+		..\..\PCC.mak = ..\..\PCC.mak
+		..\..\PellesC.mak = ..\..\PellesC.mak
+		..\..\TCC.mak = ..\..\TCC.mak
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5F798B6-01A3-4491-9669-4CFAB32F015A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.gitignore = ..\..\.gitignore
+		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -28,6 +95,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DF5CC3BF-2E9D-4FED-AD6D-86052E46C17D} = {57736AB5-9300-454B-8EBA-BF4A8549B544}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39603D32-E904-4AF0-AB8A-C5E692404B09}
