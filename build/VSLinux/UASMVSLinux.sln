@@ -42,7 +42,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{667D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Makefiles", "Makefiles", "{FD88BC2C-195B-4896-B05D-A7C3A1903B84}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\Clang3.8Linux.mak = ..\..\Clang3.8Linux.mak
 		..\..\ClangLinux64.mak = ..\..\ClangLinux64.mak
 		..\..\ClangOSX64.mak = ..\..\ClangOSX64.mak
 		..\..\GccDos.mak = ..\..\GccDos.mak
