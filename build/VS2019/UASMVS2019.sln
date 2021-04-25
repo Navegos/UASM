@@ -58,7 +58,6 @@ Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "UASM AVX2 32bits Setup", ".
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cmd", "cmd", "{33AF60CC-EF97-4B59-AD5D-AC14A1111BA8}"
 	ProjectSection(SolutionItems) = preProject
-		..\distribution\Windows\distribute.cmd = ..\distribution\Windows\distribute.cmd
 		uasmv.cmd = uasmv.cmd
 	EndProjectSection
 EndProject
@@ -113,6 +112,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{9D64
 		..\..\include\uasm\real4limits.inc = ..\..\include\uasm\real4limits.inc
 		..\..\include\uasm\real8limits.inc = ..\..\include\uasm\real8limits.inc
 		..\..\include\uasm\types.inc = ..\..\include\uasm\types.inc
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "distribution", "distribution", "{7151320D-613D-457F-92DC-F029A5B87CD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{2FAD9C12-9210-4B57-8EC9-784CD82F5611}"
+	ProjectSection(SolutionItems) = preProject
+		..\distribution\Windows\distribute.cmd = ..\distribution\Windows\distribute.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Linux", "Linux", "{93453CAB-CBEE-465E-A8AB-C7D451FA9343}"
+	ProjectSection(SolutionItems) = preProject
+		..\distribution\Linux\distribute.cmd = ..\distribution\Linux\distribute.cmd
 	EndProjectSection
 EndProject
 Global
@@ -421,6 +432,8 @@ Global
 		{BCDA93B7-2CCF-4AAB-919A-1749BEE5CC48} = {23237452-6358-4197-A6A5-3F56EB312C1E}
 		{4D8AF68E-4591-405A-8103-1D0C35E93668} = {23237452-6358-4197-A6A5-3F56EB312C1E}
 		{B72E08CE-B54F-4B54-8BB3-4A847E866566} = {23237452-6358-4197-A6A5-3F56EB312C1E}
+		{2FAD9C12-9210-4B57-8EC9-784CD82F5611} = {7151320D-613D-457F-92DC-F029A5B87CD4}
+		{93453CAB-CBEE-465E-A8AB-C7D451FA9343} = {7151320D-613D-457F-92DC-F029A5B87CD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E4A8D9F8-B538-44DA-BDDB-88C977E6F6F0}
