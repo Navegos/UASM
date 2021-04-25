@@ -97,7 +97,7 @@ static char          szDate[12];  /* value of @Date symbol */
 static char          szTime[12];  /* value of @Time symbol */
 
 #if USESTRFTIME
-#if defined(__WATCOMC__) || defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__)
+#if defined(__WATCOMC__) || defined(__unix__) || defined(__CYGWIN__) || defined(__DJGPP__)
 static const char szDateFmt[] = "%D"; /* POSIX date (mm/dd/yy) */
 static const char szTimeFmt[] = "%T"; /* POSIX time (HH:MM:SS) */
 #else

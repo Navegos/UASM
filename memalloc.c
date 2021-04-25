@@ -8,7 +8,7 @@
 *
 ****************************************************************************/
 
-#if defined(__UNIX__) && defined(__GNUC__)
+#if defined(__unix__) && defined(__GNUC__)
 #include <sys/mman.h>
 #endif
 
@@ -62,7 +62,7 @@
 
 #define BLKSIZE 0x80000
 
-#ifndef __UNIX__
+#ifndef __unix__
 #if defined(__OS2__)
 #include <os2.h>
 #elif defined(__DJGPP__)
@@ -85,7 +85,7 @@ static uint_32 currfree; /* free memory left in current block; to be moved to Mo
 static int blocks;    /* number of blocks allocated so far; to be moved to ModuleInfo.g */
 #endif
 
-#if defined(__UNIX__) && defined(__WATCOMC__)
+#if defined(__unix__) && defined(__WATCOMC__)
 
 #define SYS_mmap                 90
 #define SYS_munmap               91
@@ -119,7 +119,7 @@ static struct mmap mymmap = { 0, 0, 3, 0x22, -1, 0 };
 #define MAP_ANON 0x20
 #endif
 
-#ifndef __UNIX__
+#ifndef __unix__
 #if defined(__OS2__)
 #define BLKALLOC( p, size ) DosAllocMem( (void**)&p, size, PAG_COMMIT|PAG_READ|PAG_WRITE )
 #define BLKFREE( p )        DosFreeMem( p )

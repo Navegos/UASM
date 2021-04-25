@@ -12,7 +12,7 @@
 
 #include "basedefs.h"
 
-#if defined(__UNIX__)
+#if defined(__unix__)
 
 UASM_PACK_PUSH_STACK
 
@@ -44,7 +44,7 @@ UASM_PACK_POP
 
 /* emulations for Open Watcom */
 
-#if defined(__WATCOMC__) && !defined(__UNIX__)
+#if defined(__WATCOMC__) && !defined(__unix__)
 #ifdef __FLAT__
 #ifndef DEBUG_OUT /* OW v1.8 WDW has a problem with locally defined imports */
 

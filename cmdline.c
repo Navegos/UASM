@@ -40,7 +40,7 @@
 #include "myassert.h"
 #include "input.h"
 
-#if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__)
+#if defined(__unix__) || defined(__CYGWIN__) || defined(__DJGPP__)
 
 #define HANDLECTRLZ 0
 #ifndef SWITCHCHAR
@@ -1232,7 +1232,7 @@ static void UASM_ABI set_default_build_target(void)
         }
 #elif defined(__QNX__)
         strcpy(Options.names[OPTN_BUILD_TARGET], "QNX");
-#elif defined(__LINUX__)
+#elif defined(__linux__)
         strcpy(Options.names[OPTN_BUILD_TARGET], "LINUX");
 #elif defined(__BSD__)
         strcpy(Options.names[OPTN_BUILD_TARGET], "BSD");

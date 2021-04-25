@@ -80,7 +80,7 @@ typedef   signed __int64  int_64;
 /* 64-bit integer format specifier */
 #if defined(LONG_IS_64BITS) || defined(__LP64__)
 #define I64_SPEC "l"
-#elif defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__)
+#elif defined(__unix__) || defined(__CYGWIN__) || defined(__DJGPP__)
 #define I64_SPEC "ll"
 #else
 #define I64_SPEC "I64"

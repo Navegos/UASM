@@ -39,7 +39,7 @@
 #include <string.h>
 #include <errno.h> /* needed for errno declaration ( "sometimes" it's defined in stdlib.h ) */
 
-#if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__) /* avoid for MinGW! */
+#if defined(__unix__) || defined(__CYGWIN__) || defined(__DJGPP__) /* avoid for MinGW! */
 
 #include <strings.h>
 

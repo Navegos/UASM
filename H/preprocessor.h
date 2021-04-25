@@ -44,7 +44,7 @@
 /**
 Compiler defines
 */
-#if defined(_MSC_VER) && (!defined(__INTEL_COMPILER) && !defined(__clang__) && !defined(__CUDA_ARCH__) && !defined(__CUDACC__))
+#if defined(_MSC_VER) && !defined(__INTEL_COMPILER) && !defined(__clang__) && !defined(__CUDA_ARCH__) && !defined(__CUDACC__)
 #ifndef UASM_VC
 #       define UASM_VC 1  /* MSVC Compiler */
 #endif
@@ -366,7 +366,7 @@ Compiler defines
 #if defined(__CUDA_ARCH__) || defined(__CUDACC__)
 #       define UASM_CUDA_GPU 1
 #elif (defined(_M_IX86) || defined(_WIN32) || defined(__i386__) || defined(i386) || defined(__i386) || defined(_X86_) || defined(__X86__) \
-    || defined(__I86__) || defined(__INTEL__) || defined(__THW_INTEL__))  && !defined(_WIN64) && ! defined(_M_ARM) && !defined(_ARM) && !defined(__KNC__) && !defined(__MIC__)
+        || defined(__I86__) || defined(__INTEL__) || defined(__THW_INTEL__))  && !defined(_WIN64) && ! defined(_M_ARM) && !defined(_ARM) && !defined(__KNC__) && !defined(__MIC__)
 #       define UASM_X86 1
 #       define UASM_X86_CPU 1
 #       define UASM_X86_ABI 1
@@ -383,7 +383,8 @@ Compiler defines
 #       define UASM_ARCH_STR "x86"
 #undef UASM_ARCH
 #       define UASM_ARCH 1
-# elif defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64) || defined(__amd64__) || defined(__amd64) || defined(__x86_64) || defined(__x86_64__) || defined(_LP64) || defined(__LP64__) && !defined(__KNC__) && !defined(__MIC__)
+#elif (defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64) || defined(__amd64__) || defined(__amd64) || defined(__x86_64) || defined(__x86_64__) || defined(_LP64) || defined(__LP64__) \
+        || defined(__ORBIS__) || defined(_XBOX_ONE)) && !defined(__KNC__) && !defined(__MIC__)
 #       define UASM_X64 1
 #       define UASM_X64_CPU 1
 #       define UASM_X64_ABI 1
@@ -422,10 +423,10 @@ Compiler defines
 #       define UASM_MIC_ARCH 1 /* Intel MIC or Xeon Phi architecture */
 #       define UASM_PLATFORM_MIC 1
 #       define UASM_PLATFORM_IS_CPU_ACCELARATOR 1
-# if defined(_M_IX86) /*|| defined(_WIN32)*/ || defined(__i386__) || defined(i386) || defined(__i386) || defined(_X86_) || defined(__X86__) || defined(__I86__)
-# error ERROR: Unavailable for Intel Intel® Xeon Phi™ builds.
-# error ERROR: Solutions/projects targeting the Intel® Xeon Phi™ coprocessor are limited to using the x64 Debug | Release configuration.
-# error ERROR: Please change your build enviroment to X64 builds.
+#  if defined(_M_IX86) /*|| defined(_WIN32)*/ || defined(__i386__) || defined(i386) || defined(__i386) || defined(_X86_) || defined(__X86__) || defined(__I86__)
+#  error ERROR: Unavailable for Intel Intel® Xeon Phi™ builds.
+#  error ERROR: Solutions/projects targeting the Intel® Xeon Phi™ coprocessor are limited to using the x64 Debug | Release configuration.
+#  error ERROR: Please change your build enviroment to X64 builds.
 /*
 #       define UASM_X86 1
 #       define UASM_X86_ABI 1
@@ -441,7 +442,7 @@ Compiler defines
 #       define UASM_ARCH_STR "x86"
 #undef UASM_ARCH
 #       define UASM_ARCH 1*/
-# elif defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64) || defined(__amd64__) || defined(__amd64) || defined(__x86_64) || defined(__x86_64__) || defined(__LP64__)
+#  elif defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64) || defined(__amd64__) || defined(__amd64) || defined(__x86_64) || defined(__x86_64__) || defined(__LP64__)
 #       define UASM_X64 1
 #       define UASM_X64_CPU 1
 #       define UASM_X64_ABI 1
@@ -459,7 +460,7 @@ Compiler defines
 #       define UASM_PLATFORM_X64 1
 #undef UASM_ARCH
 #       define UASM_ARCH 2
-# endif
+#  endif
 #elif defined(_M_IA64) || defined(__itanium__) || defined(__ia64) || defined(__ia64__) || defined(_IA64) || defined(__IA64__)
 #       define UASM_IA64 1
 #       define UASM_ARCH_IA64 1
@@ -816,14 +817,16 @@ Platform define
 #       define UASM_FAMILY_STR ""
 #       define UASM_WINDOWS_FAMILY 1
 # endif
-#elif (defined(_MSC_VER) && (defined(__INTEL_COMPILER) || defined(__clang__) || defined(__GCC__))) && (defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)) || (defined(__KNC__) || defined(__MIC__))) && !defined(UASM_XBOXONE)
+/*
+#elif (defined(_MSC_VER) && (defined(__INTEL_COMPILER) || defined(__clang__) || defined(__GCC__))) \
+        && (defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS) || defined(_XBOX_ONE) || defined(__KNC__) || defined(__MIC__)) && !defined(UASM_XBOXONE)
 # if defined(__KNC__) || defined(__MIC__) || defined(UASM_MIC)
 #       define UASM_UNIX 1
 #       define UASM_UNIX_OS 1
 # else
 #       define UASM_WINDOWS 1
 #       define UASM_WINDOWS_OS 1
-# endif
+# endif*/
 #elif defined(__APPLE_CC__)
 #   include <TargetConditionals.h> // Specific to the current SDK, in usr\include
 #       define UASM_APPLE 1
@@ -889,8 +892,9 @@ Platform define
 /*#         define UASM_ARCH "IOS"*/
 #           define UASM_APPLE_FAMILY 1
 #   endif
-#elif (defined(__INTEL_COMPILER) && defined(__GNUC__)) || (defined(__GNUC__) || defined(__GCC__)) && (defined(__unix__) || defined(__linux__) || defined(__linux) \
-       || defined(linux) || defined(__CYGWIN__) || defined(ANDROID_NDK) || defined(ANDROID) || defined(NDK) || defined(__ANDROID_API__) || defined(__ANDROID__))
+#elif defined(UASM_GCC_COMPATIBLE_COMPILER) && (defined(__linux__) || defined(__linux) || defined(linux) || defined(unix) || defined(__unix__) || defined(__unix) || defined(__ORBIS__) \
+                || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__bsdi__) || defined(__DragonFly__) || defined(__bg__) \
+                || defined(__CYGWIN__) || defined(ANDROID_NDK) || defined(ANDROID) || defined(NDK) || defined(__ANDROID_API__) || defined(__ANDROID__))
 #   if defined(ANDROID_NDK) || defined(ANDROID) || defined(NDK) || defined(__ANDROID_API__) || defined(__ANDROID__)
 #       define UASM_ANDROID 1
 #       define UASM_ANDROID_OS 1
@@ -900,8 +904,12 @@ Platform define
 #       define UASM_PLATFORM_IS_CONSOLE 1
 #       define UASM_UNIX 1
 #       define UASM_UNIX_FAMILY 1
-#  elif defined(__linux__) || defined(__linux) || defined(linux) || defined(unix) || defined(__unix__) || defined(__unix) || defined(__bg__)
-#    if defined(__linux__) || defined(__linux) || defined(linux)
+#  elif defined(__linux__) || defined(__linux) || defined(linux) || defined(unix) || defined(__unix__) || defined(__unix) || defined(__ORBIS__) \
+                || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__bsdi__) || defined(__DragonFly__) || defined(__bg__)
+#    if defined(__ORBIS__) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__bsdi__) || defined(__DragonFly__)
+#       define UASM_UNIX 1
+#       define UASM_BSD_OS
+#    elif defined(__linux__) || defined(__linux) || defined(linux)
 #       define UASM_LINUX 1
 #       define UASM_LINUX_OS
 #    elif defined(__gnu_linux__)

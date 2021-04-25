@@ -58,7 +58,7 @@ extern void UASM_ABI DoDebugMsg1(const char* format, ...);
 #define DebugCmd( x )
 #endif
 
-#if defined( __UNIX__ ) || defined ( __SW_BD )
+#if defined( __unix__ ) || defined ( __SW_BD )
 #define errout stderr
 #else
 #define errout stdout

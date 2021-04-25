@@ -30,7 +30,7 @@
 #define PREFFMTSTR "20"
 #define USELSLINE 1 /* also in assemble.c! */
 
-#ifdef __UNIX__
+#ifdef __unix__
 #define NLSIZ 1
 #define NLSTR "\n"
 #else

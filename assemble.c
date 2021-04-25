@@ -76,7 +76,7 @@ jmp_buf jmpenv;
 #define USELSLINE 1 /* must match switch in listing.c! */
 
 //#define ASM_EXT "asm"
-#ifdef __UNIX__
+#ifdef __unix__
 #define OBJ_EXT "o"
 #else
 #define OBJ_EXT "obj"
@@ -772,11 +772,11 @@ static void UASM_ABI CmdlParamsInit(int pass)
         }
         else if (_stricmp(Options.build_target, "QNX") == 0)
         {
-            p = "__UNIX__";
+            p = "__unix__";
         }
         else if (_stricmp(Options.build_target, "LINUX") == 0)
         {
-            p = "__UNIX__";
+            p = "__unix__";
         }
         if (p)
         {

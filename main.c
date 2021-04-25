@@ -16,7 +16,7 @@
 #include "input.h" /* GetFNamePart() */
 #include "codegenv2.h"
 
-#if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__)
+#if defined(__unix__) || defined(__CYGWIN__) || defined(__DJGPP__)
 
 #ifndef WILDCARDS
 #define WILDCARDS 0
@@ -38,7 +38,7 @@
 
 #if WILDCARDS
 
-#ifdef __UNIX__
+#ifdef __unix__
 #include <unistd.h>
 #else
 #include <io.h>

@@ -112,7 +112,7 @@ static char* srclinebuffer;
 char* token_stringbuf;  /* start token string buffer */
 
 /* fixme: add '|| defined(__CYGWIN__)' ? */
-#if defined(__UNIX__)
+#if defined(__unix__)
 
 #define INC_PATH_DELIM      ':'
 #define INC_PATH_DELIM_STR  ":"
@@ -142,7 +142,7 @@ static char* UASM_ABI GetFullPath(const char* name, char* buff, size_t max)
     if (p == NULL)
         p = (char*)name;
 
-#if defined(__UNIX__)
+#if defined(__unix__)
     if ((p[0] == '/' && p[1] == '/') && (name[0] != '/' || name[1] != '/'))
     {
         /*
@@ -592,7 +592,7 @@ static FILE* UASM_ABI open_file_in_include_path(const char* name, char fullpath[
 
         memcpy(fullpath, curr, i);
         if (fullpath[i - 1] != '/'
-#if !defined(__UNIX__)
+#if !defined(__unix__)
             && fullpath[i - 1] != '\\' && fullpath[i - 1] != ':'
 #endif
             )

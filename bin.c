@@ -849,7 +849,7 @@ void UASM_ABI pe_create_PE_header(void)
         pehdr->e.seginfo->segtype = SEGTYPE_HDR;
         pehdr->e.seginfo->CodeBuffer = LclAlloc(size);
         memcpy(pehdr->e.seginfo->CodeBuffer, p, size);
-#if 0 //def __UNIX__
+#if 0 //def __unix__
         time((int_32*)(pehdr->e.seginfo->CodeBuffer + offsetof(struct IMAGE_PE_HEADER32, FileHeader.TimeDateStamp)));
 #else
         time((time_t*)(pehdr->e.seginfo->CodeBuffer + offsetof(struct IMAGE_PE_HEADER32, FileHeader.TimeDateStamp)));
@@ -996,7 +996,7 @@ static void UASM_ABI pe_emit_export_data(void)
         AddLineQueueX("%r DOTNAME", T_OPTION);
         /* create .edata segment */
         AddLineQueueX("%s %r %r %s", edataname, T_SEGMENT, T_DWORD, edataattr);
-#if 0 //def __UNIX__
+#if 0 //def __unix__
         time(&timedate);
 #else
         time((time_t*)&timedate);

@@ -60,7 +60,7 @@
 #define MAX_PUB_LENGTH 1024 /* max length of PUBDEF record */
 
 #if TRUNCATE
-#if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__)
+#if defined(__unix__) || defined(__CYGWIN__) || defined(__DJGPP__)
 #include <unistd.h>
 #else
 #include <io.h>
@@ -69,7 +69,7 @@
 
 UASM_PACK_PUSH_STACK
 
-#if defined(__UNIX__) || defined(__CYGWIN__)
+#if defined(__unix__) || defined(__CYGWIN__)
 #define _stat stat
 #endif
 
@@ -1688,7 +1688,7 @@ static ret_code UASM_ABI omf_write_module(struct module_info* modinfo)
      * won't become shorter anymore.
      */
     size = ftell(CurrFile[OBJ]);
-#if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__)
+#if defined(__unix__) || defined(__CYGWIN__) || defined(__DJGPP__)
     fh = fileno(CurrFile[OBJ]);
     if (ftruncate(fh, size)); /* gcc warns if return value of ftruncate() is "ignored" */
 #elif defined(__BORLANDC__)
