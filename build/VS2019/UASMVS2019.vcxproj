@@ -382,6 +382,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE\UASM
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -432,6 +433,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -482,6 +484,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -532,6 +535,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -582,6 +586,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\U
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -638,6 +643,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE\UASM
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -694,6 +700,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -750,6 +757,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -806,6 +814,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -862,6 +871,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\U
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>4</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -914,6 +924,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -980,6 +991,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\SSE2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1032,6 +1044,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1098,6 +1111,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX\UASM
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1150,6 +1164,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1216,6 +1231,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX2\UAS
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1268,6 +1284,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\U
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -1334,6 +1351,7 @@ xcopy  ..\..\BuildCustomizations $(SolutionDir)\..\distribution\Windows\AVX512\U
       <SetMemoryModel>7</SetMemoryModel>
       <CallingConvention>5</CallingConvention>
       <PackAlignmentBoundary>5</PackAlignmentBoundary>
+      <WarningLevel>0</WarningLevel>
     </UASM>
     <ResourceCompile>
       <PreprocessorDefinitions>_MSC_VER=1928;MACROLIB=1;_CRT_SECURE_NO_WARNINGS;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
