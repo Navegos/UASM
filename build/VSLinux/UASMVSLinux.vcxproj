@@ -93,7 +93,7 @@
     <ClCompile>
       <PreprocessorDefinitions>MACROLIB=1;__unix__;__linux__;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -Wformat -Werror=format-security -Wdate-time -O3 -finline-functions -std=gnu17 -march=x86-64-v3 -mavx -mabi=sysv -target x86_64-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 </AdditionalOptions>
+      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -Wformat -Werror=format-security -Wdate-time -O3  -finline-functions -std=gnu17 -march=x86-64 -mabi=sysv -target x86_64-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=2 </AdditionalOptions>
       <Optimization>
       </Optimization>
       <CppLanguageStandard>
@@ -134,7 +134,7 @@
     <ClCompile>
       <PreprocessorDefinitions>MACROLIB=1;__unix__;__linux__;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -O3 -std=gnu17 -march=x86-64 -target x86_64-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -pie -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -mstack-alignment=16</AdditionalOptions>
+      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -Wformat -Werror=format-security -Wdate-time -O3 -finline-functions -std=gnu17 -march=x86-64 -mabi=sysv -target x86-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -pie -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=2 </AdditionalOptions>
       <Optimization>
       </Optimization>
       <CppLanguageStandard>
@@ -174,7 +174,7 @@
     <ClCompile>
       <PreprocessorDefinitions>MACROLIB=1;__unix__;__linux__;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -Wformat -Werror=format-security -Wdate-time -g -O0 -std=gnu17 -march=x86-64-v3 -mavx -mabi=sysv -target x86_64-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16</AdditionalOptions>
+      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -Wformat -Werror=format-security -Wdate-time -g -O0 -std=gnu17 -march=x86-64 -mavx2 -mabi=sysv -target x86_64-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=2 </AdditionalOptions>
       <CppLanguageStandard>
       </CppLanguageStandard>
       <ExceptionHandling>
@@ -214,7 +214,7 @@
     <ClCompile>
       <PreprocessorDefinitions>MACROLIB=1;__unix__;__linux__;_DEBUG;DEBUG_OUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../H;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -g -O0 -std=gnu17 -march=x86-64 -target x86_64-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -pie -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -mstack-alignment=16</AdditionalOptions>
+      <AdditionalOptions>-Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -Wformat -Werror=format-security -Wdate-time -g -O0 -std=gnu17 -march=x86-64 -mabi=sysv -target x86-pc-linux-gnu -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=2 </AdditionalOptions>
       <CppLanguageStandard>
       </CppLanguageStandard>
       <ExceptionHandling>

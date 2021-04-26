@@ -19,7 +19,7 @@ SRC_DIR_C = ./
 export DH_OPTIONS
 
 override_dh_auto_build:
-	make $(NJOBS) -C $(SRC_DIR_C) -f ClangLinux64.mak INSTR=0 CFLAGS='-O3 -finline-functions -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=0' CPPFLAGS='' && make $(NJOBS) -C $(SRC_DIR_C) -f ClangLinux64.mak DEBUG=1 INSTR=0 CFLAGS='-g -O0 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' CPPFLAGS=''
+	make $(NJOBS) -C $(SRC_DIR_C) -f ClangLinux64.mak INSTR=0 CFLAGS='-O3 -finline-functions -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' CPPFLAGS='' && make $(NJOBS) -C $(SRC_DIR_C) -f ClangLinux64.mak DEBUG=1 INSTR=0 CFLAGS='-g -O0 -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' CPPFLAGS=''
 
 # empty override, fills example directory with lots of files
 override_dh_auto_test:

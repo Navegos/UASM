@@ -22,26 +22,26 @@ inc_dirs  = -IH
 warning_c_flags = -Wno-sign-conversion -Wno-implicit-int-conversion -Wno-comment -Wno-switch -Wno-implicit-function-declaration -Wno-enum-conversion -Wformat -Werror=format-security -Wdate-time
 
 ifeq ($(INSTR),0)
-instr_c_flags = -march=x86-64-v2 -msse2
+instr_c_flags = -march=x86-64 -msse2
 endif
 
 ifeq ($(INSTR),1)
-instr_c_flags = -march=x86-64-v3 -mavx
+instr_c_flags = -march=x86-64 -mavx
 endif
 
 ifeq ($(INSTR),2)
-instr_c_flags = -march=x86-64-v3 -mavx2
+instr_c_flags = -march=x86-64 -mavx2
 endif
 
 ifeq ($(INSTR),3)
-instr_c_flags = -march=x86-64-v4 -mavx512f
+instr_c_flags = -march=x86-64 -mavx512f
 endif
 
 ifeq ($(DEBUG),0)
-extra_c_flags = $(warning_c_flags) -O3 -finline-functions -std=gnu17 $(instr_c_flags) -mabi=sysv -target x86_64-apple-darwin-macho -DNDEBUG -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=0
+extra_c_flags = $(warning_c_flags) -O3 -finline-functions -std=gnu17 -march=x86-64 -mabi=sysv -target x86_64-apple-darwin-macho -DNDEBUG -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=2
 OUTD=GccUnixR
 else
-extra_c_flags = $(warning_c_flags) -g -O0 -std=gnu17 $(instr_c_flags) -mabi=sysv -target x86_64-apple-darwin-macho -D_DEBUG -DDEBUG_OUT -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=2
+extra_c_flags = $(warning_c_flags) -g -O0 -std=gnu17 -march=x86-64 -mabi=sysv -target x86_64-apple-darwin-macho -D_DEBUG -DDEBUG_OUT -funsigned-char -fwritable-strings -fPIC -fPIE -fstack-protector-strong -mstack-alignment=16 -D_FORTIFY_SOURCE=2
 OUTD=GccUnixD
 endif
 
