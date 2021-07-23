@@ -29,6 +29,7 @@ AVX2/
 AVX512/
 SSE/
 SSE2/
+/build/distribution/Windows/UASM/
 
 testers/
 GccUnixR/
@@ -63,24 +64,15 @@ TestResult.xml
 dlldata.c
 
 # Build Setups
-UASM AVX 32bits Setup-SetupFiles/
-UASM AVX 32bits Setup-cache/
-UASM AVX 64bits Setup-SetupFiles/
-UASM AVX 64bits Setup-cache/
-UASM AVX2 32bits Setup-SetupFiles/
-UASM AVX2 32bits Setup-cache/
-UASM AVX2 64bits Setup-SetupFiles/
-UASM AVX2 64bits Setup-cache/
-UASM AVX512 32bits Setup-SetupFiles/
-UASM AVX512 32bits Setup-cache/
-UASM AVX512 64bits Setup-SetupFiles/
-UASM AVX512 64bits Setup-cache/
-UASM SSE 32bits Setup-SetupFiles/
-UASM SSE 32bits Setup-cache/
-UASM SSE2 32bits Setup-SetupFiles/
-UASM SSE2 32bits Setup-cache/
-UASM SSE2 64bits Setup-SetupFiles/
-UASM SSE2 64bits Setup-cache/
+UASM.32bits.Setup-SetupFiles/
+UASM.32bits.Setup-cache/
+UASM.64bits.Setup-SetupFiles/
+UASM.64bits.Setup-cache/
+old_2.54/
+old_2.55/
+
+# WIP Files
+include_WIP
 
 # DNX
 project.lock.json
@@ -111,6 +103,7 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.err
 
 # Chutzpah Test files
 _Chutzpah*

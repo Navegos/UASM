@@ -125,6 +125,9 @@ Compiler defines
 #   elif defined(_MSC_VER) && (_MSC_VER == 1928)
 #       define UASM_VC14_28 1
 #       define UASM_COMPILER "Microsoft Visual C++ 16.2.8"
+#   elif defined(_MSC_VER) && (_MSC_VER == 1929)
+#       define UASM_VC14_29 1
+#       define UASM_COMPILER "Microsoft Visual C++ 16.2.9"
 #   else
 #error ERROR: add your vc compiler version
 #   endif
@@ -365,8 +368,10 @@ Compiler defines
 /* CUDA targets must be detected first as nvcc also predefined gcc macros for CPU architecture */
 #if defined(__CUDA_ARCH__) || defined(__CUDACC__)
 #       define UASM_CUDA_GPU 1
-#elif (defined(_M_IX86) || defined(_WIN32) || defined(__i386__) || defined(i386) || defined(__i386) || defined(_X86_) || defined(__X86__) \
-        || defined(__I86__) || defined(__INTEL__) || defined(__THW_INTEL__))  && !defined(_WIN64) && ! defined(_M_ARM) && !defined(_ARM) && !defined(__KNC__) && !defined(__MIC__)
+#elif ((defined(_M_IX86) || defined(_WIN32) || defined(__i386__) || defined(i386) || defined(__i386) || defined(_X86_) || defined(__X86__) \
+        || defined(__I86__) || defined(__INTEL__) || defined(__THW_INTEL__)) && !defined(_M_X64) && !defined(_M_AMD64) && !defined(_WIN64) \
+        && !defined(__amd64__) || defined(__amd64) && !defined(__x86_64) && !defined(__x86_64__) && !defined(_LP64) && !defined(__LP64__) \
+        && !defined(__ORBIS__) && !defined(_XBOX_ONE) && !defined(_M_ARM) && !defined(_ARM) && !defined(__KNC__) && !defined(__MIC__))
 #       define UASM_X86 1
 #       define UASM_X86_CPU 1
 #       define UASM_X86_ABI 1
@@ -383,8 +388,8 @@ Compiler defines
 #       define UASM_ARCH_STR "x86"
 #undef UASM_ARCH
 #       define UASM_ARCH 1
-#elif (defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64) || defined(__amd64__) || defined(__amd64) || defined(__x86_64) || defined(__x86_64__) || defined(_LP64) || defined(__LP64__) \
-        || defined(__ORBIS__) || defined(_XBOX_ONE)) && !defined(__KNC__) && !defined(__MIC__)
+#elif ((defined(_M_X64) || defined(_M_AMD64) || defined(_WIN64) || defined(__amd64__) || defined(__amd64) || defined(__x86_64) || defined(__x86_64__) || defined(_LP64) || defined(__LP64__) \
+        || defined(__ORBIS__) || defined(_XBOX_ONE)) && !defined(__KNC__) && !defined(__MIC__))
 #       define UASM_X64 1
 #       define UASM_X64_CPU 1
 #       define UASM_X64_ABI 1
@@ -3583,11 +3588,11 @@ Assert macro
 #endif
 
 #ifdef UASM_DEBUG
-#       define UASM_BUILD_TYPE  "d"
-#       define UASM_BUILD_PREFIX  ""
+#       define UASM_BUILD_PREFIX  "d"
+#       define UASM_BUILD_TYPE  "ebug"
 #else
-#       define UASM_BUILD_TYPE  ""
 #       define UASM_BUILD_PREFIX  ""
+#       define UASM_BUILD_TYPE  ""
 #endif
 
 #if defined(UASM_ARM) && !defined(UASM_PHONE_APP)

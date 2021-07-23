@@ -46,21 +46,6 @@
 #define STRICT
 #endif
 
-
-#if !defined(_WINDOWS_)
-# pragma warning( push )
-#if __INTEL_COMPILER
-# pragma warning( disable: 271 310 )
-#elif _MSC_VER
-#pragma warning(disable : 4005)
-#endif
-#pragma pack(push)
-#pragma pack(8)
-//# include <windows.h>
-#pragma pack (pop)
-# pragma warning( pop )
-#endif
-
 // If app hasn't choosen, set to work with Windows 8 and beyond
 #if !defined(WINAPI_FAMILY) || (WINAPI_FAMILY != WINAPI_FAMILY_PHONE_APP)
 #if defined(_WIN32_WINNT) && (_WIN32_WINNT < _WIN32_WINNT_WIN8)
@@ -295,9 +280,9 @@ EXTERN_CC_END
 //#define DXSTDAPI                  EXTERN_C HRESULT STDAPICALLTYPE
 //#define DXSTDAPI_(type)           EXTERN_C type STDAPICALLTYPE
 
-#   define UASM_LIB_NAME /*UASM_COMPILER_STR*/ "uasm" /*UASM_LINK_TYPE_STR UASM_FAMILY_STR UASM_ARCH_STR*/ UASM_LINK_PREFIX UASM_LINK_TYPE UASM_BUILD_PREFIX UASM_BUILD_TYPE
+#   define UASM_LIB_NAME /*UASM_COMPILER_STR*/ "uasm" /*UASM_LINK_TYPE_STR UASM_FAMILY_STR UASM_ARCH_STR*/ UASM_LINK_PREFIX UASM_LINK_TYPE UASM_BUILD_PREFIX
 
-#   define UASM_LIB_NAME_STR UASM_COMPILER_STR "uasm" UASM_LINK_TYPE_STR UASM_FAMILY_STR UASM_ARCH_STR UASM_BUILD_PREFIX UASM_BUILD_TYPE
+#   define UASM_LIB_NAME_STR UASM_COMPILER_STR "uasm" UASM_LINK_TYPE_STR UASM_FAMILY_STR UASM_ARCH_STR UASM_BUILD_PREFIX
 
 #ifdef UASM_LIB_IMPORTS
 #   //pragma comment( lib, UASM_LIB_NAME ".lib")

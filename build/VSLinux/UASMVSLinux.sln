@@ -71,6 +71,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\..\README.md = ..\..\README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "regress", "regress", "{274432C8-BAFC-48B0-98F2-10BFBE7D1E96}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\regress\runtests.cmd = ..\..\regress\runtests.cmd
+		..\..\regress\runtests.sh = ..\..\regress\runtests.sh
+		..\..\regress\runtestsVS.cmd = ..\..\regress\runtestsVS.cmd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

@@ -1,3 +1,9 @@
+uasm (2.55.0-1ubuntu2) focal; urgency=medium
+
+  * New upstream release, platform ABI, removed fault optional SIMD instructions releases
+
+ -- Navegos QA <navegos@outlook.com>  Sat, 21 May 2021 19:47:32 +0000
+
 uasm (2.54.0-1ubuntu2) focal; urgency=medium
 
   * New upstream release, platform ABI, optional SIMD instructions releases
