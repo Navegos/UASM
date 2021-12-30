@@ -134,7 +134,6 @@ struct hll_item
     char* counterlines; /* pointer to allocated memory for counters */
     uint_32             cmcnt;         /* comma counter  */
     enum hll_cmd        cmd;           /* start cmd (IF, WHILE, REPEAT) */
-    bool                cond;          /* condition  */
     enum hll_flags      flags;         /* v2.08: added */
   /* All of bellow vars are related to the SWITCH block */
     int_32              casecnt;       /* case counter  */
@@ -1767,7 +1766,6 @@ ret_code UASM_ABI HllStartDir(int i, struct asm_tok tokenarray[])
         case T_DOT_FOR:
             /* create the label to loop start */
             hll->labels[LSTART] = GetHllLabel();
-            hll->labels[LSKIP] = GetHllLabel();
             hll->labels[LCONT] = 0;
             hll->labels[LTEST] = 0;
             hll->flags = 0;
@@ -1810,12 +1808,7 @@ ret_code UASM_ABI HllStartDir(int i, struct asm_tok tokenarray[])
                 }
             }
             forbuff[b] = NULLC;
-            if (0 == _memicmp(forbuff, "(::)", 4))
-            {
-                hll->cmcnt = 0;
-            }
-            else
-            {
+            //{
                 //count initializers
                 eqcnt = 1;
                 forbuffinit[0] = NULLC;
@@ -1844,8 +1837,6 @@ ret_code UASM_ABI HllStartDir(int i, struct asm_tok tokenarray[])
                 for (b = 0; forbuff[j] && forbuff[j] != ':'; forbuffcond[b] = forbuff[j], j++, b++);
                 if (forbuffcond[b - 2] == '>' && forbuffcond[b - 1] == '0') forbuffcond[b - 2] = NULLC;
                 forbuffcond[b] = NULLC;
-                if (!b) hll->cond = FALSE;
-                else    hll->cond = TRUE;
                 j++;
                 //copy the counter to the buffer
                 cmcnt = 0;
@@ -1873,8 +1864,6 @@ ret_code UASM_ABI HllStartDir(int i, struct asm_tok tokenarray[])
                 hll->cmcnt = 0;
                 if (forbuffcnt[0])
                 {
-                    //skip altering conditions the first time
-                    AddLineQueueX(" jmp %s", GetLabelStr(hll->labels[LSKIP], buff));
                     size = (int)strlen(forbuffcnt) + 1;
                     hll->counterlines = LclAlloc(size);
                     memcpy(hll->counterlines, forbuffcnt, size);
@@ -1883,6 +1872,9 @@ ret_code UASM_ABI HllStartDir(int i, struct asm_tok tokenarray[])
                 else hll->counterlines = "";    //there is nothing after the second ':'
                 if (forbuffcond[0])
                 {
+                    //skip to test the first time, if there is a condition expression
+                    hll->labels[LTEST] = GetHllLabel();
+                    AddLineQueueX(" jmp %s", GetLabelStr(hll->labels[LTEST], buff));
                     strcpy(transformed, ".for ");
                     strcat(transformed, forbuffcond);
                     strcat(transformed, "\0");
@@ -1903,7 +1895,9 @@ ret_code UASM_ABI HllStartDir(int i, struct asm_tok tokenarray[])
                     else
                         hll->condlines = "";
                 }
-            }
+                if (forbuffcnt[0] == NULLC && forbuffcond[0] == NULLC)
+                    hll->labels[LCONT] = hll->labels[LSTART];
+            //}
             AddLineQueueX("%s" LABELQUAL, GetLabelStr(hll->labels[LSTART], buff));
             tokenarray[i].token = T_FINAL;
             break;
@@ -3014,42 +3008,29 @@ ret_code UASM_ABI HllEndDir(int i, struct asm_tok tokenarray[])
             /* end SWITCH */
         case T_DOT_ENDF:
         case T_DOT_ENDFOR:
-            if (hll->cmd != HLL_FOR)
-            {
+            if (hll->cmd != HLL_FOR) {
                 DebugMsg(("HllEndDir: no .FOR on the hll stack\n"));
                 EmitErr(BLOCK_NESTING_ERROR, tokenarray[i].string_ptr);
                 return(ERROR);
             }
             i++;
             //Insert .CONTINUE label here if there is any
-            if (hll->labels[LCONT])
+            if (hll->labels[LCONT] && (hll->counterlines[0] || hll->condlines[0]))
                 AddLineQueueX("%s" LABELQUAL, GetLabelStr(hll->labels[LCONT], buff));
-            //forever loop '.for (::)'
-            if (hll->cmcnt == 0) goto adlabel;
             //If counters exist
-            else if (hll->counterlines[0])
-            {
+            if (hll->counterlines[0]) {
                 //here we write counters
-                if (hll->counterlines)
-                {      //if there is something after second ':' expand it here
-                    ForInitAndNext(tokenarray, hll->cmcnt, hll->counterlines);
-                    LclFree(hll->counterlines);
-                }
-                //first jump from the top happens here after the counters
-                AddLineQueueX("%s" LABELQUAL, GetLabelStr(hll->labels[LSKIP], buff));
-                /* create test label */
-                if (hll->labels[LTEST])
-                {
-                    AddLineQueueX("%s" LABELQUAL, GetLabelStr(hll->labels[LTEST], buff));
-                }
+                ForInitAndNext(tokenarray, hll->cmcnt, hll->counterlines);
+                LclFree(hll->counterlines);
+            }
+            if (hll->condlines[0]) {
+                /* create test label and test code */
+                AddLineQueueX("%s" LABELQUAL, GetLabelStr(hll->labels[LTEST], buff));
                 QueueTestLines(hll->condlines);
                 LclFree(hll->condlines);
             }
             else
                 AddLineQueueX(" jmp %s", GetLabelStr(hll->labels[LSTART], buff));
-            if (!hll->cond)
-                adlabel:
-            AddLineQueueX(" jmp %s", GetLabelStr(hll->labels[LSTART], buff));
             tokenarray[i].token = T_FINAL;
             break;
             //end of .ENDFOR
